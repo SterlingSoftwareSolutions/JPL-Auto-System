@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-
-    <div class="text-center">
-
-        <h1 class="border border-red-500">Footer</h1>
-
+<footer class="w-full bg-gray-100">
+    <div class="w-full max-w-screen-xl mx-auto">
+        <div class="px-4 py-6 md:flex md:items-center md:justify-center  text-center">
+            <span class="text-sm text-black sm:text-center mx-auto ">© Copyright 2024 JPL Automotive. All Rights Reserved.</span>
+        </div>
     </div>
-</body>
-</html>
+</footer>

@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {},
+
+    // screens: {
+    //     '2xl': {'min': '1960px'},
+    // }
   },
   plugins: [],
 }
