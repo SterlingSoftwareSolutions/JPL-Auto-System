@@ -33,7 +33,7 @@
                            placeholder="">
                 </div>
                 <div class="mt-4">
-                    <h1><a href="#" class="underline text-sm font-bold text-gray-600 ">Forget Password?</a></h1>
+                    <h1><a href="{{route('forget-password')}}" class="underline text-sm font-bold text-gray-600 ">Forget Password?</a></h1>
 
                 </div>
                 <h1 class="text-md text-gray-800 font-normal mt-10">© Copyright 2024 JPL Automotive. All Rights Reserved.</h1>
