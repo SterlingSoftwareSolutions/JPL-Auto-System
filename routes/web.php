@@ -22,3 +22,8 @@ Route::get('/', function () {
 Route::get('/wel', function () {
     return view('welcome');
 });
+
+
+Route::get('/forget-password', function () {
+    return view('auth.forgetpassword');
+})->name('forget-password');
