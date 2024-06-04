@@ -18,20 +18,24 @@
         <div class="flex justify-center items-center rounded-lg p-8 mt-10 md:w-7/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
             <div class="text-center ">
                 <h1 class="text-4xl">SIGN IN</h1>
-                <div class="flex justify-center space-x-6 mt-10">
-                    <input type="password"
-                           class="rounded-md h-28 w-2/6 md:w-24 text-2xl"
-                           placeholder="">
-                    <input type="password"
-                           class="rounded-md h-28 w-2/6 md:w-24 text-2xl"
-                           placeholder="">
-                    <input type="password"
-                           class="rounded-md h-28 w-2/6 md:w-24 text-2xl"
-                           placeholder="">
-                    <input type="password"
-                           class="rounded-md h-28 w-2/6 md:w-24 text-2xl"
-                           placeholder="">
-                </div>
+                <form id="loginForm" method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <div class="flex justify-center space-x-6 mt-10">
+                        <input type="password" name="pin1"
+                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            placeholder="">
+                        <input type="password" name="pin2"
+                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            placeholder="">
+                        <input type="password" name="pin3"
+                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            placeholder="">
+                        <input type="password" name="pin4"
+                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            placeholder="">
+                    </div>
+                </form>
                 <div class="mt-4">
                     <h1><a href="#" class="underline text-sm font-bold text-gray-600 ">Forget Password?</a></h1>
 
@@ -55,4 +59,21 @@
 
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const pinInputs = document.querySelectorAll('.pin-input');
+
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', (event) => {
+                if (input.value.length === 1 && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                }
+
+                if (index === pinInputs.length - 1) {
+                    document.getElementById('loginForm').submit();
+                }
+            });
+        });
+    });
+</script>
 </html>

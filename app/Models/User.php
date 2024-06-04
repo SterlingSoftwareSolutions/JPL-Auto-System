@@ -24,7 +24,6 @@ class User extends Authenticatable
         'pin2',
         'pin3',
         'pin4',
-        'pin4',
         'user_role',
     ];
 
@@ -34,7 +33,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'pin1',
+        'pin2',
+        'pin3',
+        'pin4',
         'remember_token',
     ];
 
@@ -45,6 +47,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+
     ];
 }

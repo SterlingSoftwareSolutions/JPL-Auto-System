@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('pin1');
+            $table->string('pin2');
+            $table->string('pin3');
+            $table->string('pin4');
+            $table->enum('role', ['superadmin', 'admin','worker', 'client'])->default('superadmin');
             $table->rememberToken();
             $table->timestamps();
         });
