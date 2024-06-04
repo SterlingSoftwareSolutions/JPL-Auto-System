@@ -15,7 +15,7 @@
 
         {{-- login --}}
 
-        <div class="flex justify-center items-center rounded-lg p-8 mt-10 md:w-7/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
+        <div class="flex justify-center items-center rounded-xl p-8 mt-10 md:w-7/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
             <div class="text-center ">
                 <h1 class="text-4xl">SIGN IN</h1>
                 <form id="loginForm" method="POST" action="{{ route('login') }}">
@@ -37,7 +37,7 @@
                     </div>
                 </form>
                 <div class="mt-4">
-                    <h1><a href="#" class="underline text-sm font-bold text-gray-600 ">Forget Password?</a></h1>
+                    <h1><a href="{{route('forget-password')}}" class="underline text-sm font-bold text-gray-600 ">Forget Password?</a></h1>
 
                 </div>
                 <h1 class="text-md text-gray-800 font-normal mt-10">© Copyright 2024 JPL Automotive. All Rights Reserved.</h1>
