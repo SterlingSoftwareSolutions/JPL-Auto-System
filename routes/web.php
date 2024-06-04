@@ -27,3 +27,8 @@ Route::get('/wel', function () {
 Route::get('/forget-password', function () {
     return view('auth.forgetpassword');
 })->name('forget-password');
+
+
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+})->name('dashboard');
