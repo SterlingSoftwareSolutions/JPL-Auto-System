@@ -15,7 +15,7 @@
 
         {{-- login --}}
 
-        <div class="flex justify-center items-center rounded-lg p-8 mt-10 md:w-7/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
+        <div class="flex justify-center items-center rounded-xl p-8 mt-10 md:w-7/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
             <div class="text-center ">
                 <h1 class="text-4xl">SIGN IN</h1>
                 <div class="flex justify-center space-x-6 mt-10">

@@ -15,7 +15,7 @@
 
     {{-- Forget Password --}}
 
-    <div class="flex justify-center rounded-lg p-8 mt-10 md:w-7/12 md:mx-auto" style="background-color: #F9F9F9; min-height: 46vh;">
+    <div class="flex justify-center rounded-xl p-8 mt-10 md:w-7/12 md:mx-auto" style="background-color: #F9F9F9; min-height: 46vh;">
         <div class="text-center  w-full mt-10">
             <h1 class="text-4xl">FORGET PIN</h1>
             <h1 class=" text-sm font-semibold text-black mt-10">Email</h1>
