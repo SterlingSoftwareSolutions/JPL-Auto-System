@@ -1,4 +1,6 @@
 <header>
+
+
     <nav class="ml-3">
         {{-- Left side with logo and "Production" button --}}
         <div class="bg-white border-gray-200 flex justify-between ml-2 border-red-500">
@@ -7,6 +9,7 @@
             {{-- Logo --}}
             <div class='md:mt-2 mr-4'>
                 <img src="{{ asset('images/jpl-system-logo.png') }}" alt="profile Pic">
+
             </div>
 
             <div class="rounded-sm w-44 h-10 flex items-center justify-center mt-5 hover:bg-black bg-black transition-colors duration-300">
