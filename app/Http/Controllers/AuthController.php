@@ -43,7 +43,7 @@ class AuthController extends Controller
         //dd($user);
         if ($user) {
             Auth::login($user); // Use Auth::login for successful login
-            return redirect('/wel')->with('success', 'Login Successful');
+            return redirect('/dashboard')->with('success', 'Login Successful');
         } else {
             return redirect('/')->with('error', 'Invalid email or password.');
         }
