@@ -4,6 +4,4 @@
 
     @include('components.landingpagenavbar')
 
-    
-
     @endsection

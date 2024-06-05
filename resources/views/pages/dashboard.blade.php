@@ -9,8 +9,8 @@
             <div class="flex">
               <div class="flex image-container group">
                 <a href="{{route('vehicledetailspage')}}">
-                    <img class="transform -rotate-90 m-5 md:w-[200px] md:h-[200px] w-28 h-28 hidden group-hover:block transition duration-1000 ease-in-out bg-white rounded-lg" src="{{ asset('images/4.1.png') }}" alt="profile Pic">
-                    <img class="transform -rotate-90 m-5 md:w-[200px] md:h-[200px] w-28 h-28 group-hover:hidden transition duration-1000 ease-in-out bg-white" src="{{ asset('images/4.png') }}" alt="profile Pic">
+                    <img class="transform -rotate-90 m-5 md:w-[200px] md:h-[200px] w-28 h-28 hidden group-hover:block transition duration-1000 bg-white rounded-lg" src="{{ asset('images/4.1.png') }}" alt="profile Pic">
+                    <img class="transform -rotate-90 m-5 md:w-[200px] md:h-[200px] w-28 h-28 group-hover:hidden transition duration-1000  bg-white" src="{{ asset('images/4.png') }}" alt="profile Pic">
                 </a>
 
                 <img class="transform m-5 md:w-[200px] md:h-[200px] w-28 h-28" src="{{ asset('images/1.png') }}" alt="profile Pic">
@@ -23,9 +23,6 @@
               </div>
             </div>
           </div>
-
-
-
 
     </div>
 @endsection
