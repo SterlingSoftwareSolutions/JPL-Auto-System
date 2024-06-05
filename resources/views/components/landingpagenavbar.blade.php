@@ -46,7 +46,7 @@
             <div class="flex-grow"></div>
             <!-- Container for right-aligned item -->
             <div class="flex justify-end items-end ">
-                <a href="#" class="text-black hover:text-orange-700 w-44 h-16 flex justify-end items-center font-bol ">Dashboard</a>
+                <a href="{{route('dashboard')}}" class="text-black hover:text-orange-700 w-44 h-16 flex justify-end items-center font-bol ">Dashboard</a>
             </div>
 
         </div>
