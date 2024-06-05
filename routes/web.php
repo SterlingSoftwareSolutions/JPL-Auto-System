@@ -44,3 +44,23 @@ Route::get('/dashboard', function () {
 Route::get('/vehicle-details', function () {
     return view('pages.vehicledetailspage');
 })->name('vehicledetailspage');
+
+
+Route::get('/working-structions', function () {
+    return view('pages.workingstructions');
+})->name('workingstructions');
+
+
+Route::get('/compliance', function () {
+    return view('pages.compliancepage');
+})->name('compliancepage');
+
+
+Route::get('/partslist', function () {
+    return view('pages.partlistpage');
+})->name('partlistpage');
+
+
+Route::get('/suppliers', function () {
+    return view('pages.supplierspage');
+})->name('supplierspage');
