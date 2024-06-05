@@ -40,3 +40,7 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->name('dashboard');
 
+
+Route::get('/vehicle-details', function () {
+    return view('pages.vehicledetailspage');
+})->name('vehicledetailspage');
