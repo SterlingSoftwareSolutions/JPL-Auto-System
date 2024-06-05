@@ -27,12 +27,17 @@
         <div class="flex items-center justify-end space-x-4">
             {{-- "Logged in as" text --}}
             <div class="hidden md:block">
-                <h1>Logged in as <span class="font-bold">Dilshad</span></h1>
+                <h1>Logged in as <span class="font-bold">{{Auth::user()->name}}</span></h1>
             </div>
 
             {{-- Power off icon --}}
             <div class="flex items-center justify-center border bg-black h-20 w-20">
-                <i class="fas fa-power-off text-4xl text-white" aria-hidden="true"></i>
+                <form id="logout-form" method="post" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">
+                        <i class="fas fa-power-off text-4xl text-white" aria-hidden="true"></i>
+                    </button>
+        </form>
             </div>
         </div>
 
