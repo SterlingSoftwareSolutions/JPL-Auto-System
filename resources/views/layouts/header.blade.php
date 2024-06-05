@@ -12,9 +12,12 @@
 
             </div>
 
-            <div class="rounded-sm w-44 h-10 flex items-center justify-center mt-5 hover:bg-black bg-black transition-colors duration-300">
-                <button class="text-white text-center font-bold">Production</button>
-            </div>
+              {{-- Conditionally display "Production" button --}}
+              @if(Route::currentRouteName() === 'vehicledetailspage')
+              <div class="rounded-sm w-44 h-10 flex items-center justify-center mt-5 hover:bg-black bg-black transition-colors duration-300">
+                  <button class="text-white text-center font-bold">Production</button>
+              </div>
+             @endif
         </div>
 
         {{-- Right side with icons --}}
