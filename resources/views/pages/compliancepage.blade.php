@@ -103,7 +103,7 @@
                         </td>
 
                         <td class="px-6 py-4">
-                            <div class="w-52 h-36 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6 border border-red-500 rounded-md cursor-pointer " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
+                            <div class="w-52 h-36 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6  rounded-md cursor-pointer " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
                                 <h1 class="text-md font-bold text-gray-500">Drop files here</h1>
                                 <h3 class="text-sm text-gray-500 text-center" style=>drag and drop, or browse your file</h3>
                                 <button class="mt-4 border w-32 py-2 font-semibold text-gray-800 rounded-md " style="background-color: #F9F9F9">Browse</button>
@@ -111,7 +111,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="w-52 h-36 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6 border border-red-500 rounded-md cursor-pointer " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
+                            <div class="w-52 h-36 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6  rounded-md cursor-pointer " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
                                 <h1 class="text-md font-bold text-gray-500">Drop files here</h1>
                                 <h3 class="text-sm text-gray-500 text-center" style=>drag and drop, or browse your file</h3>
                                 <button class="mt-4 border w-32 py-2 font-semibold text-gray-800 rounded-md " style="background-color: #F9F9F9">Browse</button>
