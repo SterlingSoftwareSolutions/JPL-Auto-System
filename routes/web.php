@@ -64,3 +64,8 @@ Route::get('/partslist', function () {
 Route::get('/suppliers', function () {
     return view('pages.supplierspage');
 })->name('supplierspage');
+
+
+// Route::get('/engine-performance', function () {
+//     return view('pages.vehicaldetailspage.engine-performance');
+// })->name('engine-performance');
