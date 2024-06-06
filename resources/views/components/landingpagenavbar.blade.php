@@ -1,4 +1,4 @@
-<nav class="bg-white " x-data="{ open: false }">
+<nav class=" " x-data="{ open: false }" style="background-color: #F9F9F9">
     <div class=" px-4 py-3 flex ">
         <div class="flex ">
 
@@ -9,10 +9,10 @@
                 </svg>
             </button>
         </div>
-        <div class="hidden md:flex w-full border  ">
+        <div class="hidden md:flex w-full  bg-white ">
             <!-- Container for left-aligned items -->
         <!-- Container for left-aligned items -->
-<div class="flex justify-start items-start gap-5">
+<div class="flex justify-start items-start gap-5 bg-white">
     @if(Route::currentRouteName() === 'vehicledetailspage')
         <a href="#" class="text-white w-44 h-16 flex justify-center items-center font-bold bg-black hover:bg-black hover:text-white transition duration-1000 ">Vehicle Details</a>
     @else
