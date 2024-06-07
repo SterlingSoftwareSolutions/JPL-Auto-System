@@ -3,6 +3,8 @@
 @section('content')
 @include('components.landingpagenavbar')
 
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 <div>
     <div>
         <section id="services" class="py-20 bg-gray-100">
@@ -35,17 +37,18 @@
                                         <tbody>
                                             <tr>
 
-                                                <td class="px-4 py-2 border">01.</td>
-                                                <td class="px-4 py-2 border">Vehicle Make</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-                                                <td class="px-4 py-2 border">TBD</td>
+                                                <td class="px-8 py-2 border-l">01.</td>
+                                                <td class="px-8 py-2 border-l">Vehicle Make</td>
+                                                <td class="px-4 py-2 border-l">TBD</td>
+                                                <td class="px-4 py-2 border-l">TBD</td>
 
                                             </tr>
                                             <tr>
-                                                <td class="px-4 py-2 border">02.</td>
-                                                <td class="px-4 py-2 border">Vehicle Model</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-                                                <td class="px-4 py-2 border">TBD</td>
+                                                <td class="px-4 py-2 border-t border-b border-gray-300">02.</td>
+                                                <td class="px-4 py-2 border-t border-b border-gray-300">Vehicle Model
+                                                </td>
+                                                <td class="px-4 py-2 border-t border-b border-gray-300">TBD</td>
+                                                <td class="px-4 py-2 border-t border-b border-gray-300">TBD</td>
 
                                             </tr>
                                             <tr>
@@ -316,7 +319,8 @@
                                 class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Other</a>
                         </nav>
 
-                        <div class="overflow-hidden bg-white border rounded-lg shadow-md justify-betweenw-5xl justify-bet">
+                        <div
+                            class="overflow-hidden bg-white border rounded-lg shadow-md justify-betweenw-5xl justify-bet">
                             <div id="engine" class="hidden tab-content">
                                 <div class="flex flex-col md:flex-row">
                                     <div class="w-full md:w-1/3">
@@ -565,10 +569,10 @@
                                 </div>
                             </div>
                             <!-- Similar structure for other tabs -->
-                             <div id="exterior" class="hidden tab-content">
+                            <div id="exterior" class="hidden tab-content">
                                 <!-- Dimensions & Weight content -->
                                 <div class="flex flex-col md:flex-row">
-                                    <div class="w-full md:w-1/3">
+                                    <div class="w-full md:w-1/2">
                                         <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
                                             class="w-full rounded shadow">
                                     </div>
