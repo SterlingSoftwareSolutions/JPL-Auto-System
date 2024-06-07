@@ -27,7 +27,7 @@
         <div class="flex items-center justify-end space-x-4">
             {{-- "Logged in as" text --}}
             <div class="hidden md:block">
-                <h1>Logged in as <span class="font-bold">{{Auth::user()->name}}</span></h1>
+                <h1>Logged in as <span class="font-bold"></span></h1>
             </div>
 
             {{-- Power off icon --}}
