@@ -221,7 +221,7 @@
     <div class="w-11/12 md:w-6/12  mx-5 md:mx-0">
 
 {{-- /// --}}
-<div class="flex gap-5  mx-20 mt-5">
+<div class="flex gap-5  md:mx-20 mx-5 mt-5">
     <h1 class="underline">Body</h1>
     <h1><i class="fas fa-arrow-alt-circle-right"></i></h1>
     <h1 class="underline">Complete Shell</h1>
@@ -256,10 +256,10 @@
 
                 <!-- Thumbnails -->
                                <!-- Thumbnails -->
-                               <div class="flex justify-between mt-4 mx-2 md:gap-0 ">
+                               <div class="flex justify-between mt-4 mx-2 md:mx-4 md:gap-1  gap-1 ">
                                 <template x-for="(slide, index) in slides" :key="index">
                                     <img :src="slide" @click="activeSlide = index" :class="{'': activeSlide === index}"
-                                         class="object-cover w-20 h-20 md:w-44 md:h-44 rounded-xl cursor-pointer border border-black">
+                                         class=" inline-flex object-cover w-16 h-16 md:w-44 md:h-28  rounded-xl cursor-pointer border border-black">
                                 </template>
                             </div>
 
