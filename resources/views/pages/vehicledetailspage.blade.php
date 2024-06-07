@@ -397,7 +397,7 @@
                             </div>
                             <div class="w-full p-4 md:w-2/3">
                                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                    <div>
+                                    {{-- <div>
                                         <h3 class="mb-6 text-lg font-bold">Exterior</h3>
                                         <ul class="text-sm">
                                             <li class="flex justify-between"><span>Length</span><span>4,612 mm</span></li>
@@ -410,7 +410,91 @@
                                             <li class="flex justify-between"><span>Overhang, Front</span><span>2,760 mm</span></li>
                                             <li class="flex justify-between"><span>Overhang, Rear</span><span>2,760 mm</span></li>
                                         </ul>
+                                    </div> --}}
+                                    <div class="mx-10 ">
+            
+                                        <table class="w-full text-sm bg-white rounded shadow-md ">
+                            
+                            
+                                           
+                            
+                                            <div class="mx-10">
+                            
+                                                <thead class="mx-10 border-b-2 border-black w-60">
+                                                    <tr class="items-start text-start">
+                                                        <th class="items-start w-3/12 px-8 py-6 text-left">Exterior</th>
+                                                    </tr>
+                                                </thead>
+                                            </div>
+                            
+                            
+                            
+                                            {{-- body 1  --}}
+                                            <tbody>
+                                                <tr>
+                            
+                                                    <td class="px-8 py-2 font-bold border-l"></td>
+                                                    <td class="px-8 py-2 border-b border-black ">Length
+                                                        4,612 mm</td>
+                            
+                            
+                            
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black">Width
+                                                        1,782 mm</td>
+                            
+                            
+                            
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black">Width, with Mirrors	1,782 mm</td>
+                            
+                            
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black">Track, Front	1,513 mm</td>
+                            
+                            
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black ">Track, Rear	1507 - 1513 - 1,513 mm</td>
+                            
+                            
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black">Wheel Base	2,760 mm</td>
+                            
+                            
+                                                </tr>
+                            
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black">Overhang, Front	2,760 mm</td>
+                            
+                            
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-8 py-2 border-l "></td>
+                                                    <td class="px-8 py-2 border-b border-black ">Overhang, Rear	2,760 mm</td>
+                            
+                            
+                                                </tr>
+                            
+                                            </tbody>
+                                            {{-- body 1 end --}}
+                            
+                            
+                            
+                                        </table>
+                            
                                     </div>
+                            
                                     <div>
                                         <h3 class="mb-6 text-lg font-bold">Interior</h3>
                                         <ul class="text-sm">
@@ -508,6 +592,95 @@
                 </script>
             </section>
 
+            <div class="md:flex">
+                <div class="w-full max-h-screen overflow-y-auto bg-white md:w-6/12">
+            
+                    <div class="mx-10 ">
+            
+                        <table class="w-full text-sm bg-white rounded shadow-md ">
+            
+            
+                           
+            
+                            <div class="mx-10">
+            
+                                <thead class="mx-10 border-b-2 border-black w-60">
+                                    <tr class="items-start text-start">
+                                        <th class="items-start w-3/12 px-8 py-6 text-left">Exterior</th>
+                                    </tr>
+                                </thead>
+                            </div>
+            
+            
+            
+                            {{-- body 1  --}}
+                            <tbody>
+                                <tr>
+            
+                                    <td class="px-8 py-2 font-bold border-l"></td>
+                                    <td class="px-8 py-2 border-b border-black ">Length
+                                        4,612 mm</td>
+            
+            
+            
+                                </tr>
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black">Width
+                                        1,782 mm</td>
+            
+            
+            
+                                </tr>
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black">Width, with Mirrors	1,782 mm</td>
+            
+            
+                                </tr>
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black">Track, Front	1,513 mm</td>
+            
+            
+                                </tr>
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black ">Track, Rear	1507 - 1513 - 1,513 mm</td>
+            
+            
+                                </tr>
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black">Wheel Base	2,760 mm</td>
+            
+            
+                                </tr>
+            
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black">Overhang, Front	2,760 mm</td>
+            
+            
+                                </tr>
+                                <tr>
+                                    <td class="px-8 py-2 border-l "></td>
+                                    <td class="px-8 py-2 border-b border-black ">Overhang, Rear	2,760 mm</td>
+            
+            
+                                </tr>
+            
+                            </tbody>
+                            {{-- body 1 end --}}
+            
+            
+            
+                        </table>
+            
+                    </div>
+            
+            
+            
             
            
 
