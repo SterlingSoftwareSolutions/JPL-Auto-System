@@ -680,4 +680,206 @@
     </div>
 </div>
 
+
+
+
+
+<!----------------------------------------part list and diagram---------------------------->
+
+<div>
+    <div>
+        <Section>
+
+            <div class="container flex mx-auto py-14">
+                <div class="w-1/2 p-4 border-r">
+                    <!-- Content for the left column -->
+                    <h2 class="mb-4 text-xl font-bold">Part List</h2>
+                    <div class="container mx-auto">
+                     
+                        
+
+                        <div class="h-64 overflow-y-scroll">
+                            <table class="w-full rounded shadow-md text-Base">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" class="px-2 py-2 text-xl font-bold text-black border-b border-black">01. Power Plant</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
+                            <table class="w-full rounded shadow-md text-Base">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" class="px-2 py-2 text-xl font-bold text-black border-b border-black">02. Wheels & Tyres</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                            <span class="flex-grow text-center"># 123569</span>
+                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="w-1/2 p-4 rounded-[5%]">
+                    <h2 class="mb-4 text-xl font-bold text-black"> Diagram</h2>
+                    <div class="flex flex-col md:flex-row">
+                        <div class="w-full p-4 md:w-[40%]">
+                           <div>
+                            
+                            <div class="w-full md:w-[50%]">
+                                <img src="{{ asset('images/diagram.png') }}" alt="diagram"
+                                    class="w-full rounded shadow">
+                            </div>
+
+                            
+                           </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </Section>
+    </div>
+
+    <div>
+
+    </div>
+</div>
 @endsection

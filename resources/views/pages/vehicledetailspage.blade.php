@@ -7,212 +7,64 @@
 
 <div>
     <div>
-        <section id="services" class="py-20 bg-gray-100">
-            <div class="container px-6 mx-auto">
+        <section id="services" class="py-8 bg-gray-100">
+            <div class="container px-6 mx-10">
                 <div class="flex flex-wrap">
-                    <div class="flex w-full px-4 mb-6 md:w-4/12">
-                        <div class="p-6 bg-white rounded shadow full ">
+                    <div class="flex w-full mb-6 md:w-4/12">
+                        <div class="bg-white rounded shadow full">
                             <div class="overflow-x-auto">
                                 <div class="overflow-x-auto">
-                                    <table class="max-w-full text-sm bg-white rounded shadow-md">
-                                        <thead>
-
+                                    <table class="w-full bg-white rounded shadow-md md:w-4/12 md:text-sm">
+                                        <thead class="bg-gray-100">
                                             <tr>
                                                 <th class="px-8 py-6">Item</th>
                                                 <th class="px-8 py-6">Vehicle Information</th>
                                                 <th class="px-8 py-6" colspan="2">Details</th>
-
-
                                             </tr>
-
                                             <tr>
                                                 <th class="px-4 py-2"></th>
                                                 <th class="px-4 py-2"></th>
                                                 <th class="px-4 py-2">Variant 1</th>
                                                 <th class="px-4 py-2">Variant 2</th>
-
                                             </tr>
-
                                         </thead>
+                                        @php
+                                        $vehicleInfo = [
+                                            ['id' => '01.', 'label' => 'Vehicle Make', 'variant1' => 'TBD', 'variant2' => 'TBD'],
+                                            ['id' => '02.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => 'TBD'],
+                                            ['id' => '03.', 'label' => 'Body Shape (NSW Body Code/Shape)', 'variant1' => 'COUPE COUPE', 'variant2' => 'TBD'],
+                                            ['id' => '04.', 'label' => 'Number of Side Doors', 'variant1' => '2', 'variant2' => 'TBD'],
+                                            ['id' => '05.', 'label' => 'Number of Rear Doors', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '06.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '07.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '08.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '09.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => 'TBD'],
+                                            ['id' => '10.', 'label' => 'Body Shape (NSW Body Code/Shape)', 'variant1' => 'COUPE COUPE', 'variant2' => 'TBD'],
+                                            ['id' => '11.', 'label' => 'Number of Side Doors', 'variant1' => '2', 'variant2' => 'TBD'],
+                                            ['id' => '12.', 'label' => 'Number of Rear Doors', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '13.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '14.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '15.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '16.', 'label' => 'Body Shape (NSW Body Code/Shape)', 'variant1' => 'COUPE COUPE', 'variant2' => 'TBD'],
+                                            ['id' => '17.', 'label' => 'Number of Side Doors', 'variant1' => '2', 'variant2' => 'TBD'],
+                                            ['id' => '18.', 'label' => 'Number of Rear Doors', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '19.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '20.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => 'TBD'],
+                                            ['id' => '21.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => 'TBD'],
+                                        ];
+                                        @endphp
                                         <tbody>
-                                            <tr>
-
-                                                <td class="px-8 py-2 border-l">01.</td>
-                                                <td class="px-8 py-2 border-l">Vehicle Make</td>
-                                                <td class="px-4 py-2 border-l">TBD</td>
-                                                <td class="px-4 py-2 border-l">TBD</td>
-
+                                            @foreach($vehicleInfo as $index => $info)
+                                            <tr class="{{ $index % 2 == 0 ? 'bg-gray-200' : 'bg-white' }}">
+                                                <td class="px-4 py-2">{{ $info['id'] }}</td>
+                                                <td class="px-4 py-2">{{ $info['label'] }}</td>
+                                                <td class="px-4 py-2">{{ $info['variant1'] }}</td>
+                                                <td class="px-4 py-2">{{ $info['variant2'] }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border-t border-b border-gray-300">02.</td>
-                                                <td class="px-4 py-2 border-t border-b border-gray-300">Vehicle Model
-                                                </td>
-                                                <td class="px-4 py-2 border-t border-b border-gray-300">TBD</td>
-                                                <td class="px-4 py-2 border-t border-b border-gray-300">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">03.</td>
-                                                <td class="px-4 py-2 border">Body Shape (NSW Body Code/Shape)</td>
-                                                <td class="px-4 py-2 border">COUPE COUPE</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">04.</td>
-                                                <td class="px-4 py-2 border">Number of Side Doors</td>
-                                                <td class="px-4 py-2 border">2</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">05.</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">06.</td>
-                                                <td class="px-4 py-2 border">Vehicle Category</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td class="px-4 py-2 border">07.</td>
-                                                <td class="px-4 py-2 border">Tare Mass (kg)</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">08.</td>
-                                                <td class="px-4 py-2 border">Unladen Mass (kg)</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">09.</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">10</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">11</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">12</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">13</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">14</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">15</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">16</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">17</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">18</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">19</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">20</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td class="px-4 py-2 border">21</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td class="px-4 py-2 border">22</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">23</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="px-4 py-2 border">24</td>
-                                                <td class="px-4 py-2 border">Number of Rear Doors</td>
-                                                <td class="px-4 py-2 border">0</td>
-                                                <td class="px-4 py-2 border">TBD</td>
-
-                                            </tr>
-
-
-
+                                            @endforeach
                                         </tbody>
                                     </table>
+                                    
                                 </div>
 
                             </div>
@@ -221,7 +73,7 @@
 
                     </div>
 
-                    <div class="w-full px-4 mb-4 md:w-5/12">
+                    <div class="w-full px-4 mb-4 md:w-4/12">
                         <div class="p-6 bg-black rounded-lg shadow">
                             <h3 class="mb-4 text-2xl font-bold"></h3>
                             <div class="grid grid-cols-2 gap-4 mb-4">
@@ -232,9 +84,11 @@
                             <h3 class="mb-4 text-sm text-center text-white">Fig 3 Dashboard / Interior view</h3>
 
 
-                            <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="grid grid-cols-1 gap-4 mb-2 place-items-center">
                                 <div class="col-span-1"></div>
-                                <img src="{{ asset('images/fig-3.png') }}" alt="fig 3" class="w-full rounded shadow">
+                                {{-- <img src="{{ asset('images/fig-3.png') }}" alt="fig 3" class="w-full rounded shadow"> --}}
+                                <img src="{{ asset('images/fig-3.png') }}" alt="fig 3" class="w-48 rounded shadow">
+
                                 <div class="col-span-1"></div>
                             </div>
                             <h3 class="mb-4 text-sm text-center text-white">Fig 1 and Fig 2 Front and rear view
@@ -256,8 +110,8 @@
 
 
 
-                    <div class="flex justify-end w-full px-8 mb-4 md:w-3/12">
-                        <div class="p-6 bg-white rounded shadow">
+                    <div class="flex w-full h-[400px] md:w-3/12">
+                        <div class="bg-white rounded shadow ">
                             <h3 class="mb-4 text-2xl font-bold">Measurement</h3>
                             <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -298,6 +152,7 @@
                             <p><span class="font-bold">Optional</span></p>
                             <p><span class="font-bold">Information is missing</span></p>
                         </div>
+                        
                         <nav class="flex items-center justify-center mb-4 border border-b border-gray-300">
                             <a href="#" onclick="showTab('engine')"
                                 class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Engine &
@@ -332,6 +187,7 @@
                                             <div class="mx-10 ">
 
                                                 <table class="w-full text-sm bg-white rounded shadow-md ">
+                                                    
 
                                                     <div class="mx-10">
 
@@ -349,14 +205,14 @@
                                                     <tbody>
                                                         <tr>
 
-                                                            <td class="px-2 py-2 border-b border-black">Length</td>
-                                                            <td class="px-2 py-2 border-b border-black ">
+                                                            <td class="items-start px-2 py-2 border-b border-black text-start">Length</td>
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 4,612 mm</td>
 
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Width</td>
-                                                            <td class="px-2 py-2 border-b border-black">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 1,782 mm</td>
 
 
@@ -364,7 +220,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Width, with
                                                                 Mirrors</td>
-                                                            <td class="px-2 py-2 border-b border-black">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 1,782 mm</td>
 
 
@@ -372,27 +228,27 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Track, Front
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black"> 1,513 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 1,513 mm
                                                             </td>
 
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Track, Rear
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black ">1507 - 1513
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">1507 - 1513
                                                                 - 1,513 mm</td>
 
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Wheel Base</td>
-                                                            <td class="px-2 py-2 border-b border-black"> 2,760 mm</td>
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm</td>
 
                                                         </tr>
 
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Overhang, Front
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black"> 2,760 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm
                                                             </td>
 
 
@@ -400,7 +256,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Overhang, Rear
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black "> 2,760 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm
                                                             </td>
 
 
@@ -439,7 +295,7 @@
 
                                                                 <td class="px-2 py-2 border-b border-black">Head Room,
                                                                     Front</td>
-                                                                <td class="px-2 py-2 border-b border-black ">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     4,612 mm</td>
 
 
@@ -448,7 +304,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Head Room,
                                                                     Rear</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1,782 mm</td>
 
 
@@ -457,7 +313,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black">Hip Room,
                                                                     Front</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1,782 mm</td>
 
 
@@ -465,7 +321,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black">Hip Room,
                                                                     Rear</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1,782
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1,782
                                                                     mm</td>
 
 
@@ -505,7 +361,7 @@
 
                                                                 <td class="px-2 py-2 border-b border-black">Curb Weight
                                                                 </td>
-                                                                <td class="px-2 py-2 border-b border-black ">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1670 - 1905 kg</td>
 
 
@@ -514,7 +370,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Gross
                                                                     Weight</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1670 -
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670 -
                                                                     1905 kg</td>
 
 
@@ -524,7 +380,7 @@
                                                                 <td class="px-2 py-2 border-b border-black ">Max Trailer
                                                                     Load,
                                                                     braked</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 12% 1670 -
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 12% 1670 -
                                                                     1905 kg</td>
 
 
@@ -533,7 +389,7 @@
                                                                 <td class="px-2 py-2 border-b border-black">Max Trailer
                                                                     Load,
                                                                     Nunbreaked</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1670 - 1905
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670 - 1905
                                                                     kg</td>
 
 
@@ -541,7 +397,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Cargo
                                                                     Capacity</td>
-                                                                <td class="px-2 py-2 border-b border-black "> 1670
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670
                                                                     - 1905 kg</td>
 
 
@@ -549,7 +405,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Max Towbar
                                                                     Download</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     75 kg</td>
 
 
@@ -603,7 +459,7 @@
                                                         <tr>
 
                                                             <td class="px-2 py-2 border-b border-black">Length</td>
-                                                            <td class="px-2 py-2 border-b border-black ">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 4,612 mm</td>
 
 
@@ -611,7 +467,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Width</td>
-                                                            <td class="px-2 py-2 border-b border-black">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 1,782 mm</td>
 
 
@@ -620,7 +476,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Width, with
                                                                 Mirrors</td>
-                                                            <td class="px-2 py-2 border-b border-black">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 1,782 mm</td>
 
 
@@ -628,7 +484,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Track, Front
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black"> 1,513 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 1,513 mm
                                                             </td>
 
 
@@ -636,14 +492,14 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Track, Rear
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black ">1507 - 1513
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">1507 - 1513
                                                                 - 1,513 mm</td>
 
 
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Wheel Base</td>
-                                                            <td class="px-2 py-2 border-b border-black"> 2,760 mm</td>
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm</td>
 
 
                                                         </tr>
@@ -651,7 +507,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Overhang, Front
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black"> 2,760 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm
                                                             </td>
 
 
@@ -659,7 +515,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Overhang, Rear
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black "> 2,760 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm
                                                             </td>
 
 
@@ -701,7 +557,7 @@
 
                                                                 <td class="px-2 py-2 border-b border-black">Head Room,
                                                                     Front</td>
-                                                                <td class="px-2 py-2 border-b border-black ">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     4,612 mm</td>
 
 
@@ -710,7 +566,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Head Room,
                                                                     Rear</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1,782 mm</td>
 
 
@@ -719,7 +575,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black">Hip Room,
                                                                     Front</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1,782 mm</td>
 
 
@@ -727,7 +583,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black">Hip Room,
                                                                     Rear</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1,782
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1,782
                                                                     mm</td>
 
 
@@ -767,7 +623,7 @@
 
                                                                 <td class="px-2 py-2 border-b border-black">Curb Weight
                                                                 </td>
-                                                                <td class="px-2 py-2 border-b border-black ">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1670 - 1905 kg</td>
 
 
@@ -776,7 +632,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Gross
                                                                     Weight</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1670 -
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670 -
                                                                     1905 kg</td>
 
 
@@ -786,7 +642,7 @@
                                                                 <td class="px-2 py-2 border-b border-black ">Max Trailer
                                                                     Load,
                                                                     braked</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 12% 1670 -
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 12% 1670 -
                                                                     1905 kg</td>
 
 
@@ -795,7 +651,7 @@
                                                                 <td class="px-2 py-2 border-b border-black">Max Trailer
                                                                     Load,
                                                                     Nunbreaked</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1670 - 1905
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670 - 1905
                                                                     kg</td>
 
 
@@ -803,7 +659,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Cargo
                                                                     Capacity</td>
-                                                                <td class="px-2 py-2 border-b border-black "> 1670
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670
                                                                     - 1905 kg</td>
 
 
@@ -811,7 +667,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Max Towbar
                                                                     Download</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     75 kg</td>
 
 
@@ -864,7 +720,7 @@
                                                         <tr>
 
                                                             <td class="px-2 py-2 border-b border-black">Length</td>
-                                                            <td class="px-2 py-2 border-b border-black ">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 4,612 mm</td>
 
 
@@ -872,7 +728,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Width</td>
-                                                            <td class="px-2 py-2 border-b border-black">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 1,782 mm</td>
 
 
@@ -881,7 +737,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Width, with
                                                                 Mirrors</td>
-                                                            <td class="px-2 py-2 border-b border-black">
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                 1,782 mm</td>
 
 
@@ -889,7 +745,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Track, Front
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black"> 1,513 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 1,513 mm
                                                             </td>
 
 
@@ -897,14 +753,14 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Track, Rear
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black ">1507 - 1513
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end">1507 - 1513
                                                                 - 1,513 mm</td>
 
 
                                                         </tr>
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Wheel Base</td>
-                                                            <td class="px-2 py-2 border-b border-black"> 2,760 mm</td>
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm</td>
 
 
                                                         </tr>
@@ -912,7 +768,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Overhang, Front
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black"> 2,760 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm
                                                             </td>
 
 
@@ -920,7 +776,7 @@
                                                         <tr>
                                                             <td class="px-2 py-2 border-b border-black ">Overhang, Rear
                                                             </td>
-                                                            <td class="px-2 py-2 border-b border-black "> 2,760 mm
+                                                            <td class="items-end px-2 py-2 border-b border-black text-end"> 2,760 mm
                                                             </td>
 
 
@@ -962,7 +818,7 @@
 
                                                                 <td class="px-2 py-2 border-b border-black">Head Room,
                                                                     Front</td>
-                                                                <td class="px-2 py-2 border-b border-black ">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     4,612 mm</td>
 
 
@@ -971,7 +827,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Head Room,
                                                                     Rear</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1,782 mm</td>
 
 
@@ -980,7 +836,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black">Hip Room,
                                                                     Front</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1,782 mm</td>
 
 
@@ -988,7 +844,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black">Hip Room,
                                                                     Rear</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1,782
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1,782
                                                                     mm</td>
 
 
@@ -1028,7 +884,7 @@
 
                                                                 <td class="px-2 py-2 border-b border-black">Curb Weight
                                                                 </td>
-                                                                <td class="px-2 py-2 border-b border-black ">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     1670 - 1905 kg</td>
 
 
@@ -1037,7 +893,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Gross
                                                                     Weight</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1670 -
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670 -
                                                                     1905 kg</td>
 
 
@@ -1047,7 +903,7 @@
                                                                 <td class="px-2 py-2 border-b border-black ">Max Trailer
                                                                     Load,
                                                                     braked</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 12% 1670 -
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 12% 1670 -
                                                                     1905 kg</td>
 
 
@@ -1056,7 +912,7 @@
                                                                 <td class="px-2 py-2 border-b border-black">Max Trailer
                                                                     Load,
                                                                     Nunbreaked</td>
-                                                                <td class="px-2 py-2 border-b border-black"> 1670 - 1905
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670 - 1905
                                                                     kg</td>
 
 
@@ -1064,7 +920,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Cargo
                                                                     Capacity</td>
-                                                                <td class="px-2 py-2 border-b border-black "> 1670
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end"> 1670
                                                                     - 1905 kg</td>
 
 
@@ -1072,7 +928,7 @@
                                                             <tr>
                                                                 <td class="px-2 py-2 border-b border-black ">Max Towbar
                                                                     Download</td>
-                                                                <td class="px-2 py-2 border-b border-black">
+                                                                <td class="items-end px-2 py-2 border-b border-black text-end">
                                                                     75 kg</td>
 
 
