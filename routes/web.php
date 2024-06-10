@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,12 @@ Route::get('/wel', function () {
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('forget-password', [MailController::class, 'forgetpassword'])->name('forget-password');
+Route::get('reset-password', [MailController::class, 'resetpassword'])->name('reset-password');
+Route::get('reset-password-page', [MailController::class, 'resetpasswordpage'])->name('reset-password-page');
+
+
 
 
 Route::get('/forget-password', function () {
