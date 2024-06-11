@@ -33,7 +33,8 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('forget-password', [MailController::class, 'forgetpassword'])->name('forget-password');
 Route::get('reset-password', [MailController::class, 'resetpassword'])->name('reset-password');
-Route::get('reset-password-page', [MailController::class, 'resetpasswordpage'])->name('reset-password-page');
+Route::get('reset-password-page/{token}', [MailController::class, 'resetpasswordpage'])->name('reset-password-page');
+Route::post('reset', [MailController::class, 'reset'])->name('reset');
 
 
 

@@ -61,7 +61,7 @@
     <div class="container">
         <h1>Forgot Password</h1>
         <p>Click the button below to reset your password:</p>
-        <a href="{{ route('reset-password-page') }}" class="button">Reset Password</a>
+        <a href="{{ route('reset-password-page',['token' => $token]) }}" class="button">Reset Password</a>
     </div>
 </body>
 
