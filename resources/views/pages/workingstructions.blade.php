@@ -120,6 +120,8 @@
                         </table>
                     </div>
                 </div>
+
+               
                 
                 
                 <div id="engine" class="tab-content">
@@ -506,178 +508,140 @@
 
 <!-----------------------------------steps------->
 <div>
-    <div>
-        <Section>
-
-            <div class="container flex mx-auto">
-                <div class="w-1/2 p-4 border-r">
-                    <!-- Content for the left column -->
-                    <h2 class="mb-4 text-xl font-bold">Steps</h2>
-                    <div class="container mx-auto">
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-                            <div
-                                class="flex items-center justify-center p-6 bg-black shadow-lg rounded-[100%] w-44 h-44">
-                                <div class="text-center">
-                                    <h2 class="mb-2 text-xl font-bold text-white">1</h2>
-                                    <p class="text-white">Description of step 1.</p>
-                                </div>
+    <Section>
+        <div class="container mx-auto flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 p-4 border-b md:border-b-0 md:border-r">
+                <!-- Content for the left column -->
+                <h2 class="mb-4 text-xl font-bold">Steps</h2>
+                <div class="container mx-auto">
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex items-center justify-center p-6 bg-black shadow-lg rounded-full w-44 h-44 mx-auto">
+                            <div class="text-center">
+                                <h2 class="mb-2 text-xl font-bold text-white">1</h2>
+                                <p class="text-white">Description of step 1.</p>
                             </div>
-                            <div
-                                class="flex items-center justify-center p-6 bg-black shadow-lg rounded-[100%] w-44 h-44">
-                                <div class="text-center">
-                                    <h2 class="mb-2 text-xl font-bold text-white"> 2</h2>
-                                    <p class="text-white">Description of step 2.</p>
-                                </div>
+                        </div>
+                        <div class="flex items-center justify-center p-6 bg-black shadow-lg rounded-full w-44 h-44 mx-auto">
+                            <div class="text-center">
+                                <h2 class="mb-2 text-xl font-bold text-white">2</h2>
+                                <p class="text-white">Description of step 2.</p>
                             </div>
-                            <div
-                                class="flex items-center justify-center p-6 bg-black shadow-lg rounded-[100%] w-44 h-44">
-                                <div class="text-center">
-                                    <h2 class="mb-2 text-xl font-bold text-white"> 3</h2>
-                                    <p class="text-white">Description of step 3.</p>
-                                </div>
+                        </div>
+                        <div class="flex items-center justify-center p-6 bg-black shadow-lg rounded-full w-44 h-44 mx-auto">
+                            <div class="text-center">
+                                <h2 class="mb-2 text-xl font-bold text-white">3</h2>
+                                <p class="text-white">Description of step 3.</p>
                             </div>
-                            <div
-                                class="flex items-center justify-center p-6 bg-black shadow-lg rounded-[100%] w-44 h-44">
-                                <div class="text-center">
-                                    <h2 class="mb-2 text-xl font-bold text-white">4</h2>
-                                    <p class="text-white">Description of step 4.</p>
-                                </div>
+                        </div>
+                        <div class="flex items-center justify-center p-6 bg-black shadow-lg rounded-full w-44 h-44 mx-auto">
+                            <div class="text-center">
+                                <h2 class="mb-2 text-xl font-bold text-white">4</h2>
+                                <p class="text-white">Description of step 4.</p>
                             </div>
-                            <div
-                                class="flex items-center justify-center p-6 bg-black shadow-lg rounded-[100%] w-44 h-44">
-                                <div class="text-center">
-                                    <h2 class="mb-2 text-xl font-bold text-white"> 5</h2>
-                                    <p class="text-white">Description of step 5.</p>
-                                </div>
+                        </div>
+                        <div class="flex items-center justify-center p-6 bg-black shadow-lg rounded-full w-44 h-44 mx-auto">
+                            <div class="text-center">
+                                <h2 class="mb-2 text-xl font-bold text-white">5</h2>
+                                <p class="text-white">Description of step 5.</p>
                             </div>
-                            <div
-                                class="flex items-center justify-center p-6 bg-black shadow-lg rounded-[100%] w-44 h-44">
-                                <div class="text-center">
-                                    <h2 class="mb-2 text-xl font-bold text-white">6</h2>
-                                    <p class="text-white">Description of step 6.</p>
-                                </div>
+                        </div>
+                        <div class="flex items-center justify-center p-6 bg-black shadow-lg rounded-full w-44 h-44 mx-auto">
+                            <div class="text-center">
+                                <h2 class="mb-2 text-xl font-bold text-white">6</h2>
+                                <p class="text-white">Description of step 6.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="w-1/2 p-4 bg-black rounded-[5%]">
-                    <h2 class="mb-4 text-xl font-bold text-white">Quality Control</h2>
-                    <div class="flex flex-col md:flex-row">
-                        <div class="w-full p-4 md:w-[40%]">
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 ">
-                                <div class="mx-10">
-                                    <table class="w-full bg-black rounded shadow-md text-Base">
-                                        <tbody>
-
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">1.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">2.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">3.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">4.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">5.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">6.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">7.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">8.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">9.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-2 text-white border-b border-white">10.</td>
-                                                <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                                    <a href="#" class="ml-4 text-white hover:underline">View</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        {{-- body 1 end --}}
-
-
-
-                                    </table>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
             </div>
 
-
-
-
-
-
-
-        </Section>
-    </div>
-
-    <div>
-
-    </div>
+            <div class="w-full md:w-1/2 p-4 bg-black rounded-[5%]">
+                <h2 class="mb-4 text-xl font-bold text-white">Quality Control</h2>
+                <div class="flex flex-col md:flex-row">
+                    <div class="w-full p-4 md:w-[40%]">
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                            <div class="mx-auto md:mx-10">
+                                <table class="w-full bg-black rounded shadow-md text-base">
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">1.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">2.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">3.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">4.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">5.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">6.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">7.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">8.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">9.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-white border-b border-white">10.</td>
+                                            <td class="px-2 py-2 pl-10 text-white border-b border-white whitespace-nowrap">
+                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                                <a href="#" class="ml-4 text-white hover:underline">View</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Section>
 </div>
 
 
@@ -687,75 +651,24 @@
 <!----------------------------------------part list and diagram---------------------------->
 
 <div>
-    <div>
-        <Section>
-
-            <div class="container flex mx-auto py-14">
-                <div class="w-1/2 p-4 border-r">
-                    <!-- Content for the left column -->
-                    <h2 class="mb-4 text-xl font-bold">Part List</h2>
-                    <div class="container mx-auto">
-                     
-                        
-
-                        <div class="h-64 overflow-y-scroll">
-                            <table class="w-full rounded shadow-md text-Base">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="px-2 py-2 text-xl font-bold text-black border-b border-black">01. Power Plant</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                   
-                                </tbody>
-                            </table>
-                            <table class="w-full rounded shadow-md text-Base">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="px-2 py-2 text-xl font-bold text-black border-b border-black">02. Wheels & Tyres</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    
+    <Section>
+        <div class="container flex flex-col md:flex-row mx-auto py-14">
+            <div class="w-full md:w-1/2 p-4 border-r">
+                <!-- Content for the left column -->
+                <h2 class="mb-4 text-xl font-bold">Part List</h2>
+                <div class="container mx-auto">
+                    <div class="h-64 overflow-y-scroll">
+                        <table class="w-full rounded shadow-md text-Base">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="px-2 py-2 text-xl font-bold text-black border-b border-black">01. Power Plant</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
                                     <tr>
                                         <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
                                         <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
@@ -791,95 +704,84 @@
                                             <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
-                                        <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
-                                            <span class="flex-grow text-center"># 123569</span>
-                                            <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
-                                        </td>
-                                    </tr>
-                                  
-                                </tbody>
-                            </table>
-                        </div>
-
-
-
-
-
-
-
-
-
-                        
-
-
-
-
-
-
-
-
-
+                                </tr>
+                                <!-- Repeat for other items -->
+                            </tbody>
+                        </table>
+                        <table class="w-full rounded shadow-md text-Base">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="px-2 py-2 text-xl font-bold text-black border-b border-black">02. Wheels & Tyres</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-2 py-2 text-black border-b border-black">. Engine</td>
+                                    <td class="flex justify-between px-2 py-2 pl-10 text-black border-b border-black whitespace-nowrap">
+                                        <span class="flex-grow text-center"># 123569</span>
+                                        <a href="#" class="ml-4 text-right text-black hover:underline">View</a>
+                                    </td>
+                                </tr>
+                                <!-- Repeat for other items -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-
-                <div class="w-1/2 p-4 rounded-[5%]">
-                    <h2 class="mb-4 text-xl font-bold text-black"> Diagram</h2>
-                    <div class="flex flex-col md:flex-row">
-                        <div class="w-full p-4 md:w-[40%]">
-                           <div>
-                            
-                            <div class="w-full md:w-[50%]">
-                                <img src="{{ asset('images/diagram.png') }}" alt="diagram"
-                                    class="w-full rounded shadow">
-                            </div>
-
-                            
-                           </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
             </div>
-
-
-
-
-
-
-
-        </Section>
-    </div>
-
-    <div>
-
-    </div>
+            <div class="w-full md:w-1/2 p-4 rounded-[5%]">
+                <h2 class="mb-4 text-xl font-bold text-black">Diagram</h2>
+                <div class="flex flex-col">
+                    <div class="w-full p-4">
+                        <div>
+                            <div class="w-full">
+                                <img src="{{ asset('images/diagram.png') }}" alt="diagram" class="w-full rounded shadow">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Section>
 </div>
+
 @endsection
