@@ -33,7 +33,7 @@
             <div class="flex ">
 
                 <div class="flex image-container group">
-                    <a href="">
+                    <a href="{{route('customerlist')}}">
                         <img class="transform -rotate-90 m-5 md:w-[200px] md:h-[200px] w-28 h-28 hidden group-hover:block transition duration-1000 bg-white rounded-lg"
                             src="{{ asset('images/2.1.png') }}" alt="profile Pic">
                         <img class="transform -rotate-90 m-5 md:w-[200px] md:h-[200px] w-28 h-28 group-hover:hidden transition duration-1000  bg-white"
