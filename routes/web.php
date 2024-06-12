@@ -43,49 +43,35 @@ Route::get('/forget-password', function () {
     return view('auth.forgetpassword');
 })->name('forget-password');
 
+Route::middleware('auth:sanctum')->group(function () {
+    
+    Route::get('/dashboard', function () {
+        return view('pages.dashboard');
+    })->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->name('dashboard');
+    // production system
+    Route::get('/vehicle-details', function () {
+        return view('pages.productionsystem.vehicledetailspage');
+    })->name('vehicledetailspage');
 
-//production system
+    Route::get('/working-structions', function () {
+        return view('pages.productionsystem.workingstructions');
+    })->name('workingstructions');
 
-Route::get('/vehicle-details', function () {
-    return view('pages.productionsystem.vehicledetailspage');
-})->name('vehicledetailspage');
+    Route::get('/compliance', function () {
+        return view('pages.productionsystem.compliancepage');
+    })->name('compliancepage');
 
+    Route::get('/partslist', function () {
+        return view('pages.productionsystem.partlistpage');
+    })->name('partlistpage');
 
-Route::get('/working-structions', function () {
-    return view('pages.productionsystem.workingstructions');
-})->name('workingstructions');
+    Route::get('/suppliers', function () {
+        return view('pages.productionsystem.supplierspage');
+    })->name('supplierspage');
 
-
-Route::get('/compliance', function () {
-    return view('pages.productionsystem.compliancepage');
-})->name('compliancepage');
-
-
-Route::get('/partslist', function () {
-    return view('pages.productionsystem.partlistpage');
-})->name('partlistpage');
-
-
-Route::get('/suppliers', function () {
-    return view('pages.productionsystem.supplierspage');
-})->name('supplierspage');
-
-
-//production system
-
-
-//customers
-
-Route::get('/customers-customerlist', function () {
-    return view('pages.customersystem.customerlist');
-})->name('customerlist');
-
-
-
-// Route::get('/engine-performance', function () {
-//     return view('pages.vehicaldetailspage.engine-performance');
-// })->name('engine-performance');
+    // customers
+    Route::get('/customers-customerlist', function () {
+        return view('pages.customersystem.customerlist');
+    })->name('customerlist');
+});
