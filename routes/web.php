@@ -48,30 +48,42 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->name('dashboard');
 
+//production system
 
 Route::get('/vehicle-details', function () {
-    return view('pages.vehicledetailspage');
+    return view('pages.productionsystem.vehicledetailspage');
 })->name('vehicledetailspage');
 
 
 Route::get('/working-structions', function () {
-    return view('pages.workingstructions');
+    return view('pages.productionsystem.workingstructions');
 })->name('workingstructions');
 
 
 Route::get('/compliance', function () {
-    return view('pages.compliancepage');
+    return view('pages.productionsystem.compliancepage');
 })->name('compliancepage');
 
 
 Route::get('/partslist', function () {
-    return view('pages.partlistpage');
+    return view('pages.productionsystem.partlistpage');
 })->name('partlistpage');
 
 
 Route::get('/suppliers', function () {
-    return view('pages.supplierspage');
+    return view('pages.productionsystem.supplierspage');
 })->name('supplierspage');
+
+
+//production system
+
+
+//customers
+
+Route::get('/customers-customerlist', function () {
+    return view('pages.customersystem.customerlist');
+})->name('customerlist');
+
 
 
 // Route::get('/engine-performance', function () {
