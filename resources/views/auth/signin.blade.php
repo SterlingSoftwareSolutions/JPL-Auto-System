@@ -15,7 +15,7 @@
 
         {{-- login --}}
 
-        <div class="flex justify-center items-center rounded-xl p-8 mt-10 md:w-7/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
+        <div class="flex justify-center items-center rounded-xl p-8 mt-10 md:w-8/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
             <div class="text-center ">
                 <h1 class="text-4xl">SIGN IN</h1>
                 <form id="loginForm" method="POST" action="{{ route('login') }}">
@@ -23,16 +23,16 @@
 
                     <div class="flex justify-center space-x-6 mt-10">
                         <input type="password" name="pin1"
-                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px]  text-2xl text-center"
                             placeholder="">
                         <input type="password" name="pin2"
-                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px] text-2xl text-center"
                             placeholder="">
                         <input type="password" name="pin3"
-                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px] text-2xl text-center"
                             placeholder="">
                         <input type="password" name="pin4"
-                            class="pin-input rounded-md h-28 w-2/6 md:w-24 text-2xl text-center"
+                            class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px] text-2xl text-center"
                             placeholder="">
                     </div>
                 </form>
