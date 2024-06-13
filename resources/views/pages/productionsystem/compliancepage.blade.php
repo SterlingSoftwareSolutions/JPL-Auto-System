@@ -33,7 +33,7 @@
     </style>
     <div>
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="tableee w-full text-sm text-left divide-y divide-gray-200">
+            <table class="w-full text-sm text-left divide-y divide-gray-200 tableee">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -66,13 +66,15 @@
                         <th scope="col" class="px-6 py-3">
                             ADR Requirements
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
 
                     {{-- table row 1  --}}
                     <tr class="bg-white ">
-                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                            04/06
                         </td>
                         <td class="px-6 py-4">
@@ -84,56 +86,56 @@
                         <td class="px-6 py-4">
                             <div class="flex flex-col items-start space-y-2">
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4">
+                                    <input type="checkbox" class="w-4 h-4 form-checkbox">
                                     <span>ECE Approval</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4">
+                                    <input type="checkbox" class="w-4 h-4 form-checkbox">
                                     <span>Test Report from Approved Test Facility</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4">
+                                    <input type="checkbox" class="w-4 h-4 form-checkbox">
                                     <span>Component Type Approval (CTA)</span>
                                 </div>
                             </div>
                         </td>
 
                         <td class="px-6 py-4">
-                            <input type="text" class="border border-black h-10">
+                            <input type="text" class="h-10 border border-black">
                         </td>
 
                         <td class="px-6 py-4">
-                            <div class="w-52 h-36 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6  rounded-md cursor-pointer " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
-                                <h1 class="text-md font-bold text-gray-500">Drop files here</h1>
-                                <h3 class="text-sm text-gray-500 text-center" style=>drag and drop, or browse your file</h3>
-                                <button class="mt-4 border w-32 py-2 font-semibold text-gray-800 rounded-md " style="background-color: #F9F9F9">Browse</button>
+                            <div class="flex flex-col items-center justify-center p-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer w-52 h-36 " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
+                                <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
+                                <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
+                                <button class="w-32 py-2 mt-4 font-semibold text-gray-800 border rounded-md " style="background-color: #F9F9F9">Browse</button>
                                 <input id="fileInput" type="file" class="hidden" />
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="w-52 h-36 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6  rounded-md cursor-pointer " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
-                                <h1 class="text-md font-bold text-gray-500">Drop files here</h1>
-                                <h3 class="text-sm text-gray-500 text-center" style=>drag and drop, or browse your file</h3>
-                                <button class="mt-4 border w-32 py-2 font-semibold text-gray-800 rounded-md " style="background-color: #F9F9F9">Browse</button>
+                            <div class="flex flex-col items-center justify-center p-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer w-52 h-36 " style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
+                                <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
+                                <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
+                                <button class="w-32 py-2 mt-4 font-semibold text-gray-800 border rounded-md " style="background-color: #F9F9F9">Browse</button>
                                 <input id="fileInput" type="file" class="hidden" />
                             </div>
                         </td>
                         <td class="px-6 py-4">
                             <div>
-                                <input type="text" placeholder="Component" class="border border-black h-8 px-2 w-46 placeholder-gray-600">
+                                <input type="text" placeholder="Component" class="h-8 px-2 placeholder-gray-600 border border-black w-46">
 
-                                <div class="flex flex-col items-start space-y-2 mt-1">
+                                <div class="flex flex-col items-start mt-1 space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <span class="w-10">Type:</span>
-                                        <input type="text" placeholder="" class="border border-black w-32 h-8 placeholder-gray-600 ">
+                                        <input type="text" placeholder="" class="w-32 h-8 placeholder-gray-600 border border-black ">
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <span class="w-10">Part:</span>
-                                        <input type="text" placeholder=" "  class="border border-black w-32 h-8 placeholder-gray-600">
+                                        <input type="text" placeholder=" "  class="w-32 h-8 placeholder-gray-600 border border-black">
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <span class="w-10">Qty.:</span>
-                                        <input type="text" placeholder="" class="border border-black h-8 w-32 ">
+                                        <input type="text" placeholder="" class="w-32 h-8 border border-black ">
                                     </div>
                                 </div>
                         </div>
@@ -141,7 +143,7 @@
                         </td>
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-col items-center justify-center">
                                 <div>
                                     <h1>Brand New</h1>
                                 </div>
@@ -149,10 +151,20 @@
                         </td>
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                            <input type="checkbox" class="form-checkbox h-4 w-4">
+                            <div class="flex flex-col items-center justify-center">
+                            <input type="checkbox" class="w-4 h-4 form-checkbox">
                             </div>
                         </td>
+
+                        <td class="">
+                            <div class="flex flex-col items-center justify-center">
+                                <button>Save </button>
+                                <button>Edit </button>
+                                <button>Delete </button>
+                            </div>
+                        </td>
+                          
+
 
                         <tr class="border-b border-gray-200">
                     </tr>
@@ -160,7 +172,7 @@
 
                     {{-- table row 2  --}}
                     <tr class="bg-white ">
-                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                            04/06
                         </td>
                         <td class="px-6 py-4">
@@ -172,22 +184,22 @@
                         <td class="px-6 py-4">
                             <div class="flex flex-col items-start space-y-2">
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4">
+                                    <input type="checkbox" class="w-4 h-4 form-checkbox">
                                     <span>ECE Approval</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4">
+                                    <input type="checkbox" class="w-4 h-4 form-checkbox">
                                     <span>Test Report from Approved Test Facility</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4">
+                                    <input type="checkbox" class="w-4 h-4 form-checkbox">
                                     <span>Component Type Approval (CTA)</span>
                                 </div>
                             </div>
                         </td>
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-col items-center justify-center">
                                 R00-4768-0023
                             </div>
                             </td>
@@ -197,7 +209,7 @@
 
                                 <!-- PNG Document -->
                                 <div class="flex flex-col items-center">
-                                    <img src="path/to/png-icon.png" alt="PNG Icon" class="h-10 w-10">
+                                    <img src="path/to/png-icon.png" alt="PNG Icon" class="w-10 h-10">
                                     <span class="text-sm">photo.jpg</span>
                                 </div>
                             </div>
@@ -207,42 +219,43 @@
                         <td class="px-6 py-4">
                               <!-- PDF Document -->
                               <div class="flex flex-col items-center">
-                                <img src="path/to/pdf-icon.png" alt="PDF Icon" class="h-10 w-10">
+                                <img src="path/to/pdf-icon.png" alt="PDF Icon" class="w-10 h-10">
                                 <span class="text-sm">file.pdf</span>
                             </div>
                         </td>
 
                         <td class="px-6 py-4">
                             <div>
-                                <input type="text" placeholder="" class="border border-black h-8 px-2 w-46">
-
-                                <div class="flex flex-col items-start space-y-2 mt-1">
+                                <h1>Passanger Seatbelt LMS </h1>
+                                <div class="flex flex-col items-start mt-1 space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <span class="w-10">Type:</span>
-                                        <input type="text" placeholder="Front Outboar" class="border border-black w-32 h-8 placeholder-gray-600 ">
+                                        <h1>Front Outboard</h1>
+                                        {{-- <input type="text" placeholder="Front Outboar" class="w-32 h-8 placeholder-gray-600 border border-black "> --}}
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <span class="w-10">Part:</span>
-                                        <input type="text" placeholder="VPW Retractor "  class="border border-black w-32 h-8 placeholder-gray-600">
+                                        <h1>VPN RESETRACTABLE BELT</h1>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <span class="w-10">Qty.:</span>
-                                        <input type="text" placeholder="1" class="border border-black h-8 w-32 ">
+                                        <h1>1</h1>
+
                                     </div>
                                 </div>
                         </div>
 
                         </td>
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-col items-center justify-center">
                                 <div>
                                     <h1>Brand New</h1>
                                 </div>
                             </div>
                         </td>
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                            <input type="checkbox" class="form-checkbox h-4 w-4">
+                            <div class="flex flex-col items-center justify-center">
+                            <input type="checkbox" class="w-4 h-4 form-checkbox">
                             </div>
                         </td>
 
@@ -254,7 +267,7 @@
 
                       {{-- table row 3  --}}
                       <tr class="bg-white ">
-                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                            04/06
                         </td>
                         <td class="px-6 py-4">
@@ -265,7 +278,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex flex-col items-start space-y-2">
-                                <ul class="list-disc pl-5">
+                                <ul class="pl-5 list-disc">
                                     <li>
                                         <span>ECE Approval</span>
                                     </li>
@@ -280,9 +293,9 @@
                         </td>
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="bg-red w-14 h-10 rounded-xl flex justify-center items-center p-0" style="background-color: #DC3545">
-                                    <h1 class="text-center text-white font-bold m-0">TBD</h1>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center justify-center h-10 p-0 bg-red w-14 rounded-xl" style="background-color: #DC3545">
+                                    <h1 class="m-0 font-bold text-center text-white">TBD</h1>
                                 </div>
                             </div>
                         </td>
@@ -290,53 +303,53 @@
 
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="bg-red w-14 h-10 rounded-xl flex justify-center items-center p-0" style="background-color: #DC3545">
-                                    <h1 class="text-center text-white font-bold m-0">TBD</h1>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center justify-center h-10 p-0 bg-red w-14 rounded-xl" style="background-color: #DC3545">
+                                    <h1 class="m-0 font-bold text-center text-white">TBD</h1>
                                 </div>
                             </div>
                         </td>
 
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="bg-red w-14 h-10 rounded-xl flex justify-center items-center p-0" style="background-color: #DC3545">
-                                    <h1 class="text-center text-white font-bold m-0">TBD</h1>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center justify-center h-10 p-0 bg-red w-14 rounded-xl" style="background-color: #DC3545">
+                                    <h1 class="m-0 font-bold text-center text-white">TBD</h1>
                                 </div>
                             </div>
                         </td>
 
                         <td class="px-6 py-4">
                             <div>
-                                <input type="text" placeholder="" class="border border-black h-8 px-2 w-46 placeholder-gray-600">
+                                <input type="text" placeholder="" class="h-8 px-2 placeholder-gray-600 border border-black w-46">
 
-                            <div class="flex flex-col items-start space-y-2 mt-1">
+                            <div class="flex flex-col items-start mt-1 space-y-2">
                                 <div class="flex items-center space-x-2">
                                     <span class="w-10">Type:</span>
-                                    <input type="text" placeholder="Front Outboar" class="border border-black w-32 h-8 placeholder-gray-600 ">
+                                    <input type="text" placeholder="Front Outboar" class="w-32 h-8 placeholder-gray-600 border border-black ">
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span class="w-10">Part:</span>
-                                    <input type="text" placeholder="VPW Retractor "  class="border border-black w-32 h-8 placeholder-gray-600">
+                                    <input type="text" placeholder="VPW Retractor "  class="w-32 h-8 placeholder-gray-600 border border-black">
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span class="w-10">Qty.:</span>
-                                    <input type="text" placeholder="1" class="border border-black h-8 w-32 ">
+                                    <input type="text" placeholder="1" class="w-32 h-8 border border-black ">
                                 </div>
                             </div>
                         </div>
 
                         </td>
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-col items-center justify-center">
                                 <div>
                                     <h1>Brand New</h1>
                                 </div>
                             </div>
                         </td>
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                            <input type="checkbox" class="form-checkbox h-4 w-4">
+                            <div class="flex flex-col items-center justify-center">
+                            <input type="checkbox" class="w-4 h-4 form-checkbox">
                             </div>
                         </td>
 
@@ -349,7 +362,7 @@
 
                       {{-- table row 4  --}}
                       <tr class="bg-white ">
-                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                            04/06
                         </td>
                         <td class="px-6 py-4">
@@ -360,7 +373,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex flex-col items-start space-y-2">
-                                <ul class="list-disc pl-5">
+                                <ul class="pl-5 list-disc">
                                     <li>
                                         <span>ECE Approval</span>
                                     </li>
@@ -376,9 +389,9 @@
                         </td>
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="bg-red w-14 h-10 rounded-xl flex justify-center items-center p-0" style="background-color: #DC3545">
-                                    <h1 class="text-center text-white font-bold m-0">TBD</h1>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center justify-center h-10 p-0 bg-red w-14 rounded-xl" style="background-color: #DC3545">
+                                    <h1 class="m-0 font-bold text-center text-white">TBD</h1>
                                 </div>
                             </div>
                         </td>
@@ -386,18 +399,18 @@
 
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="bg-red w-14 h-10 rounded-xl flex justify-center items-center p-0" style="background-color: #DC3545">
-                                    <h1 class="text-center text-white font-bold m-0">TBD</h1>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center justify-center h-10 p-0 bg-red w-14 rounded-xl" style="background-color: #DC3545">
+                                    <h1 class="m-0 font-bold text-center text-white">TBD</h1>
                                 </div>
                             </div>
                         </td>
 
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="bg-red w-14 h-10 rounded-xl flex justify-center items-center p-0" style="background-color: #DC3545">
-                                    <h1 class="text-center text-white font-bold m-0">TBD</h1>
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center justify-center h-10 p-0 bg-red w-14 rounded-xl" style="background-color: #DC3545">
+                                    <h1 class="m-0 font-bold text-center text-white">TBD</h1>
                                 </div>
                             </div>
                         </td>
@@ -411,15 +424,15 @@
                         </td>
 
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-col items-center justify-center">
                                 <div>
                                     <h1>Brand New</h1>
                                 </div>
                             </div>
                         </td>
                         <td class="">
-                            <div class="flex flex-col justify-center items-center">
-                            <input type="checkbox" class="form-checkbox h-4 w-4">
+                            <div class="flex flex-col items-center justify-center">
+                            <input type="checkbox" class="w-4 h-4 form-checkbox">
                             </div>
                         </td>
 
