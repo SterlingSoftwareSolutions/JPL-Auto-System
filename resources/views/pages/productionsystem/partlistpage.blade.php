@@ -221,7 +221,7 @@
     <div class="w-11/12 md:w-6/12  mx-5 md:mx-0">
 
 {{-- /// --}}
-<div class="flex gap-5  md:mx-20 mx-5 mt-5">
+<div class="flex gap-5  md:mx-16 mx-5 mt-5">
     <h1 class="underline">Body</h1>
     <h1><i class="fas fa-arrow-alt-circle-right"></i></h1>
     <h1 class="underline">Complete Shell</h1>
@@ -232,71 +232,70 @@
 
 {{-- /// --}}
 
-        <div class="flex justify-center  w-12/12 md:mx-20 mx-5 mt-5 ">
-            <div x-data="carousel()" class="relative w-full max-w-4xl ">
-                <!-- Big Image -->
-                <div class="relative ">
-                    <template x-for="(slide, index) in slides" :key="index">
-                        <div x-show="activeSlide === index" class="w-full transition-opacity duration-1000 ease-in-out ">
-                            <img :src="slide" alt="" class="w-full h-full border border-black rounded-3xl">
-                        </div>
-                    </template>
-                    <div class=" border ">
-                        <!-- Prev/Next Buttons -->
-                        <button @click="prevSlide"
-                                class="w-12 h-12 absolute left-0 p-2 ml-5 transition duration-1000 transform -translate-y-1/2 bg-white top-1/2">
-                            <i class="fa-solid fa-arrow-left  fa-2x"></i>
-                        </button>
-                        <button @click="nextSlide"
-                                class="w-12 h-12 absolute right-0 p-2 mr-5 transition duration-1000 transform -translate-y-1/2 bg-white top-1/2">
-                            <i class="fa-solid fa-arrow-right  fa-2x"></i>
-                        </button>
-                    </div>
-                </div>
+<style>
+    .carousel-slide {
+        @apply absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-1000 ease-in-out;
+    }
+    .carousel-slide-active {
+        @apply opacity-100;
+    }
+</style>
+</head>
+<body class="bg-gray-100">
 
-                <!-- Thumbnails -->
-                               <!-- Thumbnails -->
-                               <div class="flex justify-between mt-4 mx-2 md:mx-4 md:gap-1  gap-1 ">
-                                <template x-for="(slide, index) in slides" :key="index">
-                                    <img :src="slide" @click="activeSlide = index" :class="{'': activeSlide === index}"
-                                         class=" inline-flex object-cover w-16 h-16 md:w-44 md:h-28  rounded-xl cursor-pointer border border-black">
-                                </template>
-                            </div>
-
-
-
-
+<div class="flex justify-center w-full mt-5 ">
+<div x-data="carousel()" class="relative w-full max-w-4xl">
+    <!-- Big Image -->
+    <div class="relative overflow-hidden rounded-3xl h-[630px] border border-black w-[800px] mx-8">
+        <template x-for="(slide, index) in slides" :key="index">
+            <div x-show="activeSlide === index" x-transition:enter="transition-opacity ease-in-out duration-1000" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-in-out duration-1000" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute top-0 left-0 w-full h-full">
+                <img :src="slide" alt="" class="w-full h-full object-cover rounded-3xl">
             </div>
-        </div>
-        {{-- // --}}
-        <div class="md:mx-20 mx-5 mt-5">
-            <h1>4 photos</h1>
-        </div>
+        </template>
+        <button @click="prevSlide" class="absolute left-0 p-2 ml-5 bg-white  transform -translate-y-1/2 top-1/2 transition-transform duration-500 hover:scale-110">
+            <i class="fa-solid fa-arrow-left fa-2x"></i>
+        </button>
+        <button @click="nextSlide" class="absolute right-0 p-2 mr-5 bg-white  transform -translate-y-1/2 top-1/2 transition-transform duration-500 hover:scale-110">
+            <i class="fa-solid fa-arrow-right fa-2x"></i>
+        </button>
+    </div>
 
-        {{-- // --}}
-
+    <!-- Thumbnails -->
+    <div class="flex justify-between mt-4 mx-2 md:mx-4 gap-1">
+        <template x-for="(slide, index) in slides" :key="index">
+            <div @click="activeSlide = index" :class="{'border-2 border-blue-500': activeSlide === index}" class="cursor-pointer border rounded-xl overflow-hidden w-16 h-16 md:w-44 md:h-28">
+                <img :src="slide" alt="" class="w-full h-full object-cover">
+            </div>
+        </template>
     </div>
 </div>
+</div>
 
+<div class="text-center mt-5">
+<h1>4 photos</h1>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.0/dist/alpine.min.js" defer></script>
 <script>
-    function carousel() {
-        return {
-            activeSlide: 0,
-            slides: [
-                '/images/partlist-lg-img.jpg',
-                '/images/partlist-lg-img-2.jpg',
-                '/images/partlist-lg-img-3.jpg',
-                '/images/partlist-lg-img-4.jpg',
-            ],
-            prevSlide() {
-                this.activeSlide = this.activeSlide > 0 ? this.activeSlide - 1 : this.slides.length - 1;
-            },
-            nextSlide() {
-                this.activeSlide = this.activeSlide < this.slides.length - 1 ? this.activeSlide + 1 : 0;
-            }
+function carousel() {
+    return {
+        activeSlide: 0,
+        slides: [
+            '/images/partlist-lg-img.jpg',
+            '/images/partlist-lg-img-2.jpg',
+            '/images/partlist-lg-img-3.jpg',
+            '/images/partlist-lg-img-4.jpg',
+        ],
+        prevSlide() {
+            this.activeSlide = (this.activeSlide > 0) ? this.activeSlide - 1 : this.slides.length - 1;
+        },
+        nextSlide() {
+            this.activeSlide = (this.activeSlide < this.slides.length - 1) ? this.activeSlide + 1 : 0;
         }
     }
+}
 </script>
+
 
 @endsection
 
