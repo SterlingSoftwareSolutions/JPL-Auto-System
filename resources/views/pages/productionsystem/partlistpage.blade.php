@@ -288,7 +288,7 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-5">
+                <div class="md:text-start mt-5 md:ml-16 text-center">
                     <h1>4 photos</h1>
                 </div>
 
