@@ -7,10 +7,60 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-wrapper {
+            display: flex;
+        }
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-button-next,
+.swiper-button-prev {
+    color: black;
+    background-color: white;
 
-    <div class="">
-         <div class="md:flex">
+}
 
+.swiper-button-next {
+    right: 10px;
+}
+.swiper-button-prev {
+    left: 10px;
+}
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .small-image {
+            width:200px;
+            height: 100px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .swiper-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .swiper-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slide-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="flex flex-wrap">
         <div class="w-full max-h-screen overflow-y-auto bg-white md:w-6/12">
 
             <div class="mx-10 ">
@@ -216,104 +266,71 @@
             </div>
         </div>
 
-        {{-- section 2  --}}
 
+        <div class="flex flex-col items-center justify-center w-full rounded-lg md:w-6/12">
+            <div class="w-full">
 
+                <div class="flex gap-5 mx-5 mt-5 md:mx-10">
+                    <h1 class="underline">Body</h1>
+                    <h1><i class="fas fa-arrow-alt-circle-right"></i></h1>
+                    <h1 class="underline">Complete Shell</h1>
+                    <h1><i class="fas fa-arrow-alt-circle-right"></i></h1>
+                    <h1 class="underline">RHD 67 Ford Mustang Fastback</h1>
 
+                </div>
 
-        <div class="w-8/12 mx-auto md:w-6/12 ">
+                <div class="mx-10 mt-5">
 
-                {{-- section 2  --}}
-
-
-
-        {{-- /// --}}
-        <div class="flex gap-5 mx-5 mt-5 md:mx-14">
-            <h1 class="underline">Body</h1>
-            <h1><i class="fas fa-arrow-alt-circle-right"></i></h1>
-            <h1 class="underline">Complete Shell</h1>
-            <h1><i class="fas fa-arrow-alt-circle-right"></i></h1>
-            <h1>RHD 67 Ford Mustang Fastback</h1>
-        </div>
-
-            {{-- /// --}}
-            <style>
-                .carousel-slide {
-                    @apply absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-1000 ease-in-out;
-                }
-
-                .carousel-slide-active {
-                    @apply opacity-100;
-                }
-            </style>
-            </head>
-
-            <body class="bg-gray-100">
-
-                <div class="flex justify-center mx-auto mt-5 ">
-                    <div x-data="carousel()" class="relative w-full max-w-4xl ">
-                        <!-- Big Image -->
-                        <div class="relative overflow-hidden rounded-3xl  md:mx-10 h-[200px] md:h-[700px] border border-black ">
-                            <template x-for="(slide, index) in slides" :key="index">
-                                <div x-show="activeSlide === index"
-                                    x-transition:enter="transition-opacity ease-in-out duration-1000"
-                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                                    x-transition:leave="transition-opacity ease-in-out duration-1000"
-                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                    class="absolute top-0 left-0 w-full h-full">
-                                    <img :src="slide" alt=""
-                                        class="object-cover w-full h-full rounded-3xl">
-                                </div>
-                            </template>
-                            <button @click="prevSlide"
-                                class="absolute left-0 p-2 ml-5 transition-transform duration-500 transform -translate-y-1/2 bg-white top-1/2 hover:scale-110">
-                                <i class="fa-solid fa-arrow-left fa-2x"></i>
-                            </button>
-                            <button @click="nextSlide"
-                                class="absolute right-0 p-2 mr-5 transition-transform duration-500 transform -translate-y-1/2 bg-white top-1/2 hover:scale-110">
-                                <i class="fa-solid fa-arrow-right fa-2x"></i>
-                            </button>
-                        </div>
-
-                        <!-- Thumbnails -->
-                        <div class="flex justify-between mx-2 mt-4 md:mx-10 ">
-                            <template x-for="(slide, index) in slides" :key="index">
-                                <div @click="activeSlide = index"
-                                    :class="{ '': activeSlide === index }"
-                                    class="w-24 h-24 overflow-hidden border border-black cursor-pointer rounded-xl md:w-48 md:h-36">
-                                    <img :src="slide" alt="" class="object-cover w-full h-full">
-                                </div>
-                            </template>
-                        </div>
+                <div class="relative swiper-container ">
+                    <div class=" swiper-wrapper">
+                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img.jpg" alt="Slide 1"></div>
+                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-2.jpg" alt="Slide 2"></div>
+                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-3.jpg" alt="Slide 3"></div>
+                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-4.jpg" alt="Slide 4"></div>
                     </div>
+
+                            <!-- Add Navigation Buttons -->
+                    {{-- <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div> --}}<!-- Add your custom buttons -->
+                    <button @click="swiper.slidePrev()" class="absolute left-0 z-10 w-12 h-12 p-2 ml-5 transition duration-1000 transform -translate-y-1/2 bg-white swiper-button-prev1 top-1/2">
+                        <i class="fas fa-arrow-left fa-2x"></i>
+                    </button>
+                    <button @click="swiper.slideNext()" class="absolute right-0 z-10 w-12 h-12 p-2 mr-5 transition duration-1000 transform -translate-y-1/2 bg-white swiper-button-next1 top-1/2">
+                        <i class="fas fa-arrow-right fa-2x"></i>
+                    </button>
+
+
+
+
+
+                </div>
+                <div class="flex justify-between  w-[75px] md:w-full">
+                    <img src="/images/partlist-lg-img.jpg" alt="Slide 1" class="border border-black rounded-lg small-image" onclick="changeSlide(0)">
+                    <img src="/images/partlist-lg-img-2.jpg" alt="Slide 2" class="border border-black rounded-lg small-image" onclick="changeSlide(1)">
+                    <img src="/images/partlist-lg-img-3.jpg" alt="Slide 3" class="border border-black rounded-lg small-image" onclick="changeSlide(2)">
+                    <img src="/images/partlist-lg-img-4.jpg" alt="Slide 4" class="border border-black rounded-lg small-image" onclick="changeSlide(3)">
                 </div>
 
-                <div class="mt-5 text-center">
-                    <h1>4 photos</h1>
                 </div>
-
+            </div>
         </div>
     </div>
 
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                navigation: {
+                    nextEl: '.swiper-button-next1',
+                    prevEl: '.swiper-button-prev1',
+                },
+            });
 
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.0/dist/alpine.min.js" defer></script>
-        <script>
-            function carousel() {
-                return {
-                    activeSlide: 0,
-                    slides: [
-                        '/images/partlist-lg-img.jpg',
-                        '/images/partlist-lg-img-2.jpg',
-                        '/images/partlist-lg-img-3.jpg',
-                        '/images/partlist-lg-img-4.jpg',
-                    ],
-                    prevSlide() {
-                        this.activeSlide = (this.activeSlide > 0) ? this.activeSlide - 1 : this.slides.length - 1;
-                    },
-                    nextSlide() {
-                        this.activeSlide = (this.activeSlide < this.slides.length - 1) ? this.activeSlide + 1 : 0;
-                    }
-                }
-            }
-        </script>
-    @endsection
+            window.changeSlide = function (index) {
+                swiper.slideTo(index);
+            };
+        });
+    </script>
+@endsection
