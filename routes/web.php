@@ -44,7 +44,7 @@ Route::get('/forget-password', function () {
 })->name('forget-password');
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
     })->name('dashboard');
