@@ -43,7 +43,6 @@ Route::get('/forget-password', function () {
     return view('auth.forgetpassword');
 })->name('forget-password');
 
-Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
@@ -74,4 +73,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/customers-customerlist', function () {
         return view('pages.customersystem.customerlist');
     })->name('customerlist');
-});
