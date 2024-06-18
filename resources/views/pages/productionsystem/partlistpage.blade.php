@@ -269,55 +269,52 @@
 
         <div class="flex flex-col items-center justify-center w-full rounded-lg md:w-6/12">
             <div class="w-full">
-
                 <div class="flex gap-5 mx-5 mt-5 md:mx-10">
                     <h1 class="underline">Body</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-right-short mt-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-                      </svg>
+                    </svg>
                     <h1 class="underline">Complete Shell</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-right-short mt-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-                      </svg>
+                    </svg>
                     <h1 class="underline">RHD 67 Ford Mustang Fastback</h1>
-
                 </div>
 
                 <div class="mx-10 mt-5">
+                    <div class="relative swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img.jpg" alt="Slide 1"></div>
+                            <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-2.jpg" alt="Slide 2"></div>
+                            <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-3.jpg" alt="Slide 3"></div>
+                            <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-4.jpg" alt="Slide 4"></div>
+                        </div>
 
-                <div class="relative swiper-container ">
-                    <div class=" swiper-wrapper">
-                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img.jpg" alt="Slide 1"></div>
-                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-2.jpg" alt="Slide 2"></div>
-                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-3.jpg" alt="Slide 3"></div>
-                        <div class="border border-black rounded-3xl swiper-slide"><img src="/images/partlist-lg-img-4.jpg" alt="Slide 4"></div>
+                        <!-- Navigation buttons -->
+                        <button @click="swiper.slidePrev()" class="absolute left-0 z-10 w-12 h-12 p-2 ml-5 transition duration-1000 transform -translate-y-1/2 bg-white swiper-button-prev1 top-1/2">
+                            <i class="fas fa-arrow-left fa-2x"></i>
+                        </button>
+                        <button @click="swiper.slideNext()" class="absolute right-0 z-10 w-12 h-12 p-2 mr-5 transition duration-1000 transform -translate-y-1/2 bg-white swiper-button-next1 top-1/2">
+                            <i class="fas fa-arrow-right fa-2x"></i>
+                        </button>
                     </div>
 
-                            <!-- Add Navigation Buttons -->
-                    {{-- <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div> --}}<!-- Add your custom buttons -->
-                    <button @click="swiper.slidePrev()" class="absolute left-0 z-10 w-12 h-12 p-2 ml-5 transition duration-1000 transform -translate-y-1/2 bg-white swiper-button-prev1 top-1/2">
-                        <i class="fas fa-arrow-left fa-2x"></i>
-                    </button>
-                    <button @click="swiper.slideNext()" class="absolute right-0 z-10 w-12 h-12 p-2 mr-5 transition duration-1000 transform -translate-y-1/2 bg-white swiper-button-next1 top-1/2">
-                        <i class="fas fa-arrow-right fa-2x"></i>
-                    </button>
-
-
-
-
-
-                </div>
-                <div class="flex justify-between  w-[75px] md:w-full">
-                    <img src="/images/partlist-lg-img.jpg" alt="Slide 1" class="border border-black rounded-lg small-image" onclick="changeSlide(0)">
-                    <img src="/images/partlist-lg-img-2.jpg" alt="Slide 2" class="border border-black rounded-lg small-image" onclick="changeSlide(1)">
-                    <img src="/images/partlist-lg-img-3.jpg" alt="Slide 3" class="border border-black rounded-lg small-image" onclick="changeSlide(2)">
-                    <img src="/images/partlist-lg-img-4.jpg" alt="Slide 4" class="border border-black rounded-lg small-image" onclick="changeSlide(3)">
+                    <div class="flex justify-between w-[75px] md:w-full">
+                        <img src="/images/partlist-lg-img.jpg" alt="Slide 1" class="border border-black rounded-lg small-image" onclick="changeSlide(0)">
+                        <img src="/images/partlist-lg-img-2.jpg" alt="Slide 2" class="border border-black rounded-lg small-image" onclick="changeSlide(1)">
+                        <img src="/images/partlist-lg-img-3.jpg" alt="Slide 3" class="border border-black rounded-lg small-image" onclick="changeSlide(2)">
+                        <img src="/images/partlist-lg-img-4.jpg" alt="Slide 4" class="border border-black rounded-lg small-image" onclick="changeSlide(3)">
+                    </div>
                 </div>
 
+                <!-- Adjusted alignment for "Pages 4" -->
+                <div class="text-start mt-5 ml-10 ml-5">
+                    <h1>Pages 4</h1>
                 </div>
             </div>
         </div>
+
+
     </div>
 
     <!-- Swiper JS -->
