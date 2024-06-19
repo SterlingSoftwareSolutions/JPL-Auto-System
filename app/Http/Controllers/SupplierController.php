@@ -11,36 +11,34 @@ class SupplierController extends Controller
 {
     public function savepartlist(Request $request)
     {
-        // dd($request);
+        // dd($request->all());
         // Validate incoming request data
         $validatedData = $request->validate([
 
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB per file
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB per fil
+            'trade_agreement_pdf' => 'required|file|mimes:pdf|max:2048',
         ]);
-
-        $imagePath = null;
-        if ($request->hasFile('profile_image')) {
-            $file = $request->file('profile_image'); // Get the single file
-            $imageName = time() . '-' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('profile_images', $imageName, 'public');
-            $imagePath = $filePath; // Store the path in a single variable
-        }
-
-        // dd($imagePath);
 
         $partslist  = new Supplier();
 
-        $imagePath = null;
+
         if ($request->hasFile('profile_image')) {
             $file = $request->file('profile_image'); // Get the single file
             $imageName = time() . '-' . $file->getClientOriginalName();
             $filePath = $file->storeAs('profile_images', $imageName, 'public');
-            $imagePath = $filePath; // Store the path in a single variable
+            $imagePath = $filePath;
+            $partslist->upload_image = $imageName;
         }
-        // dd($imagePath);
 
-        // DB NAME                              REQUEST NAME
-        $partslist->upload_image =   $imageName;
+        if ($request->hasFile('trade_agreement_pdf')) {
+            $pdf = $request->file('trade_agreement_pdf'); // Get the single file
+            $pdfName = time() . '-' . $pdf->getClientOriginalName();
+            $pdf_Path = $pdf->storeAs('trade_agreement_pdfs', $pdfName, 'public');
+            $trade_agreement_path = $pdf_Path;
+            $partslist->trade_agreement_pdf =   $trade_agreement_path;
+        }
+
+
         $partslist->business_name = $request->business_name;
         $partslist->business_web = $request->business_web;
         $partslist->country = $request->country;
@@ -49,7 +47,6 @@ class SupplierController extends Controller
         $partslist->phone = $request->phone;
         $partslist->email = $request->email;
         $partslist->trade_account = $request->trade_account === 'yes' ? true : false;
-        $partslist->trade_agreement_pdf = $request->trade_agreement_pdf;
         $partslist->supplier_crm = $request->supplier_crm === 'yes' ? true : false;
         $partslist->crm_url = $request->crm_url;
         $partslist->crm_username = $request->crm_username;
