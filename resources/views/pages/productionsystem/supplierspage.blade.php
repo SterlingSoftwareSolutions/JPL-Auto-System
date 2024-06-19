@@ -47,10 +47,10 @@
 
             <!-- Show supplier details only if there are suppliers -->
             @if($suppliers->isNotEmpty())
-            <div class="md:grid grid-cols-3  j">
+            <div class="md:grid grid-cols-3 border">
 
                 @foreach ($suppliers as $supplier)
-                    <div class="flex flex-col bg-white md:w-[570px] mx-4 p-10 rounded-2xl mt-2 ">
+                    <div class="flex flex-col bg-white md:w-[570px] mx-4 p-10 rounded-2xl mt-10  ">
                         <div class="flex items-end">
 
                             <div>
@@ -63,7 +63,12 @@
                             </a>
                             <div class="gap-3">
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <form action="{{ route('deletesupplier', $supplier->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button>Delete</button>
+
+                                </form>
                             </div>
                         </div>
 
