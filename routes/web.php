@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,9 @@ Route::get('/', function () {
     return view('auth.signin');
 });
 
-
-
 Route::get('/wel', function () {
     return view('welcome');
 });
-
 
 //auth routes
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -37,13 +35,15 @@ Route::get('reset-password-page/{token}', [MailController::class, 'resetpassword
 Route::post('reset', [MailController::class, 'reset'])->name('reset');
 
 
+//Supplier Controller
+Route::post('savepartlist', [SupplierController::class, 'savepartlist'])->name('storagesupplier');
 
 
 Route::get('/forget-password', function () {
     return view('auth.forgetpassword');
 })->name('forget-password');
 
-
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
     })->name('dashboard');
@@ -65,11 +65,17 @@ Route::get('/forget-password', function () {
         return view('pages.productionsystem.partlistpage');
     })->name('partlistpage');
 
-    Route::get('/suppliers', function () {
-        return view('pages.productionsystem.supplierspage');
-    })->name('supplierspage');
+
+
+    // Route::get('/suppliers', function () {
+    //     return view('pages.productionsystem.supplierspage');
+    // })->name('supplierspage');
+
+    Route::get('/suppliers', [SupplierController::class, 'getsupplier'])->name('supplierspage');
+
 
     // customers
     Route::get('/customers-customerlist', function () {
         return view('pages.customersystem.customerlist');
     })->name('customerlist');
+});
