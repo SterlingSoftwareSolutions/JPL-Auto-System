@@ -34,7 +34,8 @@
                                 <div id="uploadInstructions" class="flex flex-col items-center">
                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
                                     <p class="text-gray-600">Drop files here or click to upload.</p>
-                                    <input type="file" name="profile_image" id="fileInput" style="display:none;">
+                                    <input type="file" name="profile_image" id="fileInput" style="display:none;"
+                                    accept="image/jpeg, image/png, ">
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <label for="tradeAgreement" class="w-1/3">Upload Trade Agreement PDF</label>
-                        <input type="file" id="tradeAgreement" name="trade_agreement_pdf"
+                        <input type="file" id="tradeAgreement" name="trade_agreement_pdf" accept="application/pdf"
                             class="block w-full p-2 border border-gray-300 rounded-md">
                     </div>
                     <div class="flex items-center space-x-4">
