@@ -35,15 +35,15 @@ Route::get('reset-password-page/{token}', [MailController::class, 'resetpassword
 Route::post('reset', [MailController::class, 'reset'])->name('reset');
 
 
-//Supplier Controller
-Route::post('savepartlist', [SupplierController::class, 'savepartlist'])->name('storagesupplier');
-
-
 Route::get('/forget-password', function () {
     return view('auth.forgetpassword');
 })->name('forget-password');
 
+
+
 Route::middleware('auth:sanctum')->group(function () {
+
+
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
     })->name('dashboard');
@@ -67,15 +67,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-    // Route::get('/suppliers', function () {
-    //     return view('pages.productionsystem.supplierspage');
-    // })->name('supplierspage');
-
+    //Supplier Controller
+    Route::post('savepartlist', [SupplierController::class, 'savepartlist'])->name('storagesupplier');
     Route::get('/suppliers', [SupplierController::class, 'getsupplier'])->name('supplierspage');
-
 
     // customers
     Route::get('/customers-customerlist', function () {
         return view('pages.customersystem.customerlist');
     })->name('customerlist');
+
+
 });
