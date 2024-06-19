@@ -70,6 +70,10 @@ Route::middleware('auth:sanctum')->group(function () {
     //Supplier Controller
     Route::post('savepartlist', [SupplierController::class, 'savepartlist'])->name('storagesupplier');
     Route::get('/suppliers', [SupplierController::class, 'getsupplier'])->name('supplierspage');
+    Route::delete('/delete/{id}', [SupplierController::class, 'destroy'])->name('deletesupplier');
+
+
+
 
     // customers
     Route::get('/customers-customerlist', function () {

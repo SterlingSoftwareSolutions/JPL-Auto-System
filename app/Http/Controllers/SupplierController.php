@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
@@ -74,6 +75,17 @@ class SupplierController extends Controller
          return view('pages.productionsystem.supplierspage' , compact('suppliers'));
 
 
+    }
+
+
+    public function destroy($id)
+    {
+        $supplier = Supplier::findOrFail($id);
+        // dd($supplier);
+
+        $supplier->delete();
+
+        return redirect()->back()->with('success', 'Supplier deleted successfully.');
     }
 
 
