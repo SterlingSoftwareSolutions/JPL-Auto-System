@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modal Example</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -35,7 +37,7 @@
                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
                                     <p class="text-gray-600">Drop files here or click to upload.</p>
                                     <input type="file" name="profile_image" id="fileInput" style="display:none;"
-                                    accept="image/jpeg, image/png, ">
+                                        accept="image/jpeg, image/png, ">
                                 </div>
                             </div>
                         </div>
@@ -124,14 +126,77 @@
 
     <!-- JavaScript for Modal Toggle -->
     <script>
+        function editSupplier(supplierId) {
+            console.log('hello' + supplierId);
+
+            $.ajax({
+                url: "/suppliers/" + supplierId,
+                type: "GET",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response);
+                //   document.getElementById('fileInput').value = response.upload_image;
+                  document.getElementById('businessName').value = response.business_name;
+                  document.getElementById('businessWeb').value = response.business_web;
+                  document.getElementById('country').value = response.country;
+                  document.getElementById('contactName').value = response.contact_name;
+                  document.getElementById('phone').value = response.phone;
+                  document.getElementById('email').value = response.email;
+                  document.getElementById('tradeAccount').value = response.trade_account ? 'yes' : 'no';
+
+                document.getElementById('supplierCRM').value = response.supplier_crm ? 'yes' : 'no';
+
+                if (response.supplier_crm === 1) {
+                document.getElementById('crmUrl').value = response.crm_url;
+                document.getElementById('crmUsername').value = response.crm_username;
+                document.getElementById('crmPassword').value = response.crm_password;
+                document.getElementById('crmFields').classList.remove('hidden');
+              } else {
+                document.getElementById('crmFields').classList.add('hidden');
+                document.getElementById('crmUrl').value = '';
+                document.getElementById('crmUsername').value = '';
+                document.getElementById('crmPassword').value = '';
+             }
+
+
+
+             document.getElementById('tradeAgreement').value = response.trade_agreement_pdf ;
+
+
+                  toggleModal();
+                },
+
+                error: function(xhr, status, error) {
+                    console.error("Error fetching supplier details:", error); // Log the error to the console
+                }
+            });
+
+        }
+
+
         function toggleModal() {
+
             var modalOverlay = document.getElementById('modal-overlay');
             var modal = document.getElementById('modal');
 
             modalOverlay.classList.toggle('hidden'); // Toggle visibility of the overlay
             modal.classList.toggle('hidden'); // Toggle visibility of the modal
             document.body.classList.toggle('overflow-hidden'); // Optional: Prevent scrolling background
+
+            // Reset input field values when closing the modal
+            if (modal.classList.contains('hidden')) {
+                document.getElementById('businessName').value = '';
+                document.getElementById('businessWeb').value = '';
+                document.getElementById('country').value = '';
+                document.getElementById('contactName').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('email').value = '';
+            }
         }
+
+
 
         function toggleCRMFields() {
             var supplierCRM = document.getElementById('supplierCRM').value;
