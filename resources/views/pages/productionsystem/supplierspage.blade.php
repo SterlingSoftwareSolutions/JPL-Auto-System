@@ -62,7 +62,8 @@
                                 <img class="h-14" src="{{ asset('images/partlist01.jpg') }}" alt="profile Pic">
                             </a>
                             <div class="gap-3">
-                                <button>Edit</button>
+                                {{-- <input type="hidden" name="" id="" value="{{$supplier->id}}"> --}}
+                                <button onclick="editSupplier ({{$supplier->id}})">Edit</button>
                                 <form action="{{ route('deletesupplier', $supplier->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -104,6 +105,7 @@
                                     <div class="flex-col mt-5">
                                         <div class="flex">
                                             <h1 class="pr-2 font-semibold">CRM</h1>
+                                            <h1>{{ $supplier->supplier_crm ? 'Yes' : 'No' }}</h1>
                                         </div>
                                         <div class="flex">
                                             <h1 class="pr-2 font-semibold">url: <span class="text-left text-balance url">{{ $supplier->crm_url }}</span></h1>
