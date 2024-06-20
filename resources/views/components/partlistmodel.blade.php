@@ -162,7 +162,7 @@
 
 
 
-             document.getElementById('tradeAgreement').value = response.trade_agreement_pdf ;
+            //  document.getElementById('tradeAgreement').value = response.trade_agreement_pdf ;
 
 
                   toggleModal();
