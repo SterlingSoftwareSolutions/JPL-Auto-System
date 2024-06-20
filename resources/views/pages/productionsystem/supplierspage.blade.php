@@ -124,8 +124,9 @@
                                         </div>
                                         <div class="flex">
                                             <h1 class="pr-2">Agreement:</h1>
-                                            <h1 class="text-left">{{ $supplier->trade_agreement_pdf ? 'Agreement.pdf' : 'No Agreement' }}</h1>
+                                            <h1 class="text-left">{{ $supplier->trade_agreement_pdf ? basename($supplier->trade_agreement_pdf) : 'No Agreement' }}</h1>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
