@@ -175,7 +175,8 @@
                     if (response.upload_image) {
                         document.getElementById('uploadedFiles').innerHTML = `
                             <div class="flex items-center w-full h-full">
-                                <img src="${response.upload_image}" alt="Logo" class="object-cover w-full h-full rounded">
+                                <img src="/storage/profile_images/${response.upload_image}" alt="Logo" class="object-cover w-full h-full rounded">
+
                             </div>
                             <button class="absolute text-red-500 hover:text-red-700 top-1 right-2" onclick="removeFile('logo')">Remove</button>
                         `;
