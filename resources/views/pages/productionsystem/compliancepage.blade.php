@@ -6078,6 +6078,55 @@
             <td class="px-2 py-2">
                 Exemption            </td>
                 
+                            <td colspan="5" class="px-2 py-2 whitespace-nowrap">              
+                Road Vehicle Standards (Model Reports— Compliance with Standards) Determination 2021
+                <br>
+                Division 3—Prescription of standards: concessional and additional standards
+            Clause 21 Standards—rare vehicles
+            <br>
+            Section(3)
+            <br>
+            The standards in subsection (2) apply to the exclusion of the following:
+            <br>
+            (a) an applicable ADR, to the extent it requires the vehicle to be right-hand drive;
+            <br>
+            (b) the following applicable ADRs, to the extent they require destructive testing to demonstrate compliance:
+            <br>
+            (i) ADR 10—Steering Column;
+            <br>
+            (ii) ADR 29—Side Door Strength;
+             <br>
+            (iii) ADR 69—Full Frontal Impact Occupant Protection;
+            <br>
+            (iv) ADR 72—Dynamic Side Impact Occupant Protection;
+             <br>
+            (v) ADR 73—Offset Frontal Impact Occupant Protection;
+             <br>
+            (vi) ADR 85—Pole Side Impact Performance;
+            <br>
+            Based on the Model Reports— Compliance with Standards Determination, Clause 21 Standards—rare
+             <br>
+            vehicles, exclusion of ADR 10—Steering Column is permitted.
+            <br>
+            ADR 10—Steering Column - Exempt / Not Applicable.
+            
+            
+        </td>
+
+
+      
+
+
+
+
+       
+        <td class="px-2 py-2">
+            <div class="flex flex-col items-center justify-center">
+                <div>
+                    <h1></h1>
+                </div>
+            </div>
+        </td>
           
             <td class="px-2 py-2">
                 <div class="flex flex-col items-center justify-center">
@@ -6102,83 +6151,55 @@
             <td class="px-2 py-2">
                 Exemption
             </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-start space-y-2">
-                    <ul class="pl-5 list-disc">
-                        <li>
-                            <span>ECE Approval</span>
-                        </li>
-                        <li>
-                            <span>Test Report from Approved Test Facility</span>
-                        </li>
-                        <li>
-                            <span>Component Type Approval (CTA)</span>
-                        </li>
-                    </ul>
-                </div>
-            </td>
+            <td colspan="5" class="px-2 py-2 whitespace-nowrap">              
+                Road Vehicle Standards (Model Reports— Compliance with Standards) Determination 2021
+                <br>
+                Division 3—Prescription of standards: concessional and additional standards
+            Clause 21 Standards—rare vehicles
+            <br>
+            Section(3)
+            <br>
+            The standards in subsection (2) apply to the exclusion of the following:
+            <br>
+            (a) an applicable ADR, to the extent it requires the vehicle to be right-hand drive;
+            <br>
+            (b) the following applicable ADRs, to the extent they require destructive testing to demonstrate compliance:
+            <br>
+            (i) ADR 10—Steering Column;
+            <br>
+            (ii) ADR 29—Side Door Strength;
+             <br>
+            (iii) ADR 69—Full Frontal Impact Occupant Protection;
+            <br>
+            (iv) ADR 72—Dynamic Side Impact Occupant Protection;
+             <br>
+            (v) ADR 73—Offset Frontal Impact Occupant Protection;
+             <br>
+            (vi) ADR 85—Pole Side Impact Performance;
+            <br>
+            Based on the Model Reports— Compliance with Standards Determination, Clause 21 Standards—rare
+             <br>
+            vehicles, exclusion of ADR 10—Steering Column is permitted.
+            <br>
+            ADR 10—Steering Column - Exempt / Not Applicable.
+            
+            
+        </td>
 
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="flex items-center justify-center w-10 h-10 p-0 bg-red rounded-xl"
-                        style="background-color: #DC3545">
-                        <h1 class="m-0 font-bold text-center text-white">TBD</h1>
-                    </div>
-                </div>
-            </td>
+
+      
 
 
 
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="flex items-center justify-center w-10 h-10 p-0 bg-red rounded-xl"
-                        style="background-color: #DC3545">
-                        <h1 class="m-0 font-bold text-center text-white">TBD</h1>
-                    </div>
-                </div>
-            </td>
 
-
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="flex items-center justify-center w-10 h-10 p-0 bg-red rounded-xl"
-                        style="background-color: #DC3545">
-                        <h1 class="m-0 font-bold text-center text-white">TBD</h1>
-                    </div>
-                </div>
-            </td>
-
-            <td class="px-2 py-2">
+       
+        <td class="px-2 py-2">
+            <div class="flex flex-col items-center justify-center">
                 <div>
-                    <input type="text" placeholder=""
-                        class="h-8 px-2 placeholder-gray-600 border border-black w-46">
-
-                    <div class="flex flex-col items-start mt-1 space-y-2">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Type:</span>
-                            <input type="text" placeholder="Front Outboar"
-                                class="w-24 h-4 placeholder-gray-600 border border-black ">
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Part:</span>
-                            <input type="text" placeholder="VPW Retractor "
-                                class="w-24 h-4 placeholder-gray-600 border border-black">
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Qty.:</span>
-                            <input type="text" placeholder="1" class="w-24 h-4 border border-black ">
-                        </div>
-                    </div>
+                    <h1></h1>
                 </div>
-
-            </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div>
-                        <h1>Brand New</h1>
-                    </div>
-                </div>
-            </td>
+            </div>
+        </td>
             <td class="px-2 py-2">
                 <div class="flex flex-col items-center justify-center">
                     <input type="checkbox" class="w-10 h-3 form-checkbox">
@@ -6612,83 +6633,55 @@
             <td class="px-2 py-2">
                 Exemption
             </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-start space-y-2">
-                    <ul class="pl-5 list-disc">
-                        <li>
-                            <span></span>
-                        </li>
-                        <li>
-                            <span></span>
-                        </li>
-                        <li>
-                            <span></span>
-                        </li>
-                    </ul>
-                </div>
-            </td>
+            <td colspan="5" class="px-2 py-2 whitespace-nowrap">              
+                Road Vehicle Standards (Model Reports— Compliance with Standards) Determination 2021
+                <br>
+                Division 3—Prescription of standards: concessional and additional standards
+            Clause 21 Standards—rare vehicles
+            <br>
+            Section(3)
+            <br>
+            The standards in subsection (2) apply to the exclusion of the following:
+            <br>
+            (a) an applicable ADR, to the extent it requires the vehicle to be right-hand drive;
+            <br>
+            (b) the following applicable ADRs, to the extent they require destructive testing to demonstrate compliance:
+            <br>
+            (i) ADR 10—Steering Column;
+            <br>
+            (ii) ADR 29—Side Door Strength;
+             <br>
+            (iii) ADR 69—Full Frontal Impact Occupant Protection;
+            <br>
+            (iv) ADR 72—Dynamic Side Impact Occupant Protection;
+             <br>
+            (v) ADR 73—Offset Frontal Impact Occupant Protection;
+             <br>
+            (vi) ADR 85—Pole Side Impact Performance;
+            <br>
+            Based on the Model Reports— Compliance with Standards Determination, Clause 21 Standards—rare
+             <br>
+            vehicles, exclusion of ADR 10—Steering Column is permitted.
+            <br>
+            ADR 10—Steering Column - Exempt / Not Applicable.
+            
+            
+        </td>
 
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="flex items-center justify-center w-10 h-10 p-0 bg-red rounded-xl"
-                        style="background-color: #DC3545">
-                        <h1 class="m-0 font-bold text-center text-white">TBD</h1>
-                    </div>
-                </div>
-            </td>
+
+      
 
 
 
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="flex items-center justify-center w-10 h-10 p-0 bg-red rounded-xl"
-                        style="background-color: #DC3545">
-                        <h1 class="m-0 font-bold text-center text-white">TBD</h1>
-                    </div>
-                </div>
-            </td>
 
-
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="flex items-center justify-center w-10 h-10 p-0 bg-red rounded-xl"
-                        style="background-color: #DC3545">
-                        <h1 class="m-0 font-bold text-center text-white">TBD</h1>
-                    </div>
-                </div>
-            </td>
-
-            <td class="px-2 py-2">
+       
+        <td class="px-2 py-2">
+            <div class="flex flex-col items-center justify-center">
                 <div>
-                    <input type="text" placeholder=""
-                        class="h-8 px-2 placeholder-gray-600 border border-black w-46">
-
-                    <div class="flex flex-col items-start mt-1 space-y-2">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Type:</span>
-                            <input type="text" placeholder="Front Outboar"
-                                class="w-24 h-4 placeholder-gray-600 border border-black ">
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Part:</span>
-                            <input type="text" placeholder="VPW Retractor "
-                                class="w-24 h-4 placeholder-gray-600 border border-black">
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Qty.:</span>
-                            <input type="text" placeholder="1" class="w-24 h-4 border border-black ">
-                        </div>
-                    </div>
+                    <h1></h1>
                 </div>
-
-            </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div>
-                        <h1>Brand New</h1>
-                    </div>
-                </div>
-            </td>
+            </div>
+        </td>
             <td class="px-2 py-2">
                 <div class="flex flex-col items-center justify-center">
                     <input type="checkbox" class="w-10 h-3 form-checkbox">
@@ -6757,79 +6750,55 @@
             <td class="px-2 py-2">
                 Exemption
             </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-start space-y-2">
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="w-3 h-3 form-checkbox">
-                        <span></span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="w-3 h-3 form-checkbox">
-                        <span></span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="w-3 h-3 form-checkbox">
-                        <span></span>
-                    </div>
-                </div>
-            </td>
+            <td colspan="5" class="px-2 py-2 whitespace-nowrap">              
+                Road Vehicle Standards (Model Reports— Compliance with Standards) Determination 2021
+                <br>
+                Division 3—Prescription of standards: concessional and additional standards
+            Clause 21 Standards—rare vehicles
+            <br>
+            Section(3)
+            <br>
+            The standards in subsection (2) apply to the exclusion of the following:
+            <br>
+            (a) an applicable ADR, to the extent it requires the vehicle to be right-hand drive;
+            <br>
+            (b) the following applicable ADRs, to the extent they require destructive testing to demonstrate compliance:
+            <br>
+            (i) ADR 10—Steering Column;
+            <br>
+            (ii) ADR 29—Side Door Strength;
+             <br>
+            (iii) ADR 69—Full Frontal Impact Occupant Protection;
+            <br>
+            (iv) ADR 72—Dynamic Side Impact Occupant Protection;
+             <br>
+            (v) ADR 73—Offset Frontal Impact Occupant Protection;
+             <br>
+            (vi) ADR 85—Pole Side Impact Performance;
+            <br>
+            Based on the Model Reports— Compliance with Standards Determination, Clause 21 Standards—rare
+             <br>
+            vehicles, exclusion of ADR 10—Steering Column is permitted.
+            <br>
+            ADR 10—Steering Column - Exempt / Not Applicable.
+            
+            
+        </td>
 
-            <td class="px-2 py-2">
-                <input type="text" class="h-10 border border-black">
-            </td>
 
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
-                    style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
-                    <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
-                    <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
-                    <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
-                        style="background-color: #F9F9F9">Browse</button>
-                    <input id="fileInput" type="file" class="hidden" />
-                </div>
-            </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
-                    style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
-                    <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
-                    <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
-                    <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
-                        style="background-color: #F9F9F9">Browse</button>
-                    <input id="fileInput" type="file" class="hidden" />
-                </div>
-            </td>
-            <td class="px-2 py-2">
+      
+
+
+
+
+       
+        <td class="px-2 py-2">
+            <div class="flex flex-col items-center justify-center">
                 <div>
-                    <input type="text" placeholder="Component"
-                        class="h-8 px-0 placeholder-gray-600 border border-black w-18">
-
-                    <div class="flex flex-col items-start mt-1 space-y-1">
-                        <div class="flex items-center space-x-1">
-                            <span class="w-8">Type:</span>
-                            <input type="text" placeholder=""
-                                class="h-8 placeholder-gray-600 border border-black w-14 ">
-                        </div>
-                        <div class="flex items-center space-x-1">
-                            <span class="w-8">Part:</span>
-                            <input type="text" placeholder=" "
-                                class="h-8 placeholder-gray-600 border border-black w-14">
-                        </div>
-                        <div class="flex items-center space-x-1">
-                            <span class="w-8">Qty.:</span>
-                            <input type="text" placeholder="" class="h-8 border border-black w-14 ">
-                        </div>
-                    </div>
+                    <h1></h1>
                 </div>
-
-            </td>
-
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div>
-                        <h1>Brand New</h1>
-                    </div>
-                </div>
-            </td>
+            </div>
+        </td>
 
             <td class="px-2 py-2">
                 <div class="flex flex-col items-center justify-center">
@@ -6861,79 +6830,55 @@
             <td class="px-2 py-2">
                 Exemption
             </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-start space-y-1">
-                    <div class="flex items-center space-x-1">
-                        <input type="checkbox" class="w-3 h-4 form-checkbox">
-                        <span>Test Report from Approved Test Facility</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="w-3 h-4 form-checkbox">
-                        <span></span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" class="w-3 h-4 form-checkbox">
-                        <span></span>
-                    </div>
-                </div>
-            </td>
+            <td colspan="5" class="px-2 py-2 whitespace-nowrap">              
+                Road Vehicle Standards (Model Reports— Compliance with Standards) Determination 2021
+                <br>
+                Division 3—Prescription of standards: concessional and additional standards
+            Clause 21 Standards—rare vehicles
+            <br>
+            Section(3)
+            <br>
+            The standards in subsection (2) apply to the exclusion of the following:
+            <br>
+            (a) an applicable ADR, to the extent it requires the vehicle to be right-hand drive;
+            <br>
+            (b) the following applicable ADRs, to the extent they require destructive testing to demonstrate compliance:
+            <br>
+            (i) ADR 10—Steering Column;
+            <br>
+            (ii) ADR 29—Side Door Strength;
+             <br>
+            (iii) ADR 69—Full Frontal Impact Occupant Protection;
+            <br>
+            (iv) ADR 72—Dynamic Side Impact Occupant Protection;
+             <br>
+            (v) ADR 73—Offset Frontal Impact Occupant Protection;
+             <br>
+            (vi) ADR 85—Pole Side Impact Performance;
+            <br>
+            Based on the Model Reports— Compliance with Standards Determination, Clause 21 Standards—rare
+             <br>
+            vehicles, exclusion of ADR 10—Steering Column is permitted.
+            <br>
+            ADR 10—Steering Column - Exempt / Not Applicable.
+            
+            
+        </td>
 
-            <td class="px-2 py-2 ">
-                <div class="flex flex-col items-center justify-center">
-                    R00-4768-0023
-                </div>
-            </td>
 
-            <td class="px-2 py-2 ">
-                <div class="flex flex-col items-center space-y-2">
-
-                    <!-- PNG Document -->
-                    <div class="flex flex-col items-center">
-                        <img src="path/to/png-icon.png" alt="PNG Icon" class="w-10 h-10">
-                        <span class="text-sm">photo.jpg</span>
-                    </div>
-                </div>
-            </td>
+      
 
 
-            <td class="px-2 py-2">
-                <!-- PDF Document -->
-                <div class="flex flex-col items-center">
-                    <img src="path/to/pdf-icon.png" alt="PDF Icon" class="w-10 h-10">
-                    <span class="text-sm">file.pdf</span>
-                </div>
-            </td>
 
-            <td class="px-2 py-2">
+
+       
+        <td class="px-2 py-2">
+            <div class="flex flex-col items-center justify-center">
                 <div>
-                    <h1>Passanger Seatbelt LMS </h1>
-                    <div class="flex flex-col items-start mt-1 space-y-2">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Type:</span>
-                            <h1>Front Outboard</h1>
-                            {{-- <input type="text" placeholder="Front Outboar"
-                                class="w-32 h-8 placeholder-gray-600 border border-black "> --}}
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Part:</span>
-                            <h1>VPN RESETRACTABLE BELT</h1>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="w-10">Qty.:</span>
-                            <h1>1</h1>
-
-                        </div>
-                    </div>
+                    <h1></h1>
                 </div>
-
-            </td>
-            <td class="px-2 py-2">
-                <div class="flex flex-col items-center justify-center">
-                    <div>
-                        <h1>Brand New</h1>
-                    </div>
-                </div>
-            </td>
+            </div>
+        </td> 
             <td class="px-2 py-2">
                 <div class="flex flex-col items-center justify-center">
                     <input type="checkbox" class="w-10 h-3 form-checkbox">
@@ -6952,7 +6897,8 @@
                 88/00
             </td>
             <td class="px-2 py-2">
-                Electronic Stability Control            </td>
+                Electronic Stability Control 
+         </td>
             <td class="px-2 py-2">
                 Full
             </td>
