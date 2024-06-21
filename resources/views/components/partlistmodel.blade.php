@@ -13,19 +13,19 @@
 <body class="overflow-x-hidden">
 
     <!-- Modal Overlay -->
-    <div id="modal-overlay" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden" onclick="toggleModal()"></div>
+    <div id="modal-overlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50" onclick="toggleModal()"></div>
 
     <!-- Modal -->
     <!-- Modal -->
     <form action="{{ route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div id="modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-auto">
-                <h2 class="text-lg font-bold mb-4">Add Supplier</h2>
+        <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div class="w-full max-w-2xl p-6 mx-auto bg-white rounded-lg">
+                <h2 class="mb-4 text-lg font-bold">Add Supplier</h2>
                 <div class="space-y-4">
-                    <div class="w-full p-2 gap-4">
-                        <div class="form-group flex flex-wrap md:flex-nowrap w-full">
-                            <label for="progress-photos" class="block text-gray-700 w-full mb-1 md:mb-0 pr-4">
+                    <div class="w-full gap-4 p-2">
+                        <div class="flex flex-wrap w-full form-group md:flex-nowrap">
+                            <label for="progress-photos" class="block w-full pr-4 mb-1 text-gray-700 md:mb-0">
                                 Logo
                             </label>
                             <div class="progress-photos flex flex-col cursor-pointer items-center justify-center min-h-40 h-auto bg-[#F8F9FA] rounded w-full px-4 py-6 relative"
@@ -34,7 +34,7 @@
                                     <!-- Uploaded files will be shown here -->
                                 </div>
                                 <div id="uploadInstructions" class="flex flex-col items-center">
-                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
+                                    <i class="mb-2 text-3xl text-gray-600 fas fa-cloud-upload-alt"></i>
                                     <p class="text-gray-600">Drop files here or click to upload.</p>
                                     <input type="file" name="profile_image" id="fileInput" style="display:none;"
                                         accept="image/jpeg, image/png">
@@ -128,10 +128,10 @@
                 </div>
                 <div class="flex justify-end mt-6 space-x-4">
                     <button type="button"
-                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
+                        class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
                         onclick="toggleModal()">Close</button>
                     <button type="submit"
-                        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none">Save</button>
+                        class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">Save</button>
                 </div>
             </div>
         </div>
@@ -177,7 +177,7 @@
                             <div class="flex items-center w-full h-full">
                                 <img src="${response.upload_image}" alt="Logo" class="object-cover w-full h-full rounded">
                             </div>
-                            <button class="text-red-500 hover:text-red-700 absolute top-1 right-2" onclick="removeFile('logo')">Remove</button>
+                            <button class="absolute text-red-500 hover:text-red-700 top-1 right-2" onclick="removeFile('logo')">Remove</button>
                         `;
                         document.getElementById('uploadInstructions').classList.add('hidden');
                     } else {
@@ -188,7 +188,7 @@
                         document.getElementById('tradeAgreementContainer').innerHTML = `
         <div class="flex items-center justify-between">
             <a href="/download-trade-agreement/${response.trade_agreement_pdf}" target="_blank" class="text-blue-500 hover:text-blue-700">Download Agreement</a>
-            <button class="text-red-500 hover:text-red-700 ml-4" onclick="removeFile('tradeAgreement')">Remove</button>
+            <button class="ml-4 text-red-500 hover:text-red-700" onclick="removeFile('tradeAgreement')">Remove</button>
         </div>
         <input type="file" id="tradeAgreement" name="trade_agreement_pdf" accept="application/pdf" class="hidden">
     `;
@@ -282,7 +282,7 @@
                         <div class="flex items-center w-full h-full">
                             <img src="${e.target.result}" alt="Logo" class="object-cover w-full h-full rounded">
                         </div>
-                        <button class="text-red-500 hover:text-red-700 absolute top-1 right-2" onclick="removeFile('logo')">Remove</button>
+                        <button class="absolute text-red-500 hover:text-red-700 top-1 right-2" onclick="removeFile('logo')">Remove</button>
                     `;
                     document.getElementById('uploadInstructions').classList.add('hidden');
                 };
