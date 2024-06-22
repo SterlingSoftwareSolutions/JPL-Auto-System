@@ -82,6 +82,14 @@ class SupplierController extends Controller
         return response()->json($supplier);
     }
 
+    public function update ($id){
+        $supplier = Supplier::findOrFail($id);
+
+        return response()->json($supplier);
+
+
+    }
+
 
     public function destroy($id)
     {
