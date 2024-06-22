@@ -50,7 +50,7 @@
             <div class="md:grid grid-cols-3 border">
 
                 @foreach ($suppliers as $supplier)
-                    <div class="flex flex-col bg-white md:w-[570px] mx-4 p-10 rounded-2xl mt-10  ">
+                    <div class="flex flex-col bg-white md:w-[420px] mx-4 p-10 rounded-2xl mt-10  ">
                         <div class="flex items-end">
 
                             <div>
@@ -82,21 +82,21 @@
                             <div class="grid grid-cols-2 items-center border-b border-black">
                                 <div class="flex items-center">
                                     <h1 class="font-bold pr-2">Country:</h1>
-                                    <h1 class="text-left">{{ $supplier->country }}</h1>
+                                    <h1 class="text-left break-all">{{ $supplier->country }}</h1>
                                 </div>
                                 <div class="flex items-center border-l-4 border-black pl-2" style="padding: 10px;">
                                     <h1 class="font-bold pr-2">Account Contact:</h1>
-                                    <h1 class="text-left">{{ $supplier->contact_name }}</h1>
+                                    <h1 class="text-left break-all">{{ $supplier->contact_name }}</h1>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 items-center">
                                 <div class="flex items-center border-b-4 border-black">
                                     <h1 class="font-bold pr-2">P:</h1>
-                                    <h1 class="text-left">{{ $supplier->phone }}</h1>
+                                    <h1 class="text-left break-all">{{ $supplier->phone }}</h1>
                                 </div>
                                 <div class="flex items-center border-l-4 border-b-4 border-black pl-2">
                                     <h1 class="font-bold pr-2">E:</h1>
-                                    <h1 class="text-left">{{ $supplier->email }}</h1>
+                                    <h1 class="text-left break-all">{{ $supplier->email }}</h1>
                                 </div>
                             </div>
 
