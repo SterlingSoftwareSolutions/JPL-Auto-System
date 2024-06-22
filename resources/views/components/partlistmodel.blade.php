@@ -188,7 +188,7 @@
                     if (response.trade_agreement_pdf) {
                         document.getElementById('tradeAgreementContainer').innerHTML = `
         <div class="flex items-center justify-between">
-            <a href="/download-trade-agreement/${response.trade_agreement_pdf}" target="_blank" class="text-blue-500 hover:text-blue-700">Download Agreement</a>
+            <a href="/storage/${response.trade_agreement_pdf}" target="_blank" class="text-blue-500 hover:text-blue-700"download>Download Agreement</a>
             <button class="ml-4 text-red-500 hover:text-red-700" onclick="removeFile('tradeAgreement')">Remove</button>
         </div>
         <input type="file" id="tradeAgreement" name="trade_agreement_pdf" accept="application/pdf" class="hidden">
