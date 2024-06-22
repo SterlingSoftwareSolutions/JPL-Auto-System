@@ -74,6 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // get supplier
     Route::get('/suppliers/{id}', [SupplierController::class, 'show'])->name('show');
+    Route::post('/suppliers/{id}', [SupplierController::class, 'update'])->name('update');
 
 
 
