@@ -17,7 +17,9 @@
 
     <!-- Modal -->
     <!-- Modal -->
-    <form id="supplierForm" action="{{ isset($supplier) ? route('updatesupplier', $supplier->id) : route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
+    <form id="supplierForm" action="{{ isset($supplier) ? route('updatesupplier') : route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="supplier_id" id="supplierId">
+
         @csrf
         @if(isset($supplier))
             @method('PUT')
@@ -129,12 +131,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-end  space-x-4">
+                <div class="flex justify-end space-x-4">
                     <button type="button"
                         class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
                         onclick="toggleModal()">Close</button>
-                        <button type="submit" id="submitButton" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">{{ isset($supplier) ? 'Update' : 'Save' }}</button>
-                </div>
+                        <button type="submit"
+                        id="submitButton"
+                        class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">
+                    {{ isset($supplier) ? 'Update' : 'Save' }}
+                </button>
+
+                    </div>
             </div>
         </div>
     </form>
@@ -151,7 +158,6 @@
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log(response);
                     document.getElementById('businessName').value = response.business_name;
                     document.getElementById('businessWeb').value = response.business_web;
                     document.getElementById('country').value = response.country;
@@ -160,7 +166,7 @@
                     document.getElementById('email').value = response.email;
                     document.getElementById('tradeAccount').value = response.trade_account ? 'yes' : 'no';
                     document.getElementById('supplierCRM').value = response.supplier_crm ? 'yes' : 'no';
-
+                     document.getElementById('supplierId').value = response.id;
                     if (response.supplier_crm === 1) {
                         document.getElementById('crmUrl').value = response.crm_url;
                         document.getElementById('crmUsername').value = response.crm_username;
@@ -215,9 +221,29 @@
         }
 
 
-        function updatesupplier(supplierId){
-            console.log('hello' + supplierId);
-        }
+        function updatesupplier() {
+
+        const form = document.getElementById('supplierForm');
+        console.log(form)
+        // const form_data = const data = new FormData(form);
+
+    // $.ajax({
+    //     url: "/suppliers/" + supplierId,
+    //     type: "POST",
+    //     data: {
+    //         _token: $('meta[name="csrf-token"]').attr('content')
+    //     },
+    //     success: function(response) {
+    //         console.log('update', supplierId);
+    //         // Additional handling or logging if needed
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error("Error updating supplier:", error);
+    //         // Handle error response if needed
+    //     }
+    // });
+}
+
 
         function removeFile(type) {
             if (type === 'logo') {
