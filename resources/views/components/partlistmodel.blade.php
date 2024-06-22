@@ -17,11 +17,14 @@
 
     <!-- Modal -->
     <!-- Modal -->
-    <form action="{{ route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
+    <form id="supplierForm" action="{{ isset($supplier) ? route('updatesupplier', $supplier->id) : route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @if(isset($supplier))
+            @method('PUT')
+        @endif
         <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
             <div class="w-full max-w-2xl p-6 mx-auto bg-white rounded-lg">
-                <h2 class="mb-4 text-lg font-bold">Add Supplier</h2>
+                <h2 id="modalTitle" class="mb-4 text-lg font-bold">{{ isset($supplier) ? 'Update Supplier' : 'Add Supplier' }}</h2>
                 <div class="space-y-4">
                     <div class="w-full gap-4 p-2">
                         <div class="flex flex-wrap w-full form-group md:flex-nowrap">
@@ -126,12 +129,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-end mt-6 space-x-4">
+                <div class="flex justify-end  space-x-4">
                     <button type="button"
                         class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
                         onclick="toggleModal()">Close</button>
-                    <button type="submit"
-                        class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">Save</button>
+                        <button type="submit" id="submitButton" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">{{ isset($supplier) ? 'Update' : 'Save' }}</button>
                 </div>
             </div>
         </div>
@@ -140,7 +142,7 @@
     <!-- JavaScript for Modal Toggle -->
     <script>
         function editSupplier(supplierId) {
-            console.log('hello' + supplierId);
+            console.log('Edit Supplier' + supplierId);
 
             $.ajax({
                 url: "/suppliers/" + supplierId,
@@ -170,6 +172,10 @@
                         document.getElementById('crmUsername').value = '';
                         document.getElementById('crmPassword').value = '';
                     }
+
+                        // Adjust modal title and submit button text
+                    document.getElementById('modalTitle').textContent = 'Update Supplier';
+                    document.getElementById('submitButton').textContent = 'Update';
 
                     // Handle Logo
                     if (response.upload_image) {
@@ -208,6 +214,11 @@
             });
         }
 
+
+        function updatesupplier(supplierId){
+            console.log('hello' + supplierId);
+        }
+
         function removeFile(type) {
             if (type === 'logo') {
                 document.getElementById('uploadedFiles').innerHTML = '';
@@ -222,13 +233,18 @@
         function toggleModal() {
             var modalOverlay = document.getElementById('modal-overlay');
             var modal = document.getElementById('modal');
+            var form = document.getElementById('supplierForm');
+
 
             modalOverlay.classList.toggle('hidden'); // Toggle visibility of the overlay
             modal.classList.toggle('hidden'); // Toggle visibility of the modal
             document.body.classList.toggle('overflow-hidden'); // Optional: Prevent scrolling background
             // Reset input field values when closing the modal
             if (modal.classList.contains('hidden')) {
-            window.location.reload();  //page refresh
+                  form.reset();
+            document.getElementById('modalTitle').textContent = '{{ isset($supplier) ? "Update Supplier" : "Add Supplier" }}';
+                document.getElementById('submitButton').textContent = '{{ isset($supplier) ? "Update" : "Save" }}';
+                window.location.reload();  //page refresh
 
             }
         }
