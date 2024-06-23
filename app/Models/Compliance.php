@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Compliance extends Model
 {
     use HasFactory;
+    protected $table = 'compliance';
+    
     protected $fillable = [
         'title',
         'compliancetext',

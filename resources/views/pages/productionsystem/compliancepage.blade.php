@@ -123,15 +123,16 @@
             <tbody>
 
                 {{-- table row 1 --}}
+                @foreach ($adrData as $adr)
                 <tr class="bg-white ">
                     <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
-                        04/06
+                        {{ $adr->adrtext }}
                     </td>
                     <td class="px-2 py-2">
-                        Seatbelts
+                        {{ $adr->title }}
                     </td>
                     <td class="px-2 py-2">
-                        Full
+                        {{ $adr->compliancetext }}
                     </td>
                     <td class="px-2 py-2">
                         <div class="flex flex-col items-start space-y-2">
@@ -225,9 +226,11 @@
 
                 <tr class="border-b border-gray-200">
                 </tr>
+                @endforeach
                 {{-- table row 1 --}}
 
                 {{-- table row 2 --}}
+                
                 <tr class="bg-white ">
                     <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
                         04/06
@@ -505,6 +508,7 @@
 
                 <tr class="border-b border-gray-200">
                 </tr>
+                
 
                 {{-- table row 4 --}}
 

@@ -78,5 +78,5 @@ Route::middleware('auth:sanctum')->group(function () {
     })->name('customerlist');
 
     Route::post('/compliance/store', [ComplianceController::class, 'storeCompliance'])->name('compliance.store');
-    Route::get('/compliance', [ComplianceController::class, 'showComplianceForm'])->name('pages.productionsystem.compliancepage');
+    Route::get('/compliance', [ComplianceController::class, 'showComplianceForm'])->name('compliancepage');
 });
