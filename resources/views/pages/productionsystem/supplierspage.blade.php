@@ -31,7 +31,7 @@
         }
     </style>
 
-    <div class=" w-full h-auto " style="background-color: #F9F9F9">
+    <div class=" w-full h-auto py-2 " style="background-color: #F9F9F9">
         <div class="">
             <div class="md:flex justify-around">
                 <!-- Modal Overlay and Content -->
