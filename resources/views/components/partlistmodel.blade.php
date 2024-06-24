@@ -29,8 +29,8 @@
                     {{ isset($supplier) ? 'Update Supplier' : 'Add Supplier' }}</h2>
                 <div class="space-y-4">
                     <div class="w-full gap-4 p-2">
-                        {{-- <input type="text" name="supplier_id" value="" id="supplierId"
-                            class="border border-red-500"> --}}
+                        <input type="hidden" name="supplier_id" value="" id="supplierId"
+                            class="">
 
                         <div class="flex flex-wrap w-full form-group md:flex-nowrap">
                             <label for="progress-photos" class="block w-full pr-4 mb-1 text-gray-700 md:mb-0">
