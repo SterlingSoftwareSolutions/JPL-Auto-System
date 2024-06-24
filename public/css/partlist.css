@@ -1,0 +1,41 @@
+* Workout Library page */
+
+.popup {
+    display: none;
+}
+
+.popup-content {
+    animation-duration: 0.4s;
+}
+
+.popup-content.show {
+    animation-name: slideIn;
+}
+
+.popup-content.hide {
+    animation-name: slideOut;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
