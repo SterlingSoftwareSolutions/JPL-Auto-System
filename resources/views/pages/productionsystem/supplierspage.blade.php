@@ -31,7 +31,7 @@
         }
     </style>
 
-    <div class=" w-full h-screen" style="background-color: #F9F9F9">
+    <div class=" w-full h-auto " style="background-color: #F9F9F9">
         <div class="">
             <div class="md:flex justify-around">
                 <!-- Modal Overlay and Content -->
@@ -47,7 +47,7 @@
 
             <!-- Show supplier details only if there are suppliers -->
             @if($suppliers->isNotEmpty())
-            <div class="md:grid grid-cols-3 border">
+            <div class="md:grid grid-cols-3 ">
 
                 @foreach ($suppliers as $supplier)
                     <div class="flex flex-col bg-white md:w-[420px] mx-4 p-10 rounded-2xl mt-10  ">
@@ -126,7 +126,7 @@
                                         </div>
                                         <div class="flex">
                                             <h1 class="pr-2">Agreement:</h1>
-                                            <h1 class="text-left">{{ $supplier->trade_agreement_pdf ? basename($supplier->trade_agreement_pdf) : 'No Agreement' }}</h1>
+                                            <h1 class="text-left break-all">{{ $supplier->trade_agreement_pdf ? basename($supplier->trade_agreement_pdf) : 'No Agreement' }}</h1>
                                         </div>
 
                                     </div>

@@ -17,16 +17,21 @@
 
     <!-- Modal -->
     <!-- Modal -->
-    <form id="supplierForm" action="{{ isset($supplier) ? route('updatesupplier', $supplier->id) : route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
+    <form id="supplierForm" action="{{ route('storagesupplier') }}" method="POST" enctype="multipart/form-data">
+
         @csrf
-        @if(isset($supplier))
+        @if (isset($supplier))
             @method('PUT')
         @endif
         <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
             <div class="w-full max-w-2xl p-6 mx-auto bg-white rounded-lg">
-                <h2 id="modalTitle" class="mb-4 text-lg font-bold">{{ isset($supplier) ? 'Update Supplier' : 'Add Supplier' }}</h2>
+                <h2 id="modalTitle" class="mb-4 text-lg font-bold">
+                    {{ isset($supplier) ? 'Update Supplier' : 'Add Supplier' }}</h2>
                 <div class="space-y-4">
                     <div class="w-full gap-4 p-2">
+                        {{-- <input type="text" name="supplier_id" value="" id="supplierId"
+                            class="border border-red-500"> --}}
+
                         <div class="flex flex-wrap w-full form-group md:flex-nowrap">
                             <label for="progress-photos" class="block w-full pr-4 mb-1 text-gray-700 md:mb-0">
                                 Logo
@@ -133,7 +138,8 @@
                     <button type="button"
                         class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
                         onclick="toggleModal()">Close</button>
-                        <button type="submit" id="submitButton" class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">{{ isset($supplier) ? 'Update' : 'Save' }}</button>
+                    <button type="submit" id="submitButton"
+                        class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none">{{ isset($supplier) ? 'Update' : 'Save' }}</button>
                 </div>
             </div>
         </div>
@@ -160,6 +166,8 @@
                     document.getElementById('email').value = response.email;
                     document.getElementById('tradeAccount').value = response.trade_account ? 'yes' : 'no';
                     document.getElementById('supplierCRM').value = response.supplier_crm ? 'yes' : 'no';
+                    document.getElementById('supplierId').value = response.id;
+
 
                     if (response.supplier_crm === 1) {
                         document.getElementById('crmUrl').value = response.crm_url;
@@ -173,7 +181,7 @@
                         document.getElementById('crmPassword').value = '';
                     }
 
-                        // Adjust modal title and submit button text
+                    // Adjust modal title and submit button text
                     document.getElementById('modalTitle').textContent = 'Update Supplier';
                     document.getElementById('submitButton').textContent = 'Update';
 
@@ -215,9 +223,9 @@
         }
 
 
-        function updatesupplier(supplierId){
-            console.log('hello' + supplierId);
-        }
+        // function updatesupplier(supplierId){
+        //     console.log('hello' + supplierId);
+        // }
 
         function removeFile(type) {
             if (type === 'logo') {
@@ -241,10 +249,11 @@
             document.body.classList.toggle('overflow-hidden'); // Optional: Prevent scrolling background
             // Reset input field values when closing the modal
             if (modal.classList.contains('hidden')) {
-                  form.reset();
-            document.getElementById('modalTitle').textContent = '{{ isset($supplier) ? "Update Supplier" : "Add Supplier" }}';
-                document.getElementById('submitButton').textContent = '{{ isset($supplier) ? "Update" : "Save" }}';
-                window.location.reload();  //page refresh
+                form.reset();
+                document.getElementById('modalTitle').textContent =
+                    '{{ isset($supplier) ? 'Update Supplier' : 'Add Supplier' }}';
+                document.getElementById('submitButton').textContent = '{{ isset($supplier) ? 'Update' : 'Save' }}';
+                window.location.reload(); //page refresh
 
             }
         }
