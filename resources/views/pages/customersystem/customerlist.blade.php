@@ -58,7 +58,7 @@
 
 
                                     <div class="flex items-center space-x-4">
-                                        <label for="type" class="w-32 font-semibold">Type <span
+                                        <label for="type" class="w-32 font-semibold">Component <span
                                                 class="text-red-500">*</span></label>
                                         <select id="type" name="type"
                                             class="p-2 border border-gray-300 rounded flex-1">
