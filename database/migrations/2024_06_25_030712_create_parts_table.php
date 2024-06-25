@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->string('part_number');
+            $table->string('supplier');
+            $table->string('upload_part_image')->nullable();
+
 
               // Foreign keys
               $table->unsignedBigInteger('category_id');
