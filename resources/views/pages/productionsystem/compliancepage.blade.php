@@ -82,8 +82,10 @@
 <div class="w-full">
     <div class="h-1/3">
 
+<!-- Tables -->
+<div class="tables-container">
 
-        <table class="text-sm text-left divide-y divide-gray-200 tableee">
+    <table id="table1" class="text-sm text-left divide-y divide-gray-200 tableee">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr class="border-b-4 border-gray-900">
                     <th scope="col" class="px-2 py-2">
@@ -126,6 +128,7 @@
                 @foreach ($adrData as $adr)
                 <tr class="bg-white border-b border-gray-900">
                     <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
+
                         {{ $adr->adrtext }}
                     </td>
                     <td class="px-2 py-2">
@@ -240,10 +243,10 @@
 
                 {{-- <tr class="bg-white ">
                     <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
-                        04/06
+                        02/01
                     </td>
                     <td class="px-2 py-2">
-                        Seatbelts
+                        Side Door Latches and Hinges
                     </td>
                     <td class="px-2 py-2">
                         Full
@@ -336,11 +339,10 @@
                 {{-- table row 3 --}}
                 {{-- <tr class="bg-white ">
                     <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
-                        04/06
+                        03/04
                     </td>
                     <td class="px-2 py-2">
-                        Seatbelts
-                    </td>
+                        Seats and Seat Anchorages                    </td>
                     <td class="px-2 py-2">
                         Full
                     </td>
@@ -437,10 +439,10 @@
                 {{-- table row 4 --}}
                 {{-- <tr class="bg-white ">
                     <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
-                        04/06
+                        03/04
                     </td>
                     <td class="px-2 py-2">
-                        Seatbelts
+                        Seats and Seat Anchorages
                     </td>
                     <td class="px-2 py-2">
                         Full
@@ -522,6 +524,7 @@
 
             </tbody>
 
+
         </table>
         <div class="mt-4 flex flex-col items-center">
             <div class="mb-2 text-gray-600">
@@ -531,6 +534,7 @@
                 {{ $adrData->links() }}
             </div>
         </div>
+
 
     </div>
 
