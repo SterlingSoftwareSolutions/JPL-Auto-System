@@ -139,9 +139,10 @@
                     </td>
                     @if($adr->compliancetext == 'Exemption')
                     <td class="px-2 py-2" colspan="5">
-                        <div class="flex flex-col items-start space-y-2">@if ($adr->exemption)
-                            {{ $adr->exemption->description }}
-                        @endif</div>
+                        <div class="flex flex-col items-start space-y-2">
+                            @if ($adr->exemption)
+                            {!! nl2br(e($adr->exemption->description)) !!}
+                            @endif</div>
                     </td>
                     @else
                     <td class="px-2 py-2">
