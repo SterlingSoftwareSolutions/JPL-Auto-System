@@ -12,6 +12,8 @@ class SupplierController extends Controller
 {
     public function savepartlist(Request $request)
     {
+
+        dd($request);
         $validator = Validator::make($request->all(), [
             // 'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             // 'trade_agreement_pdf' => 'required|file|mimes:pdf|max:2048',
