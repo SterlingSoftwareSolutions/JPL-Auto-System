@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComplianceController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -57,9 +58,9 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.productionsystem.workingstructions');
     })->name('workingstructions');
 
-    Route::get('/compliance', function () {
-        return view('pages.productionsystem.compliancepage');
-    })->name('compliancepage');
+    // Route::get('/compliance', function () {
+    //     return view('pages.productionsystem.compliancepage');
+    // })->name('compliancepage');
 
     Route::get('/partslist', function () {
         return view('pages.productionsystem.partlistpage');
@@ -83,5 +84,6 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.customersystem.customerlist');
     })->name('customerlist');
 
-
+    Route::post('/compliance/store', [ComplianceController::class, 'storeCompliance'])->name('compliance.store');
+    Route::get('/compliance', [ComplianceController::class, 'showComplianceForm'])->name('compliancepage');
 });
