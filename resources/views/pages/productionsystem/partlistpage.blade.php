@@ -68,7 +68,7 @@
 
                         <div class="flex items-end justify-end flex-grow mt-5 mr-8">
                             <button id="openPopupBtn"
-                                class="bg-gray-500  h-10 px-6 text-white rounded-sm text-sm font-bold">+ ADD PART</button>
+                                class="h-10 px-6 text-sm font-bold text-white bg-gray-500 rounded-sm">+ ADD PART</button>
                         </div>
                     </div>
 
@@ -596,96 +596,96 @@
 
 
                 </table>
-                {{-- pop up view start --}}
-                <div id="popupForm"
-                    class="popup fixed inset-0 bg-gray-800 bg-opacity-50 items-start justify-center hidden border">
-                    <div class="popup-content inset-0 rounded-lg shadow-lg w-7/12 p-6 ">
-                        <div
-                            class="bg-white border border-b text-black p-4 flex justify-between items-center rounded-t-lg flex-row">
-                            <h4 class="text-xl font-semibold">Add Part</h4>
-                            <div class="flex items-center space-x-4">
-                                {{-- <a href="#" class="text-white hover:underline">Edit</a>
-             <a class="text-white">|</a> --}}
-                                <span class="close text-4xl cursor-pointer">&times;</span>
-                            </div>
-                        </div>
-                        <div class="p-6 bg-white">
-                            <form class="space-y-4" action="" method="POST">
-                                @csrf
-                                <input type="hidden" id="workoutId" name="id">
-                                <div class="flex items-center space-x-4">
-                                    <label for="category" class="w-32 font-semibold">Category <span
-                                            class="text-red-500">*</span></label>
-                                    <select id="category" name="category"
-                                        class="p-2 border border-gray-300 rounded flex-1">
-                                        <option value="body" class="p-2 hover:bg-gray-100">Body</option>
-                                        <option value="labour" class="p-2 hover:bg-gray-100">Labour</option>
-                                        <optgroup label="Parts" class="font-bold text-gray-700">
-                                            <option value="power-plant" class="p-2 hover:bg-gray-100">Power Plant</option>
-                                            <option value="suspension" class="p-2 hover:bg-gray-100">Suspension</option>
-                                            <option value="wheels-tyres" class="p-2 hover:bg-gray-100">Wheels &amp; Tyres
-                                            </option>
-                                            <option value="interior" class="p-2 hover:bg-gray-100">Interior</option>
-                                            <option value="exterior" class="p-2 hover:bg-gray-100">Exterior</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
+               {{-- pop up view start --}}
+<div id="popupForm"
+class="fixed inset-0 flex items-start justify-center hidden bg-gray-800 bg-opacity-50 border popup">
 
+<div class="inset-0 w-7/12 p-6 border border-red-500 rounded-lg shadow-lg popup-content">
+   <div class="flex flex-row items-center justify-between p-4 text-black bg-white border rounded-t-lg">
+       <h4 class="text-xl font-semibold">Add Part</h4>
+       <div class="flex items-center space-x-4">
+           {{-- <a href="#" class="text-white hover:underline">Edit</a>
+           <a class="text-white">|</a> --}}
+           <span class="text-4xl cursor-pointer close">&times;</span>
+       </div>
+   </div>
+   <div class="p-6 bg-white">
+       <form class="space-y-4" action="{{route('addpart')}}" method="POST" enctype="multipart/form-data" >
+           @csrf
+           <input type="hidden" id="workoutId" name="id">
+           <div class="flex items-center space-x-4">
+               <label for="category" class="w-32 font-semibold">Category <span
+                       class="text-red-500">*</span></label>
+               <select id="category" name="category"
+                       class="flex-1 p-2 border border-gray-300 rounded">
+                   {{-- <option value="body" class="p-2 hover:bg-gray-100">Body</option>
+                   <option value="labour" class="p-2 hover:bg-gray-100">Labour</option>
+                   <optgroup label="Parts" class="font-bold text-gray-700">
+                       <option value="power-plant" class="p-2 hover:bg-gray-100">Power Plant</option>
+                       <option value="suspension" class="p-2 hover:bg-gray-100">Suspension</option>
+                       <option value="wheels-tyres" class="p-2 hover:bg-gray-100">Wheels &amp; Tyres</option>
+                       <option value="interior" class="p-2 hover:bg-gray-100">Interior</option>
+                       <option value="exterior" class="p-2 hover:bg-gray-100">Exterior</option>
+                   </optgroup> --}}
+                   @foreach($categories as $category)
+                   <option value="{{ $category->id }}" class="p-2 hover:bg-gray-100">{{ $category->category_name }}</option>
+               @endforeach
+               </select>
+           </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="type" class="w-32 font-semibold">Component <span
-                                            class="text-red-500">*</span></label>
-                                    <select id="type" name="type"
-                                        class="p-2 border border-gray-300 rounded flex-1">
-                                        <option value="warmup">Complete Shell</option>
+           <div class="flex items-center space-x-4">
+               <label for="type" class="w-32 font-semibold">Component <span
+                       class="text-red-500">*</span></label>
+               <select id="type" name="component"
+                       class="flex-1 p-2 border border-gray-300 rounded">
+                       @foreach($components as $component)
+                       <option value="{{ $component->id }}" class="p-2 hover:bg-gray-100">{{ $component->component_name  }}</option>
+                   @endforeach
+               </select>
+           </div>
 
-                                    </select>
-                                </div>
+           <div class="flex items-center space-x-4">
+               <label for="workout" class="w-32 font-semibold">Description <span
+                       class="text-red-500">*</span></label>
+               <input type="text" id="description" name="description"
+                      class="flex-1 p-2 border border-gray-300 rounded">
+           </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="workout" class="w-32 font-semibold">Description <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="text" id="description" name="description"
-                                        class="p-2 border border-gray-300 rounded flex-1">
-                                </div>
+           <div class="flex items-center space-x-4">
+               <label for="link" class="w-32 font-semibold">Part Number <span
+                       class="text-red-500">*</span></label>
+               <input type="text" id="partnumber" name="partnumber"
+                      class="flex-1 p-2 border border-gray-300 rounded">
+           </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="link" class="w-32 font-semibold">Part Number <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="text" id="partnumber" name="partnumber"
-                                        class="p-2 border border-gray-300 rounded flex-1">
-                                </div>
+           <div class="flex items-center space-x-4">
+               <label for="link" class="w-32 font-semibold">Supplier <span
+                       class="text-red-500">*</span></label>
+               <input type="text" id="supplier" name="supplier"
+                      class="flex-1 p-2 border border-gray-300 rounded">
+           </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="link" class="w-32 font-semibold">Supplier <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="text" id="supplier" name="supplier"
-                                        class="p-2 border border-gray-300 rounded flex-1">
-                                </div>
+           <div class="flex items-center space-x-4">
+               <label for="partnumber" class="font-semibold w-34">Upload Part Image <span
+                       class="text-red-500">*</span></label>
+               <input type="file" id="partnumber" name="uploadpartimage"
+                      accept="image/jpeg, image/png" class="flex-1 p-2 border border-gray-300 rounded">
+           </div>
 
+           <div class="flex items-end justify-end gap-2 p-4 text-center rounded-b-lg">
+               <button class="w-20 py-2 font-bold text-white bg-gray-500 rounded" type="submit"
+                       id="addButton">ADD</button>
+               <button type="submit" class="px-8 py-2 mr-2 text-white bg-black rounded" type="submit"
+                       id="updateButton" hidden>Update</button>
+               <button type="button" class="w-20 py-2 font-bold text-gray-600 bg-gray-300 rounded"
+                       onclick="closePopup()">Cancel</button>
+           </div>
+       </form>
+   </div>
+</div>
+</div>
+{{-- pop up view end --}}
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="partnumber" class="w-34 font-semibold">Upload Part Image <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="file" id="partnumber" name="partnumber"
-                                        accept="image/jpeg, image/png" class="p-2 border border-gray-300 rounded flex-1">
-                                </div>
-
-
-
-                                <div class="p-4 items-end justify-end  flex text-center rounded-b-lg gap-2 ">
-                                    <button class="bg-gray-500 text-white font-bold w-20  py-2 rounded " type="submit"
-                                        id="addButton">ADD</button>
-                                    <button class="bg-black text-white px-8 py-2 rounded mr-2" type="submit"
-                                        id="updateButton" hidden>Update</button>
-                                    <button type="button" class="bg-gray-300 text-gray-600 font-bold w-20  py-2 rounded "
-                                        type="submit" onclick="closePopup()">Cancel</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                {{-- pop up view end --}}
             </div>
             <div id="myModal" class="flex items-center justify-center modal">
                 <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg shadow-xl modal-content-container">

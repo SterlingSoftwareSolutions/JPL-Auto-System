@@ -9,8 +9,15 @@ class Part extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'description',
+        'category_id',
+        'component_id',
+        'part_number',
+        'supplier',
+        'upload_part_image'
+    ];
 
-    protected $fillable = ['description', 'category_id', 'component_id'];
 
     public function category()
     {

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComplianceController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PartController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,9 +63,9 @@ Route::middleware('auth:sanctum')->group(function () {
     //     return view('pages.productionsystem.compliancepage');
     // })->name('compliancepage');
 
-    Route::get('/partslist', function () {
-        return view('pages.productionsystem.partlistpage');
-    })->name('partlistpage');
+    // Route::get('/partslist', function () {
+    //     return view('pages.productionsystem.partlistpage');
+    // })->name('partlistpage');
 
 
 
@@ -76,6 +77,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // get supplier
     Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('create');
     Route::get('/suppliers/{supplier}', [SupplierController::class, 'show'])->name('show');
+
+    //part list
+    Route::get('/partslist', [PartController::class, 'index'])->name('partlistpage');
+    Route::post('/partslist/add', [PartController::class, 'addpart'])->name('addpart');
 
 
 
