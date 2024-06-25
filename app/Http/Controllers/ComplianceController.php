@@ -8,7 +8,7 @@ class ComplianceController extends Controller
 {
     public function showComplianceForm()
     {
-        $adrData = ADR::all(); // 
+        $adrData = ADR::paginate(5); //
         return view('pages.productionsystem.compliancepage', compact('adrData'));
     }
 }

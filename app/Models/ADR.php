@@ -15,10 +15,16 @@ class ADR extends Model
         'adrtext',
         'title',
         'compliancetext',
+        'exemption_id',
     ];
 
     public function compliance()
     {
         return $this->hasMany(Compliance::class);
+    }
+
+    public function exemption()
+    {
+        return $this->belongsTo(Exemption::class, 'exemption_id');
     }
 }

@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('adr', function (Blueprint $table) {
+        Schema::create('exemptions', function (Blueprint $table) {
             $table->id();
-            $table->string('adrtext');
-            $table->string('title');
-            $table->string('compliancetext');
-            $table->foreignId('exemption_id')->nullable()->constrained('exemptions');
+            $table->string('description',5000);
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('adr');
+        Schema::dropIfExists('exemptions');
     }
 };
