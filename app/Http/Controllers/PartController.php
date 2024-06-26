@@ -14,39 +14,71 @@ class PartController extends Controller
         $categories = PartCategory::all();
         $components = PartComponent::all();
 
+
         $bodyParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Body');
-        })->with('category')->get();
-        // dd($bodyParts);
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
-        // foreach ($bodyParts as $part) {
-        //     // dd( $part->category->category_name);
-        // }
 
         $labourParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Labour');
-        })->get();
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
         // Repeat for other categories
         $powerPlantParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Power Plant');
-        })->get();
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
         $suspensionParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Suspension');
-        })->get();
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
         $wheelsTyresParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Wheels & Tyres');
-        })->get();
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
         $interiorParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Interior');
-        })->get();
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
         $exteriorParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Exterior');
-        })->get();
+        })
+        ->with(['category', 'component'])
+        ->join('part_components', 'parts.component_id', '=', 'part_components.id')
+        ->orderBy('part_components.component_name', 'asc')
+        ->select('parts.*') // To avoid ambiguity and select only parts columns
+        ->get();
 
         return view('pages.productionsystem.partlistpage', compact(
             'categories', 'components', 'bodyParts', 'labourParts',
