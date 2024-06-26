@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('ece');
             $table->boolean('test');
-            $table->boolean('component');
+            $table->boolean('cta');
             $table->timestamps();
         });
     }

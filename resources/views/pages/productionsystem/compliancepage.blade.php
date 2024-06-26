@@ -126,117 +126,120 @@
 
                 {{-- table row 1 --}}
                 @foreach ($adrData as $adr)
-                <tr class="bg-white border-b border-gray-900">
-                    <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
-
-                        {{ $adr->adrtext }}
-                    </td>
-                    <td class="px-2 py-2">
-                        {{ $adr->title }}
-                    </td>
-                    <td class="px-2 py-2">
-                        {{ $adr->compliancetext }}
-                    </td>
-                    @if($adr->compliancetext == 'Exemption')
-                    <td class="px-2 py-2" colspan="5">
-                        <div class="flex flex-col items-start space-y-2">
-                            @if ($adr->exemption)
-                            {!! nl2br(e($adr->exemption->description)) !!}
-                            @endif</div>
-                    </td>
-                    @else
-                    <td class="px-2 py-2">
-                        <div class="flex flex-col items-start space-y-2">
-                            <div class="flex items-center space-x-2">
-                                <input type="checkbox" class="w-3 h-3 form-checkbox">
-                                <span>ECE Approval</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="checkbox" class="w-3 h-3 form-checkbox">
-                                <span>Test Report from Approved Test Facility</span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="checkbox" class="w-3 h-3 form-checkbox">
-                                <span>Component Type Approval (CTA)</span>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td class="px-2 py-2">
-                        <input type="text" class="h-10 border border-black">
-                    </td>
-
-                    <td class="px-2 py-2">
-                        <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
-                            style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
-                            <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
-                            <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
-                            <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
-                                style="background-color: #F9F9F9">Browse</button>
-                            <input id="fileInput" type="file" class="hidden" />
-                        </div>
-                    </td>
-                    <td class="px-2 py-2">
-                        <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
-                            style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
-                            <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
-                            <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
-                            <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
-                                style="background-color: #F9F9F9">Browse</button>
-                            <input id="fileInput" type="file" class="hidden" />
-                        </div>
-                    </td>
-                    <td class="px-2 py-2">
-                        <div>
-                            <input type="text" placeholder="Component"
-                                class="h-8 px-0 placeholder-gray-600 border border-black w-18">
-
-                            <div class="flex flex-col items-start mt-1 space-y-1">
-                                <div class="flex items-center space-x-1">
-                                    <span class="w-8">Type:</span>
-                                    <input type="text" placeholder=""
-                                        class="h-8 placeholder-gray-600 border border-black w-14 ">
+                    <form action="/compliance/store" method="POST">
+                        @csrf
+                        <input type="hidden" name="adr_id" value="{{ $adr->id }}">
+                        <tr class="bg-white border-b border-gray-900">
+                            <td class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap">
+                                {{ $adr->adrtext }}
+                            </td>
+                            <td class="px-2 py-2">
+                                {{ $adr->title }}
+                            </td>
+                            <td class="px-2 py-2">
+                                {{ $adr->compliancetext }}
+                            </td>
+                            @if($adr->compliancetext == 'Exemption')
+                            <td class="px-2 py-2" colspan="5">
+                                <div class="flex flex-col items-start space-y-2">
+                                    @if ($adr->exemption)
+                                    {!! nl2br(e($adr->exemption->description)) !!}
+                                    @endif</div>
+                            </td>
+                            @else
+                            <td class="px-2 py-2">
+                                <div class="flex flex-col items-start space-y-2">
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-3 h-3 form-checkbox" name="ece" value="1">
+                                        <span>ECE Approval</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-3 h-3 form-checkbox" name="test" value="1">
+                                        <span>Test Report from Approved Test Facility</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="w-3 h-3 form-checkbox" name="cta" value="1">
+                                        <span>Component Type Approval (CTA)</span>
+                                    </div>
                                 </div>
-                                <div class="flex items-center space-x-1">
-                                    <span class="w-8">Part:</span>
-                                    <input type="text" placeholder=" "
-                                        class="h-8 placeholder-gray-600 border border-black w-14">
+                            </td>
+
+                            <td class="px-2 py-2">
+                                <input type="text" class="h-10 border border-black" name="number">
+                            </td>
+
+                            <td class="px-2 py-2">
+                                <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
+                                    style="background-color: #F9F9F9" >
+                                    <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
+                                    <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
+                                    <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
+                                        style="background-color: #F9F9F9">Browse</button>
+                                    <input id="fileInput" type="file" class="hidden" name="document"/>
                                 </div>
-                                <div class="flex items-center space-x-1">
-                                    <span class="w-8">Qty.:</span>
-                                    <input type="text" placeholder="" class="h-8 border border-black w-14 ">
+                            </td>
+                            <td class="px-2 py-2">
+                                <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
+                                    style="background-color: #F9F9F9">
+                                    <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
+                                    <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
+                                    <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
+                                        style="background-color: #F9F9F9">Browse</button>
+                                    <input id="fileInput" type="file" class="hidden" name="image"/>
                                 </div>
-                            </div>
-                        </div>
+                            </td>
+                            <td class="px-2 py-2">
+                                <div>
+                                    <input type="text" placeholder="Component" name="component"
+                                        class="h-8 px-0 placeholder-gray-600 border border-black w-18">
 
-                    </td>
-                    @endif
-                    <td class="px-2 py-2">
-                        <div class="flex flex-col items-center justify-center">
-                            <div>
-                                <h1>Brand New</h1>
-                            </div>
-                        </div>
-                    </td>
+                                    <div class="flex flex-col items-start mt-1 space-y-1">
+                                        <div class="flex items-center space-x-1">
+                                            <span class="w-8">Type:</span>
+                                            <input type="text" placeholder="" name="type"
+                                                class="h-8 placeholder-gray-600 border border-black w-14 ">
+                                        </div>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="w-8">Part:</span>
+                                            <input type="text" placeholder="" name="part"
+                                                class="h-8 placeholder-gray-600 border border-black w-14">
+                                        </div>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="w-8">Qty.:</span>
+                                            <input type="text" placeholder="" name="qty" class="h-8 border border-black w-14 ">
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <td class="px-2 py-2">
-                        <div class="flex flex-col items-center justify-center">
-                            <input type="checkbox" class="w-10 h-3 form-checkbox">
-                        </div>
-                    </td>
+                            </td>
+                            @endif
+                            <td class="px-2 py-2">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div>
+                                        <input type="text" value="Brand New" name="status">
+                                    </div>
+                                </div>
+                            </td>
 
-                    <td class="px-2 py-2">
-                        <div class="flex flex-col items-center justify-center">
-                            <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Save </button>
-                            <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Edit </button>
-                            <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Delete </button>
-                        </div>
-                    </td>
+                            <td class="px-2 py-2">
+                                <div class="flex flex-col items-center justify-center">
+                                    <input type="checkbox" class="w-10 h-3 form-checkbox" name="required" value="1">
+                                </div>
+                            </td>
+
+                            <td class="px-2 py-2">
+                                <div class="flex flex-col items-center justify-center">
+                                    <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Save </button>
+                                    <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Edit </button>
+                                    <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Delete </button>
+                                </div>
+                            </td>
 
 
 
 
-                </tr>
+                        </tr>
+                    </form>
                 @endforeach
                 {{-- table row 1 --}}
 
