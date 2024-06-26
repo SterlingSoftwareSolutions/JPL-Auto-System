@@ -14,6 +14,7 @@ class Part extends Model
         'category_id',
         'component_id',
         'part_number',
+        'price',
         'supplier',
         'upload_part_image'
     ];

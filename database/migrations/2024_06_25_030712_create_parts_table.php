@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->string('part_number');
+            $table->string('price');
             $table->string('supplier');
             $table->string('upload_part_image')->nullable();
 

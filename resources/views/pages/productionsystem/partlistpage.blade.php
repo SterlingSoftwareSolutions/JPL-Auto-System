@@ -95,45 +95,29 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($bodyParts as $bodyPart )
+
                     <tbody>
                         <tr class="border-b border-black">
-
-
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-
-                            <td class="px-8 py-2">
+                            <td class="px-8 py-2">{{ $bodyPart->category->category_name }}</td>
+                            <td class="px-8 py-2">{{ $bodyPart->component->component_name }}</td>
+                            <td class="px-8 py-2">{{ $bodyPart->description }}</td>
+                            <td class="px-8 py-2">{{ $bodyPart->part_number }}</td>
+                            <td class="px-8 py-2 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg"
-                                    data-img-src="{{ asset('images/dimensions-and-weight.png') }}"
-                                    data-part-number="Part NO: 3641H">
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $bodyPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $bodyPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $bodyPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
-
-
-
-
+                            <td class="px-8 py-2">{{ $bodyPart->price }}</td>
+                            <td class="px-8 py-2">{{ $bodyPart->supplier }}</td>
                         </tr>
-                        <tr class="border-b border-black">
-
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
-
-
-
-                        </tr>
-
-
-
                     </tbody>
+                    @endforeach
                     {{-- body 1 end --}}
 
 
@@ -141,8 +125,6 @@
                 </table>
 
             </div>
-
-
 
 
 
@@ -178,41 +160,38 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($labourParts as $labourPart)
                     <tbody>
                         <tr class="gap-8 border-b border-black">
 
 
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-                            <td class="px-8 py-2">
+                            <td class="px-8 py-2">{{$labourPart->category->category_name}}</td>
+                            <td class="px-8 py-2">{{$labourPart->component->component_name}}</td>
+                            <td class="px-8 py-2">{{$labourPart->description}}</td>
+                            <td class="px-8 py-2">{{$labourPart->part_number}}</td>
+                            <td class="px-8 py-2 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg">
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $labourPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $labourPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $labourPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
+                            <td class="px-8 py-2">{{$labourPart->price}} </td>
+                            <td class="px-8 py-2">{{$labourPart->supplier}}</td>
 
 
 
 
                         </tr>
-                        <tr class="border-b border-black">
 
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
-
-
-
-                        </tr>
 
 
 
                     </tbody>
+                    @endforeach
                     {{-- body 1 end --}}
 
 
@@ -253,33 +232,30 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($powerPlantParts as $powerPlantPart)
+
+
                     <tbody>
                         <tr class="gap-8 border-b border-black">
 
 
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-                            <td class="px-8 py-2">
+                            <td class="px-8 py-2">{{$powerPlantPart->category->category_name}}</td>
+                            <td class="px-8 py-2">{{$powerPlantPart->component->component_name}}</td>
+                            <td class="px-8 py-2">{{$powerPlantPart->description}}</td>
+                            <td class="px-8 py-2">{{$powerPlantPart->part_number}}</td>
+                            <td class="px-8 py-2 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg">
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $powerPlantPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $powerPlantPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $powerPlantPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
+                            <td class="px-8 py-2">{{$powerPlantPart->price}} </td>
+                            <td class="px-8 py-2">{{$powerPlantPart->supplier}}</td>
 
-
-
-
-                        </tr>
-                        <tr class="border-b border-black">
-
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
 
 
 
@@ -288,6 +264,8 @@
 
 
                     </tbody>
+                    @endforeach
+
                     {{-- body 1 end --}}
 
 
@@ -329,34 +307,30 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($suspensionParts as $suspensionPart)
+
                     <tbody>
                         <tr class="gap-8 border-b border-black">
 
 
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-                            <td class="px-8 py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                    fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16"
-                                    id="myImg">
+                            <td class="px-8 py-2">{{$suspensionPart->category->category_name}}</td>
+                            <td class="px-8 py-2">{{$suspensionPart->component->component_name}}</td>
+                            <td class="px-8 py-2">{{$suspensionPart->description}}</td>
+                            <td class="px-8 py-2">{{$suspensionPart->part_number}}</td>
+                            <td class="px-8 py-2 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $suspensionPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $suspensionPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $suspensionPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
+                            </td>
+                            <td class="px-8 py-2">{{$suspensionPart->price}}</td>
+                            <td class="px-8 py-2">{{$suspensionPart->supplier}}</td>
 
-
-
-
-                        </tr>
-                        <tr class="border-b border-black">
-
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
 
 
 
@@ -365,6 +339,8 @@
 
 
                     </tbody>
+                    @endforeach
+
                     {{-- body 1 end --}}
 
 
@@ -404,42 +380,40 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($wheelsTyresParts as $wheelsTyresPart)
+
                     <tbody>
                         <tr class="gap-8 border-b border-black">
 
 
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-                            <td class="px-8 py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                    fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16"
-                                    id="myImg">
+                            <td class="px-8 py-2">{{$wheelsTyresPart->category->category_name}}</td>
+                            <td class="px-8 py-2">{{$wheelsTyresPart->component->component_name}}</td>
+                            <td class="px-8 py-2">{{$wheelsTyresPart->description}}</td>
+                            <td class="px-8 py-2">{{$wheelsTyresPart->part_number}}</td>
+                            <td class="px-8 py-2 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $wheelsTyresPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $wheelsTyresPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $wheelsTyresPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
+                            <td class="px-8 py-2"> {{$wheelsTyresPart->price}} </td>
+                            <td class="px-8 py-2">{{$wheelsTyresPart->supplier}}</td>
 
 
 
 
                         </tr>
-                        <tr class="border-b border-black">
 
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
-
-
-
-                        </tr>
 
 
 
                     </tbody>
+                    @endforeach
+
                     {{-- body 1 end --}}
 
 
@@ -479,34 +453,29 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($interiorParts as $interiorPart)
+
                     <tbody>
                         <tr class="gap-8 border-b border-black">
 
 
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-                            <td class="px-8 py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                    fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16"
-                                    id="myImg">
+                            <td class="px-8 py-2">{{$interiorPart->category->category_name}}</td>
+                            <td class="px-8 py-2">{{$interiorPart->component->component_name}}</td>
+                            <td class="px-8 py-2">{{$interiorPart->description}}</td>
+                            <td class="px-8 py-2">{{$interiorPart->part_number}}</td>
+                            <td class="px-8 py-2 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $interiorPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $interiorPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $interiorPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
+                            <td class="px-8 py-2">{{$interiorPart->price}}</td>
+                            <td class="px-8 py-2">{{$interiorPart->supplier}}</td>
 
-
-
-
-                        </tr>
-                        <tr class="border-b border-black">
-
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
 
 
 
@@ -515,6 +484,8 @@
 
 
                     </tbody>
+                    @endforeach
+
                     {{-- body 1 end --}}
 
 
@@ -555,42 +526,38 @@
 
 
                     {{-- body 1 --}}
+                    @foreach ($exteriorParts as $exteriorPart)
+
                     <tbody>
                         <tr class="gap-8 border-b border-black">
 
 
-                            <td class="px-8 py-2">Body</td>
-                            <td class="px-8 py-2">Complete Shell</td>
-                            <td class="px-8 py-2">RHD 67 Ford Mustang Fastback</td>
-                            <td class="px-8 py-2">3641H</td>
-                            <td class="px-8 py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                    fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16"
-                                    id="myImg">
+                            <td class="px-8 py-2">{{$exteriorPart->category->category_name}}</td>
+                            <td class="px-8 py-2">{{$exteriorPart->component->component_name}}</td>
+                            <td class="px-8 py-2">{{$exteriorPart->description}}</td>
+                            <td class="px-8 py-2">{{$exteriorPart->partnumber}}</td>
+                            <td class="px-8 py-2 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16" id="myImg-{{ $exteriorPart->id }}"
+                                    data-img-src="{{ asset('storage/PartImages/' . $exteriorPart->upload_part_image) }}"
+                                    data-part-number="Part NO: {{ $exteriorPart->part_number }}">
                                     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     <path
                                         d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                 </svg>
                             </td>
-                            <td class="px-8 py-2"> US$ 15,000.00 </td>
-                            <td class="px-8 py-2">TheBOG</td>
+                            <td class="px-8 py-2"> {{$exteriorPart->price}} </td>
+                            <td class="px-8 py-2">{{$exteriorPart->supplier}}</td>
 
 
 
 
                         </tr>
-                        <tr class="border-b border-black">
-
-                            <td class="px-8 py-2 border-l "></td>
-                            <td class="px-8 py-2">Hood</td>
-
-
-
-                        </tr>
-
 
 
                     </tbody>
+                    @endforeach
+
                     {{-- body 1 end --}}
 
 
@@ -600,7 +567,7 @@
 <div id="popupForm"
 class="fixed inset-0 flex items-start justify-center hidden bg-gray-800 bg-opacity-50 border popup">
 
-<div class="inset-0 w-7/12 p-6 border border-red-500 rounded-lg shadow-lg popup-content">
+<div class="inset-0 w-7/12 p-6 rounded-lg shadow-lg popup-content">
    <div class="flex flex-row items-center justify-between p-4 text-black bg-white border rounded-t-lg">
        <h4 class="text-xl font-semibold">Add Part</h4>
        <div class="flex items-center space-x-4">
@@ -659,6 +626,14 @@ class="fixed inset-0 flex items-start justify-center hidden bg-gray-800 bg-opaci
            </div>
 
            <div class="flex items-center space-x-4">
+            <label for="link" class="w-32 font-semibold">Price($)<span
+                    class="text-red-500">*</span></label>
+            <input type="text" id="price" name="price"
+                   class="flex-1 p-2 border border-gray-300 rounded">
+        </div>
+
+
+           <div class="flex items-center space-x-4">
                <label for="link" class="w-32 font-semibold">Supplier <span
                        class="text-red-500">*</span></label>
                <input type="text" id="supplier" name="supplier"
@@ -698,30 +673,27 @@ class="fixed inset-0 flex items-start justify-center hidden bg-gray-800 bg-opaci
             <script src="{{ asset('js/customerlist.js') }}" defer></script>
 
 
+
             <script>
-                // Get the modal
-                var modal = document.getElementById("myModal");
+                // Get all SVG elements
+                document.querySelectorAll('[id^="myImg-"]').forEach(function(img) {
+                    img.addEventListener('click', function() {
+                        var modal = document.getElementById("myModal");
+                        var modalImg = document.getElementById("img01");
+                        var partNumberText = document.getElementById("partNumber");
 
-                // Get the SVG element
-                var img = document.getElementById("myImg");
-
-                // Get the modal image and part number elements
-                var modalImg = document.getElementById("img01");
-                var partNumberText = document.getElementById("partNumber");
-
-                // Set the onclick event for the SVG
-                img.onclick = function() {
-                    modal.style.display = "flex";
-                    modalImg.src = this.getAttribute("data-img-src");
-                    partNumberText.innerHTML = this.getAttribute("data-part-number");
-                }
+                        modal.style.display = "flex";
+                        modalImg.src = img.getAttribute("data-img-src");
+                        partNumberText.innerHTML = img.getAttribute("data-part-number");
+                    });
+                });
 
                 // Get the close button
                 var closeModal = document.getElementById("closeModal");
 
                 // Set the onclick event for the close button
                 closeModal.onclick = function() {
-                    modal.style.display = "none";
+                    document.getElementById("myModal").style.display = "none";
                 }
             </script>
 
