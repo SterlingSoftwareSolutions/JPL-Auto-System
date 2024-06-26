@@ -113,10 +113,13 @@ class PartController extends Controller
         return redirect()->route('partlistpage');
 
 
-
-
-
-
-
     }
+
+
+
+    public function getComponentsByCategory($categoryId)
+{
+    $components = PartComponent::where('category_id', $categoryId)->get();
+    return response()->json($components);
+}
 }
