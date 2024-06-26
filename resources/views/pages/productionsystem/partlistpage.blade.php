@@ -7,7 +7,7 @@
     <div class="flex flex-wrap">
         <div class="w-full max-h-screen overflow-y-auto bg-white md:w-[95%]">
             <link rel="stylesheet" href="{{ asset('css/partlist.css') }}">
-
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
             <style>
                 .modal {
@@ -89,7 +89,7 @@
                     @endphp
 
                     @php
-                    $previousComponentName = null;
+                        $previousComponentName = null;
                     @endphp
                     @foreach ($bodyParts as $bodyPart)
                         <tbody>
@@ -102,14 +102,15 @@
                                 @else
                                     <td class="px-8 py-2"></td>
                                 @endif
-                                @if($previousComponentName !== $bodyPart->component->component_name)
-                                <td class="px-8 py-2">{{ $bodyPart->component->component_name }}</td>
-                                @php
-                                $previousComponentName = $bodyPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                @if ($previousComponentName !== $bodyPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $bodyPart->component->component_name }}</td>
+                                    @php
+                                        $previousComponentName = $bodyPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
                                 <td class="px-8 py-2">{{ $bodyPart->description }}</td>
                                 <td class="px-8 py-2">{{ $bodyPart->part_number }}</td>
                                 <td class="px-8 py-2">
@@ -171,7 +172,7 @@
 
 
                     @php
-                    $previousComponentName = null;
+                        $previousComponentName = null;
                     @endphp
 
                     {{-- body 1 --}}
@@ -187,15 +188,15 @@
                                 @else
                                     <td class="px-8 py-2"></td>
                                 @endif
-                                @if($previousComponentName !== $labourPart->component->component_name)
-
-                                <td class="px-8 py-2">{{ $labourPart->component->component_name }}</td>
-                                @php
-                                $previousComponentName = $labourPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                @if ($previousComponentName !== $labourPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $labourPart->component->component_name }}</td>
+                                    @php
+                                        $previousComponentName = $labourPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
                                 <td class="px-8 py-2">{{ $labourPart->description }}</td>
                                 <td class="px-8 py-2">{{ $labourPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
@@ -267,7 +268,7 @@
                     @endphp
 
                     @php
-                    $previousComponentName = null;
+                        $previousComponentName = null;
                     @endphp
 
 
@@ -287,16 +288,16 @@
                                     <td class="px-8 py-2"></td>
                                 @endif
 
-                                @if($previousComponentName !== $powerPlantPart->component->component_name)
+                                @if ($previousComponentName !== $powerPlantPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $powerPlantPart->component->component_name }}</td>
 
-                                <td class="px-8 py-2">{{ $powerPlantPart->component->component_name }}</td>
-
-                                @php
-                                $previousComponentName = $powerPlantPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                    @php
+                                        $previousComponentName = $powerPlantPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
                                 <td class="px-8 py-2">{{ $powerPlantPart->description }}</td>
                                 <td class="px-8 py-2">{{ $powerPlantPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
@@ -367,7 +368,7 @@
                     @endphp
 
                     @php
-                    $previousComponentName = null;
+                        $previousComponentName = null;
                     @endphp
 
 
@@ -386,15 +387,15 @@
                                     <td class="px-8 py-2"></td>
                                 @endif
 
-                                @if($previousComponentName !== $suspensionPart->component->component_name)
-
-                                <td class="px-8 py-2">{{ $suspensionPart->component->component_name }}</td>
-                                @php
-                                $previousComponentName = $suspensionPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                @if ($previousComponentName !== $suspensionPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $suspensionPart->component->component_name }}</td>
+                                    @php
+                                        $previousComponentName = $suspensionPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
                                 <td class="px-8 py-2">{{ $suspensionPart->description }}</td>
                                 <td class="px-8 py-2">{{ $suspensionPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
@@ -464,7 +465,7 @@
                     @endphp
 
                     @php
-                    $previousComponentName = null;
+                        $previousComponentName = null;
                     @endphp
 
 
@@ -484,16 +485,16 @@
                                     <td class="px-8 py-2"></td>
                                 @endif
 
-                                @if($previousComponentName !== $wheelsTyresPart->component->component_name)
+                                @if ($previousComponentName !== $wheelsTyresPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $wheelsTyresPart->component->component_name }}</td>
 
-                                <td class="px-8 py-2">{{ $wheelsTyresPart->component->component_name }}</td>
-
-                                @php
-                                $previousComponentName = $wheelsTyresPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                    @php
+                                        $previousComponentName = $wheelsTyresPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
 
                                 <td class="px-8 py-2">{{ $wheelsTyresPart->description }}</td>
                                 <td class="px-8 py-2">{{ $wheelsTyresPart->part_number }}</td>
@@ -564,7 +565,7 @@
                     @endphp
 
                     @php
-                    $previousComponentName = null;
+                        $previousComponentName = null;
                     @endphp
 
                     {{-- body 1 --}}
@@ -581,16 +582,16 @@
                                     <td class="px-8 py-2"></td>
                                 @endif
 
-                                @if($previousComponentName !== $interiorPart->component->component_name)
+                                @if ($previousComponentName !== $interiorPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $interiorPart->component->component_name }}</td>
 
-                                <td class="px-8 py-2">{{ $interiorPart->component->component_name }}</td>
-
-                                @php
-                                $previousComponentName = $interiorPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                    @php
+                                        $previousComponentName = $interiorPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
 
                                 <td class="px-8 py-2">{{ $interiorPart->description }}</td>
                                 <td class="px-8 py-2">{{ $interiorPart->part_number }}</td>
@@ -662,9 +663,9 @@
                     @endphp
 
 
-                        @php
+                    @php
                         $previousComponentName = null;
-                        @endphp
+                    @endphp
 
 
                     {{-- body 1 --}}
@@ -681,16 +682,16 @@
                                     <td class="px-8 py-2"></td>
                                 @endif
 
-                                @if($previousComponentName !== $exteriorPart->component->component_name)
+                                @if ($previousComponentName !== $exteriorPart->component->component_name)
+                                    <td class="px-8 py-2">{{ $exteriorPart->component->component_name }}</td>
 
-                                <td class="px-8 py-2">{{ $exteriorPart->component->component_name }}</td>
-
-                                @php
-                                $previousComponentName = $exteriorPart->component->component_name; // Update the previous component name
-                            @endphp
-                        @else
-                            <td class="px-8 py-2"></td> <!-- Display an empty cell if component name is the same as the previous one -->
-                        @endif
+                                    @php
+                                        $previousComponentName = $exteriorPart->component->component_name; // Update the previous component name
+                                    @endphp
+                                @else
+                                    <td class="px-8 py-2"></td>
+                                    <!-- Display an empty cell if component name is the same as the previous one -->
+                                @endif
                                 <td class="px-8 py-2">{{ $exteriorPart->description }}</td>
                                 <td class="px-8 py-2">{{ $exteriorPart->partnumber }}</td>
                                 <td class="px-8 py-2 ">
@@ -743,17 +744,10 @@
                                 <div class="flex items-center space-x-4">
                                     <label for="category" class="w-32 font-semibold">Category <span
                                             class="text-red-500">*</span></label>
-                                    <select id="category" name="category"
+                                    <select onchange="passcategory()" id="category" name="category"
                                         class="flex-1 p-2 border border-gray-300 rounded">
-                                        {{-- <option value="body" class="p-2 hover:bg-gray-100">Body</option>
-                   <option value="labour" class="p-2 hover:bg-gray-100">Labour</option>
-                   <optgroup label="Parts" class="font-bold text-gray-700">
-                       <option value="power-plant" class="p-2 hover:bg-gray-100">Power Plant</option>
-                       <option value="suspension" class="p-2 hover:bg-gray-100">Suspension</option>
-                       <option value="wheels-tyres" class="p-2 hover:bg-gray-100">Wheels &amp; Tyres</option>
-                       <option value="interior" class="p-2 hover:bg-gray-100">Interior</option>
-                       <option value="exterior" class="p-2 hover:bg-gray-100">Exterior</option>
-                   </optgroup> --}}
+                                        <option value=""selected disabled>Choose a Category</option>
+
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" class="p-2 hover:bg-gray-100">
                                                 {{ $category->category_name }}</option>
@@ -766,10 +760,7 @@
                                             class="text-red-500">*</span></label>
                                     <select id="type" name="component"
                                         class="flex-1 p-2 border border-gray-300 rounded">
-                                        @foreach ($components as $component)
-                                            <option value="{{ $component->id }}" class="p-2 hover:bg-gray-100">
-                                                {{ $component->component_name }}</option>
-                                        @endforeach
+                                        <option value=""selected disabled>Choose a Component</option>
                                     </select>
                                 </div>
 
@@ -856,6 +847,49 @@
                 // Set the onclick event for the close button
                 closeModal.onclick = function() {
                     document.getElementById("myModal").style.display = "none";
+                }
+
+
+
+                //componenet dtielas selction depend wit category _id
+                function passcategory() {
+                    var categoryId = document.getElementById('category').value;
+
+                    $.ajax({
+                        url: '/components/' + categoryId,
+                        type: 'GET',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            console.log(response);
+
+                            var componentDropdown = document.getElementById('type');
+
+                            // Clear existing options
+                            componentDropdown.innerHTML = '';
+
+                            for (var i = 0; i < componentDropdown.options.length; i++) {
+                                if (componentDropdown.options[i].value ===
+                                    type) { // assuming 'type' is defined elsewhere
+                                    componentDropdown.selectedIndex = i;
+                                    break;
+                                }
+                            }
+
+                            $.each(response, function(index, component) {
+                                console.log(component.component_name);
+                                // Append new options
+                                var option = document.createElement('option');
+                                option.value = component.id;
+                                option.text = component.component_name;
+                                componentDropdown.appendChild(option);
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error fetching components:', error);
+                        }
+                    });
                 }
             </script>
 

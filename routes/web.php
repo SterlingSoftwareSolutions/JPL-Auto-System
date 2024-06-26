@@ -91,4 +91,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/compliance/store', [ComplianceController::class, 'storeCompliance'])->name('compliance.store');
     Route::get('/compliance', [ComplianceController::class, 'showComplianceForm'])->name('compliancepage');
+
+
+    //ajax get category
+    Route::get('/components/{categoryId}', [PartController::class, 'getComponentsByCategory']);
+
 });
