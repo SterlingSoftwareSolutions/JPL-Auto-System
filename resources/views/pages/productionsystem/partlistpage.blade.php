@@ -61,8 +61,11 @@
 
                 <table class="w-full text-sm bg-white rounded shadow-md ">
                     <div class="flex">
-                        <div class="mt-5 ml-8">
-                            <button class="w-20 h-10 text-2xl font-bold text-white bg-black rounded-lg">Body</button>
+
+                        <div class="mx-4  px-4 w-auto bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                            <button class="text-white font-bold text-3xl">
+                               Body
+                            </button>
                         </div>
                         <div class="flex items-end justify-end flex-grow mt-5 mr-8">
                             <button id="openPopupBtn"
@@ -163,8 +166,11 @@
                 <table class="w-full text-sm bg-white rounded shadow-md ">
 
 
-                    <div class="mt-5 ml-8">
-                        <button class="h-10 text-2xl font-bold text-white bg-black rounded-lg w-30">Labour
+
+
+                    <div class="mx-4  px-4 w-40 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <button class="text-white font-bold text-3xl">
+                            Labour
                         </button>
                     </div>
 
@@ -266,8 +272,10 @@
                 <table class="w-full text-sm bg-white rounded shadow-md ">
 
 
-                    <div class="mt-5 ml-8">
-                        <button class="h-10 text-2xl font-bold text-white bg-black rounded-lg w-30">Parts - Power Plant
+
+                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <button class="text-white font-bold text-3xl">
+                            Parts - Power Plant
                         </button>
                     </div>
 
@@ -379,11 +387,13 @@
 
                 <table class="w-full text-sm bg-white rounded shadow-md ">
 
-
-                    <div class="mt-5 ml-8">
-                        <button class="h-10 text-2xl font-bold text-white bg-black rounded-lg w-30">Parts - Suspension
+                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <button class="text-white font-bold text-3xl">
+                            Parts - Suspension
                         </button>
                     </div>
+
+
 
                     <div class="mx-10">
 
@@ -488,11 +498,12 @@
 
                 <table class="w-full text-sm bg-white rounded shadow-md ">
 
-
-                    <div class="mt-5 ml-8">
-                        <button class="h-10 text-2xl font-bold text-white bg-black rounded-lg w-30">Parts - Wheels & Tyres
+                    <div class="mx-4  px-4 w-[420px] bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <button class="text-white font-bold text-3xl">
+                            Parts - Wheels & Tyres
                         </button>
                     </div>
+
 
                     <div class="mx-10">
 
@@ -600,10 +611,13 @@
                 <table class="w-full text-sm bg-white rounded shadow-md ">
 
 
-                    <div class="mt-5 ml-8">
-                        <button class="h-10 text-2xl font-bold text-white bg-black rounded-lg w-30">Parts - Interior
+                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <button class="text-white font-bold text-3xl">
+                            Parts - Interior
                         </button>
                     </div>
+
+
 
                     <div class="mx-10">
 
@@ -709,8 +723,10 @@
                 <table class="w-full text-sm bg-white rounded shadow-md ">
 
 
-                    <div class="mt-5 ml-8">
-                        <button class="text-2xl font-bold text-white bg-black rounded-lg w-35 h-30">Parts - Exterior
+
+                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <button class="text-white font-bold text-3xl">
+                            Parts - Exterior
                         </button>
                     </div>
 
