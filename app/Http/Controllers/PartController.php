@@ -48,7 +48,7 @@ class PartController extends Controller
 
 
         $suspensionParts = Part::whereHas('category', function($query) {
-            $query->where('category_name', 'Suspenstion');
+            $query->where('category_name', 'Suspension');
         })
         ->with(['category', 'component'])
         ->join('part_components', 'parts.component_id', '=', 'part_components.id')
