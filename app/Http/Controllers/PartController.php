@@ -17,26 +17,28 @@ class PartController extends Controller
 
         $bodyParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Body');
+
         })
         ->with(['category', 'component'])
         ->join('part_components', 'parts.component_id', '=', 'part_components.id')
         ->orderBy('part_components.component_name', 'asc')
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
-
 
         $labourParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Labour');
+
         })
         ->with(['category', 'component'])
         ->join('part_components', 'parts.component_id', '=', 'part_components.id')
         ->orderBy('part_components.component_name', 'asc')
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
+
 
         // Repeat for other categories
         $powerPlantParts = Part::whereHas('category', function($query) {
-            $query->where('category_name', 'Power Plant');
+            $query->where('category_name', 'Power Plants');
         })
         ->with(['category', 'component'])
         ->join('part_components', 'parts.component_id', '=', 'part_components.id')
@@ -44,8 +46,9 @@ class PartController extends Controller
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
 
+
         $suspensionParts = Part::whereHas('category', function($query) {
-            $query->where('category_name', 'Suspension');
+            $query->where('category_name', 'Suspenstion');
         })
         ->with(['category', 'component'])
         ->join('part_components', 'parts.component_id', '=', 'part_components.id')
@@ -89,7 +92,7 @@ class PartController extends Controller
 
 
     public function addpart(Request $request){
-        // dd($request);
+
 
         $partslist = new Part();
 
