@@ -25,6 +25,12 @@ class PartController extends Controller
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
 
+        //bodypart calculation
+        $bodyPartPriceTotal = $bodyParts->sum('price');
+
+        //end bodypart calculation
+
+
         $labourParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Labour');
 
@@ -34,6 +40,11 @@ class PartController extends Controller
         ->orderBy('part_components.component_name', 'asc')
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
+
+
+         //bodypart calculation
+         $labourPriceTotal = $labourParts->sum('price');
+         //end bodypart calculation
 
 
         // Repeat for other categories
@@ -46,6 +57,11 @@ class PartController extends Controller
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
 
+          //bodypart calculation
+          $powerPlantPriceTotal = $powerPlantParts->sum('price');
+          //end bodypart calculation
+
+
 
         $suspensionParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Suspension');
@@ -56,6 +72,10 @@ class PartController extends Controller
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
 
+          //bodypart calculation
+          $suspensionPriceTotal = $suspensionParts->sum('price');
+          //end bodypart calculation
+
         $wheelsTyresParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Wheels & Tyres');
         })
@@ -64,6 +84,10 @@ class PartController extends Controller
         ->orderBy('part_components.component_name', 'asc')
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
+
+           //bodypart calculation
+           $wheelsTyresPriceTotal = $wheelsTyresParts->sum('price');
+           //end bodypart calculation
 
         $interiorParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Interior');
@@ -74,6 +98,10 @@ class PartController extends Controller
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
 
+        //bodypart calculation
+        $interiorPriceTotal = $interiorParts->sum('price');
+        //end bodypart calculation
+
         $exteriorParts = Part::whereHas('category', function($query) {
             $query->where('category_name', 'Exterior');
         })
@@ -83,10 +111,15 @@ class PartController extends Controller
         ->select('parts.*') // To avoid ambiguity and select only parts columns
         ->get();
 
+        //bodypart calculation
+        $exteriorPriceTotal = $exteriorParts->sum('price');
+        //end bodypart calculation
+
         return view('pages.productionsystem.partlistpage', compact(
             'categories', 'components', 'bodyParts', 'labourParts',
             'powerPlantParts', 'suspensionParts', 'wheelsTyresParts',
-            'interiorParts', 'exteriorParts'
+            'interiorParts', 'exteriorParts', 'bodyPartPriceTotal', 'labourPriceTotal', 'powerPlantPriceTotal' ,
+            'suspensionPriceTotal' , 'wheelsTyresPriceTotal' , 'interiorPriceTotal', 'exteriorPriceTotal'
         ));
     }
 
