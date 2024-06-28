@@ -19,6 +19,12 @@
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            text-align: center; /* Center align all elements */
+        }
+
+        .logo {
+            width: 150px; /* Reduce the image size */
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -29,6 +35,11 @@
 
         p {
             margin-bottom: 20px;
+        }
+
+        .small-text {
+            font-size: 12px; /* Reduce the text size */
+            margin-bottom: 10px; /* Adjust margin as needed */
         }
 
         input[type="hidden"] {
@@ -59,9 +70,12 @@
 
 <body>
     <div class="container">
+        <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg" alt="JPL System Logo" class="logo">
+
         <h1>Forgot Password</h1>
         <p>Click the button below to reset your password:</p>
         <a href="{{ route('reset-password-page',['token' => $token]) }}" class="button">Reset Password</a>
+        <p class="small-text">If you did not request a password reset, you can safely ignore this email. Only a person with access to your email can reset your account password.</p>
     </div>
 </body>
 
