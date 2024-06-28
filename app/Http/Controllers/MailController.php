@@ -80,13 +80,13 @@ class MailController extends Controller
             // Calculate the difference in minutes
             $differenceInMinutes = $createdAt->diffInMinutes($now);
 
-            if ($differenceInMinutes <= 10) {
+            if ($differenceInMinutes <= 1) {
                 return view('auth.resetpassword', ['token' => $token, 'email' => $resetPassword->email]);
             } else {
-                return redirect()->route('forget-password')->withErrors(['token' => 'The reset password token has expired.']);
+                return view('email.unauthorizedtoke');
             }
         } else {
-            return redirect()->route('forget-password')->withErrors(['token' => 'Invalid token.']);
+            return view('email.unauthorizedtoke');
         }
     }
 
@@ -100,13 +100,19 @@ class MailController extends Controller
 
             // Calculate the difference in minutes
             $differenceInMinutes = $createdAt->diffInMinutes($now);
+            // dd($differenceInMinutes);
 
 
-            if ($differenceInMinutes <= 10) {
+
+            if ($differenceInMinutes <= 1) {
 
                 $pin = $request->pin1 . $request->pin2 . $request->pin3 . $request->pin4;
                 $confirmPin = $request->confirm_pin1 . $request->confirm_pin2 . $request->confirm_pin3 . $request->confirm_pin4;
             }
+            else {
+                return view('email.pageexpired');
+            }
+
 
 
             if($pin === $confirmPin){
