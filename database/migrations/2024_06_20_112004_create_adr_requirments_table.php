@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('adr_requirments', function (Blueprint $table) {
             $table->id();
-            $table->boolean('required');
+            $table->boolean('required')->nullable();
             $table->timestamps();
         });
     }

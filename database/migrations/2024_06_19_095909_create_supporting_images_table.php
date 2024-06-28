@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('supporting_images', function (Blueprint $table) {
             $table->id();
-            $table->string('image');  //BLOB
+            $table->string('image')->nullable();  //BLOB
             $table->timestamps();
         });
     }

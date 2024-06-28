@@ -170,21 +170,21 @@
 
                             <td class="px-2 py-2">
                                 <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
-                                    style="background-color: #F9F9F9" >
+                                    style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
                                     <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
                                     <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
-                                    <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
-                                        style="background-color: #F9F9F9">Browse</button>
+                                    <h3 class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md text-center"
+                                        style="background-color: #F9F9F9">Browse</h3>
                                     <input id="fileInput" type="file" class="hidden" name="document"/>
                                 </div>
                             </td>
                             <td class="px-2 py-2">
                                 <div class="flex flex-col items-center justify-center w-32 p-2 border-2 border-gray-300 border-dashed rounded-md cursor-pointer h-36 "
-                                    style="background-color: #F9F9F9">
+                                    style="background-color: #F9F9F9" onclick="document.getElementById('fileInput').click();">
                                     <h1 class="font-bold text-gray-500 text-md">Drop files here</h1>
                                     <h3 class="text-sm text-center text-gray-500" style=>drag and drop, or browse your file</h3>
-                                    <button class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md "
-                                        style="background-color: #F9F9F9">Browse</button>
+                                    <h3 class="w-20 py-1 mt-2 font-semibold text-gray-800 border rounded-md text-center"
+                                        style="background-color: #F9F9F9">Browse</h3>
                                     <input id="fileInput" type="file" class="hidden" name="image"/>
                                 </div>
                             </td>

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('evidence_type', function (Blueprint $table) {
             $table->id();
-            $table->boolean('ece');
-            $table->boolean('test');
-            $table->boolean('cta');
+            $table->boolean('ece')->nullable();;
+            $table->boolean('test')->nullable();;
+            $table->boolean('cta')->nullable();;
             $table->timestamps();
         });
     }
