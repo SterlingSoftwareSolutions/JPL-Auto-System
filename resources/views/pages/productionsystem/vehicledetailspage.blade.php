@@ -231,59 +231,6 @@
                 </div>
             </div>
 
-         
-
-
-                {{-- <nav class="flex items-center justify-center mb-4 border border-b">
-                    <a href="#" onclick="showTab('engine')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Engine
-                        &
-                        Performance</a>
-                    <a href="#" onclick="showTab('dimensions')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Dimensions
-                        &
-                        Weight</a>
-                    <a href="#" onclick="showTab('exterior')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black ">Exterior</a>
-                    <a href="#" onclick="showTab('interior')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Interior</a>
-                    <a href="#" onclick="showTab('features')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Features</a>
-                    <a href="#" onclick="showTab('safety')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Safety
-                        &
-                        Security</a>
-                    <a href="#" onclick="showTab('other')"
-                        class="inline-block px-4 py-2 text-gray-600 hover:text-black focus:text-black">Other</a>
-                </nav> --}}
-
-{{-- 
-                 <style>
-                    .tab-links {
-                        display: inline-block;
-                        padding: 10px 20px;
-                        cursor: pointer;
-                        border: 1px solid #ccc;
-                        margin-right: 10px; /* Adjust as needed */
-                        border-radius: 5px 5px 0 0; /* Rounded corners for top */
-                    }
-                    .tab-links:hover {
-                        background-color: #f0f0f0;
-                    }
-                    .tab-links.active {
-                        background-color: #fff; /* Active tab background color */
-                        border-bottom: 1px solid #fff; /* Hide bottom border when active */
-                    }
-                    .tab-content {
-                        display: none;
-                        padding: 20px;
-                        border: 1px solid #ccc;
-                        border-top: none; /* Remove top border for content */
-                        border-radius: 0 0 5px 5px; /* Rounded corners for bottom */
-                    }
-                </style> --}}
-
-
                 <div class="flex items-center justify-center w-full mb-4 bg-white border-b border-gray-300 tab">
                     <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none active" onclick="openTab(event, 'engine')">Engine</button>
                     <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'exterior')">Exterior</button>
@@ -294,8 +241,6 @@
                     <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'other')">Other</button>
                 </div>
 
-
-            
 
                 <div class="overflow-hidden bg-white shadow-md justify-between-5xl">
                     <div id="engine" class="hidden tab-content">
@@ -2209,26 +2154,7 @@
 
         </section>
 
-        {{-- <script>
-            function openTab(evt, tabName) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tab-content");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tab-links");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" border-b-2 border-black", "");
-                }
-                document.getElementById(tabName).style.display = "block";
-                evt.currentTarget.className += " border-b-2 border-black";
-            }
-    
-            //set the first tab to be displayed by default
-            document.addEventListener("DOMContentLoaded", function() {
-                document.querySelector(".tab-links").click();
-            });
-        </script> --}}
+
 
         
     </div>
