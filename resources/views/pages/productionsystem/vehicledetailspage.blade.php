@@ -453,7 +453,7 @@
                     <div id="exterior" class="hidden tab-content">
                         <!-- Dimensions & Weight content -->
                         <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/2">
+                            <div class="w-full md:w-1/3">
                                 <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
                                     class="w-full rounded shadow">
                             </div>
