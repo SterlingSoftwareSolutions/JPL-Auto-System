@@ -96,4 +96,12 @@ Route::middleware('auth:sanctum')->group(function () {
     //ajax get category
     Route::get('/components/{categoryId}', [PartController::class, 'getComponentsByCategory']);
 
+
+    //page expired view and page unauthorized toke page view
+    Route::get('/unauthorized', [MailController::class, 'unauthorizedtoke'])->name('unauthorized');
+    Route::get('/pageexpired', [MailController::class, 'pageexpired'])->name('pageexpired');
+
+
 });
+
+
