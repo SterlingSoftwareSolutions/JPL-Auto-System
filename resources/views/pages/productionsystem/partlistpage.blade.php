@@ -119,7 +119,7 @@
                                 <td class="px-8 py-2">{{ $bodyPart->part_number }}</td>
                                 <td class="px-8 py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000" viewBox="0 0 16 16"
                                         id="myImg-{{ $bodyPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $bodyPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $bodyPart->part_number }}">
@@ -128,6 +128,7 @@
                                             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </td>
+
                                 <td class="px-8 py-2">{{ $bodyPart->price }}</td>
                                 <td class="px-8 py-2">{{ $bodyPart->supplier }}</td>
                             </tr>
@@ -229,7 +230,7 @@
                                 <td class="px-8 py-2">{{ $labourPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image" viewBox="0 0 16 16"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image  text-black hover:text-orange-500 transition duration-1000" viewBox="0 0 16 16"
                                         id="myImg-{{ $labourPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $labourPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $labourPart->part_number }}">
@@ -340,7 +341,7 @@
                                 <td class="px-8 py-2">{{ $powerPlantPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $powerPlantPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $powerPlantPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $powerPlantPart->part_number }}">
@@ -452,7 +453,7 @@
                                 <td class="px-8 py-2">{{ $suspensionPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $suspensionPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $suspensionPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $suspensionPart->part_number }}">
@@ -565,7 +566,7 @@
                                 <td class="px-8 py-2">{{ $wheelsTyresPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $wheelsTyresPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $wheelsTyresPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $wheelsTyresPart->part_number }}">
@@ -676,7 +677,7 @@
                                 <td class="px-8 py-2">{{ $interiorPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $interiorPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $interiorPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $interiorPart->part_number }}">
@@ -789,7 +790,7 @@
                                 <td class="px-8 py-2">{{ $exteriorPart->part_number }}</td>
                                 <td class="px-8 py-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image"
+                                        fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $exteriorPart->id }}"
                                         data-img-src="{{ asset('storage/PartImages/' . $exteriorPart->upload_part_image) }}"
                                         data-part-number="Part NO: {{ $exteriorPart->part_number }}">
@@ -958,7 +959,7 @@
             <div id="myModal"
                 class="fixed inset-0 flex items-start justify-center hidden bg-gray-800 bg-opacity-50 popup">
                 <div class="inset-0 w-7/12 p-6 rounded-lg shadow-lg popup-contents">
-                    <div class="flex flex-row items-center justify-between p-4 text-black bg-white border rounded-t-lg">
+                    <div class="flex flex-row items-center justify-between p-4 text-black bg-white border-b">
                         <div class="flex items-center space-x-4">
                             <button onclick="closePopupImg()">
                                 <span
@@ -1000,9 +1001,9 @@
 
                 .popup-contents {
                     background-color: white;
-                    width: 70%;
+                    width: 40%;
                     max-width: auto;
-                    max-height: 80%;
+                    max-height: 70%;
                     overflow-y: auto;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                     border-radius: 8px;
