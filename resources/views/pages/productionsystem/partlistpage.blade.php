@@ -98,26 +98,26 @@
                         @foreach ($bodyParts as $bodyPart)
                             <tr class="border-b border-black">
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $bodyPart->category->category_name }}</td>
+                                    <td class="px-8 py-2   ">{{ $bodyPart->category->category_name }}</td>
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2  max-w-xs break-words"></td>
                                 @endif
                                 @if ($previousComponentName !== $bodyPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $bodyPart->component->component_name }}</td>
+                                    <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->component->component_name }}</td>
                                     @php
                                         $previousComponentName = $bodyPart->component->component_name; // Update the previous component
                                         // name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 "></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
-                                <td class="px-8 py-2">{{ $bodyPart->description }}</td>
-                                <td class="px-8 py-2">{{ $bodyPart->part_number }}</td>
-                                <td class="px-8 py-2">
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->description }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->part_number }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000" viewBox="0 0 16 16"
                                         id="myImg-{{ $bodyPart->id }}"
@@ -129,8 +129,8 @@
                                     </svg>
                                 </td>
 
-                                <td class="px-8 py-2">{{ $bodyPart->price }}</td>
-                                <td class="px-8 py-2">{{ $bodyPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->price }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->supplier }}</td>
                             </tr>
                         @endforeach
 
@@ -209,26 +209,26 @@
                             <tr class="gap-8 border-b border-black">
 
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $labourPart->category->category_name }}</td>
+                                    <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->category->category_name }}</td>
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2  max-w-xs break-words"></td>
                                 @endif
                                 @if ($previousComponentName !== $labourPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $labourPart->component->component_name }}</td>
+                                    <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->component->component_name }}</td>
                                     @php
                                         $previousComponentName = $labourPart->component->component_name; // Update the previous
                                         // component name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2  max-w-xs break-words"></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
-                                <td class="px-8 py-2">{{ $labourPart->description }}</td>
-                                <td class="px-8 py-2">{{ $labourPart->part_number }}</td>
-                                <td class="px-8 py-2 ">
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->description }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->part_number }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image  text-black hover:text-orange-500 transition duration-1000" viewBox="0 0 16 16"
                                         id="myImg-{{ $labourPart->id }}"
@@ -239,8 +239,8 @@
                                             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </td>
-                                <td class="px-8 py-2">{{ $labourPart->price }} </td>
-                                <td class="px-8 py-2">{{ $labourPart->supplier }}</td>
+                                <td class="px-8 py-2 ">{{ $labourPart->price }} </td>
+                                <td class="px-8 py-2 ">{{ $labourPart->supplier }}</td>
 
 
 
@@ -317,29 +317,29 @@
                             <tr class="gap-8 border-b border-black">
 
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $powerPlantPart->category->category_name }}</td>
+                                    <td class="">{{ $powerPlantPart->category->category_name }}</td>
 
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class=""></td>
                                 @endif
 
                                 @if ($previousComponentName !== $powerPlantPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $powerPlantPart->component->component_name }}</td>
+                                    <td class="">{{ $powerPlantPart->component->component_name }}</td>
 
                                     @php
                                         $previousComponentName = $powerPlantPart->component->component_name; // Update the previous
                                         // component name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class=""></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
-                                <td class="px-8 py-2">{{ $powerPlantPart->description }}</td>
-                                <td class="px-8 py-2">{{ $powerPlantPart->part_number }}</td>
-                                <td class="px-8 py-2 ">
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->description }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->part_number }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $powerPlantPart->id }}"
@@ -350,8 +350,8 @@
                                             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </td>
-                                <td class="px-8 py-2">{{ $powerPlantPart->price }} </td>
-                                <td class="px-8 py-2">{{ $powerPlantPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->price }} </td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->supplier }}</td>
 
 
 
@@ -430,28 +430,28 @@
                             <tr class="gap-8 border-b border-black">
 
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $suspensionPart->category->category_name }}</td>
+                                    <td class="px-8 py-2  max-w-xs break-words">{{ $suspensionPart->category->category_name }}</td>
 
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2  max-w-xs break-words"></td>
                                 @endif
 
                                 @if ($previousComponentName !== $suspensionPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $suspensionPart->component->component_name }}</td>
+                                    <td class="px-8 py-2  max-w-xs break-words">{{ $suspensionPart->component->component_name }}</td>
                                     @php
                                         $previousComponentName = $suspensionPart->component->component_name; // Update the previous
                                         // component name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2  max-w-xs break-words"></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
-                                <td class="px-8 py-2">{{ $suspensionPart->description }}</td>
-                                <td class="px-8 py-2">{{ $suspensionPart->part_number }}</td>
-                                <td class="px-8 py-2 ">
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $suspensionPart->description }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $suspensionPart->part_number }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $suspensionPart->id }}"
@@ -463,8 +463,8 @@
                                     </svg>
                                 </td>
                                 </td>
-                                <td class="px-8 py-2">{{ $suspensionPart->price }}</td>
-                                <td class="px-8 py-2">{{ $suspensionPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->price }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->supplier }}</td>
 
 
 
@@ -541,30 +541,30 @@
                             <tr class="gap-8 border-b border-black">
 
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $wheelsTyresPart->category->category_name }}</td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->category->category_name }}</td>
 
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"></td>
                                 @endif
 
                                 @if ($previousComponentName !== $wheelsTyresPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $wheelsTyresPart->component->component_name }}</td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->component->component_name }}</td>
 
                                     @php
                                         $previousComponentName = $wheelsTyresPart->component->component_name; // Update the previous
                                         // component name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
 
-                                <td class="px-8 py-2">{{ $wheelsTyresPart->description }}</td>
-                                <td class="px-8 py-2">{{ $wheelsTyresPart->part_number }}</td>
-                                <td class="px-8 py-2 ">
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->description }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->part_number }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $wheelsTyresPart->id }}"
@@ -575,8 +575,8 @@
                                             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </td>
-                                <td class="px-8 py-2"> {{ $wheelsTyresPart->price }} </td>
-                                <td class="px-8 py-2">{{ $wheelsTyresPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"> {{ $wheelsTyresPart->price }} </td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->supplier }}</td>
 
 
 
@@ -653,29 +653,29 @@
                             <tr class="gap-8 border-b border-black">
 
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $interiorPart->category->category_name }}</td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->category->category_name }}</td>
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"></td>
                                 @endif
 
                                 @if ($previousComponentName !== $interiorPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $interiorPart->component->component_name }}</td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->component->component_name }}</td>
 
                                     @php
                                         $previousComponentName = $interiorPart->component->component_name; // Update the previous
                                         // component name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
 
-                                <td class="px-8 py-2">{{ $interiorPart->description }}</td>
-                                <td class="px-8 py-2">{{ $interiorPart->part_number }}</td>
-                                <td class="px-8 py-2 ">
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->description }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->part_number }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $interiorPart->id }}"
@@ -686,8 +686,8 @@
                                             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </td>
-                                <td class="px-8 py-2">{{ $interiorPart->price }}</td>
-                                <td class="px-8 py-2">{{ $interiorPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->price }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->supplier }}</td>
 
 
 
@@ -767,28 +767,28 @@
                             <tr class="gap-8 border-b border-black">
 
                                 @if ($showCategory)
-                                    <td class="px-8 py-2">{{ $exteriorPart->category->category_name }}</td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->category->category_name }}</td>
                                     @php
                                         $showCategory = false;
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"></td>
                                 @endif
 
                                 @if ($previousComponentName !== $exteriorPart->component->component_name)
-                                    <td class="px-8 py-2">{{ $exteriorPart->component->component_name }}</td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->component->component_name }}</td>
 
                                     @php
                                         $previousComponentName = $exteriorPart->component->component_name; // Update the previous
                                         // component name
                                     @endphp
                                 @else
-                                    <td class="px-8 py-2"></td>
+                                    <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"></td>
                                     <!-- Display an empty cell if component name is the same as the previous one -->
                                 @endif
-                                <td class="px-8 py-2">{{ $exteriorPart->description }}</td>
-                                <td class="px-8 py-2">{{ $exteriorPart->part_number }}</td>
-                                <td class="px-8 py-2 ">
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->description }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->part_number }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         fill="currentColor" class="w-12 h-12 cursor-pointer bi bi-image text-black hover:text-orange-500 transition duration-1000"
                                         viewBox="0 0 16 16" id="myImg-{{ $exteriorPart->id }}"
@@ -799,8 +799,8 @@
                                             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                                     </svg>
                                 </td>
-                                <td class="px-8 py-2"> {{ $exteriorPart->price }} </td>
-                                <td class="px-8 py-2">{{ $exteriorPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"> {{ $exteriorPart->price }} </td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->supplier }}</td>
 
 
 
