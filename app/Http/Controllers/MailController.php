@@ -140,10 +140,17 @@ class MailController extends Controller
 
 
         }
-
-
-
-
 }
 }
+
+
+public function unauthorizedtoke(){
+    return view('email.unauthorizedtoke');
+}
+
+ public function pageexpired(){
+    return view('email.pageexpired');
+        }
+
+
 }
