@@ -74,7 +74,7 @@ php artisan db:seed --class=AdrTableSeeder
 
 ## FTP Details
 
-FTP Password :  Nwu~OjGah91~
-FTP Username: jpl@jplauto.com.au
+FTP Password :  SsC+aGX7;TJb
+FTP Username: jpl@staging.jplauto.com.au
 FTP server: ftp.jplauto.com.au
 FTP & explicit FTPS port:  21
