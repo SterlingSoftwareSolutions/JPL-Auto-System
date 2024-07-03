@@ -71,3 +71,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 php artisan db:seed --class=CategorySeeder 
 php artisan db:seed --class=ComponentSeeder
 php artisan db:seed --class=AdrTableSeeder
+
+## FTP Details
+
+FTP Password :  Nwu~OjGah91~
+FTP Username: jpl@jplauto.com.au
+FTP server: ftp.jplauto.com.au
+FTP & explicit FTPS port:  21
