@@ -81,21 +81,20 @@
     <div class="border border-red-500" style="background-color: #f9f9f9; ">
 
 
-<div class="mx-5 rounded-3xl mt-10 bg-white">
 
+<div style="background-color: #f9f9f9; border: 1px solid #f9f9f9;">
 
+    <div class=" h-screen   mt-10"  style="background-color: #F9F9F9">
 
-    <div class="mt-5 h-screen ">
-
-        <div class="w-12/12 mx-4 rounded-lg"  >
+        <div class="w-12/12   mx-4 rounded-3xl  "  style="background-color: #FFFFFF">
             <div class="h-1/3">
 
                 <!-- Tables -->
                 <div class="tables-container">
 
                     <table id="table1" class="text-sm text-left divide-y divide-gray-200 tableee">
-                        <thead class="text-xs text-gray-700 uppercase ">
-                            <tr class="border-b-4 border-gray-900">
+                        <thead class="text-xs text-gray-700 uppercase   ">
+                            <tr class="border-b-4 border-gray-900 ">
                                 <th scope="col" class="px-2 py-2">
                                     ADR
                                 </th>
@@ -564,5 +563,6 @@
 </div>
 
 </div>
+
 
 @endsection
