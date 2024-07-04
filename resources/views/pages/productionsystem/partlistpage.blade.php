@@ -3,9 +3,12 @@
 @section('content')
     @include('components.landingpagenavbar')
 
+<div style="background-color: #f9f9f9; border: 1px solid #f9f9f9;">
 
-    <div class="flex flex-wrap">
-        <div class="w-full max-h-screen overflow-y-auto bg-white md:w-[95%]">
+  <div class="" style="background-color:">
+
+    <div class="flex flex-wrap  mt-10 mx-5 bg-white rounded-3xl py-4">
+        <div class="w-full max-h-screen overflow-y-auto  md:w-[95%]  ">
             <link rel="stylesheet" href="{{ asset('css/partlist.css') }}">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -59,15 +62,15 @@
 
             <div class="mx-10">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
-                    <div class="flex">
+                <table class="w-full text-sm bg-white rounded  ">
+                    <div class="flex ">
 
-                        <div class="mx-4  px-4 w-auto bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                        <div class=" px-4 w-auto bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
                             <button class="text-white font-bold text-3xl">
                                Body
                             </button>
                         </div>
-                        <div class="flex items-end justify-end flex-grow mt-5 mr-8">
+                        <div class="flex items-end justify-end flex-grow mt-5 ">
                             <button id="openPopupBtn"
                                 class="h-10 px-6 text-sm font-bold text-white bg-gray-500 rounded-sm">+ ADD PART</button>
                         </div>
@@ -164,12 +167,12 @@
 
             <div class="mx-10 ">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
+                <table class="w-full text-sm bg-white rounded  ">
 
 
 
 
-                    <div class="mx-4  px-4 w-40 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                    <div class="px-4 w-40 bg-black text-start flex  rounded-md h-12 mt-5">
                         <button class="text-white font-bold text-3xl">
                             Labour
                         </button>
@@ -270,11 +273,11 @@
 
             <div class="mx-10 ">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
+                <table class="w-full text-sm bg-white rounded  ">
 
 
 
-                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                    <div class=" px-4 w-80 bg-black text-start flex  rounded-md h-12 mt-5">
                         <button class="text-white font-bold text-3xl">
                             Parts - Power Plant
                         </button>
@@ -386,9 +389,9 @@
 
             <div class="mx-10 ">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
+                <table class="w-full text-sm bg-white rounded  ">
 
-                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                    <div class=" px-4 w-80 bg-black text-start flex  rounded-md h-12 mt-5">
                         <button class="text-white font-bold text-3xl">
                             Parts - Suspension
                         </button>
@@ -497,9 +500,9 @@
 
             <div class="mx-10 ">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
+                <table class="w-full text-sm bg-white rounded  ">
 
-                    <div class="mx-4  px-4 w-[420px] bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                    <div class=" px-4 w-[420px] bg-black text-start flex rounded-md h-12 mt-5">
                         <button class="text-white font-bold text-3xl">
                             Parts - Wheels & Tyres
                         </button>
@@ -609,10 +612,10 @@
 
             <div class="mx-10 ">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
+                <table class="w-full text-sm bg-white rounded  ">
 
 
-                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                    <div class=" px-4 w-80 bg-black text-start flex  rounded-md h-12 mt-5">
                         <button class="text-white font-bold text-3xl">
                             Parts - Interior
                         </button>
@@ -721,11 +724,11 @@
 
             <div class="mx-10 ">
 
-                <table class="w-full text-sm bg-white rounded shadow-md ">
+                <table class="w-full text-sm bg-white rounded  ">
 
 
 
-                    <div class="mx-4  px-4 w-80 bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
+                    <div class="px-4 w-80 bg-black text-start flex  rounded-md h-12 mt-5">
                         <button class="text-white font-bold text-3xl">
                             Parts - Exterior
                         </button>
@@ -1122,4 +1125,8 @@
 
 
         </div>
+    </div>
+  </div>
+</div>
+
     @endsection
