@@ -78,10 +78,16 @@
     </style>
 
     </style>
+    <div class="border border-red-500" style="background-color: #f9f9f9; ">
 
-    <div class=" h-screen"  style="background-color: #F9F9F9">
 
-        <div class="w-12/12   mx-4 rounded-lg  "  style="background-color: #FFFFFF">
+<div class="mx-5 rounded-3xl mt-10 bg-white">
+
+
+
+    <div class="mt-5 h-screen ">
+
+        <div class="w-12/12 mx-4 rounded-lg"  >
             <div class="h-1/3">
 
                 <!-- Tables -->
@@ -553,5 +559,10 @@
 
 
     </div>
+
+
+</div>
+
+</div>
 
 @endsection

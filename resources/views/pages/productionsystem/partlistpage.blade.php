@@ -3,7 +3,7 @@
 @section('content')
     @include('components.landingpagenavbar')
 
-<div style="background-color: #f9f9f9; border: 1px solid #f9f9f9;">
+<div style="background-color: #f9f9f9; border: 1px solid #f9f9f9;"> 
 
   <div class="" style="background-color:">
 
