@@ -5,11 +5,87 @@
 
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<div>
+
+
+<style>
+    @media (max-width: 1366px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1440px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+
+    .tableee {
+        width: 80%;
+        /* Adjust the percentage as needed */
+        margin: auto;
+        /* Center the table horizontally */
+    }
+
+    /* Media queries for adjusting table width on smaller screens */
+    @media (max-width: 1366px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1366px) {
+        .tableee {
+            width: 95%;
+        }
+    }
+
+
+    @media (max-width: 1920px) {
+        .tableee {
+            width: 95%;
+        }
+    }
+
+    .tableee {
+        width: 95%;
+        /* Adjust the percentage as needed */
+        margin: auto;
+        /* Center the table horizontally */
+    }
+
+    @media (max-width: 1366px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+
+    /* For smaller resolutions like 1024x768 */
+    @media (max-width: 1024px) {
+        .tableee {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="">
     <div class="container mx-auto">
         <div class="flex flex-wrap">
             <!-- vehical details  table  -->
-            <div class="w-full p-10 xl:w-5/12">
+            <div class="w-full p-10 rounded bg-gray xl:w-5/12">
                 {{-- <table class="bg-white rounded shadow-md md:text-sm"> --}}
                     <table class="min-w-full text-sm bg-white">
 
@@ -19,7 +95,7 @@
                                 <th class="px-8 py- text-start">Vehicle Information</th>
                                 <th class="px-8 py-6" colspan="2">Details</th>
                             </tr>
-                            <tr class="border-b-4 border-transparent">
+                            <tr class="py-8 border-b-4 border-transparent">
 
                                 <th class="px-4 py-2"></th>
                                 <th class="px-4 py-2"></th>
@@ -27,86 +103,91 @@
                                 <th class="px-4 py-2">Variant 2</th>
                             </tr>
                         </thead>
-                        @php
-                        $vehicleInfo = [
-                        ['id' => '01.', 'label' => 'Vehicle Make', 'variant1' => 'TBD', 'variant2' => ''],
-                        ['id' => '02.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => ''],
-                        [
-                        'id' => '03.',
-                        'label' => 'Body Shape (NSW Body Code/Shape)',
-                        'variant1' => 'COUPE COUPE',
-                        'variant2' => '',
-                        ],
-                        [
-                        'id' => '04.',
-                        'label' => 'Number of Side Doors',
-                        'variant1' => '2',
-                        'variant2' => '',
-                        ],
-                        [
-                        'id' => '05.',
-                        'label' => 'Number of Rear Doors',
-                        'variant1' => '0',
-                        'variant2' => '',
-                        ],
-                        ['id' => '06.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '07.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '08.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '09.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => ''],
-                        [
-                        'id' => '10.',
-                        'label' => 'Body Shape (NSW Body Code/Shape)',
-                        'variant1' => 'COUPE COUPE',
-                        'variant2' => '',
-                        ],
-                        [
-                        'id' => '11.',
-                        'label' => 'Number of Side Doors',
-                        'variant1' => '2',
-                        'variant2' => '',
-                        ],
-                        [
-                        'id' => '12.',
-                        'label' => 'Number of Rear Doors',
-                        'variant1' => '0',
-                        'variant2' => '',
-                        ],
-                        ['id' => '13.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '14.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '15.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                        [
-                        'id' => '16.',
-                        'label' => 'Body Shape (NSW Body Code/Shape)',
-                        'variant1' => 'COUPE COUPE',
-                        'variant2' => '',
-                        ],
-                        [
-                        'id' => '17.',
-                        'label' => 'Number of Side Doors',
-                        'variant1' => '2',
-                        'variant2' => '',
-                        ],
-                        [
-                        'id' => '18.',
-                        'label' => 'Number of Rear Doors',
-                        'variant1' => '0',
-                        'variant2' => '',
-                        ],
-                        ['id' => '19.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '20.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                        ['id' => '21.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                        ];
-                        @endphp
-                        <tbody>
-                            @foreach ($vehicleInfo as $index => $info)
-                            <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="px-2 py-2">{{ $info['id'] }}</td>
-                                <td class="px-2 py-2">{{ $info['label'] }}</td>
-                                <td class="px-2 py-2">{{ $info['variant1'] }}</td>
-                                <td class="px-2 py-2">{{ $info['variant2'] }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+
+                        <td class="px-2 py-4">
+
+                            @php
+                            $vehicleInfo = [
+                            ['id' => '01.', 'label' => 'Vehicle Make', 'variant1' => 'TBD', 'variant2' => ''],
+                            ['id' => '02.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => ''],
+                            [
+                            'id' => '03.','label' => 'Body Shape (NSW Body Code/Shape)',
+                            'variant1' => 'COUPE COUPE',
+                            'variant2' => '',
+                            ],
+                            [
+                            'id' => '04.',
+                            'label' => 'Number of Side Doors',
+                            'variant1' => '2',
+                            'variant2' => '',
+                            ],
+                            [
+                            'id' => '05.',
+                            'label' => 'Number of Rear Doors',
+                            'variant1' => '0',
+                            'variant2' => '',
+                            ],
+                            ['id' => '06.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '07.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '08.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '09.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => ''],
+                            [
+                            'id' => '10.',
+                            'label' => 'Body Shape (NSW Body Code/Shape)',
+                            'variant1' => 'COUPE COUPE',
+                            'variant2' => '',
+                            ],
+                            [
+                            'id' => '11.',
+                            'label' => 'Number of Side Doors',
+                            'variant1' => '2',
+                            'variant2' => '',
+                            ],
+                            [
+                            'id' => '12.',
+                            'label' => 'Number of Rear Doors',
+                            'variant1' => '0',
+                            'variant2' => '',
+                            ],
+                            ['id' => '13.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '14.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '15.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
+                            [
+                            'id' => '16.',
+                            'label' => 'Body Shape (NSW Body Code/Shape)',
+                            'variant1' => 'COUPE COUPE',
+                            'variant2' => '',
+                            ],
+                            [
+                            'id' => '17.',
+                            'label' => 'Number of Side Doors',
+                            'variant1' => '2',
+                            'variant2' => '',
+                            ],
+                            [
+                            'id' => '18.',
+                            'label' => 'Number of Rear Doors',
+                            'variant1' => '0',
+                            'variant2' => '',
+                            ],
+                            ['id' => '19.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '20.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
+                            ['id' => '21.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
+                            ];
+                            @endphp
+                            <tbody>
+                                @foreach ($vehicleInfo as $index => $info)
+                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }}">
+                                    <td class="px-2 py-2">{{ $info['id'] }}</td>
+                                    <td class="px-2 py-2">{{ $info['label'] }}</td>
+                                    <td class="px-2 py-2">{{ $info['variant1'] }}</td>
+                                    <td class="px-2 py-2">{{ $info['variant2'] }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            
+                        </td>
+                       
                     </table>
             </div>
             <!----------------------- Dashboard images--------------------------------->
@@ -2221,7 +2302,7 @@
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelector(".tab-links").click();
             });
-        </script> 
+</script> 
 
 
        
