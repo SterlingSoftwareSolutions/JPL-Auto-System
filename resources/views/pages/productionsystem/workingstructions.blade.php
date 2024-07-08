@@ -9,7 +9,7 @@
 <div style="background-color: #f9f9f9; border: 1px solid #f9f9f9;">
 
 
-    <div class="bg-white mx-5 rounded-3xl mt-5">
+    <div class="bg-white mx-5 rounded-3xl mt-10">
         <div class="container flex flex-col gap-8 mx-auto ">
             <section class="py-8">
 

@@ -78,7 +78,7 @@
     </style>
 
     </style>
-    <div class="border border-red-500" style="background-color: #f9f9f9; ">
+    <div style="background-color: #f9f9f9; ">
 
 
 
@@ -90,7 +90,7 @@
             <div class="h-1/3">
 
                 <!-- Tables -->
-                <div class="tables-container">
+                <div class="tables-container ">
 
                     <table id="table1" class="text-sm text-left divide-y divide-gray-200 tableee">
                         <thead class="text-xs text-gray-700 uppercase   ">

@@ -3,7 +3,7 @@
 @section('content')
     @include('components.landingpagenavbar')
 
-<div style="background-color: #f9f9f9; border: 1px solid #f9f9f9;"> 
+<div class="" style="background-color: #f9f9f9; border: 1px solid #f9f9f9;" >
 
   <div class="" style="background-color:">
 
@@ -60,17 +60,17 @@
                 }
             </style>
 
-            <div class="mx-10">
+            <div class="mx-10 ">
 
                 <table class="w-full text-sm bg-white rounded  ">
-                    <div class="flex ">
+                    <div class="flex">
 
                         <div class=" px-4 w-auto bg-black text-center flex justify-center items-center rounded-md h-12 mt-5">
                             <button class="text-white font-bold text-3xl">
                                Body
                             </button>
                         </div>
-                        <div class="flex items-end justify-end flex-grow mt-5 ">
+                        <div class="flex items-end justify-end flex-grow  ">
                             <button id="openPopupBtn"
                                 class="h-10 px-6 text-sm font-bold text-white bg-gray-500 rounded-sm">+ ADD PART</button>
                         </div>
