@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ece_number', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
+            $table->string('number')->nullable();;
             $table->timestamps();
         });
     }
