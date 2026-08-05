@@ -59,9 +59,9 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.productionsystem.workingstructions');
     })->name('workingstructions');
 
-    // Route::get('/compliance', function () {
-    //     return view('pages.productionsystem.compliancepage');
-    // })->name('compliancepage');
+    Route::get('/build-system', function () {
+        return view('pages.buildsystem.buildpage');
+    })->name('buildpage');
 
     // Route::get('/partslist', function () {
     //     return view('pages.productionsystem.partlistpage');
