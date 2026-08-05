@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('components_details', function (Blueprint $table) {
             $table->id();
-            $table->string('component');
-            $table->string('type');
-            $table->string('part');
-            $table->string('qty');
+            $table->string('component')->nullable();
+            $table->string('type')->nullable();
+            $table->string('part')->nullable();
+            $table->string('qty')->nullable();
             $table->timestamps();
         });
     }
