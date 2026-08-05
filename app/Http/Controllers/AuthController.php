@@ -17,36 +17,30 @@ class AuthController extends Controller
     //sign in
     public function login(Request $request)
     {
-        //dd( $request);
         $request->validate([
-            //'email' => 'required|email',
+            'name' => 'required',
             'pin1' => 'required',
             'pin2' => 'required',
             'pin3' => 'required',
             'pin4' => 'required',
         ]);
 
-        $credentials = [
-            'pin1' => $request->pin1,
-            'pin2' => $request->pin2,
-            'pin3' => $request->pin3,
-            'pin4' => $request->pin4,
-        ];
-
-        // Find the user by email and compare individual PIN columns
-        $user = User::where('pin1', $request->pin1)
+        $user = User::where('name', $request->name)
+                    ->where('pin1', $request->pin1)
                     ->where('pin2', $request->pin2)
                     ->where('pin3', $request->pin3)
                     ->where('pin4', $request->pin4)
                     ->first();
 
-        //dd($user);
         if ($user) {
-            Auth::login($user); // Use Auth::login for successful login
-            return redirect('/dashboard')->with('success', 'Login Successful');
-        } else {
-            return redirect('/')->with('error', 'Invalid email or password.');
+            Auth::login($user);
+
+            return redirect('/dashboard')
+                ->with('success', 'Login Successful');
         }
+
+        return redirect('/')
+            ->with('error', 'Invalid name or PIN.');
     }
 
     //log out

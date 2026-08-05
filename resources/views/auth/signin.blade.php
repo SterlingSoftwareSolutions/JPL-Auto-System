@@ -8,8 +8,8 @@
         <div class="md:w-6/12 w-10/12">
 
         {{-- logo --}}
-        <div class="justify-center flex ">
-            <img src="{{ asset('images/jpl-system-logo.png') }}" alt="profile Pic"  >
+        <div class="justify-center flex">
+            <img src="{{ asset('images/jpl-system-logo.png') }}" alt="profile Pic" class="w-40 md:w-[100px] h-auto" >
         </div>
         {{-- logo --}}
 
@@ -18,20 +18,46 @@
         <div class="flex justify-center items-center rounded-xl p-8 mt-10 md:w-8/12 md:mx-auto " style="background-color: #F9F9F9; min-height: 46vh;">
             <div class="text-center ">
                 <h1 class="text-4xl">SIGN IN</h1>
+                @if(session('error'))
+                    <div class="mt-4 text-red-600 text-sm font-semibold">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="mt-4 text-red-600 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
                 <form id="loginForm" method="POST" action="{{ route('login') }}">
                     @csrf
+                     {{-- Username --}}
+                    <div class="mt-10">
+                        <input
+                            type="text"
+                            name="name"
+                            class="rounded-md h-14 w-full md:w-10/12 px-5 text-lg text-center
+                            @error('name') border-red-500 @enderror"
+                            placeholder="Username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
 
+                    {{-- PIN --}}
                     <div class="flex justify-center space-x-6 mt-10">
-                        <input type="password" name="pin1"
+                        <input maxlength="1" accept=""type="password" name="pin1"
                             class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px]  text-2xl text-center"
                             placeholder="">
                         <input type="password" name="pin2"
                             class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px] text-2xl text-center"
                             placeholder="">
-                        <input type="password" name="pin3"
+                        <input maxlength="1" type="password" name="pin3"
                             class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px] text-2xl text-center"
                             placeholder="">
-                        <input type="password" name="pin4"
+                        <input maxlength="1" type="password" name="pin4"
                             class="pin-input rounded-md md:h-28 h-[60px] md:w-4/6 w-[60px] text-2xl text-center"
                             placeholder="">
                     </div>
@@ -60,23 +86,32 @@
 
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const form = document.getElementById('loginForm');
         const pinInputs = document.querySelectorAll('.pin-input');
+        const nameInput = document.querySelector('input[name="name"]');
 
         pinInputs.forEach((input, index) => {
-            input.addEventListener('input', (event) => {
+
+            input.addEventListener('input', () => {
+
+                // Allow only numbers
+                input.value = input.value.replace(/[^0-9]/g, '');
+
                 if (input.value.length === 1 && index < pinInputs.length - 1) {
                     pinInputs[index + 1].focus();
                 }
 
-                if (index === pinInputs.length - 1) {
-                    document.getElementById('loginForm').submit();
+                // Auto submit after last PIN
+                if (index === pinInputs.length - 1 && input.value !== '') {
+                    form.submit();
                 }
             });
 
 
-             //backspacke remove script
-    input.addEventListener('keydown', (event) => {
+            // Backspace navigation
+            input.addEventListener('keydown', (event) => {
                 if (event.key === 'Backspace' && input.value === '') {
                     if (index > 0) {
                         pinInputs[index - 1].focus();
@@ -85,6 +120,36 @@
             });
 
         });
+
+
+        // Prevent submit without name and PIN
+        form.addEventListener('submit', (event) => {
+
+            let pinComplete = true;
+
+            pinInputs.forEach(input => {
+                if(input.value === '') {
+                    pinComplete = false;
+                }
+            });
+
+
+            if(nameInput.value.trim() === '') {
+                event.preventDefault();
+                alert('Please enter your name.');
+                nameInput.focus();
+                return;
+            }
+
+
+            if(!pinComplete) {
+                event.preventDefault();
+                alert('Please enter your 4 digit PIN.');
+                pinInputs[0].focus();
+            }
+
+        });
+
     });
 
 
