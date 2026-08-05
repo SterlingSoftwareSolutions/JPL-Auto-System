@@ -15,6 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('component_name');
             $table->timestamps();
+
+
+            //Foreign Key
+            $table->unsignedBigInteger('category_id');
+
+              // Set up the foreign key constraints
+              $table->foreign('category_id')->references('id')->on('part_categories')->onDelete('cascade');
+
         });
     }
 

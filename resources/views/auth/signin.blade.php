@@ -73,7 +73,22 @@
                     document.getElementById('loginForm').submit();
                 }
             });
+
+
+             //backspacke remove script
+    input.addEventListener('keydown', (event) => {
+                if (event.key === 'Backspace' && input.value === '') {
+                    if (index > 0) {
+                        pinInputs[index - 1].focus();
+                    }
+                }
+            });
+
         });
     });
+
+
+
+
 </script>
 </html>

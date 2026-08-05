@@ -64,3 +64,17 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# DB SEEDERS
+
+php artisan db:seed --class=CategorySeeder 
+php artisan db:seed --class=ComponentSeeder
+php artisan db:seed --class=AdrTableSeeder
+
+## FTP Details
+
+FTP Password :  SsC+aGX7;TJb
+FTP Username: jpl@staging.jplauto.com.au
+FTP server: ftp.jplauto.com.au
+FTP & explicit FTPS port:  21
