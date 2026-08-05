@@ -82,4 +82,4 @@
 </html>
 
 
-<a href="{{ route('reset-password-page',['token' => $token]) }}" class="button">Reset Password</a>
+{{-- <a href="{{ route('reset-password-page',['token' => $token]) }}" class="button">Reset Password</a> --}}
