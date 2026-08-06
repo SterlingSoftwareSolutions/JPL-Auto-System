@@ -5,6 +5,7 @@ use App\Http\Controllers\ComplianceController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\SupplierController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,21 @@ Route::get('/', function () {
 
 Route::get('/wel', function () {
     return view('welcome');
+});
+
+Route::get('/symlink', function () {
+    Artisan::call('storage:link');
+    return 'Storage link created!';
+});
+
+Route::get('/migrate-seed/{key}', function ($key) {
+    abort_if($key !== 'nawodi123@2026', 403);
+
+   Artisan::call('migrate', [
+        '--force' => true,
+    ]);
+
+    return 'Migration completed!';
 });
 
 //auth routes
