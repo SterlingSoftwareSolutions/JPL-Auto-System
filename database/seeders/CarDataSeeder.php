@@ -11,17 +11,16 @@ class CarDataSeeder extends Seeder
      * Run the database seeds.
      *
      * Reads car.csv from the project root and seeds:
-     *  1. part_categories  – adds Shell & Brakes (new), keeps existing ones
-     *  2. part_components  – adds every component found in CSV
-     *  3. parts            – adds every part row (skips Cost/total/empty rows)
+     *  1. part_categories
+     *  2. part_components
+     *  3. parts
      *
-     * Rules applied:
-     *  - Empty Category / Component cells inherit the value from the row above
-     *    (carry-forward / fill-down logic).
-     *  - "Cost", "PROJECT COST TO DATE" and blank rows are skipped.
-     *  - Paid & Estimates columns are ignored (no DB columns for them).
-     *  - supplier stored as plain text; upload_part_image left null.
-     *  - price stored as raw string (e.g. " $139.00 ").
+     * Supplier handling:
+     *  - Supplier names are read from the Supplier column.
+     *  - Supplier ID is resolved from the suppliers table.
+     *  - If a part has no supplier, supplier_id is NULL.
+     *  - If a supplier name does not exist in suppliers table,
+     *    supplier_id is NULL and a warning is displayed.
      */
     public function run(): void
     {
@@ -41,47 +40,53 @@ class CarDataSeeder extends Seeder
             'Labour',
             'Power Plants',
             'Suspension',
-            'Brakes',          // new – not in CategorySeeder
+            'Brakes',
             'Wheels & Tyres',
             'Interior',
             'Exterior',
-            'Shell',           // new – mapped from CSV "Shell"
+            'Shell',
         ];
 
         foreach ($requiredCategories as $name) {
             DB::table('part_categories')->updateOrInsert(
-                ['category_name' => $name],
-                ['category_name' => $name, 'created_at' => now(), 'updated_at' => now()]
+                [
+                    'category_name' => $name,
+                ],
+                [
+                    'category_name' => $name,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
             );
         }
 
-        // Build a lookup map: category_name => id
+        // Build category lookup
+        // category_name => id
         $categoryMap = DB::table('part_categories')
             ->pluck('id', 'category_name')
             ->toArray();
 
-        $this->command->info('✔ Categories ready (' . count($categoryMap) . ' total)');
+        $this->command->info(
+            '✔ Categories ready (' . count($categoryMap) . ' total)'
+        );
 
         // ------------------------------------------------------------------ //
-        // STEP 2 – Parse CSV and collect unique components per category
+        // STEP 2 – Category normalisation
         // ------------------------------------------------------------------ //
 
-        /**
-         * Normalise the raw "category" value from the CSV header rows
-         * like "Power Plant (Budget $15,000)" => "Power Plants"
-         */
         $normaliseCategoryName = function (string $raw): string {
             $raw = trim($raw);
+
             $map = [
-                'Shell'      => 'Shell',
-                'Labour'     => 'Labour',
-                'Parts'      => null,   // generic header – skip
+                'Shell' => 'Shell',
+                'Labour' => 'Labour',
+                'Parts' => null,
                 'Power Plant' => 'Power Plants',
                 'Suspension' => 'Suspension',
-                'Brakes'     => 'Brakes',
-                'Wheels'     => 'Wheels & Tyres',
-                'Interior'   => 'Interior',
-                'Exterior'   => 'Exterior',
+                'Brakes' => 'Brakes',
+                'Wheels' => 'Wheels & Tyres',
+                'Interior' => 'Interior',
+                'Exterior' => 'Exterior',
             ];
 
             foreach ($map as $keyword => $resolved) {
@@ -93,173 +98,347 @@ class CarDataSeeder extends Seeder
             return $raw;
         };
 
-        // Read CSV
+        // ------------------------------------------------------------------ //
+        // STEP 3 – Read CSV
+        // ------------------------------------------------------------------ //
+
         $handle = fopen($csvPath, 'r');
-        $rows   = [];
+
+        if ($handle === false) {
+            $this->command->error('Unable to open car.csv!');
+            return;
+        }
+
+        $rows = [];
         $header = true;
 
         while (($line = fgetcsv($handle)) !== false) {
-            if ($header) { $header = false; continue; } // skip header row
+
+            // Skip CSV header
+            if ($header) {
+                $header = false;
+                continue;
+            }
+
             $rows[] = $line;
         }
+
         fclose($handle);
 
-        // Carry-forward pass – fill empty Category & Component cells
-        $lastCategory  = '';
+        // ------------------------------------------------------------------ //
+        // STEP 4 – Parse CSV with carry-forward logic
+        // ------------------------------------------------------------------ //
+
+        $lastCategory = '';
         $lastComponent = '';
 
         $parsedRows = [];
 
         foreach ($rows as $row) {
-            // Pad row to at least 9 columns
+
+            // Make sure row has at least 9 columns
             while (count($row) < 9) {
                 $row[] = '';
             }
 
-            [$rawCategory, $rawComponent, $description, $partNumber, $price, $supplier] = $row;
+            [
+                $rawCategory,
+                $rawComponent,
+                $description,
+                $partNumber,
+                $price,
+                $supplier
+            ] = $row;
 
-            $rawCategory  = trim($rawCategory);
+            $rawCategory = trim($rawCategory);
             $rawComponent = trim($rawComponent);
-            $description  = trim($description);
-            $partNumber   = trim($partNumber);
-            $price        = trim($price);
-            $supplier     = trim($supplier);
+            $description = trim($description);
+            $partNumber = trim($partNumber);
+            $price = trim($price);
+            $supplier = trim($supplier);
 
-            // Normalise category name from CSV budget-header rows
-            $normCategory = $rawCategory !== '' ? $normaliseCategoryName($rawCategory) : '';
+            // Normalise category
+            $normCategory = '';
 
-            // Carry-forward
+            if ($rawCategory !== '') {
+                $normCategory = $normaliseCategoryName($rawCategory);
+            }
+
+            // Carry forward category
             if ($normCategory !== '') {
                 $lastCategory = $normCategory;
             }
+
+            // Carry forward component
             if ($rawComponent !== '') {
                 $lastComponent = $rawComponent;
             }
 
-            // ---- Skip rows that are not real parts ----
+            // -------------------------------------------------------------- //
+            // Skip invalid rows
+            // -------------------------------------------------------------- //
 
             // Skip blank description rows
             if ($description === '') {
                 continue;
             }
 
-            // Skip "Cost" summary rows
+            // Skip Cost rows
             if (strtolower($description) === 'cost') {
                 continue;
             }
 
-            // Skip "PROJECT COST TO DATE" footer
+            // Skip PROJECT COST TO DATE
             if (stripos($description, 'PROJECT COST') !== false) {
                 continue;
             }
 
-            // Skip rows that have no resolved category yet
+            // Skip rows before category is identified
             if ($lastCategory === '') {
                 continue;
             }
 
+            // -------------------------------------------------------------- //
+            // Add parsed row
+            // -------------------------------------------------------------- //
+
             $parsedRows[] = [
-                'category'    => $lastCategory,
-                'component'   => $lastComponent,
+                'category' => $lastCategory,
+                'component' => $lastComponent,
                 'description' => $description,
                 'part_number' => $partNumber,
-                'price'       => $price,
-                'supplier'    => $supplier,
+                'price' => $price,
+                'supplier' => $supplier,
             ];
         }
 
+        $this->command->info(
+            '✔ CSV rows parsed: ' . count($parsedRows)
+        );
+
         // ------------------------------------------------------------------ //
-        // STEP 3 – Collect unique components and insert into part_components
+        // STEP 5 – Collect unique components
         // ------------------------------------------------------------------ //
 
-        // Gather unique (category, component) pairs
         $uniqueComponents = [];
+
         foreach ($parsedRows as $r) {
+
             $key = $r['category'] . '|||' . $r['component'];
-            if ($r['component'] !== '' && !isset($uniqueComponents[$key])) {
+
+            if (
+                $r['component'] !== '' &&
+                !isset($uniqueComponents[$key])
+            ) {
                 $uniqueComponents[$key] = [
-                    'category'  => $r['category'],
+                    'category' => $r['category'],
                     'component' => $r['component'],
                 ];
             }
         }
 
+        // ------------------------------------------------------------------ //
+        // STEP 6 – Insert components
+        // ------------------------------------------------------------------ //
+
         foreach ($uniqueComponents as $uc) {
+
             $catId = $categoryMap[$uc['category']] ?? null;
 
             if ($catId === null) {
-                $this->command->warn("  ⚠ Unknown category '{$uc['category']}' for component '{$uc['component']}' – skipping");
+
+                $this->command->warn(
+                    "⚠ Unknown category '{$uc['category']}' " .
+                    "for component '{$uc['component']}' – skipping"
+                );
+
                 continue;
             }
 
             DB::table('part_components')->updateOrInsert(
                 [
                     'component_name' => $uc['component'],
-                    'category_id'    => $catId,
+                    'category_id' => $catId,
                 ],
                 [
                     'component_name' => $uc['component'],
-                    'category_id'    => $catId,
-                    'created_at'     => now(),
-                    'updated_at'     => now(),
+                    'category_id' => $catId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]
             );
         }
 
-        // Rebuild component lookup: "component_name|||category_id" => id
+        // ------------------------------------------------------------------ //
+        // STEP 7 – Build component lookup
+        // ------------------------------------------------------------------ //
+
         $componentRows = DB::table('part_components')->get();
-        $componentMap  = [];
+
+        $componentMap = [];
+
         foreach ($componentRows as $cr) {
-            $componentMap[$cr->component_name . '|||' . $cr->category_id] = $cr->id;
+
+            $componentMap[
+                $cr->component_name . '|||' . $cr->category_id
+            ] = $cr->id;
         }
 
-        $this->command->info('✔ Components ready (' . count($componentMap) . ' total)');
+        $this->command->info(
+            '✔ Components ready (' . count($componentMap) . ' total)'
+        );
 
         // ------------------------------------------------------------------ //
-        // STEP 4 – Insert parts
+        // STEP 8 – Build supplier lookup
+        // ------------------------------------------------------------------ //
+
+        /**
+         * Supplier lookup:
+         *
+         * business_name => supplier_id
+         */
+        $supplierMap = [];
+
+        $suppliers = DB::table('suppliers')->get();
+
+        foreach ($suppliers as $supplier) {
+
+            $supplierName = strtolower(trim($supplier->business_name));
+
+            if ($supplierName !== '') {
+                $supplierMap[$supplierName] = $supplier->id;
+            }
+        }
+
+        $this->command->info(
+            '✔ Suppliers available (' . count($supplierMap) . ' total)'
+        );
+
+        // ------------------------------------------------------------------ //
+        // STEP 9 – Insert parts
         // ------------------------------------------------------------------ //
 
         $inserted = 0;
-        $skipped  = 0;
+        $skipped = 0;
+        $noSupplier = 0;
+        $missingSupplier = 0;
 
         foreach ($parsedRows as $r) {
+
+            // -------------------------------------------------------------- //
+            // Category
+            // -------------------------------------------------------------- //
+
             $catId = $categoryMap[$r['category']] ?? null;
 
             if ($catId === null) {
-                $this->command->warn("  ⚠ Skipping part '{$r['description']}' – category '{$r['category']}' not found");
+
+                $this->command->warn(
+                    "⚠ Skipping part '{$r['description']}' – " .
+                    "category '{$r['category']}' not found"
+                );
+
                 $skipped++;
+
                 continue;
             }
+
+            // -------------------------------------------------------------- //
+            // Component
+            // -------------------------------------------------------------- //
 
             $compKey = $r['component'] . '|||' . $catId;
-            $compId  = $componentMap[$compKey] ?? null;
+
+            $compId = $componentMap[$compKey] ?? null;
 
             if ($compId === null) {
-                $this->command->warn("  ⚠ Skipping part '{$r['description']}' – component '{$r['component']}' not found for category '{$r['category']}'");
+
+                $this->command->warn(
+                    "⚠ Skipping part '{$r['description']}' – " .
+                    "component '{$r['component']}' not found for " .
+                    "category '{$r['category']}'"
+                );
+
                 $skipped++;
+
                 continue;
             }
 
+            // -------------------------------------------------------------- //
+            // Supplier
+            // -------------------------------------------------------------- //
+
+            $supplierId = null;
+
+            if ($r['supplier'] !== '') {
+
+                $supplierName = strtolower(trim($r['supplier']));
+
+                $supplierId = $supplierMap[$supplierName] ?? null;
+
+                if ($supplierId === null) {
+
+                    $this->command->warn(
+                        "⚠ Supplier '{$r['supplier']}' not found " .
+                        "for part '{$r['description']}'"
+                    );
+
+                    $missingSupplier++;
+                }
+
+            } else {
+
+                $noSupplier++;
+            }
+
+            // -------------------------------------------------------------- //
+            // Insert part
+            // -------------------------------------------------------------- //
+
             DB::table('parts')->insert([
-                'category_id'       => $catId,
-                'component_id'      => $compId,
-                'description'       => $r['description'],
-                'part_number'       => $r['part_number'] ?: 'N/A',
-                'price'             => $r['price'] ?: '0',
-                'supplier'          => $r['supplier'] ?: 'N/A',
+                'category_id' => $catId,
+                'component_id' => $compId,
+                'supplier_id' => $supplierId,
+                'description' => $r['description'],
+                'part_number' => $r['part_number'] ?: 'N/A',
+                'price' => $r['price'] ?: '0',
                 'upload_part_image' => null,
-                'created_at'        => now(),
-                'updated_at'        => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
             $inserted++;
         }
 
-        $this->command->info("✔ Parts inserted: {$inserted}");
+        // ------------------------------------------------------------------ //
+        // STEP 10 – Summary
+        // ------------------------------------------------------------------ //
+
+        $this->command->info('');
+        $this->command->info('==========================================');
+        $this->command->info('        CarDataSeeder Summary');
+        $this->command->info('==========================================');
+
+        $this->command->info(
+            "✔ Parts inserted: {$inserted}"
+        );
+
+        $this->command->info(
+            "✔ Parts without supplier: {$noSupplier}"
+        );
+
+        $this->command->info(
+            "✔ Parts with missing supplier record: {$missingSupplier}"
+        );
+
         if ($skipped > 0) {
-            $this->command->warn("  ⚠ Parts skipped: {$skipped}");
+            $this->command->warn(
+                "⚠ Parts skipped: {$skipped}"
+            );
         }
 
-        $this->command->info('🎉 CarDataSeeder completed successfully!');
+        $this->command->info(
+            '🎉 CarDataSeeder completed successfully!'
+        );
     }
 }

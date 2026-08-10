@@ -114,7 +114,7 @@ class CarCostSeeder extends Seeder
                 'description'       => 'Cost',
                 'part_number'       => 'N/A',
                 'price'             => $row['price'],
-                'supplier'          => 'N/A',
+                'supplier_id'       => null,
                 'upload_part_image' => null,
                 'created_at'        => now(),
                 'updated_at'        => now(),
