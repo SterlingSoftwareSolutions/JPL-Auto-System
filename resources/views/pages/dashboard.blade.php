@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="image-container">
-                    <a href="#">
+                    <a href="{{ route('buildprocedure') }}">
                         <img class="hover-img" src="{{ asset('images/3.1.png') }}" alt="profile Pic">
                         <img class="default-img" src="{{ asset('images/3.png') }}" alt="profile Pic">
                     </a>

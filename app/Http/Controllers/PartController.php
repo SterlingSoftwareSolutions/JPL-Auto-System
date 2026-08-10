@@ -26,7 +26,8 @@ class PartController extends Controller
 
 
         $bodyPartPriceTotal = $bodyParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //bodypart calculation
 
@@ -47,7 +48,8 @@ class PartController extends Controller
 
 
         $labourPriceTotal = $labourParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
@@ -66,7 +68,8 @@ class PartController extends Controller
 
 
         $powerPlantPriceTotal = $powerPlantParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
@@ -84,7 +87,8 @@ class PartController extends Controller
         //bodypart calculation
 
         $suspensionPriceTotal = $suspensionParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
@@ -98,7 +102,8 @@ class PartController extends Controller
             ->get();
 
         $wheelsTyresPriceTotal = $wheelsTyresParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //bodypart calculation
         //end bodypart calculation
@@ -116,7 +121,8 @@ class PartController extends Controller
 
 
         $interiorPriceTotal = $interiorParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
@@ -133,7 +139,8 @@ class PartController extends Controller
 
 
         $exteriorPriceTotal = $exteriorParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 

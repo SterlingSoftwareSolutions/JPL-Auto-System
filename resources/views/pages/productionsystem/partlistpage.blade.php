@@ -144,7 +144,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $bodyPartPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($bodyPartPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -257,7 +257,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $labourPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($labourPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -369,7 +369,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $powerPlantPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($powerPlantPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -482,7 +482,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $suspensionPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($suspensionPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -595,7 +595,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $wheelsTyresPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($wheelsTyresPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -705,7 +705,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $interiorPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($interiorPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -817,7 +817,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $exteriorPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($exteriorPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -828,7 +828,7 @@
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2 font-bold">
-                                {{ $bodyPartPriceTotal + $labourPriceTotal + $powerPlantPriceTotal + $suspensionPriceTotal + $wheelsTyresPriceTotal + $interiorPriceTotal + $exteriorPriceTotal }}
+                                ${{ number_format($bodyPartPriceTotal + $labourPriceTotal + $powerPlantPriceTotal + $suspensionPriceTotal + $wheelsTyresPriceTotal + $interiorPriceTotal + $exteriorPriceTotal, 2) }}
                             </td>
                             <td class="px-8 py-2"></td>
                         </tr>
