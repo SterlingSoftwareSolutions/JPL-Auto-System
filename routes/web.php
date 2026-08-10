@@ -32,7 +32,8 @@ Route::get('/symlink', function () {
     return 'Storage link created!';
 });
 
-Route::get('/migrate-seed/{key}', function ($key) {
+//database migration
+Route::get('/migrate-db/{key}', function ($key) {
     abort_if($key !== 'nawodi123@2026', 403);
 
    Artisan::call('migrate', [
@@ -40,6 +41,26 @@ Route::get('/migrate-seed/{key}', function ($key) {
     ]);
 
     return 'Migration completed!';
+});
+
+//database seeder run
+Route::get('/seed-only/{key}', function ($key) {
+
+    abort_if($key !== 'nawodi123@2026', 403);
+
+    $seeders = [
+        'CarCostSeeder',
+        'CarDataSeeder',
+    ];
+
+    foreach ($seeders as $seeder) {
+        Artisan::call('db:seed', [
+            '--class' => $seeder,
+            '--force' => true,
+        ]);
+    }
+
+    return 'Selected seeders executed!';
 });
 
 //auth routes
