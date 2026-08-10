@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Part;
 use App\Models\PartCategory;
 use App\Models\PartComponent;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class PartController extends Controller
@@ -13,12 +14,12 @@ class PartController extends Controller
     {
         $categories = PartCategory::all();
         $components = PartComponent::all();
-
+        $suppliers = Supplier::orderBy('business_name')->get();
 
         $bodyParts = Part::whereHas('category', function ($query) {
-            $query->where('category_name', 'Body');
+            $query->where('category_name', 'Shell');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
@@ -26,7 +27,8 @@ class PartController extends Controller
 
 
         $bodyPartPriceTotal = $bodyParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //bodypart calculation
 
@@ -36,7 +38,7 @@ class PartController extends Controller
         $labourParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Labour');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
@@ -47,7 +49,8 @@ class PartController extends Controller
 
 
         $labourPriceTotal = $labourParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
@@ -56,7 +59,7 @@ class PartController extends Controller
         $powerPlantParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Power Plants');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
@@ -66,7 +69,8 @@ class PartController extends Controller
 
 
         $powerPlantPriceTotal = $powerPlantParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
@@ -75,7 +79,7 @@ class PartController extends Controller
         $suspensionParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Suspension');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
@@ -84,21 +88,23 @@ class PartController extends Controller
         //bodypart calculation
 
         $suspensionPriceTotal = $suspensionParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
         $wheelsTyresParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Wheels & Tyres');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
             ->get();
 
         $wheelsTyresPriceTotal = $wheelsTyresParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //bodypart calculation
         //end bodypart calculation
@@ -106,7 +112,7 @@ class PartController extends Controller
         $interiorParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Interior');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
@@ -116,14 +122,15 @@ class PartController extends Controller
 
 
         $interiorPriceTotal = $interiorParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
         $exteriorParts = Part::whereHas('category', function ($query) {
             $query->where('category_name', 'Exterior');
         })
-            ->with(['category', 'component'])
+            ->with(['category', 'component', 'supplier'])
             ->join('part_components', 'parts.component_id', '=', 'part_components.id')
             ->orderBy('part_components.component_name', 'asc')
             ->select('parts.*') // To avoid ambiguity and select only parts columns
@@ -133,13 +140,15 @@ class PartController extends Controller
 
 
         $exteriorPriceTotal = $exteriorParts->sum(function ($item) {
-            return is_numeric($item->price) ? $item->price : 0;
+            $price = preg_replace('/[^0-9.]/', '', $item->price ?? '');
+            return is_numeric($price) ? (float) $price : 0;
         });
         //end bodypart calculation
 
         return view('pages.productionsystem.partlistpage', compact(
             'categories',
             'components',
+            'suppliers',
             'bodyParts',
             'labourParts',
             'powerPlantParts',
@@ -176,7 +185,7 @@ class PartController extends Controller
         $partslist->description = $request->description;
         $partslist->part_number = $request->partnumber;
         $partslist->price = $request->price;
-        $partslist->supplier = $request->supplier;
+        $partslist->supplier_id = $request->supplier;
 
 
         $partslist->save();

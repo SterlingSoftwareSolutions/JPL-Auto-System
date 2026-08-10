@@ -133,7 +133,7 @@
                                 </td>
 
                                 <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->price }}</td>
-                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->supplier?->business_name ?? 'N/A' }}</td>
                             </tr>
                         @endforeach
 
@@ -144,7 +144,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $bodyPartPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($bodyPartPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -243,7 +243,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->price }} </td>
-                                <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -257,7 +257,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $labourPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($labourPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -354,7 +354,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->price }} </td>
-                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -369,7 +369,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $powerPlantPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($powerPlantPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -467,7 +467,7 @@
                                 </td>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->price }}</td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -482,7 +482,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $suspensionPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($suspensionPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -579,7 +579,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"> {{ $wheelsTyresPart->price }} </td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -595,7 +595,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $wheelsTyresPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($wheelsTyresPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -690,7 +690,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->price }}</td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -705,7 +705,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $interiorPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($interiorPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -803,7 +803,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"> {{ $exteriorPart->price }} </td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -817,7 +817,7 @@
                             <td class="px-8 py-2 font-bold">Cost</td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
-                            <td class="px-8 py-2 font-bold">{{ $exteriorPriceTotal }}</td>
+                            <td class="px-8 py-2 font-bold">${{ number_format($exteriorPriceTotal, 2) }}</td>
                             <td class="px-8 py-2"></td>
                         </tr>
 
@@ -828,7 +828,7 @@
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2"></td>
                             <td class="px-8 py-2 font-bold">
-                                {{ $bodyPartPriceTotal + $labourPriceTotal + $powerPlantPriceTotal + $suspensionPriceTotal + $wheelsTyresPriceTotal + $interiorPriceTotal + $exteriorPriceTotal }}
+                                ${{ number_format($bodyPartPriceTotal + $labourPriceTotal + $powerPlantPriceTotal + $suspensionPriceTotal + $wheelsTyresPriceTotal + $interiorPriceTotal + $exteriorPriceTotal, 2) }}
                             </td>
                             <td class="px-8 py-2"></td>
                         </tr>

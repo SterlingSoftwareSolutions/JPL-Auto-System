@@ -32,7 +32,8 @@ Route::get('/symlink', function () {
     return 'Storage link created!';
 });
 
-Route::get('/migrate-seed/{key}', function ($key) {
+//database migration
+Route::get('/migrate-db/{key}', function ($key) {
     abort_if($key !== 'nawodi123@2026', 403);
 
    Artisan::call('migrate', [
@@ -40,6 +41,26 @@ Route::get('/migrate-seed/{key}', function ($key) {
     ]);
 
     return 'Migration completed!';
+});
+
+//database seeder run
+Route::get('/seed-only/{key}', function ($key) {
+
+    abort_if($key !== 'nawodi123@2026', 403);
+
+    $seeders = [
+        'SupplierSeeder',
+        'CarDataSeeder',
+    ];
+
+    foreach ($seeders as $seeder) {
+        Artisan::call('db:seed', [
+            '--class' => $seeder,
+            '--force' => true,
+        ]);
+    }
+
+    return 'Selected seeders executed!';
 });
 
 //auth routes
@@ -75,6 +96,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.productionsystem.workingstructions');
     })->name('workingstructions');
 
+    Route::get('/build-procedure', function () {
+        return view('pages.productionsystem.buildprocedure');
+    })->name('buildprocedure');
+
     Route::get('/build-system', function () {
         return view('pages.buildsystem.buildpage');
     })->name('buildpage');
@@ -101,9 +126,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // customers
-    Route::get('/customers-customerlist', function () {
-        return view('pages.customersystem.customerlist');
-    })->name('customerlist');
+    Route::get('/customers-customerlist', [App\Http\Controllers\CustomerController::class, 'index'])->name('customerlist');
+    Route::post('/customers-customerlist', [App\Http\Controllers\CustomerController::class, 'store'])->name('customerstore');
 
     Route::post('/compliance/store', [ComplianceController::class, 'storeCompliance'])->name('compliance.store');
     Route::get('/compliance', [ComplianceController::class, 'showComplianceForm'])->name('compliancepage');
