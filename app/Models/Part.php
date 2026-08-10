@@ -15,10 +15,9 @@ class Part extends Model
         'component_id',
         'part_number',
         'price',
-        'supplier',
-        'upload_part_image'
+        'supplier_id',
+        'upload_part_image',
     ];
-
 
     public function category()
     {
@@ -28,5 +27,10 @@ class Part extends Model
     public function component()
     {
         return $this->belongsTo(PartComponent::class, 'component_id');
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 }

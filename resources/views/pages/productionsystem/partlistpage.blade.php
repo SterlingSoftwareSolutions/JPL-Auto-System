@@ -133,7 +133,7 @@
                                 </td>
 
                                 <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->price }}</td>
-                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $bodyPart->supplier?->business_name ?? 'N/A' }}</td>
                             </tr>
                         @endforeach
 
@@ -243,7 +243,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->price }} </td>
-                                <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $labourPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -354,7 +354,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->price }} </td>
-                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->supplier }}</td>
+                                <td class="px-8 py-2  max-w-xs break-words">{{ $powerPlantPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -467,7 +467,7 @@
                                 </td>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->price }}</td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $suspensionPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -579,7 +579,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"> {{ $wheelsTyresPart->price }} </td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $wheelsTyresPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -690,7 +690,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->price }}</td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $interiorPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 
@@ -803,7 +803,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-8 py-2 px-8 py-2  max-w-xs break-words"> {{ $exteriorPart->price }} </td>
-                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->supplier }}</td>
+                                <td class="px-8 py-2 px-8 py-2  max-w-xs break-words">{{ $exteriorPart->supplier?->business_name ?? 'N/A' }}</td>
 
 
 

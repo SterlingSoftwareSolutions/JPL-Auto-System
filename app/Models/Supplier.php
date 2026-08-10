@@ -25,4 +25,9 @@ class Supplier extends Model
         'crm_password'
     ];
 
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
 }
