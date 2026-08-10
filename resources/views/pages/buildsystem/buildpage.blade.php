@@ -301,7 +301,37 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+        
+        .dashboard-floating-btn {
+            position: absolute;
+            top: 104px;
+            right: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #ffffff;
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+        .dashboard-floating-btn:hover {
+            background: #f8fafc;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transform: translateY(-1px);
+        }
     </style>
+
+    <a href="{{ route('dashboard') }}" class="dashboard-floating-btn">
+        <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Dashboard
+    </a>
 
     <div class="build-page">
         <div class="wrap">

@@ -75,6 +75,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.productionsystem.workingstructions');
     })->name('workingstructions');
 
+    Route::get('/build-procedure', function () {
+        return view('pages.productionsystem.buildprocedure');
+    })->name('buildprocedure');
+
     Route::get('/build-system', function () {
         return view('pages.buildsystem.buildpage');
     })->name('buildpage');
@@ -101,9 +105,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // customers
-    Route::get('/customers-customerlist', function () {
-        return view('pages.customersystem.customerlist');
-    })->name('customerlist');
+    Route::get('/customers-customerlist', [App\Http\Controllers\CustomerController::class, 'index'])->name('customerlist');
+    Route::post('/customers-customerlist', [App\Http\Controllers\CustomerController::class, 'store'])->name('customerstore');
 
     Route::post('/compliance/store', [ComplianceController::class, 'storeCompliance'])->name('compliance.store');
     Route::get('/compliance', [ComplianceController::class, 'showComplianceForm'])->name('compliancepage');
