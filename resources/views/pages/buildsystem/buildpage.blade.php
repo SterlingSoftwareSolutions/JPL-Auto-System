@@ -533,7 +533,7 @@
             }
 
             try {
-                const response = await fetch('/build-system/tasks', {
+                const response = await fetch('{{ url("/build-system/tasks") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -561,7 +561,7 @@
 
         async function deleteTask(id) {
             try {
-                const response = await fetch('/build-system/tasks/' + id, {
+                const response = await fetch('{{ url("/build-system/tasks") }}/' + id, {
                     method: 'DELETE',
                     headers: { 'X-CSRF-TOKEN': getCsrfToken() }
                 });
@@ -588,7 +588,7 @@
             t[field] = value;
             
             try {
-                const response = await fetch('/build-system/tasks/' + id, {
+                const response = await fetch('{{ url("/build-system/tasks") }}/' + id, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
