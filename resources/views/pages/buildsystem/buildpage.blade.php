@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-   
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
@@ -326,6 +326,55 @@
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             transform: translateY(-1px);
         }
+
+        .custom-datalist {
+            position: relative;
+        }
+        .custom-datalist-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-top: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 50;
+            display: none;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+        }
+        .custom-datalist-options.show {
+            display: block;
+        }
+        
+        /* Custom Scrollbar for Dropdown */
+        .custom-datalist-options::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-datalist-options::-webkit-scrollbar-track {
+            background: var(--panel-2);
+            border-radius: 4px;
+        }
+        .custom-datalist-options::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        .custom-datalist-options::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .custom-datalist-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text);
+        }
+        .custom-datalist-option:hover {
+            background: var(--accent);
+            color: #1a1006;
+        }
     </style>
 
     <a href="{{ route('dashboard') }}" class="dashboard-floating-btn">
@@ -344,8 +393,10 @@
                 <div class="form-grid">
                     <div class="field">
                         <label>Track</label>
-                        <input id="f-track" list="track-options" placeholder="e.g. Electrical">
-                        <datalist id="track-options"></datalist>
+                        <div class="custom-datalist" id="track-combobox">
+                            <input id="f-track" placeholder="e.g. Electrical" autocomplete="off" onfocus="showTrackOptions()" onblur="hideTrackOptions()" oninput="filterTrackOptions()">
+                            <div class="custom-datalist-options" id="track-options-list"></div>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Phase</label>
@@ -377,7 +428,13 @@
             </div>
 
             <div class="panel">
-                <h2>Timeline</h2>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                    <h2 style="margin:0;">Timeline</h2>
+                    <select id="timeline-scale" onchange="changeTimelineScale()" style="width: auto; padding: 4px 8px; font-size: 12px; background: var(--panel-2); color: var(--text); border: 1px solid var(--border); border-radius: 6px;">
+                        <option value="weekly">Weekly View</option>
+                        <option value="monthly">Monthly View</option>
+                    </select>
+                </div>
                 <div id="timeline-wrap"></div>
                 <div class="legend" id="legend"></div>
                 <div class="totals" id="totals"></div>
@@ -396,52 +453,25 @@
         ];
         const phaseById = Object.fromEntries(PHASES.map(p => [p.id, p]));
 
-        let tasks = [
-            { id: 1, track: 'Electrical', phase: 'design', label: 'Diagram eng', cost: 3000, start: 1, dur: 2 },
-            { id: 2, track: 'Electrical', phase: 'production', label: 'Harness (prod)', cost: 1000, start: 3, dur: 3 },
-            { id: 3, track: 'Electrical', phase: 'installation', label: 'Install (Josh)', cost: 0, start: 6, dur: 1 },
-
-            { id: 4, track: 'Climate (A/C)', phase: 'procurement', label: 'Source pump', cost: 500, start: 1, dur: 1 },
-            { id: 5, track: 'Climate (A/C)', phase: 'shipping', label: 'Ship new unit', cost: 1000, start: 2, dur: 2 },
-
-            { id: 6, track: 'ABS / plumbing', phase: 'procurement', label: 'Order ABS', cost: 3000, start: 1, dur: 1 },
-            { id: 7, track: 'ABS / plumbing', phase: 'shipping', label: 'Ship ABS unit', cost: 0, start: 2, dur: 2 },
-            { id: 8, track: 'ABS / plumbing', phase: 'installation', label: 'Install ABS', cost: 0, start: 4, dur: 1 },
-            { id: 9, track: 'ABS / plumbing', phase: 'installation', label: 'Plumbing (Josh)', cost: 0, start: 5, dur: 1 },
-
-            { id: 10, track: 'Interior / 3D', phase: 'design', label: '3D modelling', cost: 0, start: 1, dur: 3 },
-            { id: 11, track: 'Interior / 3D', phase: 'production', label: 'Panel milling', cost: 3000, start: 4, dur: 2 },
-            { id: 12, track: 'Interior / 3D', phase: 'installation', label: 'Trim', cost: 2000, start: 6, dur: 1 },
-            { id: 13, track: 'Interior / 3D', phase: 'installation', label: 'Install (Josh)', cost: 0, start: 7, dur: 1 },
-
-            { id: 14, track: 'Digital gauges', phase: 'design', label: 'Gauge design', cost: 0, start: 1, dur: 2 },
-            { id: 15, track: 'Digital gauges', phase: 'production', label: 'Gauge production', cost: 3000, start: 3, dur: 2 },
-            { id: 16, track: 'Digital gauges', phase: 'production', label: 'SW integration', cost: 1000, start: 5, dur: 1 },
-
-            { id: 17, track: 'Seats', phase: 'procurement', label: 'Order seats', cost: 800, start: 1, dur: 1 },
-            { id: 18, track: 'Seats', phase: 'shipping', label: 'Ship from US', cost: 0, start: 2, dur: 3 },
-            { id: 19, track: 'Seats', phase: 'design', label: 'Belt eng', cost: 1000, start: 5, dur: 1 },
-
-            { id: 20, track: 'Testing', phase: 'testing', label: 'Testing', cost: 7000, start: 8, dur: 2 },
+        const DEFAULT_TRACKS = [
+            'Electrical',
+            'Climate (A/C)',
+            'ABS / plumbing',
+            'Interior / 3D',
+            'Digital gauges',
+            'Seats',
+            'Testing'
         ];
-        let nextId = 21;
 
-        async function loadState() {
-            try {
-                const res = await window.storage.get('478-timeline-tasks', false);
-                if (res && res.value) {
-                    tasks = JSON.parse(res.value);
-                    nextId = tasks.reduce((m, t) => Math.max(m, t.id), 0) + 1;
-                }
-            } catch (e) { /* no saved state yet, use defaults */ }
-            renderAll();
+        let tasks = @json($tasks ?? []);
+        let timelineScale = 'weekly';
+
+        function changeTimelineScale() {
+            timelineScale = document.getElementById('timeline-scale').value;
+            renderTimeline();
         }
 
-        async function saveState() {
-            try {
-                await window.storage.set('478-timeline-tasks', JSON.stringify(tasks), false);
-            } catch (e) { /* storage unavailable, continue with in-memory state */ }
-        }
+        const getCsrfToken = () => document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         function populatePhaseSelect() {
             const sel = document.getElementById('f-phase');
@@ -449,12 +479,47 @@
         }
 
         function populateTrackOptions() {
-            const dl = document.getElementById('track-options');
-            const tracks = [...new Set(tasks.map(t => t.track))];
-            dl.innerHTML = tracks.map(t => `<option value="${t}">`).join('');
+            const list = document.getElementById('track-options-list');
+            const usedTracks = tasks.map(t => t.track);
+            const allTracks = [...new Set([...DEFAULT_TRACKS, ...usedTracks])];
+            
+            window.allTrackOptions = allTracks;
+            renderTrackOptions(allTracks);
         }
 
-        function addTask() {
+        function renderTrackOptions(options) {
+            const list = document.getElementById('track-options-list');
+            if (options.length === 0) {
+                list.innerHTML = `<div class="custom-datalist-option" style="color:var(--text-faint);cursor:default;">No matches</div>`;
+                return;
+            }
+            list.innerHTML = options.map(t => `<div class="custom-datalist-option" onmousedown="selectTrack('${t.replace(/'/g, "\\'")}')">${t}</div>`).join('');
+        }
+
+        function showTrackOptions() {
+            document.getElementById('track-options-list').classList.add('show');
+            filterTrackOptions();
+        }
+
+        function hideTrackOptions() {
+            setTimeout(() => {
+                const el = document.getElementById('track-options-list');
+                if(el) el.classList.remove('show');
+            }, 150);
+        }
+
+        function filterTrackOptions() {
+            const val = document.getElementById('f-track').value.toLowerCase();
+            const filtered = window.allTrackOptions.filter(t => t.toLowerCase().includes(val));
+            renderTrackOptions(filtered);
+        }
+
+        function selectTrack(track) {
+            document.getElementById('f-track').value = track;
+            document.getElementById('track-options-list').classList.remove('show');
+        }
+
+        async function addTask() {
             const track = document.getElementById('f-track').value.trim();
             const phase = document.getElementById('f-phase').value;
             const label = document.getElementById('f-label').value.trim();
@@ -467,31 +532,82 @@
                 return;
             }
 
-            tasks.push({ id: nextId++, track, phase, label, cost, start, dur });
-            document.getElementById('f-label').value = '';
-            document.getElementById('f-cost').value = '';
-            document.getElementById('f-start').value = '1';
-            document.getElementById('f-dur').value = '1';
-            saveState();
-            renderAll();
+            try {
+                const response = await fetch('/build-system/tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': getCsrfToken()
+                    },
+                    body: JSON.stringify({ track, phase, label, cost, start, dur })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    tasks.push(data.task);
+                    document.getElementById('f-track').value = '';
+                    document.getElementById('f-label').value = '';
+                    document.getElementById('f-cost').value = '';
+                    document.getElementById('f-start').value = '1';
+                    document.getElementById('f-dur').value = '1';
+                    alert('Task added successfully!');
+                    renderAll();
+                }
+            } catch(e) {
+                console.error(e);
+                alert("Failed to add task.");
+            }
         }
 
-        function deleteTask(id) {
-            tasks = tasks.filter(t => t.id !== id);
-            saveState();
-            renderAll();
+        async function deleteTask(id) {
+            try {
+                const response = await fetch('/build-system/tasks/' + id, {
+                    method: 'DELETE',
+                    headers: { 'X-CSRF-TOKEN': getCsrfToken() }
+                });
+                const data = await response.json();
+                if (data.success) {
+                    tasks = tasks.filter(t => t.id !== id);
+                    renderAll();
+                }
+            } catch(e) {
+                console.error(e);
+                alert("Failed to delete task.");
+            }
         }
 
-        function updateTask(id, field, value) {
+        async function updateTask(id, field, value) {
             const t = tasks.find(t => t.id === id);
             if (!t) return;
             if (field === 'cost' || field === 'start' || field === 'dur') {
                 value = parseFloat(value) || 0;
                 if (field === 'start' || field === 'dur') value = Math.max(1, Math.round(value));
             }
+            
+            const originalValue = t[field];
             t[field] = value;
-            saveState();
-            renderAll();
+            
+            try {
+                const response = await fetch('/build-system/tasks/' + id, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': getCsrfToken()
+                    },
+                    body: JSON.stringify({ [field]: value })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    renderAll();
+                } else {
+                    t[field] = originalValue;
+                    renderAll();
+                }
+            } catch(e) {
+                console.error(e);
+                t[field] = originalValue;
+                renderAll();
+            }
         }
 
         function fmtMoney(v) {
@@ -542,21 +658,34 @@
                 return;
             }
 
-            const maxWeek = Math.max(9, ...tasks.map(t => t.start + t.dur - 1));
+            const maxWeek = Math.max(9, ...tasks.map(t => parseInt(t.start) + parseInt(t.dur) - 1));
             const tracks = [...new Set(tasks.map(t => t.track))];
+            
+            let timelineMax = maxWeek;
 
             let weekHeader = '<div class="weekrow"><div></div><div class="weeks">';
-            for (let w = 1; w <= maxWeek; w++) { weekHeader += `<span>${w}</span>`; }
+            
+            if (timelineScale === 'monthly') {
+                const maxMonth = Math.ceil(maxWeek / 4);
+                timelineMax = maxMonth * 4; // Round up max weeks to a whole month scale
+                for (let m = 1; m <= maxMonth; m++) { 
+                    weekHeader += `<span>M${m}</span>`; 
+                }
+            } else {
+                for (let w = 1; w <= maxWeek; w++) { 
+                    weekHeader += `<span>${w}</span>`; 
+                }
+            }
             weekHeader += '</div></div>';
 
             let trackRows = tracks.map(track => {
                 const trackTasks = tasks.filter(t => t.track === track);
                 let bars = trackTasks.map(t => {
                     const p = phaseById[t.phase] || PHASES[0];
-                    const left = ((t.start - 1) / maxWeek) * 100;
-                    const width = (t.dur / maxWeek) * 100;
-                    const label = t.cost ? `${t.label} ${fmtMoney(t.cost)}` : t.label;
-                    return `<div class="bar" style="left:${left}%;width:${width}%;background:${p.color};color:${p.text}" title="${t.label} (${p.label}, wk ${t.start}-${t.start + t.dur - 1})">${label}</div>`;
+                    const left = ((parseInt(t.start) - 1) / timelineMax) * 100;
+                    const width = (parseInt(t.dur) / timelineMax) * 100;
+                    const label = parseFloat(t.cost) > 0 ? `${t.label} ${fmtMoney(parseFloat(t.cost))}` : t.label;
+                    return `<div class="bar" style="left:${left}%;width:${width}%;background:${p.color};color:${p.text}" title="${t.label} (${p.label}, wk ${t.start}-${parseInt(t.start) + parseInt(t.dur) - 1})">${label}</div>`;
                 }).join('');
                 return `<div class="track-row">
           <div class="track-name">${track}</div>
@@ -568,7 +697,7 @@
 
             legend.innerHTML = PHASES.map(p => `<span><span class="swatch" style="background:${p.color}"></span>${p.label}</span>`).join('');
 
-            const totalCost = tasks.reduce((s, t) => s + t.cost, 0);
+            const totalCost = tasks.reduce((s, t) => s + parseFloat(t.cost || 0), 0);
             totalsEl.innerHTML = `<div>Critical path: <b>${maxWeek} weeks</b></div><div>Costed total: <b>${fmtMoney(totalCost)}</b></div><div>Tasks: <b>${tasks.length}</b></div>`;
         }
 
@@ -579,7 +708,7 @@
         }
 
         populatePhaseSelect();
-        loadState();
+        renderAll();
     </script>
 
 @endsection

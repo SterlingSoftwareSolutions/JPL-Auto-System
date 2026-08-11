@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @include('components.landingpagenavbar')
 
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -78,14 +79,231 @@
             width: 100%;
         }
     }
+    
+    .fig-block {
+        background: #27272a;
+        border: 2px solid #b4975a;
+        border-radius: 0.5rem;
+        height: 175px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+        position: relative;
+        overflow: hidden;
+    }
+    .fig-block:hover {
+        background: #3f3f46;
+        transform: scale(1.02);
+    }
+    .fig-overlay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 10px;
+    }
+    .fig-block.has-image .fig-overlay {
+        position: absolute;
+        bottom: -100%;
+        height: auto;
+        padding: 15px 0;
+        background: rgba(0, 0, 0, 0.75);
+    }
+    .fig-block.has-image:hover .fig-overlay {
+        bottom: 0;
+    }
+    .fig-title-num {
+        color: #b4975a;
+        font-weight: 700;
+        margin-bottom: 4px;
+        z-index: 10;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+    .fig-title-text {
+        color: #ffffff;
+        font-size: 12px;
+        margin-bottom: 12px;
+        z-index: 10;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+    .fig-pending {
+        color: #71717a;
+        font-size: 11px;
+        font-style: italic;
+        z-index: 10;
+    }
+    .fig-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 5;
+    }
+    .fig-block input[type="file"] {
+        display: none;
+    }
+    .fig-loading {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 20;
+        display: none;
+    }
+    .fig-remove {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: rgba(220, 38, 38, 0.9);
+        color: white;
+        border-bottom-left-radius: 8px;
+        width: 24px;
+        height: 24px;
+        line-height: 22px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 15;
+        transition: background 0.2s;
+    }
+    .fig-remove:hover {
+        background: #b91c1c;
+    }
+
+    /* ===== Measurement Section ===== */
+    .measurement-card {
+        background: linear-gradient(145deg, #1a1a1d 0%, #0f0f10 100%);
+        border: 1px solid #2e2e32;
+        border-radius: 1.2rem;
+        padding: 2rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(180,151,90,0.15);
+        transition: box-shadow 0.3s ease;
+    }
+    .measurement-card:hover {
+        box-shadow: 0 12px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(180,151,90,0.3), inset 0 1px 0 rgba(180,151,90,0.2);
+    }
+    .measurement-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .measurement-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #b4975a, #d4b87a);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(180,151,90,0.4);
+    }
+    .measurement-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: #1a1a1d;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .measurement-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #f5f5f5;
+        letter-spacing: 0.03em;
+        line-height: 1.2;
+    }
+    .measurement-title span {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: #b4975a;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+    .measurement-divider {
+        height: 1px;
+        background: linear-gradient(90deg, #b4975a, transparent);
+        border: none;
+        margin: 0;
+    }
+    .measurement-desc {
+        font-size: 0.8rem;
+        color: #a1a1aa;
+        line-height: 1.7;
+        text-align: justify;
+    }
+    .measurement-img-wrap {
+        position: relative;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid #3f3f46;
+        background: #111;
+        flex: 1;
+    }
+    .measurement-img-wrap::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 60%, rgba(180,151,90,0.08) 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+    .measurement-img-wrap img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.4s ease;
+    }
+    .measurement-img-wrap:hover img {
+        transform: scale(1.04);
+    }
+    .measurement-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(180,151,90,0.15);
+        border: 1px solid rgba(180,151,90,0.4);
+        color: #b4975a;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 4px;
+        z-index: 2;
+        backdrop-filter: blur(4px);
+    }
 </style>
 
 
-<div class="">
-    <div class="container mx-auto">
+<div class="w-full overflow-hidden">
+    <div class="w-full px-4 mx-auto xl:px-8 max-w-[1920px]">
         <div class="flex flex-wrap">
             <!-- vehical details  table  -->
-            <div class="w-full p-10 rounded bg-gray xl:w-5/12">
+            <div class="w-full p-10 rounded bg-gray xl:w-4/12">
                 {{-- <table class="bg-white rounded shadow-md md:text-sm"> --}}
                     <table class="min-w-full text-sm bg-white">
 
@@ -106,82 +324,13 @@
 
                         <td class="px-2 py-4">
 
-                            @php
-                            $vehicleInfo = [
-                            ['id' => '01.', 'label' => 'Vehicle Make', 'variant1' => 'TBD', 'variant2' => ''],
-                            ['id' => '02.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => ''],
-                            [
-                            'id' => '03.','label' => 'Body Shape (NSW Body Code/Shape)',
-                            'variant1' => 'COUPE COUPE',
-                            'variant2' => '',
-                            ],
-                            [
-                            'id' => '04.',
-                            'label' => 'Number of Side Doors',
-                            'variant1' => '2',
-                            'variant2' => '',
-                            ],
-                            [
-                            'id' => '05.',
-                            'label' => 'Number of Rear Doors',
-                            'variant1' => '0',
-                            'variant2' => '',
-                            ],
-                            ['id' => '06.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '07.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '08.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '09.', 'label' => 'Vehicle Model', 'variant1' => 'TBD', 'variant2' => ''],
-                            [
-                            'id' => '10.',
-                            'label' => 'Body Shape (NSW Body Code/Shape)',
-                            'variant1' => 'COUPE COUPE',
-                            'variant2' => '',
-                            ],
-                            [
-                            'id' => '11.',
-                            'label' => 'Number of Side Doors',
-                            'variant1' => '2',
-                            'variant2' => '',
-                            ],
-                            [
-                            'id' => '12.',
-                            'label' => 'Number of Rear Doors',
-                            'variant1' => '0',
-                            'variant2' => '',
-                            ],
-                            ['id' => '13.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '14.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '15.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                            [
-                            'id' => '16.',
-                            'label' => 'Body Shape (NSW Body Code/Shape)',
-                            'variant1' => 'COUPE COUPE',
-                            'variant2' => '',
-                            ],
-                            [
-                            'id' => '17.',
-                            'label' => 'Number of Side Doors',
-                            'variant1' => '2',
-                            'variant2' => '',
-                            ],
-                            [
-                            'id' => '18.',
-                            'label' => 'Number of Rear Doors',
-                            'variant1' => '0',
-                            'variant2' => '',
-                            ],
-                            ['id' => '19.', 'label' => 'Vehicle Category', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '20.', 'label' => 'Tare Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                            ['id' => '21.', 'label' => 'Unladen Mass (kg)', 'variant1' => '0', 'variant2' => ''],
-                            ];
-                            @endphp
                             <tbody>
                                 @foreach ($vehicleInfo as $index => $info)
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }}">
-                                    <td class="px-2 py-2">{{ $info['id'] }}</td>
-                                    <td class="px-2 py-2">{{ $info['label'] }}</td>
-                                    <td class="px-2 py-2">{{ $info['variant1'] }}</td>
-                                    <td class="px-2 py-2">{{ $info['variant2'] }}</td>
+                                    <td class="px-2 py-2">{{ $info->item_number }}</td>
+                                    <td class="px-2 py-2">{{ $info->label }}</td>
+                                    <td class="px-2 py-2">{{ $info->variant1 }}</td>
+                                    <td class="px-2 py-2">{{ $info->variant2 }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -190,53 +339,65 @@
                        
                     </table>
             </div>
-            <!----------------------- Dashboard images--------------------------------->
-            <div class="w-full p-4 xl:w-4/12">
+            <div class="w-full p-4 xl:w-5/12">
+                @php
+                $figures = [
+                    1 => 'Front 3/4 Exterior',
+                    2 => 'Rear 3/4 Exterior',
+                    3 => 'Full-Length Side Profile',
+                    4 => 'Dashboard / Front Interior',
+                    5 => 'Rear Interior / Seats',
+                    6 => 'Gauge Cluster Detail',
+                    7 => 'Engine Bay View',
+                    8 => 'Underbody View',
+                    9 => 'Underbody - Fuel Tank Detail',
+                ];
+                @endphp
 
-                <div class="p-8 bg-black shadow rounded-[5%]">
-                    <h3 class="mb-4 text-2xl font-bold"></h3>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <img src="{{ asset('images/fig-1.png') }}" alt="fig 1" class="w-full rounded shadow">
-                        <img src="{{ asset('images/fig-2.png') }}" alt="fig 2" class="w-full rounded shadow">
-
+                <div class="p-6 bg-black shadow xl:p-8 rounded-[5%] h-full flex flex-col justify-center">
+                    <div class="grid grid-cols-3 gap-3 sm:gap-4">
+                        @foreach(range(1, 9) as $num)
+                            @php $hasImg = isset($vehicleImages) && isset($vehicleImages[$num]); @endphp
+                            <label class="fig-block {{ $hasImg ? 'has-image' : '' }}" id="fig-block-{{ $num }}">
+                                <div class="fig-overlay">
+                                    <div class="fig-title-num">FIG {{ $num }}</div>
+                                    <div class="fig-title-text">{{ $figures[$num] }}</div>
+                                    <div class="fig-pending" id="fig-pending-{{ $num }}" style="display: {{ $hasImg ? 'none' : 'block' }};">[ PHOTOGRAPHY PENDING ]</div>
+                                </div>
+                                <img src="{{ $hasImg ? ($vehicleImages[$num]->image_url ?? asset('storage/' . $vehicleImages[$num]->image_path)) : '' }}" class="fig-img" id="fig-img-{{ $num }}" style="display: {{ $hasImg ? 'block' : 'none' }};">
+                                <div class="fig-remove" id="fig-remove-{{ $num }}" style="display: {{ $hasImg ? 'block' : 'none' }};" onclick="removeFigureImage(event, {{ $num }})">&times;</div>
+                                <div class="fig-loading" id="fig-loading-{{ $num }}">Uploading...</div>
+                                <input type="file" accept="image/*" onchange="uploadFigureImage(this, {{ $num }})">
+                            </label>
+                        @endforeach
                     </div>
-                    <h3 class="mb-4 text-sm text-center text-white">Fig 3 Dashboard / Interior view</h3>
-
-
-                    <div class="grid grid-cols-1 gap-4 mb-2 place-items-center">
-                        <div class="col-span-1"></div>
-                        {{-- <img src="{{ asset('images/fig-3.png') }}" alt="fig 3" class="w-full rounded shadow"> --}}
-                        <img src="{{ asset('images/fig-3.png') }}" alt="fig 3" class="w-48 rounded shadow">
-
-                        <div class="col-span-1"></div>
-                    </div>
-                    <h3 class="mb-4 text-sm text-center text-white">Fig 1 and Fig 2 Front and rear view
-
-                    </h3>
-
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <img src="{{ asset('images/fig-4.png') }}" alt="fig 4" class="w-full rounded shadow">
-                        <img src="{{ asset('images/fig-5.png') }}" alt="fig 5" class="w-full rounded shadow">
-
-                    </div>
-                    <h3 class="mb-4 text-sm text-center text-white">Fig 4 and Fig 5. Engine bay view and
-                        underbody view
-
-                    </h3>
-
                 </div>
             </div>
 
             <!---------------- Measurement -------------------------- -->
-            <div class="w-full p-10 xl:w-3/12">
+            <div class="w-full p-4 xl:w-3/12">
+                <div class="measurement-card">
 
-                <div class="bg-white rounded shadow ">
-                    <h3 class="mb-6 text-2xl font-bold">Measurement</h3>
-                    <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                        ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <img src="{{ asset('images/measurement.png') }}" alt="fig 5" class="w-full rounded shadow">
+                    <div class="measurement-header">
+                        <div class="measurement-icon">
+                            <svg viewBox="0 0 24 24"><path d="M3 3h18M3 9h18M3 15h18M3 21h18M9 3v18M15 3v18"/></svg>
+                        </div>
+                        <div class="measurement-title">
+                            <span>Technical</span>
+                            Measurements
+                        </div>
+                    </div>
+
+                    <hr class="measurement-divider">
+
+                    <p class="measurement-desc">Precise dimensional specifications and proportional blueprints for this vehicle. All measurements are factory-certified and verified against OEM documentation.
+                    </p>
+
+                    <div class="measurement-img-wrap">
+                        <div class="measurement-badge">Blueprint View</div>
+                        <img src="{{ asset('images/image006.jpg') }}" alt="Vehicle Measurement Specifications">
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -251,66 +412,7 @@
                 <div class="flex flex-wrap">
                     <h1 class="text-2xl font-bold">Specifications</h1>
 
-                    <div class="flex justify-center items-center p-2 mb-16 w-[40%] mx-auto">
-                        <input type="text" id="searchInput" placeholder="Search Specific attribute..."
-                            class="flex-grow p-2" style="h-[40%]">
-                        <i class="fas fa-search" style="font-size: 20px; margin-top: 5px;"></i>
-                    </div>
 
-
-                    <div class="flex items-center justify-center mb-10 text-sm text-gray-600 md:w-[80%] mx-auto gap-10">
-                        <p>
-                            <span class="font-bold">Explanation:</span>
-                        </p>
-
-                        <style>
-                            .icon-text {
-                                display: flex;
-                                align-items: center;
-                                gap: 5px;
-                            }
-                        </style>
-
-                        <p class="icon-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green"
-                                class="bi bi-patch-plus-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0" />
-                            </svg>
-                            <span class="font-bold">Included</span>
-                        </p>
-
-
-                        <p class="icon-text">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-                                class="bi bi-patch-minus-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zM6 7.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1" />
-                            </svg>
-                            <span class="font-bold">Unavailable</span>
-                        </p>
-
-                        <p class="icon-text">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange"
-                                class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
-                            </svg>
-                            <span class="font-bold">Optional</span>
-                        </p>
-
-                        <p class="icon-text">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-patch-question-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0m1.602-2.027c.04-.534.198-.815.846-1.26.674-.475 1.05-1.09 1.05-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.7 1.7 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745.336 0 .504-.24.554-.627" />
-                            </svg>
-                            <span class="font-bold">Information is missing</span>
-                        </p>
-                    </div>
 
                 </div>
             </div>
@@ -321,1964 +423,53 @@
         <section class="mx-10 py">
            
                 <div class="flex items-center justify-center w-full mb-4 bg-white border-b border-gray-300 tab">
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none active" onclick="openTab(event, 'engine')">Engine</button>
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'exterior')">Exterior</button>
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'dimensions')">Dimensions</button>
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'interior')">Interior</button>
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'features')">Features</button>
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'safety')">Safety</button>
-                    <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none" onclick="openTab(event, 'other')">Other</button>
+                    @foreach($categories as $index => $category)
+                        <button class="px-4 py-2 text-gray-600 tab-links hover:text-gray-800 focus:outline-none {{ $index === 0 ? 'active' : '' }}" onclick="openTab(event, '{{ Str::slug($category->name) }}')">{{ $category->name }}</button>
+                    @endforeach
                 </div>
 
-
                 <div class="overflow-hidden bg-white shadow-md justify-between-5xl">
-                    <div id="engine" class="hidden tab-content">
+                    @foreach($categories as $index => $category)
+                    <div id="{{ Str::slug($category->name) }}" class="tab-content {{ $index === 0 ? '' : 'hidden' }}">
                         <div class="flex flex-col md:flex-row">
                             <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
+                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="{{ $category->name }}" class="w-full rounded shadow">
                             </div>
                             <div class="w-full p-4 md:w-2/3">
                                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                                     <div class="mx-10 ">
-
                                         <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
                                             <div class="mx-10">
-
                                                 <thead class="mx-10 border-b-2 w-60">
                                                     <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
+                                                        <th class="items-start w-3/12 px-8 py-6 text-left">{{ $category->name }}</th>
                                                     </tr>
                                                 </thead>
                                             </div>
                                             <tbody>
+                                                @forelse($category->specifications as $spec)
                                                 <tr>
-
-                                                    <td class="items-start px-2 py-2 border-b border-black text-start">
-                                                        Length</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
+                                                    @if(empty($spec->value))
+                                                    <td colspan="2" class="items-start px-2 py-2 border-b border-black text-start">{{ $spec->description }}</td>
+                                                    @else
+                                                    <td class="items-start px-2 py-2 border-b border-black text-start">{{ $spec->description }}</td>
+                                                    <td class="items-end px-2 py-2 border-b border-black text-end">{{ $spec->value }}</td>
+                                                    @endif
                                                 </tr>
+                                                @empty
                                                 <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
+                                                    <td colspan="2" class="px-2 py-4 text-center text-gray-500">No data for this section</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-                                                </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="exterior" class="hidden tab-content">
-                        <!-- Dimensions & Weight content -->
-                        <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
-                            </div>
-                            <div class="w-full p-4 md:w-2/3">
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div class="mx-10 ">
-
-                                        <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                            <div class="mx-10">
-
-                                                <thead class="mx-10 border-b-2 w-60">
-                                                    <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
-                                                    </tr>
-                                                </thead>
-                                            </div>
-
-
-
-                                            {{-- body 1 --}}
-                                            <tbody>
-                                                <tr>
-
-                                                    <td class="px-2 py-2 border-b border-black">Length
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-
-                                            </tbody>
-                                            {{-- body 1 end --}}
-
-
-
-                                        </table>
-
-                                    </div>
-
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="dimensions" class="hidden tab-content">
-                        <!-- Dimensions & Weight content -->
-                        <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
-                            </div>
-                            <div class="w-full p-4 md:w-2/3">
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div class="mx-10 ">
-
-                                        <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                            <div class="mx-10">
-
-                                                <thead class="mx-10 border-b-2 w-60">
-                                                    <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
-                                                    </tr>
-                                                </thead>
-                                            </div>
-
-
-
-                                            {{-- body 1 --}}
-                                            <tbody>
-                                                <tr>
-
-                                                    <td class="px-2 py-2 border-b border-black">Length
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-
-                                            </tbody>
-                                            {{-- body 1 end --}}
-
-
-
-                                        </table>
-
-                                    </div>
-
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 
-                     <div id="interior" class="hidden tab-content">
-                        <!-- Dimensions & Weight content -->
-                        <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
-                            </div>
-                            <div class="w-full p-4 md:w-2/3">
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div class="mx-10 ">
-
-                                        <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                            <div class="mx-10">
-
-                                                <thead class="mx-10 border-b-2 w-60">
-                                                    <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
-                                                    </tr>
-                                                </thead>
-                                            </div>
-
-
-
-                                            {{-- body 1 --}}
-                                            <tbody>
-                                                <tr>
-
-                                                    <td class="px-2 py-2 border-b border-black">Length
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-
-                                            </tbody>
-                                            {{-- body 1 end --}}
-
-
-
-                                        </table>
-
-                                    </div>
-
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="features" class="hidden tab-content">
-                        <!-- Dimensions & Weight content -->
-                        <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
-                            </div>
-                            <div class="w-full p-4 md:w-2/3">
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div class="mx-10 ">
-
-                                        <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                            <div class="mx-10">
-
-                                                <thead class="mx-10 border-b-2 w-60">
-                                                    <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
-                                                    </tr>
-                                                </thead>
-                                            </div>
-
-
-
-                                            {{-- body 1 --}}
-                                            <tbody>
-                                                <tr>
-
-                                                    <td class="px-2 py-2 border-b border-black">Length
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-
-                                            </tbody>
-                                            {{-- body 1 end --}}
-
-
-
-                                        </table>
-
-                                    </div>
-
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="safety" class="hidden tab-content">
-                        <!-- Dimensions & Weight content -->
-                        <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
-                            </div>
-                            <div class="w-full p-4 md:w-2/3">
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div class="mx-10 ">
-
-                                        <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                            <div class="mx-10">
-
-                                                <thead class="mx-10 border-b-2 w-60">
-                                                    <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
-                                                    </tr>
-                                                </thead>
-                                            </div>
-
-
-
-                                            {{-- body 1 --}}
-                                            <tbody>
-                                                <tr>
-
-                                                    <td class="px-2 py-2 border-b border-black">Length
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-
-                                            </tbody>
-                                            {{-- body 1 end --}}
-
-
-
-                                        </table>
-
-                                    </div>
-
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="other" class="hidden tab-content">
-                        <!-- Dimensions & Weight content -->
-                        <div class="flex flex-col md:flex-row">
-                            <div class="w-full md:w-1/3">
-                                <img src="{{ asset('images/dimensions-and-weight.png') }}" alt="fig 5"
-                                    class="w-full rounded shadow">
-                            </div>
-                            <div class="w-full p-4 md:w-2/3">
-                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                                    <div class="mx-10 ">
-
-                                        <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                            <div class="mx-10">
-
-                                                <thead class="mx-10 border-b-2 w-60">
-                                                    <tr class="items-start text-start">
-                                                        <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                            Exterior</th>
-                                                    </tr>
-                                                </thead>
-                                            </div>
-
-
-
-                                            {{-- body 1 --}}
-                                            <tbody>
-                                                <tr>
-
-                                                    <td class="px-2 py-2 border-b border-black">Length
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        4,612 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Width,
-                                                        with
-                                                        Mirrors</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,782 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1,513 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Track,
-                                                        Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        1507 - 1513
-                                                        - 1,513 mm</td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">Wheel
-                                                        Base</td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm</td>
-
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Front
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-2 py-2 border-b border-black ">
-                                                        Overhang, Rear
-                                                    </td>
-                                                    <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                        2,760 mm
-                                                    </td>
-
-
-                                                </tr>
-
-                                            </tbody>
-                                            {{-- body 1 end --}}
-
-
-
-                                        </table>
-
-                                    </div>
-
-                                    <div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Interior
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Head
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            4,612 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Head Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Front</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782 mm</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Hip
-                                                            Room,
-                                                            Rear</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1,782
-                                                            mm</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                        <div class="mx-10 ">
-
-                                            <table class="w-full text-sm bg-white rounded shadow-md ">
-
-
-
-
-                                                <div class="mx-10">
-
-                                                    <thead class="mx-10 border-b-2 w-60">
-                                                        <tr class="items-start text-start">
-                                                            <th class="items-start w-3/12 px-8 py-6 text-left">
-                                                                Weight
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-
-
-
-                                                {{-- body 1 --}}
-                                                <tbody>
-                                                    <tr>
-
-                                                        <td class="px-2 py-2 border-b border-black">Curb
-                                                            Weight
-                                                        </td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Gross
-                                                            Weight</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 -
-                                                            1905 kg</td>
-
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Trailer
-                                                            Load,
-                                                            braked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            12% 1670 -
-                                                            1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black">Max
-                                                            Trailer
-                                                            Load,
-                                                            Nunbreaked</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670 - 1905
-                                                            kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">
-                                                            Cargo
-                                                            Capacity</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            1670
-                                                            - 1905 kg</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="px-2 py-2 border-b border-black ">Max
-                                                            Towbar
-                                                            Download</td>
-                                                        <td class="items-end px-2 py-2 border-b border-black text-end">
-                                                            75 kg</td>
-
-
-                                                    </tr>
-
-                                                </tbody>
-                                                {{-- body 1 end --}}
-
-
-
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div> 
+                    @endforeach
+                </div>
 
         </section>
 
@@ -2308,7 +499,105 @@
        
 
 
+<script>
+    async function uploadFigureImage(input, figureNumber) {
+        if (!input.files || input.files.length === 0) return;
         
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('figure_number', figureNumber);
+        formData.append('title', 'Figure ' + figureNumber);
+        formData.append('vehicle_id', 1);
+
+        const loadingEl = document.getElementById('fig-loading-' + figureNumber);
+        const imgEl = document.getElementById('fig-img-' + figureNumber);
+        const pendingEl = document.getElementById('fig-pending-' + figureNumber);
+
+        loadingEl.style.display = 'flex';
+
+        try {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const response = await fetch('/vehicle-images/upload', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                imgEl.src = data.image_url;
+                imgEl.style.display = 'block';
+                pendingEl.style.display = 'none';
+                document.getElementById('fig-remove-' + figureNumber).style.display = 'block';
+                document.getElementById('fig-block-' + figureNumber).classList.add('has-image');
+            } else {
+                alert(data.message || 'Upload failed');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('An error occurred during upload.');
+        } finally {
+            loadingEl.style.display = 'none';
+            input.value = ''; // Reset input
+        }
+    }
+
+    async function removeFigureImage(event, figureNumber) {
+        event.preventDefault(); // Prevent opening file picker
+        event.stopPropagation();
+        
+        if (!confirm('Are you sure you want to remove this image?')) {
+            return;
+        }
+
+        const loadingEl = document.getElementById('fig-loading-' + figureNumber);
+        const imgEl = document.getElementById('fig-img-' + figureNumber);
+        const pendingEl = document.getElementById('fig-pending-' + figureNumber);
+        const removeEl = document.getElementById('fig-remove-' + figureNumber);
+        const inputEl = document.querySelector('#fig-block-' + figureNumber + ' input[type="file"]');
+
+        loadingEl.style.display = 'flex';
+        loadingEl.innerText = 'Removing...';
+
+        try {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const response = await fetch('/vehicle-images/remove', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify({
+                    figure_number: figureNumber,
+                    vehicle_id: 1
+                })
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                imgEl.src = '';
+                imgEl.style.display = 'none';
+                pendingEl.style.display = 'block';
+                removeEl.style.display = 'none';
+                inputEl.value = '';
+                document.getElementById('fig-block-' + figureNumber).classList.remove('has-image');
+            } else {
+                alert(data.message || 'Remove failed');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('An error occurred while removing the image.');
+        } finally {
+            loadingEl.style.display = 'none';
+            loadingEl.innerText = 'Uploading...';
+        }
+    }
+</script>
     </div>
 </div>
 
