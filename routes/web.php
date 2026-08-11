@@ -49,8 +49,10 @@ Route::get('/seed-only/{key}', function ($key) {
     abort_if($key !== 'nawodi123@2026', 403);
 
     $seeders = [
-        'SupplierSeeder',
-        'CarDataSeeder',
+        // 'SupplierSeeder',
+        // 'CarDataSeeder',
+        'VehicleInformationSeeder',
+        'VehicleSpecificationSeeder',
     ];
 
     foreach ($seeders as $seeder) {
