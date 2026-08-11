@@ -88,9 +88,9 @@ Route::middleware('auth:sanctum')->group(function () {
     })->name('dashboard');
 
     // production system
-    Route::get('/vehicle-details', function () {
-        return view('pages.productionsystem.vehicledetailspage');
-    })->name('vehicledetailspage');
+    Route::get('/vehicle-details', [App\Http\Controllers\VehicleDetailsController::class, 'index'])->name('vehicledetailspage');
+    Route::post('/vehicle-images/upload', [App\Http\Controllers\VehicleImageController::class, 'upload'])->name('vehicleimages.upload');
+    Route::delete('/vehicle-images/remove', [App\Http\Controllers\VehicleImageController::class, 'remove'])->name('vehicleimages.remove');
 
     Route::get('/working-structions', function () {
         return view('pages.productionsystem.workingstructions');
@@ -100,9 +100,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.productionsystem.buildprocedure');
     })->name('buildprocedure');
 
-    Route::get('/build-system', function () {
-        return view('pages.buildsystem.buildpage');
-    })->name('buildpage');
+    Route::get('/build-system', [\App\Http\Controllers\BuildSystemController::class, 'index'])->name('buildpage');
+    Route::post('/build-system/tasks', [\App\Http\Controllers\BuildSystemController::class, 'store']);
+    Route::put('/build-system/tasks/{id}', [\App\Http\Controllers\BuildSystemController::class, 'update']);
+    Route::delete('/build-system/tasks/{id}', [\App\Http\Controllers\BuildSystemController::class, 'destroy']);
 
     // Route::get('/partslist', function () {
     //     return view('pages.productionsystem.partlistpage');
