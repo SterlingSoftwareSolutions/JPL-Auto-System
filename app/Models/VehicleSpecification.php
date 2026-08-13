@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleSpecification extends Model
 {
-    protected $fillable = ['category_id', 'description', 'value'];
+    protected $fillable = ['vehicle_id', 'category_id', 'description', 'value'];
 
     public function category()
     {

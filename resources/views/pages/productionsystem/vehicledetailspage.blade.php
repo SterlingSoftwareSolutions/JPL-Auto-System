@@ -518,7 +518,7 @@
 
         try {
             const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const response = await fetch('/vehicle-images/upload', {
+            const response = await fetch(window.AppUrl + '/vehicle-images/upload', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': token
@@ -565,7 +565,7 @@
 
         try {
             const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const response = await fetch('/vehicle-images/remove', {
+            const response = await fetch(window.AppUrl + '/vehicle-images/remove', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

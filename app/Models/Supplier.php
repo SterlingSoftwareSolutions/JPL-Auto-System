@@ -30,4 +30,9 @@ class Supplier extends Model
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
+    public function vehicles()
+    {
+        return $this->belongsToMany(Vehicle::class);
+    }
+
 }

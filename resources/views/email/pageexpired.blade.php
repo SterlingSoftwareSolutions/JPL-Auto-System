@@ -19,7 +19,7 @@
                     <h1 class="text-4xl  mt-5">Page Expired</h1>
                     <div
                         class="md:mx-auto flex items-center justify-center h-10 mt-10 transition-colors duration-300 bg-black rounded-sm w-44 hover:bg-black">
-                        <a href="/forget-password">
+                        <a href="{{ url('/forget-password') }}">
                             <button class="font-bold text-center text-white">Back</button>
                             </a>
                     </div>

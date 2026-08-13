@@ -13,10 +13,11 @@
 
 <body>
 
+    @if(!View::hasSection('hide_header'))
     <header>
         @include('layouts.header')
-
     </header>
+    @endif
 
     @yield('content')
 
