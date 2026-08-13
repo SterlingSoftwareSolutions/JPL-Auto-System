@@ -10,6 +10,7 @@ class Part extends Model
     use HasFactory;
 
     protected $fillable = [
+        'vehicle_id',
         'description',
         'category_id',
         'component_id',
@@ -32,5 +33,10 @@ class Part extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 }

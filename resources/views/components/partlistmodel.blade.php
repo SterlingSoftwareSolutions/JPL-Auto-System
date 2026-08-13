@@ -1,3 +1,4 @@
+@props(['vehicleId' => null, 'supplier' => null])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,13 +24,51 @@
         @if (isset($supplier))
             @method('PUT')
         @endif
-        <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
-            <div class="w-full max-w-2xl p-6 mx-auto bg-white rounded-lg">
+        @if (isset($vehicleId))
+            <input type="hidden" name="vehicle_id" value="{{ $vehicleId }}">
+        @endif
+
+        <style>
+            /* Custom thin scrollbar styling */
+            .thin-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+            .thin-scrollbar::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            .thin-scrollbar::-webkit-scrollbar-thumb {
+                background-color: rgba(156, 163, 175, 0.6);
+                border-radius: 10px;
+            }
+            .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+                background-color: rgba(107, 114, 128, 0.8);
+            }
+            .thin-scrollbar {
+                scrollbar-width: thin;
+                scrollbar-color: rgba(156, 163, 175, 0.6) transparent;
+            }
+        </style>
+
+        <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden py-8">
+            <div class="w-full max-w-2xl p-6 mx-auto bg-white rounded-lg shadow-xl max-h-[95vh] overflow-y-auto thin-scrollbar">
                 <h2 id="modalTitle" class="mb-4 text-lg font-bold">
                     {{ isset($supplier) ? 'Update Supplier' : 'Add Supplier' }}</h2>
+                    
+                @if ($errors->any())
+                    <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">Whoops!</strong>
+                        <span class="block sm:inline">There were some problems with your input.</span>
+                        <ul class="mt-2 list-disc list-inside text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
                 <div class="space-y-4">
                     <div class="w-full gap-4 p-2">
-                        <input type="hidden" name="supplier_id" value="" id="supplierId"
+                        <input type="hidden" name="supplier_id" value="{{ old('supplier_id') }}" id="supplierId"
                             class="">
 
                         <div class="flex flex-wrap w-full form-group md:flex-nowrap">
@@ -53,36 +92,36 @@
                     <div class="flex space-x-4">
                         <div class="flex items-center w-1/2">
                             <label for="businessName" class="w-1/3">Business Name</label>
-                            <input type="text" name="business_name" id="businessName"
+                            <input type="text" name="business_name" id="businessName" value="{{ old('business_name') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                         <div class="flex items-center w-1/2">
                             <label for="businessWeb" class="w-1/3">Business Web</label>
-                            <input type="text" name="business_web" id="businessWeb"
+                            <input type="text" name="business_web" id="businessWeb" value="{{ old('business_web') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                     </div>
                     <div class="flex space-x-4">
                         <div class="flex items-center w-1/2">
                             <label for="country" class="w-1/3">Country</label>
-                            <input type="text" name="country" id="country"
+                            <input type="text" name="country" id="country" value="{{ old('country') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                         <div class="flex items-center w-1/2">
                             <label for="contactName" class="w-1/3">Contact Name</label>
-                            <input type="text" name="contact_name" id="contactName"
+                            <input type="text" name="contact_name" id="contactName" value="{{ old('contact_name') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                     </div>
                     <div class="flex space-x-4">
                         <div class="flex items-center w-1/2">
                             <label for="phone" class="w-1/3">Phone</label>
-                            <input type="tel" id="phone" name="phone"
+                            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                         <div class="flex items-center w-1/2">
                             <label for="email" class="w-1/3">Email</label>
-                            <input type="email" id="email" name="email"
+                            <input type="email" id="email" name="email" value="{{ old('email') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                     </div>
@@ -91,8 +130,8 @@
                             <label for="tradeAccount" class="w-1/3">Trade Account</label>
                             <select id="tradeAccount" name="trade_account"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
+                                <option value="yes" {{ old('trade_account') == 'yes' ? 'selected' : '' }}>Yes</option>
+                                <option value="no" {{ old('trade_account') == 'no' ? 'selected' : '' }}>No</option>
                             </select>
                         </div>
                         <div class="flex items-center w-1/2">
@@ -111,20 +150,20 @@
                             <select id="supplierCRM" name="supplier_crm"
                                 class="block w-full p-2 border border-gray-300 rounded-md"
                                 onchange="toggleCRMFields()">
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
+                                <option value="no" {{ old('supplier_crm') == 'no' ? 'selected' : '' }}>No</option>
+                                <option value="yes" {{ old('supplier_crm') == 'yes' ? 'selected' : '' }}>Yes</option>
                             </select>
                         </div>
                     </div>
                     <div id="crmFields" class="hidden space-y-4">
                         <div class="flex items-center space-x-4">
                             <label for="crmUrl" class="w-1/3">URL</label>
-                            <input type="url" id="crmUrl" name="crm_url"
+                            <input type="url" id="crmUrl" name="crm_url" value="{{ old('crm_url') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                         <div class="flex items-center space-x-4">
                             <label for="crmUsername" class="w-1/3">Username</label>
-                            <input type="text" id="crmUsername" name="crm_username"
+                            <input type="text" id="crmUsername" name="crm_username" value="{{ old('crm_username') }}"
                                 class="block w-full p-2 border border-gray-300 rounded-md">
                         </div>
                         <div class="flex items-center space-x-4">
@@ -147,11 +186,27 @@
 
     <!-- JavaScript for Modal Toggle -->
     <script>
+        @if ($errors->any())
+            document.addEventListener('DOMContentLoaded', function() {
+                var modalOverlay = document.getElementById('modal-overlay');
+                var modal = document.getElementById('modal');
+                modalOverlay.classList.remove('hidden');
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+                
+                // If it was an update, set title to Update Supplier
+                if (document.getElementById('supplierId').value) {
+                    document.getElementById('modalTitle').textContent = 'Update Supplier';
+                    document.getElementById('submitButton').textContent = 'Update';
+                }
+            });
+        @endif
+
         function editSupplier(supplierId) {
             console.log('Edit Supplier' + supplierId);
 
             $.ajax({
-                url: "/suppliers/" + supplierId,
+                url: window.AppUrl + "/suppliers/" + supplierId,
                 type: "GET",
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content')
@@ -189,7 +244,7 @@
                     if (response.upload_image) {
                         document.getElementById('uploadedFiles').innerHTML = `
                             <div class="flex items-center w-full h-full">
-                                <img src="/storage/profile_images/${response.upload_image}" alt="Logo" class="object-cover w-full h-full rounded">
+                                <img src="${window.AppUrl}/storage/profile_images/${response.upload_image}" alt="Logo" class="object-contain w-full max-h-48 rounded">
 
                             </div>
                             <button class="absolute text-red-500 hover:text-red-700 top-1 right-2" onclick="removeFile('logo')">Remove</button>
@@ -202,7 +257,7 @@
                     if (response.trade_agreement_pdf) {
                         document.getElementById('tradeAgreementContainer').innerHTML = `
         <div class="flex items-center justify-between">
-            <a href="/storage/${response.trade_agreement_pdf}" target="_blank" class="text-blue-500 hover:text-blue-700"download>Download Agreement</a>
+            <a href="${window.AppUrl}/storage/${response.trade_agreement_pdf}" target="_blank" class="text-blue-500 hover:text-blue-700"download>Download Agreement</a>
             <button class="ml-4 text-red-500 hover:text-red-700" onclick="removeFile('tradeAgreement')">Remove</button>
         </div>
         <input type="file" id="tradeAgreement" name="trade_agreement_pdf" accept="application/pdf" class="hidden">
@@ -306,7 +361,7 @@
                 reader.onload = function(e) {
                     document.getElementById('uploadedFiles').innerHTML = `
                         <div class="flex items-center w-full h-full">
-                            <img src="${e.target.result}" alt="Logo" class="object-cover w-full h-full rounded">
+                            <img src="${e.target.result}" alt="Logo" class="object-contain w-full max-h-48 rounded">
                         </div>
                         <button class="absolute text-red-500 hover:text-red-700 top-1 right-2" onclick="removeFile('logo')">Remove</button>
                     `;

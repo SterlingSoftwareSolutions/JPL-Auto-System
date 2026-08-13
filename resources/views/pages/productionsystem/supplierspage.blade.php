@@ -50,88 +50,97 @@
             <div class="md:grid grid-cols-3 ">
 
                 @foreach ($suppliers as $supplier)
-                    <div class="flex flex-col bg-white md:w-[420px] mx-4 p-10 rounded-2xl mt-10  ">
-                        <div class="flex items-end">
+                    <div class="flex flex-col bg-white rounded-2xl overflow-hidden mt-10" style="border: 1px solid #e5e7eb; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); transition: box-shadow 0.3s ease;">
+                        
+                        <!-- Header with Image & Actions -->
+                        <div class="relative bg-gray-50 flex items-center justify-center" style="height: 140px; border-bottom: 1px solid #f3f4f6;">
+                            @if($supplier->upload_image)
+                                <img src="{{ asset('storage/profile_images/' . $supplier->upload_image) }}" class="h-full w-full object-contain p-4" alt="Supplier Logo">
+                            @else
+                                <div class="text-gray-400 font-medium tracking-wide uppercase text-sm">No Image</div>
+                            @endif
 
-                            <div>
-                                <img src="{{ asset('storage/profile_images/' . $supplier->upload_image) }}" class="w-52 h-24" alt="profile Pic">
-
-
-                            </div>
-                            <a href="#" class="ml-auto">
-                                <img class="h-14" src="{{ asset('images/partlist01.jpg') }}" alt="profile Pic">
-                            </a>
-                            <div class="gap-3">
-                                {{-- <input type="hidden" name="" id="" value="{{$supplier->id}}"> --}}
-                                <button onclick="editSupplier ({{$supplier->id}})">Edit</button>
-                                <form action="{{ route('deletesupplier', $supplier->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button>Delete</button>
-
-                                </form>
+                            <!-- Top Right Actions -->
+                            <div class="absolute top-3 right-3 flex flex-col gap-2 items-end">
+                                <div class="flex gap-2 bg-white rounded-lg shadow-sm px-2 py-1" style="border: 1px solid #e5e7eb;">
+                                    <button onclick="editSupplier({{ $supplier->id }})" class="text-xs font-semibold text-gray-600 hover:text-orange-500 transition-colors">Edit</button>
+                                    <span class="text-gray-300">|</span>
+                                    <form action="{{ route('deletesupplier', $supplier->id) }}" method="POST" style="margin: 0;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-xs font-semibold text-gray-600 hover:text-red-600 transition-colors">Delete</button>
+                                    </form>
+                                </div>
+                                <a href="#" class="block bg-white rounded-lg shadow-sm overflow-hidden" style="border: 1px solid #e5e7eb; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                    <img class="h-8" src="{{ asset('images/partlist01.jpg') }}" alt="Parts List">
+                                </a>
                             </div>
                         </div>
 
-                        <div class="mt-5 border-b-2 border-black pb-2">
-                            <h1 class="font-bold text-xl">{{ $supplier->business_name }}</h1>
-                            <h2 class="font-bold">{{ $supplier->business_web }}</h2>
-                        </div>
-
-                        <div class="flex flex-col mt-5">
-                            <div class="grid grid-cols-2 items-center border-b border-black">
-                                <div class="flex items-center">
-                                    <h1 class="font-bold pr-2">Country:</h1>
-                                    <h1 class="text-left break-all">{{ $supplier->country }}</h1>
-                                </div>
-                                <div class="flex items-center border-l-4 border-black pl-2" style="padding: 10px;">
-                                    <h1 class="font-bold pr-2">Account Contact:</h1>
-                                    <h1 class="text-left break-all">{{ $supplier->contact_name }}</h1>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 items-center">
-                                <div class="flex items-center border-b-4 border-black">
-                                    <h1 class="font-bold pr-2">P:</h1>
-                                    <h1 class="text-left break-all">{{ $supplier->phone }}</h1>
-                                </div>
-                                <div class="flex items-center border-l-4 border-b-4 border-black pl-2">
-                                    <h1 class="font-bold pr-2">E:</h1>
-                                    <h1 class="text-left break-all">{{ $supplier->email }}</h1>
-                                </div>
+                        <!-- Body content -->
+                        <div class="p-6 flex-1 flex flex-col">
+                            
+                            <!-- Title & Web -->
+                            <div class="mb-4">
+                                <h1 class="font-bold text-xl text-gray-900 leading-tight">{{ $supplier->business_name }}</h1>
+                                <a href="{{ str_starts_with($supplier->business_web, 'http') ? $supplier->business_web : 'https://'.$supplier->business_web }}" target="_blank" class="text-sm font-medium text-blue-600 hover:underline break-all">{{ $supplier->business_web }}</a>
                             </div>
 
-                            <div class="grid grid-cols-2">
-                                <div class="flex">
-                                    <div class="flex-col mt-5">
-                                        <div class="flex">
-                                            <h1 class="pr-2 font-semibold">CRM</h1>
-                                            <h1>{{ $supplier->supplier_crm ? 'Yes' : 'No' }}</h1>
+                            <!-- Info Grid -->
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm mb-5">
+                                <div class="flex flex-col pb-2 border-b border-gray-100">
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Country</span>
+                                    <span class="font-medium text-gray-800 break-all">{{ $supplier->country ?: '-' }}</span>
+                                </div>
+                                <div class="flex flex-col pb-2 border-b border-gray-100">
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Account Contact</span>
+                                    <span class="font-medium text-gray-800 break-all">{{ $supplier->contact_name ?: '-' }}</span>
+                                </div>
+                                <div class="flex flex-col pb-2 border-b border-gray-100">
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Phone</span>
+                                    <span class="font-medium text-gray-800 break-all">{{ $supplier->phone ?: '-' }}</span>
+                                </div>
+                                <div class="flex flex-col pb-2 border-b border-gray-100">
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Email</span>
+                                    <span class="font-medium text-gray-800 break-all">{{ $supplier->email ?: '-' }}</span>
+                                </div>
+                            </div>
+
+                            <!-- System Details Box -->
+                            <div class="mt-auto bg-gray-50 rounded-xl p-4 text-xs" style="border: 1px solid #f3f4f6;">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <!-- CRM Side -->
+                                    <div class="flex flex-col gap-1.5">
+                                        <div class="flex justify-between items-center">
+                                            <span class="font-semibold text-gray-600">CRM Configured</span>
+                                            <span class="px-2 py-0.5 rounded-full {{ $supplier->supplier_crm ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600' }} font-bold" style="font-size: 10px;">{{ $supplier->supplier_crm ? 'YES' : 'NO' }}</span>
                                         </div>
-                                        <div class="flex">
-                                            <h1 class="pr-2 font-semibold">url: <span class="text-left text-balance url">{{ $supplier->crm_url }}</span></h1>
+                                        <div class="truncate" title="{{ $supplier->crm_url }}">
+                                            <span class="text-gray-400">URL:</span> <span class="font-medium">{{ $supplier->crm_url ?: '-' }}</span>
                                         </div>
-                                        <div class="flex">
-                                            <h1 class="text-left font-semibold">Username: {{ $supplier->crm_username }}</h1>
+                                        <div class="truncate" title="{{ $supplier->crm_username }}">
+                                            <span class="text-gray-400">User:</span> <span class="font-medium">{{ $supplier->crm_username ?: '-' }}</span>
                                         </div>
-                                        <div class="flex">
-                                            <h1 class="text-left font-semibold">Password: ******</h1>
+                                    </div>
+                                    
+                                    <!-- Trade Side -->
+                                    <div class="flex flex-col gap-1.5 pl-4 border-l border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="font-semibold text-gray-600">Trade Account</span>
+                                            <span class="px-2 py-0.5 rounded-full {{ $supplier->trade_account ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600' }} font-bold" style="font-size: 10px;">{{ $supplier->trade_account ? 'YES' : 'NO' }}</span>
+                                        </div>
+                                        <div class="flex flex-col mt-1">
+                                            <span class="text-gray-400">Agreement:</span> 
+                                            @if($supplier->trade_agreement_pdf)
+                                                <span class="font-medium text-blue-600 hover:underline truncate" title="{{ basename($supplier->trade_agreement_pdf) }}">{{ basename($supplier->trade_agreement_pdf) }}</span>
+                                            @else
+                                                <span class="font-medium text-gray-400">No Agreement</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex border-l-4 border-black pl-2">
-                                    <div class="flex-col mt-4">
-                                        <div class="flex">
-                                            <h1 class="pr-2">Trade Account:</h1>
-                                            <h1 class="text-left">{{ $supplier->trade_account ? 'Yes' : 'No' }}</h1>
-                                        </div>
-                                        <div class="flex">
-                                            <h1 class="pr-2">Agreement:</h1>
-                                            <h1 class="text-left break-all">{{ $supplier->trade_agreement_pdf ? basename($supplier->trade_agreement_pdf) : 'No Agreement' }}</h1>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
+                            
                         </div>
                     </div>
                 @endforeach

@@ -89,6 +89,18 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('pages.dashboard');
     })->name('dashboard');
 
+    // Vehicles
+    Route::get('/vehicles', [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicles.index');
+    Route::post('/vehicles', [App\Http\Controllers\VehicleController::class, 'store'])->name('vehicles.store');
+    Route::get('/vehicles/{id}/report', [App\Http\Controllers\VehicleController::class, 'report'])->name('vehicles.report');
+    Route::post('/vehicles/{id}/builds', [App\Http\Controllers\VehicleController::class, 'storeBuild'])->name('vehicles.builds.store');
+    Route::post('/vehicles/{id}/compliance', [\App\Http\Controllers\ComplianceController::class, 'updateVehicleCompliance'])->name('vehicles.compliance.update');
+    Route::post('/vehicles/{id}/model-report-approvals', [\App\Http\Controllers\VehicleController::class, 'storeModelReportApproval'])->name('vehicles.model-report-approvals.store');
+    Route::post('/builds/{id}/parts', [App\Http\Controllers\VehicleController::class, 'storeBuildPart']);
+    Route::put('/builds/parts/{id}/status', [App\Http\Controllers\VehicleController::class, 'updateBuildPartStatus']);
+    Route::post('/builds/{id}/timeline-tasks', [App\Http\Controllers\VehicleController::class, 'storeTimelineTask']);
+    Route::put('/builds/timeline-tasks/{id}', [App\Http\Controllers\VehicleController::class, 'updateTimelineTask']);
+    Route::delete('/builds/timeline-tasks/{id}', [App\Http\Controllers\VehicleController::class, 'destroyTimelineTask']);
     // production system
     Route::get('/vehicle-details', [App\Http\Controllers\VehicleDetailsController::class, 'index'])->name('vehicledetailspage');
     Route::post('/vehicle-images/upload', [App\Http\Controllers\VehicleImageController::class, 'upload'])->name('vehicleimages.upload');
@@ -117,6 +129,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('savepartlist', [SupplierController::class, 'savepartlist'])->name('storagesupplier');
     Route::get('/suppliers', [SupplierController::class, 'getsupplier'])->name('supplierspage');
     Route::delete('/delete/{id}', [SupplierController::class, 'destroy'])->name('deletesupplier');
+    Route::delete('/timeline/{id}', [\App\Http\Controllers\VehicleController::class, 'destroyTimelineTask'])->name('timeline.destroy');
+
+
+
+    Route::put('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\VehicleController::class, 'toggleStep']);
+    Route::post('/builds/{id}/steps/{stepId}/image', [\App\Http\Controllers\VehicleController::class, 'uploadStepImage']);
+
+    // Vehicle CRUD
+    Route::put('/vehicles/{id}', [\App\Http\Controllers\VehicleController::class, 'update'])->name('vehicles.update');
+    Route::delete('/vehicles/{id}', [\App\Http\Controllers\VehicleController::class, 'destroy'])->name('vehicles.destroy');
 
     // get supplier
     Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('create');

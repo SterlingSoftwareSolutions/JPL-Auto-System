@@ -15,21 +15,21 @@ class SupplierController extends Controller
             // This block is for creating a new supplier
 
             // Validate incoming request data
-            // $validatedData = $request->validate([
-            //     'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB per file
-            //     'trade_agreement_pdf' => 'required|file|mimes:pdf|max:2048',
-            //     'business_name' => 'required|string|max:255',
-            //     'business_web' => 'nullable|string|max:255',
-            //     'country' => 'nullable|string|max:255',
-            //     'contact_name' => 'nullable|string|max:255',
-            //     'phone' => 'nullable|string|max:255',
-            //     'email' => 'nullable|string|email|max:255',
-            //     'trade_account' => 'nullable|string|in:yes,no',
-            //     'supplier_crm' => 'nullable|string|in:yes,no',
-            //     'crm_url' => 'nullable|string|max:255',
-            //     'crm_username' => 'nullable|string|max:255',
-            //     'crm_password' => 'nullable|string|max:255',
-            // ]);
+            $validatedData = $request->validate([
+                'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'trade_agreement_pdf' => 'nullable|file|mimes:pdf|max:2048',
+                'business_name' => 'required|string|max:255',
+                'business_web' => 'nullable|string|max:255',
+                'country' => 'nullable|string|max:255',
+                'contact_name' => 'nullable|string|max:255',
+                'phone' => 'nullable|string|max:255',
+                'email' => 'nullable|string|email|max:255|unique:suppliers,email',
+                'trade_account' => 'nullable|in:yes,no',
+                'supplier_crm' => 'nullable|in:yes,no',
+                'crm_url' => 'nullable|string|max:255',
+                'crm_username' => 'nullable|string|max:255',
+                'crm_password' => 'nullable|string|max:255',
+            ]);
 
             $partslist = new Supplier();
 
@@ -65,6 +65,11 @@ class SupplierController extends Controller
             // Save the new supplier record
             $partslist->save();
 
+            // Link to vehicle if provided
+            if ($request->has('vehicle_id') && !empty($request->vehicle_id)) {
+                $partslist->vehicles()->attach($request->vehicle_id);
+            }
+
         } else {
             // This block is for updating an existing supplier
 
@@ -72,19 +77,21 @@ class SupplierController extends Controller
             $supplier = Supplier::findOrFail($request->supplier_id);
 
             // Validate incoming request data for update
-            // $validatedData = $request->validate([
-            //     'business_name' => 'required|string|max:255',
-            //     'business_web' => 'nullable|string|max:255',
-            //     'country' => 'nullable|string|max:255',
-            //     'contact_name' => 'nullable|string|max:255',
-            //     'phone' => 'nullable|string|max:255',
-            //     'email' => 'nullable|string|email|max:255',
-            //     'trade_account' => 'nullable|string|in:yes,no',
-            //     'supplier_crm' => 'nullable|string|in:yes,no',
-            //     'crm_url' => 'nullable|string|max:255',
-            //     'crm_username' => 'nullable|string|max:255',
-            //     'crm_password' => 'nullable|string|max:255',
-            // ]);
+            $validatedData = $request->validate([
+                'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'trade_agreement_pdf' => 'nullable|file|mimes:pdf|max:2048',
+                'business_name' => 'required|string|max:255',
+                'business_web' => 'nullable|string|max:255',
+                'country' => 'nullable|string|max:255',
+                'contact_name' => 'nullable|string|max:255',
+                'phone' => 'nullable|string|max:255',
+                'email' => 'nullable|string|email|max:255|unique:suppliers,email,' . $request->supplier_id,
+                'trade_account' => 'nullable|in:yes,no',
+                'supplier_crm' => 'nullable|in:yes,no',
+                'crm_url' => 'nullable|string|max:255',
+                'crm_username' => 'nullable|string|max:255',
+                'crm_password' => 'nullable|string|max:255',
+            ]);
 
             // Update the supplier fields
             $supplier->business_name = $request->business_name;
@@ -121,7 +128,7 @@ class SupplierController extends Controller
 
 
 
-        return redirect()->route('supplierspage');
+        return redirect()->back()->with('success', 'Supplier saved successfully.');
     }
 
 
@@ -181,7 +188,7 @@ class SupplierController extends Controller
 
         $supplier->update();
 
-        return redirect()->route('supplierspage')->with('success', 'Supplier updated successfully.');
+        return redirect()->back()->with('success', 'Supplier updated successfully.');
     }
 
 
