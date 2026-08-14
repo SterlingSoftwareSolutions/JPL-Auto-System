@@ -49,7 +49,7 @@
   h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
   .lede { color: var(--text-dim); font-size: 13px; margin: 0 0 20px; }
   .section-label { font-size: 11px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px; }
-  .page { display: none; max-width: 1280px; margin: 0 auto; padding: 24px 28px; }
+  .page { display: none; max-width: 1440px; width: 100%; margin: 0 auto; padding: 32px 40px; box-sizing: border-box; }
   .page.active { display: block; }
   #page-vehicle { max-width: none; padding: 32px; margin: 0; background: #f8fafc; min-height: calc(100vh - 130px); }
 
@@ -247,7 +247,7 @@
   <div class="tab active" data-page="builds" onclick="showTab('builds')"><i class="fas fa-list-alt" style="margin-right: 6px;"></i> Builds</div>
   <div class="tab" data-page="vehicle" onclick="showTab('vehicle')"><i class="fas fa-car" style="margin-right: 6px;"></i> Vehicle details</div>
   <div class="tab" data-page="compliance" onclick="showTab('compliance')"><i class="fas fa-shield-alt" style="margin-right: 6px;"></i> Compliance</div>
-  <div class="tab" data-page="process" onclick="showTab('process')" style="display: none;"><i class="fas fa-cog" style="margin-right: 6px;"></i> Build process</div>
+  <div class="tab" data-page="process" onclick="showTab('process')"><i class="fas fa-cog" style="margin-right: 6px;"></i> Build process</div>
   <div class="tab" data-page="parts" onclick="showTab('parts')"><i class="fas fa-box" style="margin-right: 6px;"></i> Parts list</div>
   <div class="tab" data-page="suppliers" onclick="showTab('suppliers')"><i class="fas fa-users" style="margin-right: 6px;"></i> Suppliers</div>
 </div>
@@ -292,10 +292,11 @@
       </div>
     </div>
     <div id="builds-detail-view" style="display:none">
-      <div style="margin-bottom: 16px;">
-        <span class="back-link" onclick="closeBuildDetail()" style="display: inline-flex; align-items: center; gap: 6px; color: #111827; font-size: 13px; font-weight: 600; cursor: pointer; margin-bottom: 8px; padding: 8px 14px; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); background: #fff;">&larr; Builds</span>
-        <h1 id="build-detail-title" style="font-size: 32px; font-weight: 700; margin: 0 0 4px; color: #111827;">Build</h1>
-        <div id="build-detail-meta" style="font-size: 14px; color: #6b7280; margin: 0; display: flex; align-items: center; gap: 8px;"></div>
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+        <button onclick="closeBuildDetail()" title="Back to builds" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 20px; border: 1px solid #e5e7eb; background: #fff; cursor: pointer; color: #111827; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin: 0; transition: background 0.2s;">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 id="build-detail-title" style="font-size: 32px; font-weight: 700; margin: 0; color: #111827;">Build</h1>
       </div>
       <div class="subtabs">
         <div class="subtab active" data-sub="overview" onclick="showSubTab('overview')"><i class="fas fa-info-circle"></i> Overview</div>
@@ -1214,7 +1215,6 @@ function openBuildDetail(id) {
   document.getElementById('builds-list-view').style.display = 'none';
   document.getElementById('builds-detail-view').style.display = 'block';
   document.getElementById('build-detail-title').textContent = b.name;
-  document.getElementById('build-detail-meta').innerHTML = '<span style="background: #0f172a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.02em;">478</span> <span>&middot; 1967 Mustang Fastback &middot; Built against 478 &mdash; v1</span>';
   document.getElementById('ov-parts-pct').textContent = computePartsInstalledPct() + '%';
   document.getElementById('ov-vin-display').textContent = b.vin || 'Assigned on completion';
   document.getElementById('ov-vin-display').style.color = b.vin ? 'var(--text)' : 'var(--text-faint)';
