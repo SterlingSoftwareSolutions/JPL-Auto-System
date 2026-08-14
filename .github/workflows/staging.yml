@@ -35,6 +35,7 @@ jobs:
         sed -i "s%ACTIONS_MAIL_FROM_ADDRESS%${{ secrets.mail_from_address }}%g" .env
         sed -i "s%ACTIONS_STRIPE_KEY%${{ secrets.stripe_key }}%g" .env
         sed -i "s%ACTIONS_STRIPE_SECRET%${{ secrets.stripe_secret }}%g" .env
+        sed -i "s%ACTIONS_ASSET_URL%${{ secrets.asset_url }}%g" .env
 
     - name: Install vendor files
       run: composer install --no-dev --optimize-autoloader
