@@ -433,12 +433,19 @@
               RAV: {{ $appr->rav_entry_reference ?: 'N/A' }} &bull; Date: {{ $appr->approval_date ?: 'N/A' }} &bull; Dept: {{ $appr->department_reference ?: 'N/A' }}
             </div>
           </div>
-          <div>
+          <div style="display:flex; align-items:center; gap: 16px;">
             @if($appr->certificate_file_path)
-              <a href="{{ Storage::url($appr->certificate_file_path) }}" target="_blank" style="font-size:13px; color:#2563eb; text-decoration:underline; font-weight:500;">View Certificate</a>
+              <a href="{{ asset('storage/' . $appr->certificate_file_path) }}" target="_blank" style="font-size:13px; color:#2563eb; text-decoration:underline; font-weight:500;">View Certificate</a>
             @else
               <span style="font-size:12px; color:#9ca3af;">No file</span>
             @endif
+            <form action="{{ route('vehicles.model-report-approvals.destroy', $appr->id) }}" method="POST" style="margin:0;" onsubmit="return confirm('Are you sure you want to delete this approval record?');">
+              @csrf
+              @method('DELETE')
+              <button type="submit" style="background:none; border:none; padding:0; cursor:pointer; color:#ef4444;" title="Delete">
+                  <i class="fas fa-trash-alt"></i>
+              </button>
+            </form>
           </div>
         </div>
         @endforeach
