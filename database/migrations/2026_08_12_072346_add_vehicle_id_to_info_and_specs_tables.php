@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::table('vehicle_information', function (Blueprint $table) {
             $table->unsignedBigInteger('vehicle_id')->nullable()->after('id');
+        });
+
+        Schema::table('vehicle_information', function (Blueprint $table) {
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
         });
 
         Schema::table('vehicle_specifications', function (Blueprint $table) {
             $table->unsignedBigInteger('vehicle_id')->nullable()->after('id');
+        });
+
+        Schema::table('vehicle_specifications', function (Blueprint $table) {
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
         });
     }
