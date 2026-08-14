@@ -40,7 +40,6 @@
                         <h3 class="font-bold text-black text-xl mb-1 pr-6">{{ $vehicle->name }}</h3>
                         <p class="text-xs text-gray-500 font-medium">{{ $vehicle->year }} {{ $vehicle->make }} {{ $vehicle->model }}</p>
                     </div>
-                </a>
 
                 <!-- Card Footer (Active Status) -->
                 <div class="border-t border-gray-100 px-5 py-3 flex items-center justify-between">
@@ -50,6 +49,7 @@
                     </div>
                     <i class="fas fa-arrow-right text-gray-400 text-sm"></i>
                 </div>
+                </a>
 
                 <!-- 3 Dot Menu Button -->
                 <div class="absolute top-3 right-3 z-10">
@@ -61,7 +61,7 @@
                         <button onclick="openEditModal({{ $vehicle->id }}, '{{ addslashes($vehicle->name) }}', '{{ $vehicle->year }}', '{{ addslashes($vehicle->make) }}', '{{ addslashes($vehicle->model) }}', {{ $vehicle->image_path ? 'true' : 'false' }})" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-medium">
                             Edit
                         </button>
-                        <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this vehicle?');">
+                        <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this vehicle?');" class="hidden">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
