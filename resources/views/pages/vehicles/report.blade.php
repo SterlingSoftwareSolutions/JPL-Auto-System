@@ -292,10 +292,8 @@
       </div>
     </div>
     <div id="builds-detail-view" style="display:none">
-      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
-        <button onclick="closeBuildDetail()" title="Back to builds" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 20px; border: 1px solid #e5e7eb; background: #fff; cursor: pointer; color: #111827; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin: 0; transition: background 0.2s;">
-          <i class="fas fa-arrow-left"></i>
-        </button>
+      <div style="margin-bottom: 24px;">
+        <span class="back-link" onclick="closeBuildDetail()" style="display: inline-flex; align-items: center; gap: 6px; color: #6b7280; font-size: 15px; font-weight: 500; cursor: pointer; margin-bottom: 12px; transition: color 0.2s;">&larr; Builds</span>
         <h1 id="build-detail-title" style="font-size: 32px; font-weight: 700; margin: 0; color: #111827;">Build</h1>
       </div>
       <div class="subtabs">
