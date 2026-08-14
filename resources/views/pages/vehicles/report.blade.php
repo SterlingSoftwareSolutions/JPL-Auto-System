@@ -660,6 +660,7 @@
 </main>
 
 <script>
+window.AppUrl = '{{ url("") }}';
 function showTab(page) {
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.page === page));
   document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + page));
