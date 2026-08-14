@@ -154,8 +154,8 @@ class VehicleController extends Controller
                 'type' => $comp && $comp->componentDetails ? $comp->componentDetails->type : '',
                 'part' => $comp && $comp->componentDetails ? $comp->componentDetails->part : '',
                 'qty' => $comp && $comp->componentDetails ? $comp->componentDetails->qty : '',
-                'document' => $comp && $comp->supportingDocument ? Storage::url($comp->supportingDocument->document) : null,
-                'image' => $comp && $comp->supportingImage ? Storage::url($comp->supportingImage->image) : null
+                'document' => $comp && $comp->supportingDocument ? asset('storage/' . $comp->supportingDocument->document) : null,
+                'image' => $comp && $comp->supportingImage ? asset('storage/' . $comp->supportingImage->image) : null
             ];
         }
 
@@ -303,8 +303,21 @@ class VehicleController extends Controller
                 'rav_entry_reference' => $approval->rav_entry_reference,
                 'approval_date' => $approval->approval_date,
                 'department_reference' => $approval->department_reference,
-                'certificate_url' => $approval->certificate_file_path ? Storage::url($approval->certificate_file_path) : null,
+                'certificate_url' => $approval->certificate_file_path ? asset('storage/' . $approval->certificate_file_path) : null,
             ]
         ]);
+    }
+
+    public function destroyModelReportApproval($id)
+    {
+        $approval = ModelReportApproval::findOrFail($id);
+        
+        if ($approval->certificate_file_path) {
+            Storage::disk('public')->delete($approval->certificate_file_path);
+        }
+        
+        $approval->delete();
+        
+        return redirect()->back()->with('success', 'Approval record deleted successfully.');
     }
 }
