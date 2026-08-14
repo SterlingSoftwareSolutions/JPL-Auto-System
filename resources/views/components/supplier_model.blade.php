@@ -19,7 +19,7 @@
                                     @if (isset($supplier) && $supplier->upload_image)
 
                                     <div class="flex items-center w-full h-full">
-                                        <img src="/storage/profile_images/{{$supplier->upload_image}}" alt="Logo" class="object-cover w-full h-full rounded">
+                                        <img src="{{ asset('storage/profile_images/' . $supplier->upload_image) }}" alt="Logo" class="object-cover w-full h-full rounded">
 
                                     </div>
                                     <button class="absolute text-red-500 hover:text-red-700 top-1 right-2" onclick="removeFile('logo')">Remove</button>
@@ -91,7 +91,7 @@
 
                                 @if (isset($supplier->trade_agreement_pdf))
                                     <div class="flex items-center justify-between">
-                                        <a href="/storage/{{$supplier->trade_agreement_pdf}}" target="_blank" class="text-blue-500 hover:text-blue-700"download>Download Agreement</a>
+                                        <a href="{{ asset('storage/' . $supplier->trade_agreement_pdf) }}" target="_blank" class="text-blue-500 hover:text-blue-700"download>Download Agreement</a>
                                         <button class="ml-4 text-red-500 hover:text-red-700" onclick="removeFile('tradeAgreement')">Remove</button>
                                     </div>
                                     <input type="file" id="tradeAgreement" name="trade_agreement_pdf" accept="application/pdf" class="hidden">

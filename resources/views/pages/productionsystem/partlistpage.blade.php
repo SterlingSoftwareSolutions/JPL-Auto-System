@@ -1085,8 +1085,9 @@
                     var categoryId = document.getElementById('category').value;
 
                     $.ajax({
-                        url: '/components/' + categoryId,
+                        url: window.AppUrl + '/components/' + categoryId,
                         type: 'GET',
+                        dataType: 'json',
                         data: {
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },

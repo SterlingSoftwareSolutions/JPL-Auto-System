@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleInformation extends Model
 {
     protected $table = 'vehicle_information';
-    protected $fillable = ['item_number', 'label', 'variant1', 'variant2'];
+    protected $fillable = ['vehicle_id', 'item_number', 'label', 'variant1', 'variant2'];
 }

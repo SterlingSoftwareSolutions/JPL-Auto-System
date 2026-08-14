@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.sidebar')
 
 
 
@@ -10,19 +10,13 @@
     display: flex;
     height: 100vh;
     max-width: 100% !important;
-    background-image: url('../images/landing-bg.jpg');
-    background-position: center;
-    background-size: cover;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
 }
 
 .content {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    transform: rotate(45deg);
+    display: none;
 }
 
 
@@ -78,7 +72,10 @@
 </style>
 
 @section('content')
-    <div class="container">
+    <div class="container relative">
+        <div class="text-center absolute inset-0 flex items-center justify-center">
+            <h1 class="text-4xl font-bold text-gray-800">Dashboard <span class="text-blue-600">Coming Soon</span></h1>
+        </div>
         <div class="content">
             <div class="row">
                 <div class="image-container">
