@@ -137,6 +137,31 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\VehicleController::class, 'toggleStep']);
     Route::post('/builds/{id}/steps/{stepId}/image', [\App\Http\Controllers\VehicleController::class, 'uploadStepImage']);
 
+    // Build Process API — master template + live build state
+    Route::prefix('api')->group(function () {
+        // Master template (belongs to vehicle, read-only for builds)
+        Route::get('/vehicles/{vehicleId}/build-process', [\App\Http\Controllers\BuildProcessController::class, 'masterTemplate']);
+
+        // Live build state (per commissioned build)
+        Route::get('/builds/{buildId}/process-state',                    [\App\Http\Controllers\BuildProcessController::class, 'buildState']);
+        Route::get('/builds/{buildId}/progress',                         [\App\Http\Controllers\BuildProcessController::class, 'progress']);
+        Route::post('/builds/{buildId}/steps/{stepId}/toggle',           [\App\Http\Controllers\BuildProcessController::class, 'toggleStep']);
+        Route::post('/builds/{buildId}/steps/{stepId}/image',            [\App\Http\Controllers\BuildProcessController::class, 'uploadStepImage']);
+        Route::delete('/builds/{buildId}/steps/{stepId}/image',          [\App\Http\Controllers\BuildProcessController::class, 'removeStepImage']);
+        Route::post('/builds/{buildId}/qc/{qcId}',                       [\App\Http\Controllers\BuildProcessController::class, 'saveQc']);
+        Route::post('/builds/{buildId}/signoff/{signoffId}',             [\App\Http\Controllers\BuildProcessController::class, 'saveSignoff']);
+        Route::delete('/builds/{buildId}/signoff/{signoffId}',           [\App\Http\Controllers\BuildProcessController::class, 'removeSignoff']);
+        Route::post('/builds/{buildId}/operations/{opId}/notes',         [\App\Http\Controllers\BuildProcessController::class, 'saveOperationNote']);
+        Route::post('/builds/{buildId}/operations/{opId}/diagram',       [\App\Http\Controllers\BuildProcessController::class, 'uploadOperationDiagram']);
+
+        // Master template image uploads (admin only — updates blueprint, visible to all builds)
+        Route::post('/master/steps/{stepId}/image',       [\App\Http\Controllers\BuildProcessController::class, 'uploadMasterStepImage']);
+        Route::delete('/master/steps/{stepId}/image',     [\App\Http\Controllers\BuildProcessController::class, 'removeMasterStepImage']);
+        Route::post('/master/operations/{opId}/diagram',  [\App\Http\Controllers\BuildProcessController::class, 'uploadMasterDiagram']);
+        Route::delete('/master/operations/{opId}/diagram', [\App\Http\Controllers\BuildProcessController::class, 'removeMasterDiagram']);
+    });
+
+
     // Vehicle CRUD
     Route::put('/vehicles/{id}', [\App\Http\Controllers\VehicleController::class, 'update'])->name('vehicles.update');
     Route::delete('/vehicles/{id}', [\App\Http\Controllers\VehicleController::class, 'destroy'])->name('vehicles.destroy');
