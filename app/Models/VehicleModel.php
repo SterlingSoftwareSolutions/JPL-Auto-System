@@ -16,11 +16,6 @@ class VehicleModel extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function buildStations()
-    {
-        return $this->hasMany(VehicleBuildStation::class)->orderBy('order');
-    }
-
     public function parts()
     {
         return $this->hasMany(VehicleBuildPart::class, 'vehicle_model_id');
@@ -31,8 +26,23 @@ class VehicleModel extends Model
         return $this->hasMany(VehicleBuildTimelineTask::class, 'vehicle_model_id');
     }
 
-    public function buildStepStatuses()
+    public function buildStepLogs()
     {
-        return $this->hasMany(VehicleBuildStepStatus::class, 'vehicle_model_id');
+        return $this->hasMany(BuildStepLog::class, 'vehicle_model_id');
+    }
+
+    public function buildQcLogs()
+    {
+        return $this->hasMany(BuildQcLog::class, 'vehicle_model_id');
+    }
+
+    public function buildSignoffLogs()
+    {
+        return $this->hasMany(BuildSignoffLog::class, 'vehicle_model_id');
+    }
+
+    public function operationNotes()
+    {
+        return $this->hasMany(BuildOperationNote::class, 'vehicle_model_id');
     }
 }

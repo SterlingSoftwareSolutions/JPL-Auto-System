@@ -5,13 +5,23 @@
 @section('content')
 <div style="background: var(--bg); display: flex; flex-direction: column; min-height: 100vh; width: 100%;">
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500;600;700&display=swap');
+
   :root {
-    --bg: #ffffff; --panel: #f7f7f5; --card: #ffffff; --border: #e0dfda;
-    --text: #1a1a18; --text-dim: #6b6a64; --text-faint: #9c9b94;
-    --orange: #c9781f; --green: #2f8a4c; --amber: #b8860b;
+    --bg: #F8FAFC; --panel: #F1F5F9; --card: #FFFFFF; --border: #E2E8F0;
+    --text: #0F172A; --text-dim: #475569; --text-faint: #94A3B8;
+    --orange: #0F172A; --green: #10B981; --amber: #0F172A;
+    --mono: 'JetBrains Mono', monospace; 
+    --disp: 'Oswald', sans-serif; 
+    --font-main: 'Inter', sans-serif;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size: 14px; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-main); font-size: 14px; }
+  h1, h2, h3, header .title, .summary b, [style*="font-weight: 800"], [style*="font-weight: 700"] { font-family: var(--disp) !important; letter-spacing: -0.01em; }
+  th, .tab, .vin.set, .pn, [style*="font-family: monospace"], [style*="ui-monospace"] { font-family: var(--mono) !important; }
+  .tab { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px !important; }
+  header .title { font-size: 22px !important; }
+
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -21,19 +31,20 @@
   .logo span { transform: rotate(-45deg); font-size: 11px; font-weight: 700; }
   header .title { font-weight: 600; font-size: 15px; }
   header .sub { color: var(--text-dim); font-size: 12px; margin-left: 4px; }
-  .tabs { display: flex; gap: 8px; padding: 0 32px; border-bottom: 1px solid var(--border); background: #ffffff; }
+  .tabs { display: flex; gap: 8px; padding: 0 32px; border-bottom: 1px solid var(--border); background: #ffffff; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
   .tab { position: relative; padding: 14px 16px; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; transition: color 0.3s ease; }
   .tab:hover { color: #111827; }
   .tab::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background-color: #111827; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
   .tab:hover::after { transform: scaleX(1); transform-origin: left; }
   .tab.active { color: #111827; font-weight: 600; }
   .tab.active::after { transform: scaleX(1); transform-origin: left; }
-  .subtabs { display: flex; gap: 24px; border-bottom: 1px solid var(--border); margin: 0 0 28px; }
+  .subtabs { display: flex; gap: 24px; border-bottom: 1px solid var(--border); margin: 0 0 28px; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
+  .subtabs::-webkit-scrollbar { display: none; }
   .subtab { display: flex; align-items: center; gap: 8px; padding: 0 0 12px 0; font-size: 14px; color: #64748b; cursor: pointer; transition: color 0.2s; position: relative; }
   .subtab:hover { color: #000; }
   .subtab.active { color: #000; font-weight: 600; }
-  .subtab::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: #000; transform: scaleX(0); transition: transform 0.2s ease; transform-origin: left; }
-  .subtab.active::after { transform: scaleX(1); }
+  .subtab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: #000; transform: scaleX(1); }
   .subpage { display: none; }
   .subpage.active { display: block; }
   #build-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 8px; }
@@ -45,13 +56,13 @@
   .build-card-new:hover { border-color: #d1d5db; color: #111827; background: #f3f4f6; transform: translateY(-2px); }
   .back-link { font-size: 12.5px; color: var(--text-dim); cursor: pointer; margin-bottom: 10px; display: inline-block; }
   .back-link:hover { color: var(--text); }
-  main { flex: 1; padding-bottom: 60px; }
+  main { flex: 1; padding-bottom: 60px; overflow-x: hidden; }
   h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
   .lede { color: var(--text-dim); font-size: 13px; margin: 0 0 20px; }
   .section-label { font-size: 11px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px; }
-  .page { display: none; max-width: 1440px; width: 100%; margin: 0 auto; padding: 32px 40px; box-sizing: border-box; }
+  .page { display: none; max-width: 1600px; width: 100%; margin: 0 auto; padding: 32px 40px; box-sizing: border-box; }
   .page.active { display: block; }
-  #page-vehicle { max-width: none; padding: 32px; margin: 0; background: #f8fafc; min-height: calc(100vh - 130px); }
+  #page-vehicle { max-width: none; padding: 32px; margin: 0; background: var(--bg); min-height: calc(100vh - 130px); }
 
   /* Compliance styles */
   .panel { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 24px; }
@@ -96,12 +107,15 @@
   .cat-total { font-size: 13px; color: #6b7280; font-weight: 500; }
   .chevron { color: #9ca3af; font-size: 12px; transition: transform 0.15s; }
   .cat.collapsed .chevron { transform: rotate(-90deg); }
-  .cat.collapsed .board { display: none; }
+  .cat.collapsed .board-wrapper { display: none; }
 
-  .board { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  .board-wrapper { overflow-x: auto; padding-bottom: 24px; margin-bottom: -24px; -ms-overflow-style: none; scrollbar-width: none; }
+  .board-wrapper::-webkit-scrollbar { display: none; }
+  .board { display: grid; grid-template-columns: repeat(5, minmax(280px, 1fr)); gap: 16px; min-width: max-content; }
   .col-head { font-size: 11px; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
   .col-count { background: #f3f4f6; color: #4b5563; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: 700; }
-  .col-body { display: flex; flex-direction: column; gap: 12px; min-height: 40px; width: 100%; align-items: stretch; }
+  .col-wrapper { display: flex; flex-direction: column; height: 100%; min-height: 200px; }
+  .col-body { display: flex; flex-direction: column; gap: 12px; flex: 1; width: 100%; align-items: stretch; padding-bottom: 20px; border: 2px dashed transparent; transition: background 0.2s, border 0.2s; border-radius: 12px; }
 
   .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: grab; width: 90%; margin: 0; box-sizing: border-box; overflow: hidden; transition: box-shadow 0.2s, border-color 0.2s; }
   .card:hover { border-color: #d1d5db; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
@@ -133,62 +147,7 @@
   .summary { display: flex; gap: 32px; margin-top: 16px; padding-top: 24px; border-top: 1px solid #e5e7eb; font-size: 14px; color: #6b7280; }
   .summary b { color: #111827; font-weight: 700; font-size: 16px; }
 
-  /* Build process / diary */
-  .proc-wrap { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .proc-sidebar { width: 300px; flex-shrink: 0; background: #ffffff; color: #1e293b; border-right: 1px solid var(--border); display: flex; flex-direction: column; }
-  .proc-sidebar-head { padding: 24px 20px 20px; background: #000000; color: #ffffff; }
-  .proc-brand { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 10px; color: #d97706; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; margin: 0 0 6px; }
-  .proc-title { font-size: 18px; font-weight: 900; margin: 0 0 4px; letter-spacing: -0.02em; color: #fff; }
-  .proc-meta { font-size: 12px; color: #94a3b8; }
-  .proc-overall { padding: 16px 20px; background: #ffffff; border-bottom: 1px solid var(--border); }
-  .proc-overall .lbl { display: flex; justify-content: space-between; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; font-weight: 700; align-items: center; }
-  .proc-overall .lbl span.big { color: #0f172a; font-size: 14px; font-weight: 900; }
-  .proc-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-  .proc-bar-fill { height: 100%; background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%); border-radius: 4px; transition: width 0.5s; box-shadow: inset 0 -1px 1px rgba(0,0,0,0.1); }
-  .proc-station-list { padding: 12px; flex: 1; overflow-y: auto; }
-  .proc-station { margin-bottom: 4px; border: none; }
-  .proc-station-head { display: flex; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; border-radius: 8px; border: 1px solid transparent; transition: all 0.2s ease; font-size: 13px; }
-  .proc-station-head:hover { background: #f8fafc; }
-  .proc-station.active .proc-station-head { background: #0f172a; color: #ffffff; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); transform: translateY(-1px); }
-  .proc-station-num { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 10px; color: #64748b; background: #f8fafc; border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-weight: 700; flex: 0 0 auto; }
-  .proc-station.active .proc-station-num { color: #ffffff; background: transparent; border-color: rgba(255,255,255,0.2); }
-  .proc-station-name { flex: 1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .proc-station-pct { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11px; font-weight: 700; color: #64748b; }
-  .proc-station.active .proc-station-pct { color: #ffffff; }
-  .proc-op-list { display: none; padding: 4px 0 4px 12px; }
-  .proc-station.active .proc-op-list { display: block; }
-  .proc-op-item { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 8px 12px; border-radius: 8px; font-size: 12px; color: #1e293b; cursor: pointer; border: 1px solid transparent; transition: all 0.2s ease; margin: 2px 0; }
-  .proc-op-item:hover { background: #f8fafc; transform: translateX(2px); }
-  .proc-op-item.selected { background: #f1f5f9; border-color: var(--border); font-weight: 600; }
-  .proc-op-item .op-no { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 10px; color: #64748b; font-weight: 700; }
-  .proc-content { flex: 1; padding: 32px 48px; background: #f0f2f5; min-width: 0; }
-  .proc-op-badge { display: inline-block; background: #fbe8c9; color: #8a5a10; font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 5px; margin-bottom: 10px; }
-  .proc-op-title { font-size: 18px; font-weight: 700; margin: 0 0 16px; }
-  .proc-meta-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
-  .proc-meta-grid .cell { background: #fff; padding: 10px 12px; }
-  .proc-meta-grid .cell .k { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 3px; }
-  .proc-meta-grid .cell .v { font-size: 14px; font-weight: 600; margin: 0; }
-  .proc-sec-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 20px 0 10px; }
-  .ppe-badge { display: inline-flex; align-items: center; gap: 6px; background: #1a1c24; color: #fff; font-size: 12px; font-weight: 500; padding: 7px 12px; border-radius: 6px; margin: 0 8px 8px 0; }
-  .ppe-badge .warn-icn { color: var(--orange); }
-  table.hazard-tbl { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  table.hazard-tbl th { text-align: left; font-size: 10.5px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; padding: 10px 12px; background: var(--panel); }
-  table.hazard-tbl td { padding: 10px 12px; font-size: 12.5px; border-top: 1px solid var(--border); }
-  table.hazard-tbl td.ctrl { color: #4552c4; }
-  .tm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  .tm-col { background: #fff; padding: 12px 16px; }
-  .tm-col .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; border-left: 3px solid var(--orange); padding-left: 6px; margin: 0 0 8px; }
-  .tm-col ul { margin: 0; padding: 0; list-style: none; }
-  .tm-col li { font-size: 12.5px; color: #4552c4; padding: 3px 0; }
-  .step-card { border: 1px solid var(--border); border-radius: 10px; background: #fff; padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 12px; }
-  .step-card input[type=checkbox] { margin-top: 3px; width: 16px; height: 16px; flex-shrink: 0; }
-  .step-card .step-body { flex: 1; }
-  .step-card .step-num { font-size: 10.5px; color: var(--text-faint); margin: 0 0 2px; }
-  .step-card .step-text { font-size: 13px; margin: 0; }
-  .step-card.done .step-text { color: var(--text-faint); text-decoration: line-through; }
-  .step-warn { margin-top: 8px; background: #fdf1cf; color: #8a5a10; font-size: 11.5px; padding: 8px 10px; border-radius: 6px; display: flex; gap: 6px; align-items: flex-start; }
-  .step-ref-img { width: 140px; height: 66px; border: 1px dashed var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-faint); flex-shrink: 0; }
-  .step-card.readonly input[type=checkbox] { pointer-events: none; opacity: 0.5; }
+  /* Build process / diary CSS removed - now in public/css/build_process.css */
 
   /* Timeline */
   .tl-panel { background: #fff; color: #000; border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
@@ -218,9 +177,11 @@
   .tl-summary { display: flex; gap: 24px; margin-top: 10px; font-size: 12.5px; color: var(--text-faint); }
   .tl-summary b { color: var(--text); }
 </style>
-</style>
-<div style="font-family: -apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size: 14px; color: var(--text);">
-<header class="flex items-center justify-between px-8 py-5 border-b border-gray-200 bg-white">
+<link rel="stylesheet" href="{{ asset('css/build_process.css') }}">
+<script src="{{ asset('js/images.js') }}"></script>
+<script src="{{ asset('js/build_process.js') }}?v={{ rand() }}"></script>
+<div style="font-size: 14px; color: var(--text);">
+<header class="flex items-center justify-between px-8 py-5 border-b border-gray-200" style="background: #ffffff;">
   <div class="flex items-center gap-6">
       <img src="{{ asset('images/jpl-system-logo.png') }}" alt="JPL Logo" style="height: 84px; width: auto;">
       <div class="flex flex-col border-l border-gray-300 pl-6">
@@ -259,7 +220,7 @@
   </div>
 
   <div class="page active" id="page-builds">
-    <div id="builds-list-view" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 40px;">
+    <div id="builds-list-view" style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 40px;">
       <div style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-start;">
         <div>
           <div style="display: inline-block; background: #000; color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; margin-bottom: 12px;">478 &mdash; BUILDS</div>
@@ -292,11 +253,11 @@
       </div>
     </div>
     <div id="builds-detail-view" style="display:none">
-      <div style="margin-bottom: 24px;">
+      <div id="build-detail-header" style="margin-bottom: 24px;">
         <span class="back-link" onclick="closeBuildDetail()" style="display: inline-flex; align-items: center; gap: 6px; color: #6b7280; font-size: 15px; font-weight: 500; cursor: pointer; margin-bottom: 12px; transition: color 0.2s;">&larr; Builds</span>
         <h1 id="build-detail-title" style="font-size: 32px; font-weight: 700; margin: 0; color: #111827;">Build</h1>
       </div>
-      <div class="subtabs">
+      <div id="build-detail-subtabs" class="subtabs">
         <div class="subtab active" data-sub="overview" onclick="showSubTab('overview')"><i class="fas fa-info-circle"></i> Overview</div>
         <div class="subtab" data-sub="process" onclick="showSubTab('process')"><i class="fas fa-tools"></i> Build process</div>
         <div class="subtab" data-sub="bparts" onclick="showSubTab('bparts')"><i class="fas fa-box"></i> Parts</div>
@@ -307,41 +268,18 @@
         <div class="field-grid" style="grid-template-columns:repeat(4,1fr)">
           <div class="panel" style="padding:12px"><p class="section-label" style="margin:0 0 4px">Stage</p><p style="margin:0;font-weight:500">In build</p></div>
           <div class="panel" style="padding:12px"><p class="section-label" style="margin:0 0 4px">Parts installed</p><p style="margin:0;font-weight:500" id="ov-parts-pct">&mdash;</p></div>
-          <div class="panel" style="padding:12px"><p class="section-label" style="margin:0 0 4px">Build diary</p><p style="margin:0;font-weight:500" id="ov-diary-stat">0 / 0 steps</p></div>
+          <div class="panel" style="padding:12px"><p class="section-label" style="margin:0 0 4px">Build process</p><p style="margin:0;font-weight:500" id="ov-diary-stat">0 / 0 steps</p></div>
           <div class="panel" style="padding:12px"><p class="section-label" style="margin:0 0 4px">VIN</p><p id="ov-vin-display" style="margin:0;font-weight:500;color:var(--text-faint)">Assigned on completion</p></div>
         </div>
       </div>
 
       <div class="subpage" id="sub-process">
-        <p class="lede">Live build diary for this specific car — check off each step as it's completed on the floor.</p>
         <div class="proc-wrap" id="proc-build-wrap"></div>
       </div>
 
       <div class="subpage" id="sub-bparts">
         <p class="lede">This build's parts, tracked as procurement &rarr; ordered &rarr; in transit &rarr; received &rarr; installed.</p>
-        <form class="addrow" id="global-add" onsubmit="addPart(event)">
-          <div><label>Category</label><select id="g-cat" onchange="onCatChange()"></select></div>
-          <div><label>Component</label><input required id="g-comp"></div>
-          <div><label>Description</label><input required id="g-desc"></div>
-          <div><label>Part number</label><input id="g-pn"></div>
-          <div><label>Price</label><input type="number" min="0" step="0.01" value="0" id="g-price"></div>
-          <div>
-            <label>Supplier</label>
-            <select id="g-supplier">
-              <option value="">Select Supplier</option>
-              @foreach($vehicleSuppliers as $supplier)
-                <option value="{{ $supplier->business_name }}">{{ $supplier->business_name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div><label>Status</label><select id="g-status"><option value="procurement">Procurement</option><option value="ordered">Ordered</option><option value="transit">In transit</option><option value="received">Received</option><option value="installed">Installed</option></select></div>
-          <button type="submit">Add</button>
-        </form>
-        <div class="newcat-row" id="newcat-row">
-          <div><label style="display:block;font-size:10px;color:var(--text-dim);margin-bottom:3px">New category name</label><input id="newcat-name" placeholder="e.g. Electrical"></div>
-          <button type="button" class="create" onclick="createCategory()">Create category</button>
-          <button type="button" class="cancel" onclick="cancelNewCat()">Cancel</button>
-        </div>
+
         <div id="categories"></div>
         <div class="summary" id="grand-summary"></div>
       </div>
@@ -488,8 +426,6 @@
   </div>
 
   <div class="page" id="page-process">
-    <h1>478 — build process</h1>
-    <p class="lede">The master procedure for this model — reference only. Steps here aren't checkable; each build gets its own live diary under Builds.</p>
     <div class="proc-wrap" id="proc-template-wrap"></div>
   </div>
 
@@ -923,12 +859,13 @@ function onCardDragEnd(e) {
   e.currentTarget.classList.remove('dragging');
   document.querySelectorAll('.col-body').forEach(b => b.classList.remove('drop-ok', 'drop-no'));
   dragState = null;
+  render();
 }
 
 function onColDragOver(e) {
   if (!dragState) return;
   const colIdx = Number(e.currentTarget.dataset.statusIdx);
-  if (colIdx === dragState.currentIdx + 1) {
+  if (colIdx !== dragState.currentIdx) {
     e.preventDefault();
     e.currentTarget.classList.add('drop-ok');
     e.dataTransfer.dropEffect = 'move';
@@ -944,19 +881,23 @@ function onColDragLeave(e) {
 function onColDrop(e) {
   if (!dragState) return;
   const colIdx = Number(e.currentTarget.dataset.statusIdx);
-  if (colIdx !== dragState.currentIdx + 1) return; // only the applicable next stage accepts the drop
+  if (colIdx === dragState.currentIdx) return;
   e.preventDefault();
   const part = categories[dragState.ci].parts.find(p => p.id === dragState.pid);
   const oldStatus = part.status;
   const newStatus = STATUSES[colIdx].key;
   part.status = newStatus;
-  render();
 
   fetch(window.AppUrl + `/builds/parts/${part.id}/status`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({ status: newStatus, _token: '{{ csrf_token() }}' })
-  }).then(res => res.json()).catch(err => {
+  }).then(res => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  }).catch(err => {
+    console.error(err);
+    alert('Error saving status: ' + err.message + '. Try refreshing the page.');
     part.status = oldStatus;
     render();
   });
@@ -984,7 +925,9 @@ function render() {
         <div class="cat-title"><span class="cat-badge">Parts &mdash; ${cat.name}</span><span class="cat-total">${cat.parts.length} parts &middot; ${fmt(catTotal)}</span></div>
         <span class="chevron">&#9660;</span>
       </div>
-      <div class="board"></div>
+      <div class="board-wrapper">
+        <div class="board"></div>
+      </div>
     `;
     root.appendChild(el);
 
@@ -992,10 +935,16 @@ function render() {
     STATUSES.forEach((s, si) => {
       const items = cat.parts.filter(p => p.status === s.key);
       const col = document.createElement('div');
+      col.className = 'col-wrapper';
       col.innerHTML = `<div class="col-head">${s.label}<span class="col-count">${items.length}</span></div>`;
       const body = document.createElement('div');
       body.className = 'col-body';
       body.dataset.statusIdx = si;
+      body.addEventListener('dragenter', e => {
+        if (dragState && Number(e.currentTarget.dataset.statusIdx) !== dragState.currentIdx) {
+          e.preventDefault();
+        }
+      });
       body.addEventListener('dragover', onColDragOver);
       body.addEventListener('dragleave', onColDragLeave);
       body.addEventListener('drop', onColDrop);
@@ -1019,6 +968,7 @@ function render() {
           body.appendChild(card);
         });
       }
+
       col.appendChild(body);
       board.appendChild(col);
     });
@@ -1036,6 +986,7 @@ function toggleCat(el) {
 
 function populateCatSelect() {
   const sel = document.getElementById('g-cat');
+  if (!sel) return;
   const current = sel.value;
   sel.innerHTML = categories.map((c,i) => `<option value="${i}">${c.name}</option>`).join('') + `<option value="__new">+ New category</option>`;
   if (current && current !== '__new' && categories[current]) sel.value = current;
@@ -1068,6 +1019,48 @@ function cancelNewCat() {
   document.getElementById('newcat-name').value = '';
   document.getElementById('newcat-row').classList.remove('show');
   document.getElementById('g-cat').value = 0;
+}
+
+function inlineAddPart(e, ci) {
+  e.preventDefault();
+  const g = id => document.getElementById(`g-${id}-${ci}`);
+  const comp = g('comp').value.trim(), desc = g('desc').value.trim();
+  if (!comp || !desc) return;
+  const catName = categories[ci].name;
+
+  const payload = {
+    category: catName,
+    component: comp,
+    description: desc,
+    part_number: g('pn').value.trim() || 'N/A',
+    price: Number(g('price').value) || 0,
+    supplier: g('supplier').value.trim() || 'N/A',
+    status: 'procurement',
+    _token: '{{ csrf_token() }}'
+  };
+
+  fetch(window.AppUrl + `/builds/${activeBuildId}/parts`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(p => {
+    const b = buildCards.find(x => x.id === activeBuildId);
+    if (!b.parts) b.parts = [];
+    b.parts.push(p);
+
+    g('comp').value = ''; g('desc').value = ''; g('pn').value = ''; g('price').value = ''; g('supplier').value = '';
+    
+    const form = e.target;
+    form.style.display = 'none';
+    form.previousSibling.style.display = 'block';
+    render();
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Error adding part.');
+  });
 }
 
 function addPart(e) {
@@ -1252,6 +1245,7 @@ function closeBuildDetail() {
 function showSubTab(sub) {
   document.querySelectorAll('.subtab').forEach(t => t.classList.toggle('active', t.dataset.sub === sub));
   document.querySelectorAll('.subpage').forEach(p => p.classList.toggle('active', p.id === 'sub-' + sub));
+  
   if (sub === 'bparts') render();
   if (sub === 'process') renderProcessBuild(activeBuildId);
   if (sub === 'btimeline') renderTimeline();
@@ -1264,264 +1258,23 @@ function computePartsInstalledPct() {
 }
 
 // ---- Build process (master template) ----
-const PROCESS = [
-  { id:1, name:'Body Shell', ops:[
-    { code:'OP-101', section:'Body Shell', station:'Receiving Bay',
-      title:'New Body Shell Receiving, Inspection & Fixture Check',
-      ppe:['Safety Glasses','Gloves','Steel-Cap Boots'],
-      hazards:[
-        { h:'Manual handling of shell/panels', c:'Two-plus person lift or hoist for shell; use body cart/rotisserie once landed.' },
-        { h:'Shell on stands — stability', c:'Confirm stands/fixture rated for shell weight before releasing hoist.' },
-      ],
-      tools:['Body cart / rotisserie','Dimensional check fixture / tape','Inspection light','Camera'],
-      materials:['Dynacorn shell spec sheet'],
-      steps:[
-        { label:'Uncrate and inspect the new Dynacorn reproduction shell for shipping damage, panel alignment and e-coat/paint condition.', warn:'No teardown required — shell arrives as new sheet metal, not a restored body.' },
-        { label:'Mount shell on rotisserie or chassis fixture; confirm level and square before any structural work begins.' },
-        { label:'Dimensional check against spec sheet at all reference points.' },
-        { label:'Confirm panel gaps and alignment across doors, decklid and fenders.' },
-      ],
-    },
-  ]},
-  { id:2, name:'Chassis — Rear', ops:[
-    { code:'OP-201', section:'Chassis — Rear', station:'Chassis Bay',
-      title:'Rear 4-Link and Panhard Bar Installation',
-      ppe:['Safety Glasses','Gloves'],
-      hazards:[{ h:'Suspension under load during fitment', c:'Support on stands; never work under a hoisted, unsecured chassis.' }],
-      tools:['Torque wrench','Chassis stands'],
-      materials:['Rear 4-link kit spec sheet'],
-      steps:[
-        { label:'Fit rear 4-link mounts to chassis rails.' },
-        { label:'Install panhard bar bracket.' },
-        { label:'Torque check all mounting points to spec.' },
-      ],
-    },
-  ]},
-  { id:3, name:'Front IFS', ops:[
-    { code:'OP-301', section:'Front IFS', station:'Chassis Bay',
-      title:'Front Independent Suspension Installation',
-      ppe:['Safety Glasses','Gloves'],
-      hazards:[{ h:'Crossmember handling', c:'Two-person lift; secure on stand before fitting.' }],
-      tools:['Torque wrench','Alignment gauge'],
-      materials:[],
-      steps:[
-        { label:'Install front IFS crossmember.' },
-        { label:'Fit power rack and steering linkage.' },
-        { label:'Align and torque to spec.' },
-      ],
-    },
-  ]},
-  { id:4, name:'Rear Suspension', ops:[
-    { code:'OP-401', section:'Rear Suspension', station:'Chassis Bay',
-      title:'Rear Spring and Shock Fitment',
-      ppe:['Safety Glasses','Gloves'],
-      hazards:[{ h:'Spring compression', c:'Use rated spring compressor; never hand-force a loaded spring.' }],
-      tools:['Spring compressor','Torque wrench'],
-      materials:[],
-      steps:[
-        { label:'Fit rear springs and shocks.' },
-        { label:'Torque all mounting hardware to spec.' },
-      ],
-    },
-  ]},
-  { id:5, name:'Brakes & Fuel', ops:[
-    { code:'OP-501', section:'Brakes & Fuel', station:'Chassis Bay',
-      title:'Wilwood Brake and Fuel System Installation',
-      ppe:['Safety Glasses','Gloves'],
-      hazards:[{ h:'Brake fluid contact', c:'Wear gloves; wipe spills immediately, avoid contact with paint.' }],
-      tools:['Brake bleeding kit','Torque wrench'],
-      materials:['Aeromotive fuel tank spec sheet'],
-      steps:[
-        { label:'Install Wilwood brake calipers and rotors, front and rear.' },
-        { label:'Fit Aeromotive fuel tank and lines.' },
-        { label:'Bleed brake system and pressure test.' },
-      ],
-    },
-  ]},
-  { id:6, name:'Drivetrain', ops:[
-    { code:'OP-601', section:'Drivetrain', station:'Engine Bay',
-      title:'Coyote Engine and Transmission Installation',
-      ppe:['Safety Glasses','Gloves','Steel-Cap Boots'],
-      hazards:[{ h:'Engine hoist operation', c:'Rated hoist only; clear the swing area before lifting.' }],
-      tools:['Engine hoist','Torque wrench'],
-      materials:['4R70W install spec sheet'],
-      steps:[
-        { label:'Mount 5.0L Coyote engine on chassis.' },
-        { label:'Install 4R70W transmission.' },
-        { label:'Connect driveline and torque all mounts.' },
-      ],
-    },
-  ]},
-  { id:7, name:'Electrical', ops:[
-    { code:'OP-701', section:'Electrical', station:'Electrical Bay',
-      title:'Haltech ECU and Wiring Harness Installation',
-      ppe:['Safety Glasses'],
-      hazards:[{ h:'Battery connected during wiring', c:'Disconnect battery before harness work.' }],
-      tools:['Multimeter','Crimp tool'],
-      materials:['Wiring diagram'],
-      steps:[
-        { label:'Install Haltech ECU and engine harness.' },
-        { label:'Wire digital dash and gauge cluster.' },
-        { label:'Function test all circuits before reassembly.' },
-      ],
-    },
-  ]},
-  { id:8, name:'Paint & Body', ops:[
-    { code:'OP-801', section:'Paint & Body', station:'Paint Bay',
-      title:'Final Panel Fit and Paint Preparation',
-      ppe:['Respirator','Gloves'],
-      hazards:[{ h:'Paint booth fumes', c:'Respirator required; ensure booth extraction is running.' }],
-      tools:['Panel gap gauge'],
-      materials:[],
-      steps:[
-        { label:'Confirm final panel gaps prior to paint.' },
-        { label:'Mask and prep for customer-specified colour.' },
-      ],
-    },
-  ]},
-  { id:9, name:'Trim & Glass', ops:[
-    { code:'OP-901', section:'Trim & Glass', station:'Trim Bay',
-      title:'Interior Trim and Glass Fitment',
-      ppe:['Gloves'],
-      hazards:[{ h:'Glass handling', c:'Two-person lift for all glass; use suction handles.' }],
-      tools:['Trim tools','Glass install kit'],
-      materials:[],
-      steps:[
-        { label:'Fit custom interior trim per customer specification.' },
-        { label:'Install windscreen and door glass.' },
-      ],
-    },
-  ]},
-  { id:10, name:'Commissioning', ops:[
-    { code:'OP-1001', section:'Commissioning', station:'Commissioning Bay',
-      title:'Final Commissioning and Road Test',
-      ppe:['Safety Glasses'],
-      hazards:[{ h:'Road test of uncommissioned vehicle', c:'Complete full pre-drive checklist before any road test.' }],
-      tools:['Diagnostic scanner'],
-      materials:[],
-      steps:[
-        { label:'Complete full systems check against build sheet.' },
-        { label:'Road test and confirm no faults.' },
-        { label:'Sign off ready for VIN assignment.' },
-      ],
-    },
-  ]},
-];
+const PROCESS = {!! $masterTemplateProcess->toJson() !!};
 
 function opStepCount(op) { return op.steps.length; }
 function stationStepCount(st) { return st.operations.reduce((a,o)=>a+opStepCount(o),0); }
 
 function renderProcessGeneric(wrapId, data, interactive) {
-  const wrap = document.getElementById(wrapId);
-  const totalSteps = data.reduce((a,st)=>a+stationStepCount(st),0);
-  const doneSteps = interactive ? data.reduce((a,st)=>a+st.operations.reduce((b,o)=>b+o.steps.filter(s=>s.is_completed).length,0),0) : 0;
-  const overallPct = totalSteps ? Math.round((doneSteps/totalSteps)*100) : 0;
-
-  let selected = wrap._selected;
-  if (!selected || !data.find(s => s.id === selected.stId)) {
-    selected = { stId: data[0].id, opIdx: 0 };
+  let bId = activeBuildId;
+  if (wrapId === 'proc-template-wrap') {
+      bId = 'master';
   }
-  wrap._selected = selected;
-  const st = data.find(s => s.id === selected.stId);
-  const op = st.operations[selected.opIdx];
-  const b = interactive ? buildCards.find(x => x.id === activeBuildId) : null;
-
-  const sidebar = `
-    <div class="proc-sidebar">
-      <div class="proc-sidebar-head">
-        <p class="proc-brand">JPL Automotive</p>
-        <p class="proc-title">Full Build &mdash; ${b ? b.name : 'Template'}</p>
-        <p class="proc-meta">1967 Mustang Fastback &middot; Rev A</p>
-      </div>
-      <div class="proc-overall">
-        <div class="lbl"><span>Overall build progress</span><span>${overallPct}%</span></div>
-        <div class="proc-bar"><div class="proc-bar-fill" style="width:${overallPct}%"></div></div>
-      </div>
-      ${data.map((s, si) => {
-        const sDone = interactive ? s.operations.reduce((b,o)=>b+o.steps.filter(x=>x.is_completed).length,0) : 0;
-        const sTotal = stationStepCount(s);
-        const sPct = sTotal ? Math.round((sDone/sTotal)*100) : 0;
-        const isActive = s.id === selected.stId;
-        return `
-          <div class="proc-station ${isActive?'active':''}">
-            <div class="proc-station-head" onclick="procSelectStation('${wrapId}', ${s.id})">
-              <span class="proc-station-num">${String(si + 1).padStart(2,'0')}</span>
-              <span class="proc-station-name">${s.name}</span>
-              <span class="proc-station-pct">${sPct}%</span>
-            </div>
-            <div class="proc-op-list">
-              ${s.operations.map((o,oi) => {
-                const isOpActive = isActive && oi === selected.opIdx;
-                return `<div class="proc-op-item ${isOpActive ? 'selected' : ''}" onclick="procSelectOp('${wrapId}', ${s.id}, ${oi}, event)">
-                  <div class="op-no">${o.code}</div>
-                  <div>${o.title}</div>
-                </div>`;
-              }).join('')}
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
-
-  const opDone = interactive ? op.steps.filter(s=>s.is_completed).length : 0;
-  const opPct = op.steps.length ? Math.round((opDone/op.steps.length)*100) : 0;
-
-  const content = `
-    <div class="proc-content">
-      <span class="proc-op-badge">${op.code} &middot; ${op.station.toUpperCase()}</span>
-      <p class="proc-op-title">${op.title}</p>
-      <div class="proc-meta-grid">
-        <div class="cell"><p class="k">Operation</p><p class="v">${op.code}</p></div>
-        <div class="cell"><p class="k">Station</p><p class="v">${op.station}</p></div>
-        <div class="cell"><p class="k">Section</p><p class="v">${op.section}</p></div>
-        <div class="cell"><p class="k">Progress</p><p class="v">${interactive ? opPct+'%' : '&mdash;'}</p></div>
-      </div>
-
-      <p class="proc-sec-label">PPE required</p>
-      <div>${op.ppe.map(p=>`<span class="ppe-badge"><span class="warn-icn">&#9888;</span>${p}</span>`).join('')}</div>
-
-      <p class="proc-sec-label">Hazards &amp; controls</p>
-      <table class="hazard-tbl">
-        <tr><th>Hazard</th><th>Control</th></tr>
-        ${op.hazards.map(h=>`<tr><td>${h.h}</td><td class="ctrl">${h.c}</td></tr>`).join('')}
-      </table>
-
-      <p class="proc-sec-label">Tools &amp; materials</p>
-      <div class="tm-grid">
-        <div class="tm-col"><p class="lbl">TOOLS</p><ul>${op.tools.map(t=>`<li>${t}</li>`).join('') || '<li style="color:var(--text-faint)">None listed</li>'}</ul></div>
-        <div class="tm-col"><p class="lbl">MATERIALS</p><ul>${op.materials.map(m=>`<li>${m}</li>`).join('') || '<li style="color:var(--text-faint)">None listed</li>'}</ul></div>
-      </div>
-
-      <p class="proc-sec-label">Work steps</p>
-      ${op.steps.map((s,si) => `
-        <div class="step-card ${interactive?'':'readonly'} ${s.is_completed?'done':''}">
-          <input type="checkbox" ${s.is_completed?'checked':''} ${interactive?`onchange="procToggleStep('${wrapId}', ${st.id}, ${selected.opIdx}, ${si}, ${s.id})"`:'disabled'}>
-          <div class="step-body">
-            <p class="step-num">${String(si+1).padStart(2,'0')}</p>
-            <p class="step-text">${s.label}</p>
-            ${s.warn ? `<div class="step-warn"><span>&#9888;</span><span>${s.warn}</span></div>` : ''}
-          </div>
-          <div class="step-ref-img" ${interactive?`onclick="procUploadImage(${s.id})"`:''} style="${s.image_path ? `background-image:url(/storage/${s.image_path});background-size:cover;background-position:center;` : ''}">
-            ${!s.image_path ? `
-              <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:#9ca3af;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span style="font-size:12px;font-weight:500">[ No reference image ]</span>
-              </div>
-            ` : ''}
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  wrap.innerHTML = sidebar + content;
+  initBuildProcess(wrapId, data, interactive, buildCards, bId);
 }
 
 function procSelectStation(wrapId, stId) {
   const wrap = document.getElementById(wrapId);
   wrap._selected = { stId, opIdx: 0 };
-  if (wrapId === 'proc-template-wrap') renderProcessGeneric(wrapId, PROCESS, false);
+  if (wrapId === 'proc-template-wrap') renderProcessGeneric(wrapId, PROCESS, true);
   else renderProcessGeneric(wrapId, activeBuildProcessData(), true);
 }
 
@@ -1529,65 +1282,8 @@ function procSelectOp(wrapId, stId, opIdx, evt) {
   evt.stopPropagation();
   const wrap = document.getElementById(wrapId);
   wrap._selected = { stId, opIdx };
-  if (wrapId === 'proc-template-wrap') renderProcessGeneric(wrapId, PROCESS, false);
+  if (wrapId === 'proc-template-wrap') renderProcessGeneric(wrapId, PROCESS, true);
   else renderProcessGeneric(wrapId, activeBuildProcessData(), true);
-}
-
-function procToggleStep(wrapId, stId, opIdx, stepIdx, dbStepId) {
-  const data = activeBuildProcessData();
-  const st = data.find(s => s.id === stId);
-  const step = st.operations[opIdx].steps[stepIdx];
-  step.is_completed = !step.is_completed;
-  
-  const wrap = document.getElementById(wrapId);
-  wrap._selected = { stId, opIdx };
-  renderProcessGeneric(wrapId, data, true);
-  updateOverviewDiaryStat();
-
-  if (dbStepId) {
-    fetch(window.AppUrl + `/builds/${activeBuildId}/steps/${dbStepId}/toggle`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ _token: '{{ csrf_token() }}', is_completed: step.is_completed })
-    });
-  }
-}
-
-function procUploadImage(stepId) {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const fd = new FormData();
-        fd.append('image', file);
-        fd.append('_token', '{{ csrf_token() }}');
-        
-        fetch(window.AppUrl + `/builds/${activeBuildId}/steps/${stepId}/image`, {
-            method: 'POST',
-            body: fd
-        })
-        .then(r => r.json())
-        .then(res => {
-            if (res.success) {
-                // Update local data
-                const data = activeBuildProcessData();
-                for (const st of data) {
-                    for (const op of st.operations) {
-                        for (const step of op.steps) {
-                            if (step.id === stepId) {
-                                step.image_path = res.image_path;
-                            }
-                        }
-                    }
-                }
-                const wrapId = 'proc-build-wrap';
-                renderProcessGeneric(wrapId, data, true);
-            }
-        });
-    };
-    input.click();
 }
 
 function activeBuildProcessData() {
@@ -1607,7 +1303,7 @@ function updateOverviewDiaryStat() {
 }
 
 function renderProcessTemplate() {
-  renderProcessGeneric('proc-template-wrap', PROCESS, false);
+  renderProcessGeneric('proc-template-wrap', PROCESS, true);
 }
 
 function renderProcessBuild(buildId) {

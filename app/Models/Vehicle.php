@@ -42,4 +42,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(ModelReportApproval::class);
     }
+
+    public function buildStations()
+    {
+        return $this->hasMany(VehicleBuildStation::class)->orderBy('order');
+    }
 }
