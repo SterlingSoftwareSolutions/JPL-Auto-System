@@ -54,8 +54,8 @@ Route::get('/seed-only/{key}', function ($key) {
         // 'VehicleInformationSeeder',
         // 'VehicleSpecificationSeeder',
         'BuildProcessSeeder',
-        'VehicleDataSeeder',
-        'SupplierVehicleSeeder',
+        // 'VehicleDataSeeder',
+        // 'SupplierVehicleSeeder',
     ];
 
     foreach ($seeders as $seeder) {
