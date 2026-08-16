@@ -1,0 +1,2005 @@
+[
+    {
+        "section": "01",
+        "opNo": "OP-101",
+        "title": "New Body Shell Receiving, Inspection & Fixture Check",
+        "station": "Receiving Bay",
+        "next": "OP-201 \u2014 Rear Parcel Shelf Brace \u2014 Fabrication & Weld-In (ADR Seatbelt Mounting).",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Body cart \/ rotisserie",
+            "Dimensional check fixture \/ tape",
+            "Inspection light",
+            "Camera"
+        ],
+        "materials": [
+            "Dynacorn shell spec sheet"
+        ],
+        "hazards": [
+            [
+                "Manual handling of shell\/panels",
+                "Two-plus person lift or hoist for shell; use body cart\/rotisserie once landed."
+            ],
+            [
+                "Shell on stands \u2014 stability",
+                "Confirm stands\/fixture rated for shell weight before releasing hoist."
+            ]
+        ],
+        "qc": [
+            [
+                "Shell dimensions vs Dynacorn spec",
+                "Within tolerance at all checked points"
+            ],
+            [
+                "Shipping damage",
+                "None, or documented\/claimed before work begins"
+            ]
+        ],
+        "steps": [
+            [
+                "Uncrate and inspect the new Dynacorn reproduction shell for shipping damage, panel alignment and e-coat\/paint condition.",
+                "No teardown required \u2014 shell arrives as new sheet metal, not a restored body.",
+                null,
+                null
+            ],
+            [
+                "Mount shell on rotisserie or chassis fixture; confirm level and square before any structural work begins.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Dimensionally check core body points \u2014 shock tower centres, front rail width, rear frame rail length \u2014 against the Dynacorn spec sheet.",
+                "\u26a0 Confirm dimensions before OP-201 \u2014 the parcel shelf brace and Front IFS install both depend on an accurate shell.",
+                null,
+                null
+            ],
+            [
+                "Photograph shell condition and record any shipping damage claims before proceeding.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "02",
+        "opNo": "OP-201",
+        "title": "Rear Parcel Shelf Brace \u2014 Fabrication & Weld-In (ADR Seatbelt Mounting).",
+        "station": "Chassis Fab Bay",
+        "next": "OP-202 \u2014 ADR-Compliant Seatbelt Mounting Plate Upgrade.",
+        "diagramSvg": "<svg viewBox=\"0 0 640 340\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" font-family=\"JetBrains Mono, monospace\">\n  <!-- body side profile: fastback rear quarter, roofline to trunk -->\n  <g fill=\"none\" stroke=\"var(--text)\" stroke-width=\"2.2\" stroke-linejoin=\"round\" stroke-linecap=\"round\">\n    <!-- roofline sloping to decklid -->\n    <path d=\"M 40 70 L 150 40 L 300 40 L 470 130 L 560 150\"\/>\n    <!-- rear glass -->\n    <path d=\"M 300 40 L 460 128\" stroke-dasharray=\"4 4\"\/>\n    <!-- decklid \/ trunk lid -->\n    <path d=\"M 470 130 L 560 150 L 560 170 L 470 175 Z\"\/>\n    <!-- rear body \/ quarter panel down to floor -->\n    <path d=\"M 40 70 L 40 260 L 600 260 L 600 175 L 560 170\"\/>\n    <!-- rear bumper hint -->\n    <path d=\"M 560 230 L 620 230 L 620 250 L 560 250\"\/>\n    <!-- rear seat back -->\n    <path d=\"M 60 200 L 60 260 M 60 200 Q 95 180 150 200 L 150 260\"\/>\n    <!-- package tray \/ parcel shelf plane (shaded) -->\n    <path d=\"M 150 195 L 470 175 L 470 205 L 150 225 Z\" fill=\"var(--amber-dim)\" opacity=\"0.55\" stroke=\"var(--amber)\"\/>\n    <!-- trunk floor -->\n    <path d=\"M 150 225 L 470 205 L 470 260 L 150 260 Z\" opacity=\"0.15\" fill=\"var(--text)\"\/>\n    <!-- seatbelt anchor marks on parcel shelf -->\n    <circle cx=\"210\" cy=\"212\" r=\"4\" fill=\"var(--amber)\" stroke=\"none\"\/>\n    <circle cx=\"300\" cy=\"205\" r=\"4\" fill=\"var(--amber)\" stroke=\"none\"\/>\n    <circle cx=\"390\" cy=\"197\" r=\"4\" fill=\"var(--amber)\" stroke=\"none\"\/>\n  <\/g>\n  <!-- callouts -->\n  <g font-size=\"12\" fill=\"var(--text)\">\n    <line x1=\"300\" y1=\"185\" x2=\"300\" y2=\"120\" stroke=\"var(--text)\" stroke-width=\"1\"\/>\n    <text x=\"215\" y=\"112\">PARCEL SHELF BRACE<\/text>\n    <text x=\"240\" y=\"128\">welded across package tray<\/text>\n\n    <line x1=\"300\" y1=\"205\" x2=\"300\" y2=\"300\" stroke=\"var(--text)\" stroke-width=\"1\"\/>\n    <text x=\"205\" y=\"315\">ADR SEATBELT ANCHOR POINTS (3x, rear)<\/text>\n\n    <line x1=\"105\" y1=\"220\" x2=\"60\" y2=\"90\" stroke=\"var(--text)\" stroke-width=\"1\"\/>\n    <text x=\"20\" y=\"80\">REAR SEAT BACK<\/text>\n\n    <line x1=\"515\" y1=\"190\" x2=\"555\" y2=\"70\" stroke=\"var(--text)\" stroke-width=\"1\"\/>\n    <text x=\"430\" y=\"60\">DECKLID \/ TRUNK OPENING<\/text>\n\n    <text x=\"40\" y=\"290\" font-size=\"11\" opacity=\"0.6\">Reflex angle fits to body \u2014 confirmed at fixture, OP-201 Step 2<\/text>\n  <\/g>\n<\/svg>\n",
+        "diagramCaption": "Original schematic \u2014 parcel shelf brace location & rear seatbelt anchor points (not to scale; reflex angle fits to body per Step 2)",
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "MIG welder",
+            "Angle finder",
+            "Adjustable clamps"
+        ],
+        "materials": [
+            "Parcel shelf assembly \u2014 supplied part, P\/N: [enter part number]",
+            "MIG wire",
+            "Grinding discs"
+        ],
+        "hazards": [
+            [
+                "Cutting \/ grinding sparks",
+                "Clear flammables from bay; fire extinguisher within reach."
+            ],
+            [
+                "Welding fumes \/ arc flash",
+                "Ventilated bay; welding mask and gauntlets."
+            ]
+        ],
+        "qc": [
+            [
+                "Part received matches drawing",
+                "P\/N confirmed, no shipping damage"
+            ],
+            [
+                "Seating against body reflex angle",
+                "Flush, no gaps"
+            ],
+            [
+                "Final weld quality",
+                "Full weld, no gaps\/cold-lap\/pinholes"
+            ]
+        ],
+        "steps": [
+            [
+                "Receive and inspect the parcel shelf assembly (P\/N: [enter part number]) against the reference drawing \u2014 confirm mounting hole layout, ADR harness cut-outs and panel condition before fitting.",
+                "\u2714 This is a supplied part, not fabricated on-site \u2014 check it against the drawing for shipping damage or defect, don't re-cut it.",
+                "parcel_shelf_drawing.jpg",
+                "Parcel shelf drawing \u2014 supplied part reference, P\/N: [enter part number]"
+            ],
+            [
+                "Dry-fit the parcel shelf panel across the rear package tray, confirming it seats against the body's reflex angle and rear seat bulkhead.",
+                "\u26a0 Reflex angle is body-specific \u2014 confirm the fold\/seat angle against the actual shell in this fixture; no fixed spec is issued for this yet, fit to the body.",
+                null,
+                null
+            ],
+            [
+                "Clamp the panel in place and tack weld the parcel shelf brace to the body structure at the marked points.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Confirm fitment and structural alignment before final weld \u2014 check for panel oil-canning or gaps against the body.",
+                "\u2714 No gaps or high spots before proceeding to final weld.",
+                null,
+                null
+            ],
+            [
+                "Fully weld the parcel shelf brace to the body seam per structural weld standard.",
+                "\u2714 Continuous weld bead, no gaps, cold-lap or pinholes.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "02",
+        "opNo": "OP-202",
+        "title": "ADR-Compliant Seatbelt Mounting Plate Upgrade",
+        "station": "Chassis Fab Bay",
+        "next": "OP-010 \u2014 Front K-Member, Shock Tower Saddle & Frame Rail Preparation (Section 03).",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "MIG welder",
+            "Drill",
+            "Torque wrench"
+        ],
+        "materials": [
+            "ADR-compliant seatbelt mounting plate kit (interim upgrade)",
+            "Note: this operation may be removed from the standard travel sheet if\/when Dynacorn supplies ADR-compliant seatbelt mounting as standard equipment."
+        ],
+        "hazards": [
+            [
+                "Cutting \/ grinding sparks",
+                "Clear flammables from bay; fire extinguisher within reach."
+            ],
+            [
+                "Welding fumes \/ arc flash",
+                "Ventilated bay; welding mask and gauntlets."
+            ]
+        ],
+        "qc": [
+            [
+                "Mounting plate positions",
+                "Match ADR seatbelt anchorage spec"
+            ],
+            [
+                "Weld quality",
+                "Full weld, no gaps"
+            ],
+            [
+                "Belt hardware fit",
+                "Test-fits without binding"
+            ]
+        ],
+        "steps": [
+            [
+                "Locate factory seatbelt anchor points and confirm against the ADR seatbelt anchorage design rule.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Remove or reinforce any factory mounting points that don't meet the compliant spec.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Fit and weld ADR-compliant seatbelt mounting plates at the lower anchor, upper anchor (B-pillar) and inertia reel positions \u2014 tie rear mounts into the parcel shelf brace from OP-201.",
+                "\u2714 Rear belt loads route through the parcel shelf brace, not bare sheet metal.",
+                null,
+                null
+            ],
+            [
+                "Confirm all mounting plate welds and drill any clearance holes required for belt hardware.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-010",
+        "title": "Front K-Member, Shock Tower Saddle & Frame Rail Preparation (Section 03).",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-020 \u2014 Shock Tower Saddle Fit-Up & Tack Weld.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "Vehicle hoist or jack stands (rated)",
+            "Engine crane",
+            "Angle grinder + cut-off wheel",
+            "MIG welder + shielding gas",
+            "Adjustable C-clamps",
+            "Tape measure",
+            "Sharpie \/ marker",
+            "Socket set (SAE)"
+        ],
+        "materials": [
+            "HEIDTS K-member sub-frame kit (P\/N MTF-201)",
+            "Driver's & passenger's shock tower saddles",
+            "Grinding discs",
+            "MIG wire",
+            "Anti-seize compound (later ops)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Cutting \/ grinding sparks",
+                "Clear flammables from bay; fire extinguisher within reach; eye and hand protection mandatory."
+            ],
+            [
+                "Welding fumes \/ arc flash",
+                "Local extraction or open bay ventilation; welding mask and gauntlets; screen off adjacent stations."
+            ],
+            [
+                "Suspended engine\/component during removal",
+                "Use rated hoist\/engine crane; no body parts under suspended load."
+            ]
+        ],
+        "qc": [
+            [
+                "Spindle centreline mark, both sides",
+                "24 1\/4\" from front of frame, \u00b11\/16\""
+            ],
+            [
+                "Frame rails cleaned to bare metal in weld zone",
+                "Visual \u2014 no coating\/rust"
+            ],
+            [
+                "All removed fasteners tagged and retained",
+                "100% accounted for"
+            ],
+            [
+                "Shock tower cut lines clean, on apron edge",
+                "Visual, both sides"
+            ]
+        ],
+        "steps": [
+            [
+                "Raise vehicle and support on jack stands placed on the flat section of the frame rails, close to the front body mounts.",
+                "\u26a0 Confirm stand placement before releasing hoist. Vehicle must not rock.",
+                null,
+                null
+            ],
+            [
+                "Remove engine and transmission. Tag and bag all fasteners for re-installation.",
+                "\u2714 Every fastener labelled by location \u2014 zero loose\/unlabelled fasteners at end of step.",
+                null,
+                null
+            ],
+            [
+                "Remove front wheels and shocks. Disconnect brake lines and tie rods.",
+                "Cap open brake lines to prevent fluid loss \/ contamination.",
+                null,
+                null
+            ],
+            [
+                "Remove the factory steering box, pitman arm, and lower control arms. Unbolt the factory crossmember from the frame. Cut out the factory lower control arm mounts.",
+                "Reference cut lines only where marked \u2014 do not cut into the main frame rail.",
+                "p03_f0.jpg",
+                "Fig. 1 \u2014 cut-out control arm mounts"
+            ],
+            [
+                "Cut out the factory shock towers, cutting along the edge between the shock tower and the inner apron for a clean line \u2014 passenger side.",
+                "\u2714 Clean, straight cut on the apron edge \u2014 this becomes the weld joint for the new inner fender panel.",
+                "p04_f0.jpg",
+                "Fig. 2 \u2014 passenger side"
+            ],
+            [
+                "Cut out the factory shock tower \u2014 driver's side.",
+                "\u2714 Match passenger side cut line.",
+                "p04_f1.jpg",
+                "Fig. 3 \u2014 driver's side, tower removed"
+            ],
+            [
+                "Grind and clean the remaining front frame rails \u2014 top, bottom, inner and outer faces \u2014 down to bare, weld-ready metal.",
+                "\u2714 No paint, rust, or coating within the weld zone.",
+                "p04_f2.jpg",
+                "Fig. 4 \u2014 bottom view of engine bay"
+            ],
+            [
+                "Measure 24-1\/4\" from the very front of the frame and mark a vertical Sharpie line on each rail \u2014 passenger side shown.",
+                "\u26a0 CRITICAL DIMENSION \u2014 re-check measurement on both sides before marking.",
+                "p05_f0.jpg",
+                "Fig. 5 \u2014 spindle centreline mark"
+            ],
+            [
+                "Repeat the 24-1\/4\" centreline mark \u2014 driver's side.",
+                "Error here affects final wheel alignment.",
+                "p05_f1.jpg",
+                "Fig. 6 \u2014 driver's side, 24 1\/4\""
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-020",
+        "title": "Shock Tower Saddle Fit-Up & Tack Weld",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-030 \u2014 K-Member Installation & Final Weld.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "MIG welder (tack setting)",
+            "Adjustable C-clamps",
+            "Torque wrench",
+            "Socket set (SAE)"
+        ],
+        "materials": [
+            "Driver's side shock tower saddle",
+            "Passenger's side shock tower saddle",
+            "Factory 7\/16\" steering gear bolt (alignment tool only)",
+            "Factory 3\/8\" idler arm bolt (alignment tool only)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Welding fumes \/ arc flash (tack weld)",
+                "Welding mask and gauntlets; ventilated bay."
+            ],
+            [
+                "Sharp cut edges on frame rail",
+                "Deburr edges or wear cut-resistant gloves when handling."
+            ]
+        ],
+        "qc": [
+            [
+                "Spindle centreline visible through saddle slot, both sides",
+                "Visual"
+            ],
+            [
+                "Saddle orientation \u2014 front hole higher than rear",
+                "Visual, both sides"
+            ],
+            [
+                "Saddles clamped snug, no gap to frame rail",
+                "Visual \/ feel"
+            ]
+        ],
+        "steps": [
+            [
+                "Place the driver's side shock tower saddle onto the frame rail. Orient so the upper control arm mount hole is higher at the front than the rear.",
+                "Confirm orientation before clamping \u2014 front hole higher than rear.",
+                null,
+                null
+            ],
+            [
+                "Use the factory 7\/16\" steering gear bolt to pre-locate the driver's side saddle, sliding it through the front \u00bd\" hole in the saddle and the \u00bd\" factory frame rail hole.",
+                "Factory bolt is an alignment guide only \u2014 discard once saddle is aligned.",
+                "p07_f0.jpg",
+                "Fig. 7A \u2014 driver's side alignment bolt"
+            ],
+            [
+                "Use the factory 3\/8\" idler arm bolt to pre-locate the passenger's side saddle through the rear \u00bd\" hole in the saddle and the rear \u00bd\" hole in the frame rail.",
+                "Discard factory bolt once aligned.",
+                "p07_f1.jpg",
+                "Fig. 7B \u2014 passenger side alignment bolt"
+            ],
+            [
+                "Check the slot in each shock tower saddle against the spindle centreline mark made in OP-010. The vertical Sharpie line must be visible through the slot.",
+                "\u26a0 Do not proceed until the centreline mark is visible through the slot on both sides.",
+                "p06_f0.jpg",
+                "Fig. 7 \u2014 saddle alignment window"
+            ],
+            [
+                "Use adjustable clamps to securely snug both shock tower saddles to the frame rails, then tack weld in place.",
+                "\u2714 Tack only \u2014 full weld occurs in OP-030 after K-member fit-up.",
+                "p06_f1.jpg",
+                "Fig. 8 \u2014 clamped for tack weld"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-030",
+        "title": "K-Member Installation & Final Weld",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-040 \u2014 Lower Ball Joint & Lower Control Arm Installation.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "Engine crane or transmission jack",
+            "Adjustable C-clamps",
+            "MIG welder (full-penetration setting)",
+            "Grinding wheel (weld clean-up)"
+        ],
+        "materials": [
+            "HEIDTS front K-member sub-frame (motor stands pre-welded on)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "K-member weight during fit-up",
+                "Support with engine crane or transmission jack while positioning; do not hand-hold under load."
+            ],
+            [
+                "Full-seam welding \u2014 fumes, arc flash, burns",
+                "Ventilation, welding mask\/gauntlets, screen adjacent stations, allow cool-down before handling."
+            ]
+        ],
+        "qc": [
+            [
+                "K-member slots aligned to saddle slots",
+                "Visual, both sides"
+            ],
+            [
+                "Spindle centreline still correct post-clamp",
+                "24 1\/4\" from front of frame, \u00b11\/16\""
+            ],
+            [
+                "Full weld \u2014 no gaps, pinholes or cold-lap",
+                "Visual, both sides + tap test"
+            ]
+        ],
+        "steps": [
+            [
+                "Place the front K-member into the vehicle, locating the vertical slots on the K-member to the vertical slots of the saddles. Use adjustable clamps to secure the K-member to the frame rail saddles and rear frame rails.",
+                "Slots must align \u2014 do not force; re-check saddle position if binding.",
+                "p08_f0.jpg",
+                "Fig. 9 \u2014 align slots at spindle centreline"
+            ],
+            [
+                "Confirm the motor stands (pre-welded to the K-member) are correctly oriented before welding.",
+                "\u2714 Re-check spindle centreline alignment before welding \u2014 last point to correct it.",
+                "p09_f0.jpg",
+                "Fig. 10 \u2014 motor stands, driver's side"
+            ],
+            [
+                "Fully weld all seams and slots between the K-member and the vehicle frame \u2014 driver's side, view from outside vehicle.",
+                "\u2714 Continuous weld bead, no gaps or cold-lap.",
+                "p10_f0.jpg",
+                "Fig. 11 \u2014 driver's side, outside view"
+            ],
+            [
+                "Complete the weld \u2014 driver's side, view from engine compartment.",
+                "Grind smooth per your finishing standard.",
+                "p10_f1.jpg",
+                "Fig. 13 \u2014 driver's side, engine bay view"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-040",
+        "title": "Lower Ball Joint & Lower Control Arm Installation",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-050 \u2014 Upper Control Arm, Ball Joint & Caster\/Camber Slug Installation.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Torque wrench",
+            "Socket set (SAE)",
+            "Anti-seize compound"
+        ],
+        "materials": [
+            "2\u00d7 lower control arms",
+            "2\u00d7 lower screw-in ball joints",
+            "8\u00d7 \u00bd-20 Nylock nut",
+            "8\u00d7 5\/8 SAE washer",
+            "2\u00d7 5\/8-11 x 4\u00bd\" Hex Bolt (front mount)",
+            "2\u00d7 5\/8-11 x 5\" Hex Bolt Grade 5 (rear mount)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Thread damage from cross-threading ball joint",
+                "Start by hand, use anti-seize, do not force."
+            ]
+        ],
+        "qc": [
+            [
+                "Ball joint threads coated with anti-seize before install",
+                "Visual \/ process check"
+            ],
+            [
+                "Correct bolt length used front vs rear (4\u00bd\" vs 5\")",
+                "Visual \u2014 verify against parts list"
+            ],
+            [
+                "Ball joint boot seated on top side",
+                "Visual, both sides"
+            ]
+        ],
+        "steps": [
+            [
+                "Apply anti-seize to the threads of the lower screw-in ball joint.",
+                "\u2714 Anti-seize on every ball joint thread before install \u2014 no exceptions.",
+                "p11_f0.jpg",
+                "Fig. 14 \u2014 ball joint, anti-seize"
+            ],
+            [
+                "Install the lower ball joint into the control arm housing. Tighten until tight to the housing.",
+                "Confirm ball joint seats fully \u2014 no gap to housing.",
+                "p11_f1.jpg",
+                "Fig. 15 \u2014 ball joint housing"
+            ],
+            [
+                "Place the ball joint boot on the top side of the housing.",
+                "Boot orientation matters \u2014 top side only, or it will not seal correctly.",
+                "p11_f2.jpg",
+                "Fig. 16 \u2014 boot installed"
+            ],
+            [
+                "Install the lower control arms. Use 5\/8-11 x 4\u00bd\" hex bolts, washers and Nylock nuts for the front mount; 5\/8-11 x 5\" hex bolts, washers and Nylock nuts for the rear mount. The cut-out on the bottom of the cross member is for the front bolt.",
+                "Torque per fastener spec sheet \u2014 do not fully torque until ride height is set, unless your procedure specifies otherwise.",
+                "p12_f0.jpg",
+                "Fig. 17\/18 \u2014 control arm + cross-member cut-out"
+            ],
+            [
+                "Confirm final control arm position and fastening.",
+                "Verify against fastener spec.",
+                "p12_f1.jpg",
+                "Fig. 19 \u2014 control arm installed"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-050",
+        "title": "Upper Control Arm, Ball Joint & Caster\/Camber Slug Installation",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-060 \u2014 Steering Arm & Spindle Installation.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Torque wrench",
+            "Socket set (SAE)"
+        ],
+        "materials": [
+            "2\u00d7 upper control arms",
+            "2\u00d7 upper ball joints",
+            "Aluminium upper control arm slugs \u2014 0\" offset (base kit, 4 supplied)",
+            "6\u00d7 \u00bd-20 x 2\u00be\" Grade 8 Hex Bolt",
+            "Moog K960 camber shim kit (optional, if adjusting beyond base setting)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ]
+        ],
+        "qc": [
+            [
+                "Correct slug offset installed both sides (match unless deliberate correction)",
+                "Visual \u2014 record offset used"
+            ],
+            [
+                "Upper control arm bolts torqued to spec",
+                "Torque wrench, both sides"
+            ]
+        ],
+        "steps": [
+            [
+                "Install the upper control arm ball joints.",
+                null,
+                "p13_f0.jpg",
+                "Fig. 20A \u2014 upper ball joint installed"
+            ],
+            [
+                "Install the aluminium upper control arm slugs into the upper control arm slotted shaft for desired caster. Base kit ships with 0\" offset slugs (measured from bolt centre), giving 4\u20135\u00b0 of caster.",
+                "If more caster is required, source offset slugs (1\/16\" increments, Lefthander Chassis) rather than modifying the base slugs.",
+                "p13_f1.jpg",
+                "Fig. 21A \u2014 LHC upper control arm slugs"
+            ],
+            [
+                "Reference: available slug offset options if a non-zero setting is needed.",
+                "Record offset used per side for the alignment log.",
+                "p14_f0.jpg",
+                "Fig. 21B \u2014 slug offset options"
+            ],
+            [
+                "If adjusting camber beyond the base setting, add camber shim plates between the shock tower and the outside of the upper control arm shaft (Moog K960 kit).",
+                "Record shim thickness used per side for the alignment record in OP-100.",
+                "p14_f1.jpg",
+                "Fig. 21C \u2014 Moog K960 camber shims"
+            ],
+            [
+                "Secure the upper control arm with the supplied \u00bd-20 x 2\u00be\" Grade 8 hex bolts.",
+                "Torque per fastener spec sheet.",
+                "p15_f0.jpg",
+                "Fig. 21D \u2014 upper control arm assembled"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-060",
+        "title": "Steering Arm & Spindle Installation",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-070 \u2014 Coilover Shock Installation.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Torque wrench",
+            "Socket set (SAE)",
+            "Red thread locker"
+        ],
+        "materials": [
+            "2\u00d7 spindles",
+            "Steering arm hardware",
+            "Castle nuts + cotter pins (lower\/upper ball joint retention)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Red thread locker \u2014 skin\/eye contact",
+                "Wear gloves; avoid contact with skin and eyes."
+            ]
+        ],
+        "qc": [
+            [
+                "Steering arms oriented forward, both sides",
+                "Visual"
+            ],
+            [
+                "Thread locker present on all steering arm fasteners",
+                "Visual \/ process check"
+            ],
+            [
+                "Cotter pins fitted, new, both ball joints, both sides",
+                "Visual, 4 locations"
+            ],
+            [
+                "Castle nuts torqued to spec",
+                "Torque wrench, 4 locations"
+            ]
+        ],
+        "steps": [
+            [
+                "Apply red thread locker to all steering arm fastener threads before installation.",
+                "\u2714 Thread locker on every steering arm fastener \u2014 steering-critical joint.",
+                "p15_f1.jpg",
+                "Fig. 22 \u2014 thread locker on bolt"
+            ],
+            [
+                "Install the steering arms to the spindles.",
+                "Confirm steering arms face forward before final torque.",
+                "p15_f2.jpg",
+                "Fig. 23 \u2014 steering arm"
+            ],
+            [
+                "Install the spindle over the lower ball joint first. Thread the castle nut over the washer to secure the spindle to the lower ball joint.",
+                null,
+                "p16_f0.jpg",
+                "Fig. 24 \u2014 steering arms face forward"
+            ],
+            [
+                "Attach the upper ball joint to the spindle.",
+                "Confirm orientation matches Fig. 24 reference.",
+                "p16_f1.jpg",
+                "Fig. 25 \u2014 spindle attached to ball joints"
+            ],
+            [
+                "Torque castle nuts to spec and fit new cotter pins through both upper and lower ball joints.",
+                "\u26a0 Steering-critical fastener \u2014 do not reuse cotter pins. Advance torque (never back off) to align the slot.",
+                "p17_f0.jpg",
+                "Fig. 26 \u2014 castle nut installed"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-070",
+        "title": "Coilover Shock Installation",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-080 \u2014 Sway Bar Installation.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Torque wrench",
+            "Socket set (SAE)"
+        ],
+        "materials": [
+            "2\u00d7 front coilover shocks",
+            "2\u00d7 springs",
+            "4\u00d7 shock spacers (MTF-216)",
+            "6\u00d7 \u00bd-20 x 2\u00be\" Grade 8 Hex Bolt (lower mount)",
+            "2\u00d7 \u00bd-20 x 5\" Grade 8 Hex Bolt (upper mount)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Spring under compression (coilover)",
+                "Handle assembled coilovers with care; do not disassemble spring\/shock without a spring compressor."
+            ]
+        ],
+        "qc": [
+            [
+                "Adjuster knob in-board, both sides",
+                "Visual"
+            ],
+            [
+                "Shock spacers fitted at upper mount, both sides",
+                "Visual \u2014 4 spacers total"
+            ],
+            [
+                "Upper and lower mount bolts torqued to spec",
+                "Torque wrench, both sides"
+            ]
+        ],
+        "steps": [
+            [
+                "Install the coil-over shocks. Use \u00bd-20 x 2\u00be\" Grade 8 hex bolts, washers and Nylock nuts for the lower control arm mount.",
+                null,
+                "p17_f1.jpg",
+                "Fig. 27 \u2014 coilover installed"
+            ],
+            [
+                "Confirm the adjuster knob faces in-board for ease of adjustment.",
+                "\u26a0 Adjuster orientation \u2014 in-board on both sides, or later adjustment access is blocked by the frame.",
+                "p17_f2.jpg",
+                "Fig. 28 \u2014 adjuster knob orientation"
+            ],
+            [
+                "Use \u00bd-20 x 5\" Grade 8 hex bolts, washers and Nylock nuts along with the aluminium shock spacers (MTF-216) to secure the shock to the upper mount.",
+                "Torque per fastener spec sheet.",
+                "p18_f0.jpg",
+                "Fig. 29 \u2014 upper shock mount"
+            ],
+            [
+                "Confirm final coilover position and fastening.",
+                "Verify spacer count \u2014 4 total across both sides.",
+                "p18_f1.jpg",
+                "Fig. 30 \u2014 upper mount detail"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-080",
+        "title": "Sway Bar Installation",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-090 \u2014 Rack & Pinion Installation.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "MIG welder",
+            "Adjustable C-clamps",
+            "Socket set (SAE)",
+            "Grease",
+            "Anti-seize compound"
+        ],
+        "materials": [
+            "Splined sway bar + torsion arms",
+            "Adjustable end links (sway bar kit)",
+            "Sway bar bushings + collars",
+            "3\/8\" spacers",
+            "7\/16-14 x 1\u00bd\" Grade 8 bolts, washers, Nylock nuts"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Tack\/final weld of sway bar mounting brackets",
+                "Welding mask, ventilation, screen adjacent stations."
+            ]
+        ],
+        "qc": [
+            [
+                "End links straight (vertical) both axes, both sides",
+                "Visual, pre- and post-weld"
+            ],
+            [
+                "Mounting bracket flush to bottom of frame before tack",
+                "Visual"
+            ],
+            [
+                "Full weld on mounting brackets, no gaps",
+                "Visual, both sides"
+            ],
+            [
+                "Sway bar collars tightened, bar centred",
+                "Visual \/ feel"
+            ]
+        ],
+        "steps": [
+            [
+                "Attach the sway bar to the adjustable end links and mount the end links snug to the lower control arm mounts. Confirm end links sit straight up and down, front-to-rear and left-to-right. Apply anti-seize to adjustable link threads.",
+                "Mount the female rod end on the top side to avoid trapping water in the threads.",
+                "p18_f2.jpg",
+                "Fig. 31\/32 \u2014 end link assembly"
+            ],
+            [
+                "Install the sway bar bushings using 7\/16-14 x 1\u00bd\" Grade 8 bolts, washers and Nylock nuts, with 3\/8\" spacers, to the sway bar mounting brackets. Clamp the assembly to the factory frame \u2014 driver's side shown.",
+                "Re-check end link bushings are still straight up and down before tacking.",
+                "p19_f0.jpg",
+                "Fig. 33 \u2014 driver's side, clamped"
+            ],
+            [
+                "Once the mounting bracket is flush with the bottom of the frame, tack weld the mounting bracket to the frame.",
+                null,
+                "p19_f1.jpg",
+                "Fig. 34 \u2014 mounting bracket tacked"
+            ],
+            [
+                "Install and tighten the sway bar collars. Once the sway bar is at the desired location, fully weld the sway bar mounting brackets to the frame.",
+                "\u2714 Full weld only after collar position confirmed correct \u2014 rework after full weld is difficult.",
+                "p19_f3.jpg",
+                "Fig. 35 \u2014 collar installed"
+            ],
+            [
+                "Grease the bushings and install the splined sway bar and torsion arm, confirming the adjustable link is straight up and down, front-to-rear and right-to-left \u2014 full underside view.",
+                null,
+                "p20_f0.jpg",
+                "Fig. 36 \u2014 full assembly, underside"
+            ],
+            [
+                "Confirm bushing and clamping collar seating from inside the sway bar mount.",
+                "Passenger side shown \u2014 mirror for driver's side.",
+                "p20_f1.jpg",
+                "Fig. 37 \u2014 bushing & collar detail"
+            ],
+            [
+                "Confirm splined sway bar final position, passenger side.",
+                null,
+                "p21_f0.jpg",
+                "Fig. 38 \u2014 splined sway bar, passenger side"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-090",
+        "title": "Rack & Pinion Installation",
+        "station": "Chassis \u2014 Front End",
+        "next": "OP-100 \u2014 Ride Height, Alignment & Road Test.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Socket head cap screw driver \/ Allen key set",
+            "Torque wrench"
+        ],
+        "materials": [
+            "HEIDTS power rack & pinion",
+            "Billet rack mount brackets + caps",
+            "4\u00d7 socket head cap screw bolts"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ]
+        ],
+        "qc": [
+            [
+                "Rack & pinion mount bolts torqued to spec, all 4",
+                "Torque wrench"
+            ],
+            [
+                "Outer tie rods connected both sides, boots undamaged",
+                "Visual, both sides"
+            ]
+        ],
+        "steps": [
+            [
+                "Install the billet rack mount brackets on top of the rack mount tabs. Remove the billet rack mount caps and position the rack and pinion in place.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Use the four socket head cap screw bolts to fasten the rack & pinion and rack mounts to the cross member. Attach the outer tie rod to the steering arm.",
+                "Torque per fastener spec sheet. Confirm tie rod boot is not twisted or pinched before final torque.",
+                "p21_f1.jpg",
+                "Fig. 39\/40 \u2014 rack & pinion installed"
+            ]
+        ]
+    },
+    {
+        "section": "03",
+        "opNo": "OP-100",
+        "title": "Ride Height, Alignment & Road Test",
+        "station": "Chassis \u2014 Front End",
+        "next": "End of front IFS installation sequence \u2014 proceed to next chassis station per build travel sheet.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Alignment rack \/ equipment",
+            "Camber shim plates (as required)"
+        ],
+        "materials": [
+            "Camber shim plates (Moog K960 or equivalent, as required)"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Road test of unproven suspension build",
+                "Low-speed shakedown first; check for noise, binding or looseness before normal driving."
+            ]
+        ],
+        "qc": [
+            [
+                "Caster, both sides",
+                "3\u00b0 to 6\u00b0 positive, matched side-to-side"
+            ],
+            [
+                "Camber",
+                "0\u00b0 to 2\u00b0 negative"
+            ],
+            [
+                "Toe",
+                "0 to 1\/16\" toe-in"
+            ],
+            [
+                "Post-settling re-check scheduled",
+                "Logged with date\/mileage"
+            ]
+        ],
+        "steps": [
+            [
+                "Set the vehicle at final ride height with the lower control arms level before setting alignment.",
+                "\u26a0 Alignment must be set at ride height, not on the hoist with suspension drooped.",
+                null,
+                null
+            ],
+            [
+                "Set caster using the upper control arm mount slugs installed in OP-050. Zero-offset slugs should fall within the recommended caster window.",
+                "Target: 3\u00b0 to 6\u00b0 positive caster.",
+                null,
+                null
+            ],
+            [
+                "Set camber by adding or subtracting camber shim plates at the upper control arm.",
+                "Target: 0\u00b0 to 2\u00b0 negative camber.",
+                null,
+                null
+            ],
+            [
+                "Set toe.",
+                "Target: 0 to 1\/16\" toe-in.",
+                null,
+                null
+            ],
+            [
+                "Confirm both sides have equal caster settings.",
+                "\u26a0 Unequal caster side-to-side will cause the vehicle to pull \u2014 do not release for road test until matched.",
+                null,
+                null
+            ],
+            [
+                "Road test for a few hundred miles, then re-check ride height and alignment. Springs may settle and change ride height\/camber \u2014 re-adjust ride height before re-checking alignment.",
+                "Schedule a follow-up alignment check post-settling before final customer\/compliance sign-off.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "04",
+        "opNo": "OP-401",
+        "title": "Rear Axle, 4-Link \/ Torque Arm & Panhard Bar Mounting",
+        "station": "Rear Chassis",
+        "next": "OP-402 \u2014 Rear Coilover \/ Spring & Parking Brake Cable Routing.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "Engine crane or transmission jack",
+            "MIG welder",
+            "Adjustable C-clamps",
+            "Tape measure"
+        ],
+        "materials": [
+            "4-link \/ torque arm bracket kit",
+            "Panhard or Watts link kit"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Suspended axle assembly",
+                "Support on rated stands\/jack; no body parts under suspended load."
+            ],
+            [
+                "Welding fumes \/ arc flash",
+                "Ventilated bay; welding mask and gauntlets."
+            ]
+        ],
+        "qc": [
+            [
+                "Axle centreline vs chassis centreline",
+                "\u00b11\/16\""
+            ],
+            [
+                "Pinion angle",
+                "Within spec"
+            ],
+            [
+                "Bracket welds",
+                "Full weld, no gaps"
+            ]
+        ],
+        "steps": [
+            [
+                "Position rear axle assembly under the vehicle at correct ride height and pinion angle.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Fit 4-link\/torque arm brackets and Panhard\/Watts link mount, confirming axle centreline against chassis centreline.",
+                "\u26a0 CRITICAL \u2014 axle centreline must match chassis centreline before any welding.",
+                null,
+                null
+            ],
+            [
+                "Tack weld all mounting brackets; verify axle is square before final weld.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Fully weld all mounting brackets to the frame.",
+                "\u2714 Continuous weld bead, no gaps.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "04",
+        "opNo": "OP-402",
+        "title": "Rear Coilover \/ Spring & Parking Brake Cable Routing",
+        "station": "Rear Chassis",
+        "next": "OP-501 \u2014 Brake Line Fabrication & Master Cylinder \/ Booster Install.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Torque wrench",
+            "Socket set",
+            "Cable ties \/ clips"
+        ],
+        "materials": [
+            "Rear coilovers\/springs & shocks",
+            "Parking brake cable kit"
+        ],
+        "hazards": [
+            [
+                "Spring under compression",
+                "Handle assembled coilovers with care; use a spring compressor if disassembling."
+            ]
+        ],
+        "qc": [
+            [
+                "Ride height",
+                "Within spec, both sides"
+            ],
+            [
+                "Parking brake cable clearance",
+                "Confirmed through full suspension travel"
+            ],
+            [
+                "Suspension fasteners",
+                "Torqued to spec"
+            ]
+        ],
+        "steps": [
+            [
+                "Install rear coilovers\/springs and shocks per kit instructions; confirm ride height.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Route parking brake cables clear of exhaust, driveshaft and moving suspension components.",
+                "\u2714 Check clearance through full suspension travel, not just static.",
+                null,
+                null
+            ],
+            [
+                "Torque all suspension fasteners to spec.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "05",
+        "opNo": "OP-501",
+        "title": "Brake Line Fabrication & Master Cylinder \/ Booster Install",
+        "station": "Brake & Fuel Bay",
+        "next": "OP-502 \u2014 Fuel Cell \/ Tank Install, Fuel Lines & Brake Bleed.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Brake line flaring tool",
+            "Tubing bender",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Master cylinder \/ booster",
+            "Proportioning valve",
+            "Brake line & fittings"
+        ],
+        "hazards": [
+            [
+                "Brake fluid \u2014 skin\/eye\/paint contact",
+                "Wear gloves and glasses; wipe spills immediately, brake fluid damages paint."
+            ]
+        ],
+        "qc": [
+            [
+                "Brake line routing",
+                "No contact with moving or hot components"
+            ],
+            [
+                "Fitting torque",
+                "Torqued to spec, no weeping under pressure test"
+            ]
+        ],
+        "steps": [
+            [
+                "Install master cylinder, booster (if fitted) and proportioning valve.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Fabricate and route brake lines front to rear, securing with mounting clips at factory intervals.",
+                "No line within 50mm of exhaust or moving suspension without a heat shield\/clearance check.",
+                null,
+                null
+            ],
+            [
+                "Connect lines to calipers\/wheel cylinders; torque all fittings to spec.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "05",
+        "opNo": "OP-502",
+        "title": "Fuel Cell \/ Tank Install, Fuel Lines & Brake Bleed",
+        "station": "Brake & Fuel Bay",
+        "next": "OP-601 \u2014 Engine & Transmission Install.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Fuel line tools",
+            "Brake bleeder",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Fuel cell \/ tank & straps",
+            "Fuel line & fittings"
+        ],
+        "hazards": [
+            [
+                "Fuel vapour \u2014 fire risk",
+                "No open flame or grinding nearby; ensure bay ventilation."
+            ],
+            [
+                "Pressurised brake bleed",
+                "Wear eye protection; relieve pressure before disconnecting."
+            ]
+        ],
+        "qc": [
+            [
+                "Fuel system leak test",
+                "Leak-free under test pressure"
+            ],
+            [
+                "Brake pedal feel",
+                "Firm, no sponginess"
+            ],
+            [
+                "Fitting leaks",
+                "None at any fitting"
+            ]
+        ],
+        "steps": [
+            [
+                "Install fuel cell\/tank and mounting straps; connect fuel supply\/return lines and vent per fuel system diagram.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Pressure\/leak-test fuel system before first start.",
+                "\u26a0 Do not proceed to OP-601 first start until fuel system passes leak test.",
+                null,
+                null
+            ],
+            [
+                "Bench or manual bleed the complete brake system; verify pedal feel and no leaks.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "06",
+        "opNo": "OP-601",
+        "title": "Engine & Transmission Install",
+        "station": "Drivetrain Bay",
+        "next": "OP-602 \u2014 Driveshaft Fit, Exhaust Fabrication & Cooling System.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Engine crane\/hoist",
+            "Transmission jack",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Engine mounts",
+            "Transmission crossmember"
+        ],
+        "hazards": [
+            [
+                "Vehicle on jack stands \/ hoist",
+                "Stands on flat frame-rail sections near front body mounts only; confirm vehicle stability before working underneath."
+            ],
+            [
+                "Suspended engine\/transmission load",
+                "Use rated hoist\/crane; no body parts under suspended load."
+            ]
+        ],
+        "qc": [
+            [
+                "Mount torque",
+                "Torqued to spec"
+            ],
+            [
+                "Chassis\/body clearance",
+                "Adequate clearance at all points"
+            ]
+        ],
+        "steps": [
+            [
+                "Lower engine\/transmission assembly onto mounts; confirm mount alignment and clearance to chassis\/body.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Connect engine mounts, transmission crossmember and driveline accessories.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Torque all mounting hardware to spec.",
+                "\u2714 Re-check torque after first heat cycle.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "06",
+        "opNo": "OP-602",
+        "title": "Driveshaft Fit & Exhaust Fabrication",
+        "station": "Drivetrain Bay",
+        "next": "OP-603 \u2014 Engine Bay Ancillary Components (Radiator, Brake Booster & Electric Pump Brackets).",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Welding Mask \/ Gloves",
+            "Steel-Cap Boots",
+            "Hearing Protection (grinding)"
+        ],
+        "tools": [
+            "MIG\/TIG welder",
+            "Pipe bender",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Driveshaft",
+            "Exhaust system components",
+            "Radiator, hoses & fan(s)"
+        ],
+        "hazards": [
+            [
+                "Cutting\/welding exhaust \u2014 sparks, fumes",
+                "Ventilated bay; fire extinguisher within reach."
+            ]
+        ],
+        "qc": [
+            [
+                "Driveshaft angles",
+                "Within spec"
+            ],
+            [
+                "Exhaust clearance",
+                "Clears all lines\/floor by minimum margin"
+            ]
+        ],
+        "steps": [
+            [
+                "Fit driveshaft; confirm u-joint angles and slip-yoke engagement.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Fabricate and install exhaust system, maintaining clearance from fuel lines, brake lines and floor.",
+                "Minimum clearance per your fabrication standard \u2014 check at full suspension travel.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "06",
+        "opNo": "OP-603",
+        "title": "Engine Bay Ancillary Components \u2014 Radiator, Brake Booster & Electric Pump Brackets",
+        "station": "Drivetrain Bay",
+        "next": "OP-604 \u2014 Engine Bay Plumbing (Brake, A\/C & Coolant Line Routing).",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Bracket fabrication tools",
+            "Drill",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Radiator & fan(s)",
+            "Brake booster \/ master cylinder assembly",
+            "Electric master cylinder pump + bracket",
+            "Electric A\/C pump + bracket"
+        ],
+        "hazards": [
+            [
+                "Manual handling \/ sharp bracket edges",
+                "Deburr fabricated brackets; wear gloves when fitting."
+            ]
+        ],
+        "qc": [
+            [
+                "Radiator\/fan clearance",
+                "Confirmed, no contact"
+            ],
+            [
+                "Electric MC pump bracket \u2014 passenger side",
+                "Clear of wheel\/suspension through full travel"
+            ],
+            [
+                "Electric A\/C pump bracket \u2014 driver side",
+                "Clear of wheel\/suspension through full travel"
+            ],
+            [
+                "Bracket fastening",
+                "Torqued\/welded per standard"
+            ]
+        ],
+        "steps": [
+            [
+                "Install radiator and confirm clearance to fan, core support and A\/C condenser.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Install brake booster \/ master cylinder assembly at the firewall.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Fabricate and fit the mounting bracket for the electric master cylinder pump under the front fender, passenger side.",
+                "\u2714 Confirm bracket location matches this build's standard \u2014 passenger side, under-fender.",
+                null,
+                null
+            ],
+            [
+                "Fabricate and fit the mounting bracket for the electric A\/C pump under the front fender, driver side.",
+                "\u2714 Confirm bracket location matches this build's standard \u2014 driver side, under-fender.",
+                null,
+                null
+            ],
+            [
+                "Confirm clearance to wheel, tyre and suspension travel for both fender-mounted pump brackets through full lock and full suspension travel.",
+                "\u26a0 Check at full steering lock and full bump\/droop \u2014 not just static.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "06",
+        "opNo": "OP-604",
+        "title": "Engine Bay Plumbing \u2014 Brake, A\/C & Coolant Line Routing",
+        "station": "Drivetrain Bay",
+        "next": "OP-701 \u2014 Chassis Harness Install.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Line routing tools",
+            "Flaring tool",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Brake line & fittings",
+            "A\/C line & fittings",
+            "Coolant hose"
+        ],
+        "hazards": [
+            [
+                "Brake fluid \u2014 skin\/eye\/paint contact",
+                "Wear gloves and glasses; wipe spills immediately."
+            ],
+            [
+                "Refrigerant handling (A\/C charging)",
+                "Only charge A\/C with certified equipment and refrigerant handling licence."
+            ]
+        ],
+        "qc": [
+            [
+                "Line chafe check",
+                "No chafe points through full steering\/suspension travel"
+            ],
+            [
+                "Fitting torque \/ pressure test",
+                "Torqued to spec, no weeping"
+            ],
+            [
+                "Line labelling",
+                "Labelled\/documented for service reference"
+            ]
+        ],
+        "steps": [
+            [
+                "Run brake lines from the electric master cylinder pump (passenger fender) to the booster\/master cylinder and forward to the front brake circuit fabricated in OP-501.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Run A\/C lines from the electric A\/C pump (driver fender) to the compressor\/condenser circuit.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Route coolant hoses between radiator and engine, clear of exhaust and moving components.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Secure all lines with mounting clips at factory-style intervals; confirm no chafe points through full steering and suspension travel.",
+                "\u26a0 Check at full steering lock and full suspension travel, both fender pump lines included.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "07",
+        "opNo": "OP-701",
+        "title": "Chassis Harness Install",
+        "station": "Electrical Bay",
+        "next": "OP-702 \u2014 Engine Harness, ECU Integration & Gauge\/Switch Wiring.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Wiring harness",
+            "Crimp tools",
+            "Multimeter",
+            "Loom \/ conduit"
+        ],
+        "materials": [
+            "Chassis wiring harness"
+        ],
+        "hazards": [
+            [
+                "Battery \u2014 short circuit \/ arc risk",
+                "Disconnect battery before harness work; insulate loose terminals."
+            ]
+        ],
+        "qc": [
+            [
+                "Continuity check",
+                "Zero shorts to chassis"
+            ],
+            [
+                "Grounds",
+                "Clean contact, torqued"
+            ]
+        ],
+        "steps": [
+            [
+                "Route and secure chassis wiring harness, keeping clear of heat sources and moving parts.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Connect lighting, fuel sender and chassis grounds; verify continuity at each circuit.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Confirm no shorts to chassis before battery connection.",
+                "\u26a0 Do not connect battery until this check passes.",
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "07",
+        "opNo": "OP-702",
+        "title": "Engine Harness, ECU Integration & Gauge\/Switch Wiring",
+        "station": "Electrical Bay",
+        "next": "OP-801 \u2014 Panel Fitment, Bodywork & Paint.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "ECU programming laptop\/tool",
+            "Multimeter",
+            "Crimp tools"
+        ],
+        "materials": [
+            "Engine harness",
+            "ECU",
+            "Gauge cluster & switch panel"
+        ],
+        "hazards": [
+            [
+                "Battery \u2014 short circuit \/ arc risk",
+                "Disconnect battery before harness work."
+            ]
+        ],
+        "qc": [
+            [
+                "ECU communication",
+                "Connects, no fault codes present"
+            ],
+            [
+                "Gauge\/switch function",
+                "All function correctly"
+            ],
+            [
+                "Fuse\/relay panel",
+                "Labelled, matches diagram"
+            ]
+        ],
+        "steps": [
+            [
+                "Connect engine harness to ECU and sensors; verify pinout against wiring diagram.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Wire gauge cluster, switch panel and accessory circuits; label all fuses\/relays.",
+                "\u2714 Every fuse\/relay labelled and matched to the wiring diagram.",
+                null,
+                null
+            ],
+            [
+                "Power up and confirm ECU communication, gauge function and no fault codes.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "08",
+        "opNo": "OP-801",
+        "title": "Panel Fitment, Bodywork & Paint",
+        "station": "Paint Booth",
+        "next": "OP-901 \u2014 Interior, Glass & Trim Install.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Respirator",
+            "Safety Glasses",
+            "Coveralls"
+        ],
+        "tools": [
+            "Paint booth",
+            "Spray gun",
+            "DA sander",
+            "Panel gap gauges"
+        ],
+        "materials": [
+            "Filler, primer, base coat, clear coat"
+        ],
+        "hazards": [
+            [
+                "Paint \/ solvent fumes",
+                "Spray only in a ventilated, filtered booth."
+            ],
+            [
+                "Isocyanate exposure (2K paint)",
+                "Fresh-air-fed respirator required for 2K clear coat."
+            ]
+        ],
+        "qc": [
+            [
+                "Panel gaps",
+                "Within spec, consistent both sides"
+            ],
+            [
+                "Paint finish",
+                "Free of runs, excess orange peel, or contamination"
+            ],
+            [
+                "Cure time",
+                "Met before handling"
+            ]
+        ],
+        "steps": [
+            [
+                "Fit and align all body panels; confirm gaps and shut lines within spec.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Complete bodywork, filler and surface prep; seal and prime.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Apply base coat and clear coat in a controlled, ventilated booth; cure per paint manufacturer spec.",
+                "\u26a0 Full respiratory protection required for 2K clear coat application.",
+                null,
+                null
+            ],
+            [
+                "Colour-sand and buff finished paint.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "09",
+        "opNo": "OP-901",
+        "title": "Interior, Glass & Trim Install",
+        "station": "Trim Bay",
+        "next": "OP-1001 \u2014 Fluids, Start-Up & Systems Check.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Trim tools",
+            "Adhesive \/ sealant",
+            "Torque wrench"
+        ],
+        "materials": [
+            "Seats, belts, console",
+            "Dash & trim",
+            "Glass & weatherstrip"
+        ],
+        "hazards": [
+            [
+                "Manual handling of glass",
+                "Two-person lift for all glass panels."
+            ]
+        ],
+        "qc": [
+            [
+                "Seatbelt anchor points",
+                "Torqued to spec"
+            ],
+            [
+                "Glass seals",
+                "Continuous, no gaps"
+            ],
+            [
+                "Trim fitment",
+                "Secure, no rattles on shake test"
+            ]
+        ],
+        "steps": [
+            [
+                "Install sound deadening, carpet, seats, seatbelts and console.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Install dash, gauges and interior trim.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Install glass, exterior trim and weatherstrip; confirm seals against water\/wind intrusion.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "10",
+        "opNo": "OP-1001",
+        "title": "Fluids, Start-Up & Systems Check",
+        "station": "Commissioning Bay",
+        "next": "OP-1002 \u2014 Wheel Alignment, Road Test & ADR\/RVSA Compliance Inspection.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Fluid fill equipment",
+            "Diagnostic scanner"
+        ],
+        "materials": [
+            "Oil, coolant, transmission, differential, brake, power steering fluid"
+        ],
+        "hazards": [
+            [
+                "First start \u2014 fire risk, hot surfaces",
+                "Fire extinguisher on hand for first start; clear bay of flammables."
+            ]
+        ],
+        "qc": [
+            [
+                "Leak check after first start",
+                "No leaks"
+            ],
+            [
+                "Electrical systems",
+                "All functional"
+            ],
+            [
+                "Fluid levels",
+                "Correct level and type, all systems"
+            ]
+        ],
+        "steps": [
+            [
+                "Fill all fluids \u2014 oil, coolant, transmission, differential, brake, power steering \u2014 to spec.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Perform initial start-up with fire extinguisher on hand; check for leaks, unusual noise and correct idle.",
+                "\u26a0 First start \u2014 extinguisher on hand, bay clear of flammables.",
+                null,
+                null
+            ],
+            [
+                "Function-check all electrical systems: lighting, HVAC, wipers, gauges, infotainment.",
+                null,
+                null,
+                null
+            ]
+        ]
+    },
+    {
+        "section": "10",
+        "opNo": "OP-1002",
+        "title": "Wheel Alignment, Road Test & ADR\/RVSA Compliance Inspection",
+        "station": "Commissioning Bay",
+        "next": "Build complete \u2014 vehicle released to delivery\/handover.",
+        "diagramSvg": null,
+        "diagramCaption": null,
+        "ppe": [
+            "Safety Glasses",
+            "Gloves",
+            "Steel-Cap Boots"
+        ],
+        "tools": [
+            "Alignment rack",
+            "ADR\/RVSA compliance checklist"
+        ],
+        "materials": [
+            "Compliance documentation pack"
+        ],
+        "hazards": [
+            [
+                "Road test of new build",
+                "Low-speed shakedown first; check for noise, binding or looseness before normal driving."
+            ]
+        ],
+        "qc": [
+            [
+                "Alignment",
+                "Within spec, matched side-to-side"
+            ],
+            [
+                "Post-road-test re-torque",
+                "All suspension\/steering fasteners re-torqued"
+            ],
+            [
+                "ADR\/RVSA checklist",
+                "Complete, no outstanding items"
+            ],
+            [
+                "Pre-delivery inspection",
+                "Signed off"
+            ]
+        ],
+        "steps": [
+            [
+                "Set final wheel alignment (caster, camber, toe) per Front IFS spec (OP-100) and rear suspension spec.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Complete low-speed shakedown, then extended road test; re-check alignment and torque all suspension\/steering fasteners after settling.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Complete ADR\/RVSA compliance inspection checklist and compile compliance documentation for submission.",
+                null,
+                null,
+                null
+            ],
+            [
+                "Final detail and pre-delivery inspection.",
+                null,
+                null,
+                null
+            ]
+        ]
+    }
+]
