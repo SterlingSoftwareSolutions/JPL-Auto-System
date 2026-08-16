@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('build_signoff_logs', function (Blueprint $table) {
-            $table->dropForeign(['signed_by']);
-        });
+        // Schema::table('build_signoff_logs', function (Blueprint $table) {
+        //     $table->dropForeign(['signed_by']);
+        // });
 
-        Schema::table('build_signoff_logs', function (Blueprint $table) {
-            $table->dropIndex(['signed_by']);
-        });
+        // Schema::table('build_signoff_logs', function (Blueprint $table) {
+        //     $table->dropIndex(['signed_by']);
+        // });
 
-        Schema::table('build_signoff_logs', function (Blueprint $table) {
-            $table->string('signed_by', 191)->nullable()->change();
-        });
+        // Schema::table('build_signoff_logs', function (Blueprint $table) {
+        //     $table->string('signed_by', 191)->nullable()->change();
+        // });
     }
 
     /**
@@ -29,13 +29,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('build_signoff_logs', function (Blueprint $table) {
-            // NOTE: Reverting this will fail if the table contains non-integer strings in signed_by
-            $table->unsignedBigInteger('signed_by')->nullable()->change();
-        });
+        // Schema::table('build_signoff_logs', function (Blueprint $table) {
+        //     // NOTE: Reverting this will fail if the table contains non-integer strings in signed_by
+        //     $table->unsignedBigInteger('signed_by')->nullable()->change();
+        // });
 
-        Schema::table('build_signoff_logs', function (Blueprint $table) {
-            $table->foreign('signed_by')->references('id')->on('users')->nullOnDelete();
-        });
+        // Schema::table('build_signoff_logs', function (Blueprint $table) {
+        //     $table->foreign('signed_by')->references('id')->on('users')->nullOnDelete();
+        // });
     }
 };
