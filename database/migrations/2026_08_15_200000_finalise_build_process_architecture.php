@@ -71,7 +71,8 @@ return new class extends Migration
             Schema::create('build_operation_notes', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
-                $table->foreignId('vehicle_model_id')->constrained('vehicle_models')->cascadeOnDelete();
+                //$table->foreignId('vehicle_model_id')->constrained('vehicle_models')->cascadeOnDelete();
+                $table->foreignId('vehicle_model_id')->nullable()->constrained('vehicle_models')->cascadeOnDelete();
                 $table->foreignId('vehicle_build_operation_id')->constrained('vehicle_build_operations')->cascadeOnDelete();
                 // Per-build work sequence job photo (does NOT go back to master)
                 $table->string('diagram_image_path')->nullable();

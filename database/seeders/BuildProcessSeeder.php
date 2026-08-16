@@ -19,8 +19,11 @@ class BuildProcessSeeder extends Seeder
 {
     public function run(): void
     {
-        // Target the first vehicle (JPL 478). Adjust if needed.
-        $vehicle = Vehicle::first();
+        // Target a specific vehicle ID if provided, otherwise fallback to the first vehicle.
+        // User mentioned the live vehicle ID is 3.
+        $vehicleId = env('BUILD_SEED_VEHICLE_ID', 3); 
+        $vehicle = Vehicle::find($vehicleId) ?? Vehicle::first();
+        
         if (!$vehicle) {
             $this->command->warn('No vehicles found. Please create a vehicle first.');
             return;
@@ -30,7 +33,7 @@ class BuildProcessSeeder extends Seeder
 
         // Clear existing master template data for this vehicle (vehicle_model_id = null)
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        VehicleBuildStation::where('vehicle_id', $vehicle->id)->whereNull('vehicle_model_id')->each(function($station) {
+        VehicleBuildStation::where('vehicle_id', $vehicle->id)->each(function($station) {
             $station->operations()->each(function($op) {
                 $op->steps()->delete();
                 $op->hazards()->delete();
@@ -89,7 +92,6 @@ class BuildProcessSeeder extends Seeder
             $stationName = $sectionNames[$sectionId] ?? ("Section {$sectionId}");
             $station = VehicleBuildStation::create([
                 'vehicle_id'      => $vehicle->id,
-                'vehicle_model_id' => null,
                 'section_name'    => $sectionId,
                 'name'            => $stationName,
                 'order'           => $stationOrder++,
@@ -99,7 +101,6 @@ class BuildProcessSeeder extends Seeder
             foreach ($sectionOps as $opData) {
                 $operation = VehicleBuildOperation::create([
                     'vehicle_build_station_id' => $station->id,
-                    'vehicle_model_id'          => null,
                     'code'                      => $opData['opNo'] ?? null,
                     'title'                     => $opData['title'] ?? '',
                     'station'                   => $opData['station'] ?? null,
@@ -150,7 +151,6 @@ class BuildProcessSeeder extends Seeder
                     foreach ($opData['qc'] as $qc) {
                         OperationQcCheck::create([
                             'vehicle_build_operation_id' => $operation->id,
-                            'vehicle_model_id'            => null,
                             'specification'               => $qc[0] ?? '',
                             'expected_value'              => $qc[1] ?? '',
                             'order'                       => $qcOrder++,
@@ -164,7 +164,6 @@ class BuildProcessSeeder extends Seeder
                     foreach ($opData['steps'] as $step) {
                         VehicleBuildStep::create([
                             'vehicle_build_operation_id' => $operation->id,
-                            'vehicle_model_id'            => null,
                             'label'                       => $step[0] ?? '',
                             'keypoint_text'               => ($step[1] !== null && $step[1] !== '') ? $step[1] : null,
                             'image_path'                  => $step[2] ?? null,

@@ -4,69 +4,81 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Vehicle;
+use App\Models\SpecificationCategory;
+use App\Models\VehicleSpecification;
 
 class VehicleSpecificationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $categories = [
             'Engine' => [
-                ['description' => 'Ford 5.0L "Coyote" naturally aspirated V8 engine', 'value' => null],
-                ['description' => '6-speed transmission - automatic or manual, to customer specification', 'value' => null],
-                ['description' => 'Haltech programmable engine management system (ECU) for precision tuning and diagnostics', 'value' => null],
+                ['description' => 'Ford 5.0L \"Coyote\" naturally aspirated V8 engine', 'value' => ''],
+                ['description' => '6-speed transmission - automatic or manual, to customer specification', 'value' => ''],
+                ['description' => 'Haltech programmable engine management system (ECU) for precision tuning and diagnostics', 'value' => ''],
             ],
             'Exterior' => [
-                ['description' => 'Length', 'value' => '4,613 mm (181.6")'],
-                ['description' => 'Width', 'value' => '~1,801 mm (70.9")'],
-                ['description' => 'Track, Front', 'value' => '1,476 mm (58.1" — V8 spec)'],
-                ['description' => 'Track, Rear', 'value' => '1,476 mm (58.1" — V8 spec)'],
-                ['description' => 'Wheel Base', 'value' => '2,743 mm (108.0")'],
-                ['description' => 'Overhang, Front + Rear (combined)', 'value' => '~1,869 mm total (Length – Wheelbase)'],
+                ['description' => 'Fully bespoke exterior trim, paint and colourway - customer-specified', 'value' => ''],
+                ['description' => 'Electric, colour-matched exterior mirrors', 'value' => ''],
+                ['description' => 'Integrated reverse camera and front/rear parking sensor housings', 'value' => ''],
+            ],
+            'Dimensions' => [
+                ['description' => 'Independent front and rear suspension for modern ride, handling and control', 'value' => ''],
+                ['description' => 'Purpose-engineered chassis dimensions and geometry (full specification available on request)', 'value' => ''],
             ],
             'Interior' => [
-                ['description' => 'Head Room, Front', 'value' => '950 mm (37.4")'],
-                ['description' => 'Head Room, Rear', 'value' => '~875 mm (34.4") - est.'],
-                ['description' => 'Hip Room, Front', 'value' => '1,389 mm (54.7")'],
-                ['description' => 'Hip Room, Rear', 'value' => '~865 mm (34") - est.'],
-            ],
-            'Weight' => [
-                ['description' => 'Curb / Tare Weight', 'value' => '~1,450–1,500 kg — estimate*'],
-                ['description' => 'Unladen Mass', 'value' => '~1,450–1,500 kg — estimate*'],
-                ['description' => 'Gross Weight (GVM)', 'value' => 'TBC — pending engineering calculation'],
+                ['description' => 'Fully bespoke interior trim, materials and colourway - customer-specified', 'value' => ''],
+                ['description' => 'Digital instrumentation integrated within the original gauge cluster housing', 'value' => ''],
+                ['description' => 'Premium infotainment system', 'value' => ''],
+                ['description' => 'Premium sound system', 'value' => ''],
+                ['description' => 'Power windows', 'value' => ''],
+                ['description' => 'Climate-controlled air conditioning', 'value' => ''],
             ],
             'Features' => [
-                ['description' => 'Vintage Air climate control system', 'value' => null],
-                ['description' => 'Push-button start and keyless entry', 'value' => null],
+                ['description' => 'Modern infotainment and connectivity suite', 'value' => ''],
+                ['description' => 'Reverse camera with front and rear parking sensors', 'value' => ''],
+                ['description' => 'Electric exterior mirrors', 'value' => ''],
+                ['description' => 'Full customer customisation program across interior and exterior specification', 'value' => ''],
             ],
             'Safety' => [
-                ['description' => '4-wheel Wilwood disc brakes with hydroboost', 'value' => null],
-                ['description' => 'Integrated 6-point roll cage', 'value' => null],
+                ['description' => 'Wilwood high-performance disc brakes with ABS, four-wheel', 'value' => ''],
+                ['description' => 'Traction control system', 'value' => ''],
+                ['description' => 'Three-point seatbelts throughout', 'value' => ''],
+                ['description' => 'Reverse camera and front/rear parking sensors', 'value' => ''],
             ],
             'Other' => [
-                ['description' => 'Fully adjustable coilover suspension', 'value' => null],
-                ['description' => 'Custom stainless steel dual exhaust system', 'value' => null],
+                ['description' => 'Every 478 is a ground-up, exclusive commission - no two builds alike', 'value' => ''],
+                ['description' => 'Complete customer authority over exterior and interior trim, colour and specification', 'value' => ''],
+                ['description' => 'Individually numbered, hand-built production run', 'value' => ''],
             ],
         ];
 
-        foreach ($categories as $categoryName => $specs) {
-            $categoryId = \Illuminate\Support\Facades\DB::table('specification_categories')->insertGetId([
-                'name' => $categoryName,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        // Target a specific vehicle ID if provided, otherwise fallback to the first vehicle.
+        $vehicleId = env('BUILD_SEED_VEHICLE_ID', 3);
+        $vehicle = Vehicle::find($vehicleId) ?? Vehicle::first();
 
-            foreach ($specs as $spec) {
-                \Illuminate\Support\Facades\DB::table('vehicle_specifications')->insert([
-                    'category_id' => $categoryId,
-                    'description' => $spec['description'],
-                    'value' => $spec['value'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
+        if (!$vehicle) {
+            $this->command->warn('No vehicles found. Please create a vehicle first.');
+            return;
+        }
+
+        // Clear existing specs for this vehicle
+        VehicleSpecification::where('vehicle_id', $vehicle->id)->delete();
+
+        foreach ($categories as $categoryName => $specs) {
+            $category = SpecificationCategory::firstOrCreate(['name' => $categoryName]);
+
+            foreach ($specs as $specData) {
+                VehicleSpecification::create([
+                    'vehicle_id' => $vehicle->id,
+                    'category_id' => $category->id,
+                    'description' => $specData['description'],
+                    'value' => $specData['value'],
                 ]);
             }
         }
+        
+        $this->command->info("Vehicle specifications seeded successfully for vehicle ID {$vehicle->id}.");
     }
 }
