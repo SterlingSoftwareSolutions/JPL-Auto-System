@@ -16,7 +16,11 @@ return new class extends Migration
         });
 
         Schema::table('build_signoff_logs', function (Blueprint $table) {
-            $table->string('signed_by')->nullable()->change();
+            $table->dropIndex(['signed_by']);
+        });
+
+        Schema::table('build_signoff_logs', function (Blueprint $table) {
+            $table->string('signed_by', 191)->nullable()->change();
         });
     }
 
