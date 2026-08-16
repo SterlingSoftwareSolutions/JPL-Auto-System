@@ -20,9 +20,9 @@ return new class extends Migration
         Schema::table('build_signoff_logs', function (Blueprint $table) {
             $table->unsignedBigInteger('vehicle_model_id')->nullable()->change();
         });
-        Schema::table('build_operation_notes', function (Blueprint $table) {
-            $table->unsignedBigInteger('vehicle_model_id')->nullable()->change();
-        });
+        // Schema::table('build_operation_notes', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('vehicle_model_id')->nullable()->change();
+        // });
     }
 
     /**
@@ -41,8 +41,8 @@ return new class extends Migration
         Schema::table('build_signoff_logs', function (Blueprint $table) {
             $table->unsignedBigInteger('vehicle_model_id')->nullable(false)->change();
         });
-        Schema::table('build_operation_notes', function (Blueprint $table) {
-            $table->unsignedBigInteger('vehicle_model_id')->nullable(false)->change();
-        });
+        // Schema::table('build_operation_notes', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('vehicle_model_id')->nullable(false)->change();
+        // });
     }
 };
