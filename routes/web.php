@@ -5,7 +5,10 @@ use App\Http\Controllers\ComplianceController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\SupplierController;
+use App\Models\SpecificationCategory;
+use App\Models\VehicleSpecification;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +59,7 @@ Route::get('/seed-only/{key}', function ($key) {
         'BuildProcessSeeder',
         // 'VehicleDataSeeder',
         // 'SupplierVehicleSeeder',
+        //'VehicleSpecificationSeeder',
     ];
 
     foreach ($seeders as $seeder) {
@@ -66,6 +70,21 @@ Route::get('/seed-only/{key}', function ($key) {
     }
 
     return 'Selected seeders executed!';
+});
+
+//tinker
+Route::get('/clear-specifications/{key}', function ($key) {
+
+    abort_if($key !== 'nawodi123@2026', 403);
+
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+    SpecificationCategory::truncate();
+    VehicleSpecification::truncate();
+
+    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+    return 'Specification tables cleared successfully.';
 });
 
 //auth routes
