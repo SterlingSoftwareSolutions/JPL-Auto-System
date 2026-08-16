@@ -9,8 +9,8 @@ class VehicleBuildStation extends Model
 {
     protected $guarded = [];
 
-    public function vehicleModel() {
-        return $this->belongsTo(VehicleModel::class);
+    public function vehicle() {
+        return $this->belongsTo(Vehicle::class);
     }
 
     public function operations() {

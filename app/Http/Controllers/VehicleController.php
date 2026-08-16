@@ -80,36 +80,109 @@ class VehicleController extends Controller
     public function report($id)
     {
         $vehicle = Vehicle::with([
-            'builds.parts', 
+            'builds.parts',
             'builds.timelineTasks',
-            'builds.buildStepStatuses',
+            'builds.buildStepLogs',
+            'builds.buildQcLogs',
+            'builds.buildSignoffLogs',
             'modelReportApprovals'
         ])->findOrFail($id);
 
-        foreach ($vehicle->builds as $build) {
-            $stations = \App\Models\VehicleBuildStation::with(['operations' => function($q) use ($build) {
-                $q->whereNull('vehicle_model_id')->orWhere('vehicle_model_id', $build->id)->orderBy('order');
-            }, 'operations.steps' => function($q) use ($build) {
-                $q->whereNull('vehicle_model_id')->orWhere('vehicle_model_id', $build->id)->orderBy('order');
-            }])->whereNull('vehicle_model_id')->orWhere('vehicle_model_id', $build->id)->orderBy('order')->get();
+        // Load master blueprint once for this vehicle (shared across all builds)
+        $masterStations = \App\Models\VehicleBuildStation::with([
+            'operations'          => fn($q) => $q->orderBy('order'),
+            'operations.steps'    => fn($q) => $q->orderBy('order'),
+            'operations.ppes',
+            'operations.tools',
+            'operations.materials',
+            'operations.hazards',
+            'operations.qcChecks' => fn($q) => $q->orderBy('order'),
+            'operations.signoffs' => fn($q) => $q->orderBy('order'),
+        ])->where('vehicle_id', $id)->orderBy('order')->get();
 
-            $statuses = $build->buildStepStatuses->keyBy('vehicle_build_step_id');
-            
-            foreach ($stations as $station) {
-                foreach ($station->operations as $operation) {
-                    foreach ($operation->steps as $step) {
-                        if ($statuses->has($step->id)) {
-                            $status = $statuses->get($step->id);
-                            $step->is_completed = $status->is_completed;
-                            $step->image_path = $status->image_path;
-                        } else {
-                            $step->is_completed = false;
-                            $step->image_path = null;
-                        }
-                    }
-                }
-            }
-            
+        // --- NEW: Load logs specifically for the master template (where vehicle_model_id is null) ---
+        $masterStepLogs    = \App\Models\BuildStepLog::where('vehicle_id', $id)->whereNull('vehicle_model_id')->get()->keyBy('vehicle_build_step_id');
+        $masterQcLogs      = \App\Models\BuildQcLog::where('vehicle_id', $id)->whereNull('vehicle_model_id')->get()->keyBy('operation_qc_check_id');
+        $masterSignoffLogs = \App\Models\BuildSignoffLog::where('vehicle_id', $id)->whereNull('vehicle_model_id')->get()->keyBy('operation_signoff_id');
+
+        $masterTemplateProcess = $masterStations->map(function ($station) use ($masterStepLogs, $masterQcLogs, $masterSignoffLogs) {
+            $stationClone = clone $station;
+            $stationClone->setRelation('operations', $station->operations->map(function ($operation) use ($masterStepLogs, $masterQcLogs, $masterSignoffLogs) {
+                $opClone = clone $operation;
+                $opClone->setRelation('steps', $operation->steps->map(function ($step) use ($masterStepLogs) {
+                    $stepClone = clone $step;
+                    $log = $masterStepLogs->get($step->id);
+                    $stepClone->is_completed  = $log ? (bool) $log->is_completed : false;
+                    $stepClone->job_image_path = ($log && $log->image_path) ? asset('storage/' . $log->image_path) : null;
+                    return $stepClone;
+                }));
+                $opClone->setRelation('qcChecks', $operation->qcChecks->map(function ($qc) use ($masterQcLogs) {
+                    $qcClone = clone $qc;
+                    $log = $masterQcLogs->get($qc->id);
+                    $qcClone->status = $log ? $log->status : null;
+                    return $qcClone;
+                }));
+                $opClone->setRelation('signoffs', $operation->signoffs->map(function ($signoff) use ($masterSignoffLogs) {
+                    $sigClone = clone $signoff;
+                    $log = $masterSignoffLogs->get($signoff->id);
+                    $sigClone->signed_by      = $log ? $log->signed_by : null;
+                    $sigClone->signature_data = $log ? $log->signature_data : null;
+                    $sigClone->signed_at      = $log ? $log->signed_at : null;
+                    return $sigClone;
+                }));
+                return $opClone;
+            }));
+            return $stationClone;
+        });
+        // ---------------------------------------------------------------------------------------------
+
+        foreach ($vehicle->builds as $build) {
+            // Key the log tables by their master template ID for fast lookup
+            $stepLogs    = $build->buildStepLogs->keyBy('vehicle_build_step_id');
+            $qcLogs      = $build->buildQcLogs->keyBy('operation_qc_check_id');
+            $signoffLogs = $build->buildSignoffLogs->keyBy('operation_signoff_id');
+
+            // Deep-clone the master stations so we can attach per-build state
+            // without mutating the shared master collection
+            $stations = $masterStations->map(function ($station) use ($stepLogs, $qcLogs, $signoffLogs) {
+                $stationClone = clone $station;
+                $stationClone->setRelation('operations', $station->operations->map(function ($operation) use ($stepLogs, $qcLogs, $signoffLogs) {
+                    $opClone = clone $operation;
+
+                    // Merge step completion + job image from build_step_logs
+                    $opClone->setRelation('steps', $operation->steps->map(function ($step) use ($stepLogs) {
+                        $stepClone = clone $step;
+                        $log = $stepLogs->get($step->id);
+                        $stepClone->is_completed  = $log ? (bool) $log->is_completed : false;
+                        $stepClone->job_image_path = ($log && $log->image_path)
+                            ? asset('storage/' . $log->image_path)
+                            : null;
+                        return $stepClone;
+                    }));
+
+                    // Merge QC results from build_qc_logs
+                    $opClone->setRelation('qcChecks', $operation->qcChecks->map(function ($qc) use ($qcLogs) {
+                        $qcClone = clone $qc;
+                        $log = $qcLogs->get($qc->id);
+                        $qcClone->status = $log ? $log->status : null;
+                        return $qcClone;
+                    }));
+
+                    // Merge signoff state from build_signoff_logs
+                    $opClone->setRelation('signoffs', $operation->signoffs->map(function ($signoff) use ($signoffLogs) {
+                        $sigClone = clone $signoff;
+                        $log = $signoffLogs->get($signoff->id);
+                        $sigClone->signed_by      = $log ? $log->signed_by : null;
+                        $sigClone->signature_data = $log ? $log->signature_data : null;
+                        $sigClone->signed_at      = $log ? $log->signed_at : null;
+                        return $sigClone;
+                    }));
+
+                    return $opClone;
+                }));
+                return $stationClone;
+            });
+
             $build->processState = $stations;
         }
 
@@ -159,27 +232,121 @@ class VehicleController extends Controller
             ];
         }
 
-        return view('pages.vehicles.report', compact('vehicle', 'vehicleInfo', 'categories', 'vehicleImages', 'partCategories', 'vehicleSuppliers', 'adrDataForFrontend'));
+        return view('pages.vehicles.report', compact('vehicle', 'vehicleInfo', 'categories', 'vehicleImages', 'partCategories', 'vehicleSuppliers', 'adrDataForFrontend', 'masterTemplateProcess'));
     }
 
     public function storeBuild(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'vin' => 'nullable|string|max:255',
+            'vin'  => 'nullable|string|max:255',
         ]);
 
         $vehicle = Vehicle::findOrFail($id);
-        
+
         $build = $vehicle->builds()->create([
             'name' => $request->name,
-            'vin' => $request->vin,
+            'vin'  => $request->vin,
         ]);
 
-        // Global seeding is separate.
+        // Copy BOM parts to this build under Procurement status
+        $bomParts = \App\Models\Part::with(['category', 'component', 'supplier'])->where('vehicle_id', $vehicle->id)->get();
+        $buildPartsToInsert = [];
+        $now = now();
+        foreach ($bomParts as $bp) {
+            $price = $bp->price ? (float)str_replace(['$', ','], '', $bp->price) : 0;
+            $buildPartsToInsert[] = [
+                'vehicle_model_id' => $build->id,
+                'category' => $bp->category ? $bp->category->category_name : 'Uncategorized',
+                'component' => $bp->component ? $bp->component->component_name : 'N/A',
+                'description' => $bp->description,
+                'part_number' => $bp->part_number,
+                'price' => $price,
+                'supplier' => $bp->supplier ? $bp->supplier->business_name : 'N/A',
+                'status' => 'procurement',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+        }
+        if (!empty($buildPartsToInsert)) {
+            \App\Models\VehicleBuildPart::insert($buildPartsToInsert);
+        }
+
+        // Load master template for this vehicle (stations → operations → steps, QC, signoffs)
+        $masterStations = \App\Models\VehicleBuildStation::with([
+            'operations.steps',
+            'operations.qcChecks',
+            'operations.signoffs',
+        ])->where('vehicle_id', $vehicle->id)->orderBy('order')->get();
+
+        $stepLogRows     = [];
+        $qcLogRows       = [];
+        $signoffLogRows  = [];
+        $now = now();
+
+        foreach ($masterStations as $station) {
+            foreach ($station->operations as $operation) {
+                // Seed one build_step_log per master step (unchecked by default)
+                foreach ($operation->steps as $step) {
+                    $stepLogRows[] = [
+                        'vehicle_id'            => $vehicle->id,
+                        'vehicle_model_id'      => $build->id,
+                        'vehicle_build_step_id' => $step->id,
+                        'is_completed'          => false,
+                        'image_path'            => null,
+                        'completed_by'          => null,
+                        'completed_at'          => null,
+                        'created_at'            => $now,
+                        'updated_at'            => $now,
+                    ];
+                }
+
+                // Seed one build_qc_log per QC check template (no result yet)
+                foreach ($operation->qcChecks as $qc) {
+                    $qcLogRows[] = [
+                        'vehicle_id'             => $vehicle->id,
+                        'vehicle_model_id'       => $build->id,
+                        'operation_qc_check_id'  => $qc->id,
+                        'status'                 => null,
+                        'notes'                  => null,
+                        'logged_by'              => null,
+                        'logged_at'              => null,
+                        'created_at'             => $now,
+                        'updated_at'             => $now,
+                    ];
+                }
+
+                // Seed one build_signoff_log per signoff role template (unsigned by default)
+                foreach ($operation->signoffs as $signoff) {
+                    $signoffLogRows[] = [
+                        'vehicle_id'          => $vehicle->id,
+                        'vehicle_model_id'    => $build->id,
+                        'operation_signoff_id'=> $signoff->id,
+                        'signed_by'           => null,
+                        'signature_data'      => null,
+                        'signed_at'           => null,
+                        'created_at'          => $now,
+                        'updated_at'          => $now,
+                    ];
+                }
+            }
+        }
+
+        // Bulk insert for performance
+        if (!empty($stepLogRows)) {
+            \App\Models\BuildStepLog::insert($stepLogRows);
+        }
+        if (!empty($qcLogRows)) {
+            \App\Models\BuildQcLog::insert($qcLogRows);
+        }
+        if (!empty($signoffLogRows)) {
+            \App\Models\BuildSignoffLog::insert($signoffLogRows);
+        }
 
         return redirect()->back()->with('success', 'Build added successfully.');
     }
+
+
 
 
 
@@ -255,7 +422,7 @@ class VehicleController extends Controller
 
     public function toggleStep(Request $request, $id, $stepId)
     {
-        $status = \App\Models\VehicleBuildStepStatus::updateOrCreate(
+        $status = \App\Models\BuildStepLog::updateOrCreate(
             ['vehicle_model_id' => $id, 'vehicle_build_step_id' => $stepId],
             ['is_completed' => $request->is_completed]
         );
@@ -267,7 +434,7 @@ class VehicleController extends Controller
         $request->validate(['image' => 'required|image']);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('steps', 'public');
-            $status = \App\Models\VehicleBuildStepStatus::updateOrCreate(
+            $status = \App\Models\BuildStepLog::updateOrCreate(
                 ['vehicle_model_id' => $id, 'vehicle_build_step_id' => $stepId],
                 ['image_path' => $path]
             );

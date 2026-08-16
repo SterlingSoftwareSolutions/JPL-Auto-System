@@ -2,10 +2,10 @@
 
 return [
     [
-        'name' => 'Body Shell',
+        'name' => 'New Shell Receiving & Inspection',
         'ops' => [
             [
-                'code' => 'OP-101', 'section' => 'Body Shell', 'station' => 'Receiving Bay',
+                'code' => 'OP-101', 'section' => 'New Shell Receiving & Inspection', 'station' => 'Receiving Bay',
                 'title' => 'New Body Shell Receiving, Inspection & Fixture Check',
                 'ppe' => ['Safety Glasses','Gloves','Steel-Cap Boots'],
                 'hazards' => [
@@ -24,10 +24,10 @@ return [
         ]
     ],
     [
-        'name' => 'Chassis — Rear',
+        'name' => 'ADR Structural Modification',
         'ops' => [
             [
-                'code' => 'OP-201', 'section' => 'Chassis — Rear', 'station' => 'Chassis Bay',
+                'code' => 'OP-201', 'section' => 'ADR Structural Modification', 'station' => 'Chassis Bay',
                 'title' => 'Rear 4-Link and Panhard Bar Installation',
                 'ppe' => ['Safety Glasses','Gloves'],
                 'hazards' => [
@@ -44,10 +44,10 @@ return [
         ]
     ],
     [
-        'name' => 'Front IFS',
+        'name' => 'Front Suspension (IFS) Install',
         'ops' => [
             [
-                'code' => 'OP-301', 'section' => 'Front IFS', 'station' => 'Chassis Bay',
+                'code' => 'OP-301', 'section' => 'Front Suspension (IFS) Install', 'station' => 'Chassis Bay',
                 'title' => 'Front Independent Suspension Installation',
                 'ppe' => ['Safety Glasses','Gloves'],
                 'hazards' => [
@@ -64,10 +64,10 @@ return [
         ]
     ],
     [
-        'name' => 'Rear Suspension',
+        'name' => 'Rear Suspension & Driveline',
         'ops' => [
             [
-                'code' => 'OP-401', 'section' => 'Rear Suspension', 'station' => 'Chassis Bay',
+                'code' => 'OP-401', 'section' => 'Rear Suspension & Driveline', 'station' => 'Chassis Bay',
                 'title' => 'Rear Spring and Shock Fitment',
                 'ppe' => ['Safety Glasses','Gloves'],
                 'hazards' => [
@@ -83,10 +83,10 @@ return [
         ]
     ],
     [
-        'name' => 'Brakes & Fuel',
+        'name' => 'Brake & Fuel Systems',
         'ops' => [
             [
-                'code' => 'OP-501', 'section' => 'Brakes & Fuel', 'station' => 'Chassis Bay',
+                'code' => 'OP-501', 'section' => 'Brake & Fuel Systems', 'station' => 'Chassis Bay',
                 'title' => 'Wilwood Brake and Fuel System Installation',
                 'ppe' => ['Safety Glasses','Gloves'],
                 'hazards' => [
@@ -103,10 +103,10 @@ return [
         ]
     ],
     [
-        'name' => 'Drivetrain',
+        'name' => 'Drivetrain & Engine Bay Install',
         'ops' => [
             [
-                'code' => 'OP-601', 'section' => 'Drivetrain', 'station' => 'Engine Bay',
+                'code' => 'OP-601', 'section' => 'Drivetrain & Engine Bay Install', 'station' => 'Engine Bay',
                 'title' => 'Coyote Engine and Transmission Installation',
                 'ppe' => ['Safety Glasses','Gloves','Steel-Cap Boots'],
                 'hazards' => [
@@ -123,10 +123,10 @@ return [
         ]
     ],
     [
-        'name' => 'Electrical',
+        'name' => 'Electrical & Wiring',
         'ops' => [
             [
-                'code' => 'OP-701', 'section' => 'Electrical', 'station' => 'Electrical Bay',
+                'code' => 'OP-701', 'section' => 'Electrical & Wiring', 'station' => 'Electrical Bay',
                 'title' => 'Haltech ECU and Wiring Harness Installation',
                 'ppe' => ['Safety Glasses'],
                 'hazards' => [
@@ -143,10 +143,10 @@ return [
         ]
     ],
     [
-        'name' => 'Paint & Body',
+        'name' => 'Body & Paint',
         'ops' => [
             [
-                'code' => 'OP-801', 'section' => 'Paint & Body', 'station' => 'Paint Bay',
+                'code' => 'OP-801', 'section' => 'Body & Paint', 'station' => 'Paint Bay',
                 'title' => 'Final Panel Fit and Paint Preparation',
                 'ppe' => ['Respirator','Gloves'],
                 'hazards' => [
@@ -162,10 +162,10 @@ return [
         ]
     ],
     [
-        'name' => 'Trim & Glass',
+        'name' => 'Interior and External Trim',
         'ops' => [
             [
-                'code' => 'OP-901', 'section' => 'Trim & Glass', 'station' => 'Trim Bay',
+                'code' => 'OP-901', 'section' => 'Interior and External Trim', 'station' => 'Trim Bay',
                 'title' => 'Interior Trim and Glass Fitment',
                 'ppe' => ['Gloves'],
                 'hazards' => [
@@ -181,10 +181,10 @@ return [
         ]
     ],
     [
-        'name' => 'Commissioning',
+        'name' => 'Final Assembly, Alignment & Commissioning',
         'ops' => [
             [
-                'code' => 'OP-1001', 'section' => 'Commissioning', 'station' => 'Commissioning Bay',
+                'code' => 'OP-1001', 'section' => 'Final Assembly, Alignment & Commissioning', 'station' => 'Commissioning Bay',
                 'title' => 'Final Commissioning and Road Test',
                 'ppe' => ['Safety Glasses'],
                 'hazards' => [
