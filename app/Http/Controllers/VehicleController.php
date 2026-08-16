@@ -361,6 +361,14 @@ class VehicleController extends Controller
     public function destroyBuild($id)
     {
         $build = \App\Models\VehicleModel::findOrFail($id);
+        
+        $build->parts()->delete();
+        $build->timelineTasks()->delete();
+        $build->buildStepLogs()->delete();
+        $build->buildQcLogs()->delete();
+        $build->buildSignoffLogs()->delete();
+        $build->operationNotes()->delete();
+
         $build->delete();
 
         return response()->json(['success' => true]);

@@ -1180,7 +1180,7 @@ function editBuild(id) {
   if(!b) return;
   const newName = prompt("Edit build name:", b.name);
   if(newName) {
-    fetch(`/builds/${id}`, {
+    fetch(`{{ url('builds') }}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -1203,7 +1203,7 @@ function editBuild(id) {
 function deleteBuild(id) {
   document.querySelectorAll('[id^="build-menu-"]').forEach(m => m.style.display = 'none');
   if(confirm("Are you sure you want to delete this build?")) {
-    fetch(`/builds/${id}`, {
+    fetch(`{{ url('builds') }}/${id}`, {
       method: 'DELETE',
       headers: {
         'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
