@@ -19,8 +19,11 @@ class BuildProcessSeeder extends Seeder
 {
     public function run(): void
     {
-        // Target the first vehicle (JPL 478). Adjust if needed.
-        $vehicle = Vehicle::first();
+        // Target a specific vehicle ID if provided, otherwise fallback to the first vehicle.
+        // User mentioned the live vehicle ID is 3.
+        $vehicleId = env('BUILD_SEED_VEHICLE_ID', 3); 
+        $vehicle = Vehicle::find($vehicleId) ?? Vehicle::first();
+        
         if (!$vehicle) {
             $this->command->warn('No vehicles found. Please create a vehicle first.');
             return;
