@@ -1180,19 +1180,47 @@ function editBuild(id) {
   if(!b) return;
   const newName = prompt("Edit build name:", b.name);
   if(newName) {
-    b.name = newName;
-    renderBuildCards();
+    fetch(`/builds/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+      },
+      body: JSON.stringify({ name: newName })
+    }).then(res => {
+      if(res.ok) {
+        b.name = newName;
+        renderBuildCards();
+      } else {
+        alert("Error updating build name.");
+      }
+    }).catch(err => {
+      alert("Error updating build name.");
+    });
   }
 }
 
 function deleteBuild(id) {
   document.querySelectorAll('[id^="build-menu-"]').forEach(m => m.style.display = 'none');
   if(confirm("Are you sure you want to delete this build?")) {
-    const idx = buildCards.findIndex(x => x.id === id);
-    if(idx !== -1) {
-      buildCards.splice(idx, 1);
-      renderBuildCards();
-    }
+    fetch(`/builds/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+      }
+    }).then(res => {
+      if(res.ok) {
+        const idx = buildCards.findIndex(x => x.id === id);
+        if(idx !== -1) {
+          buildCards.splice(idx, 1);
+          renderBuildCards();
+        }
+      } else {
+        alert("Error deleting build.");
+      }
+    }).catch(err => {
+      alert("Error deleting build.");
+    });
   }
 }
 

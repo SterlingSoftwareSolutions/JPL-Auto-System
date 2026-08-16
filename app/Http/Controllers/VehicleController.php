@@ -344,9 +344,27 @@ class VehicleController extends Controller
         }
 
         return redirect()->back()->with('success', 'Build added successfully.');
+    }    public function updateBuild(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $build = \App\Models\VehicleModel::findOrFail($id);
+        $build->update([
+            'name' => $request->name,
+        ]);
+
+        return response()->json($build);
     }
 
+    public function destroyBuild($id)
+    {
+        $build = \App\Models\VehicleModel::findOrFail($id);
+        $build->delete();
 
+        return response()->json(['success' => true]);
+    }
 
 
 

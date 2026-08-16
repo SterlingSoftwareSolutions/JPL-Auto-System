@@ -97,6 +97,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/vehicles/{id}/compliance', [\App\Http\Controllers\ComplianceController::class, 'updateVehicleCompliance'])->name('vehicles.compliance.update');
     Route::post('/vehicles/{id}/model-report-approvals', [\App\Http\Controllers\VehicleController::class, 'storeModelReportApproval'])->name('vehicles.model-report-approvals.store');
     Route::delete('/vehicles/model-report-approvals/{id}', [\App\Http\Controllers\VehicleController::class, 'destroyModelReportApproval'])->name('vehicles.model-report-approvals.destroy');
+    Route::put('/builds/{id}', [App\Http\Controllers\VehicleController::class, 'updateBuild']);
+    Route::delete('/builds/{id}', [App\Http\Controllers\VehicleController::class, 'destroyBuild']);
     Route::post('/builds/{id}/parts', [App\Http\Controllers\VehicleController::class, 'storeBuildPart']);
     Route::put('/builds/parts/{id}/status', [App\Http\Controllers\VehicleController::class, 'updateBuildPartStatus']);
     Route::post('/builds/{id}/timeline-tasks', [App\Http\Controllers\VehicleController::class, 'storeTimelineTask']);
