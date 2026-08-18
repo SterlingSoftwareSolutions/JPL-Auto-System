@@ -127,6 +127,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/builds/{id}/signoff/{signoffId}/clear', [\App\Http\Controllers\VehicleController::class, 'clearSignoff']);
     Route::put('/builds/{id}', [App\Http\Controllers\VehicleController::class, 'updateBuild']);
     Route::delete('/builds/{id}', [App\Http\Controllers\VehicleController::class, 'destroyBuild']);
+    Route::post('/vehicles/{id}/parts', [App\Http\Controllers\VehicleController::class, 'storeModelPart']);
+    Route::delete('/vehicles/parts/{id}', [App\Http\Controllers\VehicleController::class, 'destroyModelPart']);
+    Route::put('/vehicles/parts/{id}', [App\Http\Controllers\VehicleController::class, 'updateModelPart']);
     Route::post('/builds/{id}/parts', [App\Http\Controllers\VehicleController::class, 'storeBuildPart']);
     Route::put('/builds/parts/{id}/status', [App\Http\Controllers\VehicleController::class, 'updateBuildPartStatus']);
     Route::post('/builds/{id}/timeline-tasks', [App\Http\Controllers\VehicleController::class, 'storeTimelineTask']);

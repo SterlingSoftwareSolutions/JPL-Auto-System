@@ -235,6 +235,85 @@ class VehicleController extends Controller
         return view('pages.vehicles.report', compact('vehicle', 'vehicleInfo', 'categories', 'vehicleImages', 'partCategories', 'vehicleSuppliers', 'adrDataForFrontend', 'masterTemplateProcess'));
     }
 
+    public function storeModelPart(Request $request, $id)
+    {
+        $vehicle = Vehicle::findOrFail($id);
+
+        $cat = \App\Models\PartCategory::firstOrCreate(['category_name' => $request->category]);
+        $comp = \App\Models\PartComponent::firstOrCreate(['component_name' => $request->component, 'category_id' => $cat->id]);
+
+        $supplier = null;
+        if ($request->supplier && $request->supplier !== 'N/A') {
+            $supplier = \App\Models\Supplier::firstOrCreate(['business_name' => $request->supplier]);
+        }
+
+        $part = \App\Models\Part::create([
+            'vehicle_id' => $id,
+            'category_id' => $cat->id,
+            'component_id' => $comp->id,
+            'description' => $request->description,
+            'part_number' => $request->part_number === 'N/A' ? null : $request->part_number,
+            'price' => $request->price,
+            'supplier_id' => $supplier ? $supplier->id : null,
+        ]);
+
+        $builds = \App\Models\VehicleModel::where('vehicle_id', $id)->get();
+        if ($builds->count() > 0) {
+            $buildPartsToInsert = [];
+            $now = now();
+            $priceNum = $part->price ? (float)str_replace(['$', ','], '', $part->price) : 0;
+            foreach ($builds as $build) {
+                $buildPartsToInsert[] = [
+                    'vehicle_model_id' => $build->id,
+                    'category' => $cat->category_name,
+                    'component' => $comp->component_name,
+                    'description' => $part->description,
+                    'part_number' => $part->part_number,
+                    'price' => $priceNum,
+                    'supplier' => $supplier ? $supplier->business_name : 'N/A',
+                    'status' => 'procurement',
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            }
+            \App\Models\VehicleBuildPart::insert($buildPartsToInsert);
+        }
+
+        return response()->json([
+            'id' => $part->id,
+            'category' => $cat->category_name,
+            'component' => $comp->component_name,
+            'description' => $part->description,
+            'part_number' => $part->part_number,
+            'price' => $part->price,
+            'supplier' => $supplier ? $supplier->business_name : null,
+        ]);
+    }
+
+    public function destroyModelPart($id)
+    {
+        $part = \App\Models\Part::findOrFail($id);
+        $part->delete();
+        return response()->json(['success' => true]);
+    }
+
+    public function updateModelPart(Request $request, $id)
+    {
+        $request->validate([
+            'price' => 'required|numeric',
+            'part_number' => 'nullable|string'
+        ]);
+        $part = \App\Models\Part::findOrFail($id);
+        $part->price = $request->price;
+        $part->part_number = $request->part_number ?: 'N/A';
+        $part->save();
+        return response()->json([
+            'success' => true,
+            'price' => $part->price,
+            'part_number' => $part->part_number
+        ]);
+    }
+
     public function storeBuild(Request $request, $id)
     {
         $request->validate([
