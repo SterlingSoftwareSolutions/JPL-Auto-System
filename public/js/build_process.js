@@ -505,7 +505,7 @@ function procToggleStep(wrapId, stId, opIdx, stepIdx, dbStepId, buildId) {
     bp.renderAll(true);
 
     // Persist to DB
-    fetch(`${window.AppUrl}/api/builds/${buildId}/steps/${dbStepId}/toggle`, {
+    fetch(`${window.AppUrl}/builds/${buildId}/steps/${dbStepId}/toggle`, {
         method : 'POST',
         headers: {
             'Content-Type'     : 'application/json',
@@ -552,7 +552,7 @@ function procToggleQc(wrapId, qcId, status, opIdx, qcIdx, buildId) {
     qcItem[2] = (prevStatus === status) ? null : status;
     bp.renderAll(true);
 
-    fetch(`${window.AppUrl}/api/builds/${buildId}/qc/${qcId}`, {
+    fetch(`${window.AppUrl}/builds/${buildId}/qc/${qcId}`, {
         method : 'POST',
         headers: {
             'Content-Type' : 'application/json',
@@ -577,7 +577,7 @@ function procToggleQc(wrapId, qcId, status, opIdx, qcIdx, buildId) {
 function procRemoveMasterImage(dbStepId, opIdx, stepIdx, wrapId) {
     if (!confirm('Are you sure you want to remove the master reference image?')) return;
 
-    fetch(`${window.AppUrl}/api/master/steps/${dbStepId}/image`, {
+    fetch(`${window.AppUrl}/master/steps/${dbStepId}/image`, {
         method: 'DELETE',
         headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': _bpCsrf() }
     })
@@ -616,7 +616,7 @@ function procUploadImage(dbStepId, opIdx, stepIdx, wrapId, buildId) {
         formData.append('image', file);
         formData.append('_token', _bpCsrf());
 
-        fetch(`${window.AppUrl}/api/builds/${buildId}/steps/${dbStepId}/image`, {
+        fetch(`${window.AppUrl}/builds/${buildId}/steps/${dbStepId}/image`, {
             method : 'POST',
             headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': _bpCsrf() },
             body   : formData,
@@ -649,7 +649,7 @@ function procSaveDataEntry(dbStepId, opIdx, stepIdx, wrapId, buildId, value) {
     const step = bp._ops[opIdx].dbSteps[stepIdx];
     step.data_entry_value = value;
 
-    fetch(`${window.AppUrl}/api/builds/${buildId}/steps/${dbStepId}/data-entry`, {
+    fetch(`${window.AppUrl}/builds/${buildId}/steps/${dbStepId}/data-entry`, {
         method : 'POST',
         headers: {
             'Content-Type' : 'application/json',
@@ -681,8 +681,8 @@ function procSaveDataEntry(dbStepId, opIdx, stepIdx, wrapId, buildId, value) {
 function procClearOrRemoveSignoff(e, signoffId, buildId, isSaved, wrapId) {
     if (isSaved) {
         if (!confirm('Are you sure you want to remove this signature?')) return;
-        fetch(`${window.AppUrl}/api/builds/${buildId}/signoff/${signoffId}`, {
-            method: 'DELETE',
+        fetch(`${window.AppUrl}/builds/${buildId}/signoff/${signoffId}/clear`, {
+            method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': _bpCsrf(),
                 'Accept': 'application/json'
@@ -734,7 +734,7 @@ function procSaveSignoff(signoffId, canvasId, nameInputId, buildId, wrapId) {
 
     const signatureData = canvas ? canvas.toDataURL('image/png') : null;
 
-    fetch(`${window.AppUrl}/api/builds/${buildId}/signoff/${signoffId}`, {
+    fetch(`${window.AppUrl}/builds/${buildId}/signoff/${signoffId}`, {
         method : 'POST',
         headers: {
             'Content-Type' : 'application/json',

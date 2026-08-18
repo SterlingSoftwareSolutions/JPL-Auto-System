@@ -119,7 +119,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/vehicles/{id}/compliance', [\App\Http\Controllers\ComplianceController::class, 'updateVehicleCompliance'])->name('vehicles.compliance.update');
     Route::post('/vehicles/{id}/model-report-approvals', [\App\Http\Controllers\VehicleController::class, 'storeModelReportApproval'])->name('vehicles.model-report-approvals.store');
     Route::delete('/vehicles/model-report-approvals/{id}', [\App\Http\Controllers\VehicleController::class, 'destroyModelReportApproval'])->name('vehicles.model-report-approvals.destroy');
-    Route::put('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\VehicleController::class, 'toggleStep']);
+    Route::post('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\VehicleController::class, 'toggleStep']);
     Route::post('/builds/{id}/steps/{stepId}/image', [\App\Http\Controllers\VehicleController::class, 'uploadStepImage']);
     Route::post('/builds/{id}/steps/{stepId}/data-entry', [\App\Http\Controllers\VehicleController::class, 'saveDataEntry']);
     Route::post('/builds/{id}/qc/{qcId}', [\App\Http\Controllers\VehicleController::class, 'saveQc']);
