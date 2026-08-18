@@ -119,12 +119,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/vehicles/{id}/compliance', [\App\Http\Controllers\ComplianceController::class, 'updateVehicleCompliance'])->name('vehicles.compliance.update');
     Route::post('/vehicles/{id}/model-report-approvals', [\App\Http\Controllers\VehicleController::class, 'storeModelReportApproval'])->name('vehicles.model-report-approvals.store');
     Route::delete('/vehicles/model-report-approvals/{id}', [\App\Http\Controllers\VehicleController::class, 'destroyModelReportApproval'])->name('vehicles.model-report-approvals.destroy');
-    Route::post('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\VehicleController::class, 'toggleStep']);
-    Route::post('/builds/{id}/steps/{stepId}/image', [\App\Http\Controllers\VehicleController::class, 'uploadStepImage']);
-    Route::post('/builds/{id}/steps/{stepId}/data-entry', [\App\Http\Controllers\VehicleController::class, 'saveDataEntry']);
-    Route::post('/builds/{id}/qc/{qcId}', [\App\Http\Controllers\VehicleController::class, 'saveQc']);
-    Route::post('/builds/{id}/signoff/{signoffId}', [\App\Http\Controllers\VehicleController::class, 'saveSignoff']);
-    Route::post('/builds/{id}/signoff/{signoffId}/clear', [\App\Http\Controllers\VehicleController::class, 'clearSignoff']);
+    Route::post('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\BuildProcessController::class, 'toggleStep']);
+    Route::post('/builds/{id}/steps/{stepId}/image', [\App\Http\Controllers\BuildProcessController::class, 'uploadStepImage']);
+    Route::post('/builds/{id}/steps/{stepId}/data-entry', [\App\Http\Controllers\BuildProcessController::class, 'saveDataEntry']);
+    Route::post('/builds/{id}/qc/{qcId}', [\App\Http\Controllers\BuildProcessController::class, 'saveQc']);
+    Route::post('/builds/{id}/signoff/{signoffId}', [\App\Http\Controllers\BuildProcessController::class, 'saveSignoff']);
+    Route::post('/builds/{id}/signoff/{signoffId}/clear', [\App\Http\Controllers\BuildProcessController::class, 'clearSignoff']);
     Route::put('/builds/{id}', [App\Http\Controllers\VehicleController::class, 'updateBuild']);
     Route::delete('/builds/{id}', [App\Http\Controllers\VehicleController::class, 'destroyBuild']);
     Route::post('/vehicles/{id}/parts', [App\Http\Controllers\VehicleController::class, 'storeModelPart']);
@@ -167,8 +167,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-    Route::put('/builds/{id}/steps/{stepId}/toggle', [\App\Http\Controllers\VehicleController::class, 'toggleStep']);
-    Route::post('/builds/{id}/steps/{stepId}/image', [\App\Http\Controllers\VehicleController::class, 'uploadStepImage']);
 
     // Build Process API — master template + live build state
     Route::prefix('api')->group(function () {

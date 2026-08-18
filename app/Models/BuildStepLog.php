@@ -16,7 +16,8 @@ class BuildStepLog extends Model
         'is_completed',
         'image_path',
         'completed_by',
-        'completed_at'
+        'completed_at',
+        'data_entry_value'
     ];
 
     protected $casts = [

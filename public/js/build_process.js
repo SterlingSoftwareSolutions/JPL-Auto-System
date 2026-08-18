@@ -287,8 +287,12 @@ function initBuildProcess(wrapId, data, interactive, buildCards, activeBuildId) 
                 dataEntryHtml = `
                   <div class="doc-box data-entry-box" style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;margin-left:76px;text-align:left;">
                     <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;">📋 ${de.label}</div>
-                    <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:10px;">Required: ${de.spec}${de.unit ? ' ('+de.unit+')' : ''}</div>
-                    <input type="text" placeholder="Value used${de.unit ? ' — '+de.unit : ''}" value="${val}" ${interactive ? `onchange="procSaveDataEntry(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}', this.value)"` : 'disabled'} style="width:100%;max-width:320px;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:8px 11px;font-size:13px;">
+                    <div style="display:flex;gap:8px;align-items:center;position:relative;">
+                        <input type="text" id="de_${dbStep.id}" placeholder="Value used${de.unit ? ' — '+de.unit : ''}" value="${val}" 
+                               ${interactive ? `onchange="const el=document.getElementById('de_status_${dbStep.id}'); el.style.opacity=1; el.innerText='Saving...'; procSaveDataEntry(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}', this.value); setTimeout(()=>el.innerText='✓ Saved!', 300); setTimeout(()=>el.style.opacity=0, 2000);"` : 'disabled'} 
+                               style="width:100%;max-width:320px;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:8px 11px;font-size:13px;transition:border-color 0.2s;">
+                        <span id="de_status_${dbStep.id}" style="font-size:12px;color:var(--text);font-weight:600;opacity:0;transition:opacity 0.3s;position:absolute;left:330px;white-space:nowrap;"></span>
+                    </div>
                   </div>`;
             }
 
