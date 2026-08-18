@@ -258,12 +258,12 @@ class VehicleController extends Controller
         ]);
 
         $builds = \App\Models\VehicleModel::where('vehicle_id', $id)->get();
+        $insertedBuildParts = [];
         if ($builds->count() > 0) {
-            $buildPartsToInsert = [];
             $now = now();
             $priceNum = $part->price ? (float)str_replace(['$', ','], '', $part->price) : 0;
             foreach ($builds as $build) {
-                $buildPartsToInsert[] = [
+                $bpId = \App\Models\VehicleBuildPart::insertGetId([
                     'vehicle_model_id' => $build->id,
                     'category' => $cat->category_name,
                     'component' => $comp->component_name,
@@ -274,9 +274,20 @@ class VehicleController extends Controller
                     'status' => 'procurement',
                     'created_at' => $now,
                     'updated_at' => $now,
+                ]);
+                
+                $insertedBuildParts[] = [
+                    'id' => $bpId,
+                    'vehicle_model_id' => $build->id,
+                    'category' => $cat->category_name,
+                    'component' => $comp->component_name,
+                    'description' => $part->description,
+                    'part_number' => $part->part_number,
+                    'price' => (string)$priceNum,
+                    'supplier' => $supplier ? $supplier->business_name : 'N/A',
+                    'status' => 'procurement'
                 ];
             }
-            \App\Models\VehicleBuildPart::insert($buildPartsToInsert);
         }
 
         return response()->json([
@@ -287,6 +298,7 @@ class VehicleController extends Controller
             'part_number' => $part->part_number,
             'price' => $part->price,
             'supplier' => $supplier ? $supplier->business_name : null,
+            'inserted_build_parts' => $insertedBuildParts
         ]);
     }
 

@@ -1660,6 +1660,18 @@ function addModelPart(e, vid) {
     const emptyRow = tbody.querySelector('td[colspan="7"]');
     if (emptyRow) emptyRow.parentElement.remove();
 
+    if (p.inserted_build_parts && Array.isArray(p.inserted_build_parts)) {
+      p.inserted_build_parts.forEach(bp => {
+        const build = buildCards.find(b => b.id === bp.vehicle_model_id);
+        if (build) {
+          if (!build.parts) build.parts = [];
+          build.parts.push(bp);
+        }
+      });
+      // Re-render build parts if we are currently viewing one
+      if (activeBuildId) render();
+    }
+
     resetModelPartForm(e.target);
   })
   .catch(err => {
@@ -1719,7 +1731,7 @@ function saveModelPart(id) {
   .then(res => {
     if(res.success) {
       document.getElementById(`price-val-${id}`).innerText = '$' + Number(res.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById(`pn-val-${id}`).innerText = res.part_number;
+      document.getElementById(`pn-val-${id}`).innerText = res.part_number || 'N/A';
       cancelEditModelPart(id);
     }
   })
@@ -1749,7 +1761,7 @@ function resetModelPartForm(form) {
   if(sSel) sSel.removeAttribute('required');
 
   document.getElementById('add-model-part-form').style.display = 'none';
-  document.getElementById('add-model-part-btn').style.display = 'inline-block';
+  document.getElementById('add-model-part-btn').style.display = 'flex';
 }
 
 render();
