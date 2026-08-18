@@ -1684,12 +1684,22 @@ function deleteModelPart(partId, btn) {
   if(!confirm('Are you sure you want to remove this part from the model?')) return;
   fetch(window.AppUrl + `/vehicles/parts/${partId}`, {
     method: 'DELETE',
-    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
-  }).then(() => {
+    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' }
+  })
+  .then(r => r.json())
+  .then(res => {
     btn.closest('tr').remove();
     const tbody = document.getElementById('bom-body');
     if (tbody.children.length === 0) {
       tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 32px 24px; color: #6b7280; font-size: 14px;">No parts found.</td></tr>`;
+    }
+    if (res.deleted_build_part_ids && Array.isArray(res.deleted_build_part_ids)) {
+      buildCards.forEach(b => {
+        if (b.parts) {
+          b.parts = b.parts.filter(p => !res.deleted_build_part_ids.includes(p.id));
+        }
+      });
+      if (activeBuildId) render();
     }
   }).catch(err => {
     console.error(err);
@@ -1733,6 +1743,20 @@ function saveModelPart(id) {
       document.getElementById(`price-val-${id}`).innerText = '$' + Number(res.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       document.getElementById(`pn-val-${id}`).innerText = res.part_number || 'N/A';
       cancelEditModelPart(id);
+      
+      if (res.updated_build_part_ids && Array.isArray(res.updated_build_part_ids)) {
+        buildCards.forEach(b => {
+          if (b.parts) {
+            b.parts.forEach(p => {
+              if (res.updated_build_part_ids.includes(p.id)) {
+                p.price = res.price;
+                p.part_number = res.part_number || 'N/A';
+              }
+            });
+          }
+        });
+        if (activeBuildId) render();
+      }
     }
   })
   .catch(err => {
