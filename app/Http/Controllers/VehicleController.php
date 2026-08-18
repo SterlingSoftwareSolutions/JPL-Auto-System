@@ -305,8 +305,29 @@ class VehicleController extends Controller
     public function destroyModelPart($id)
     {
         $part = \App\Models\Part::findOrFail($id);
+        
+        $cat = \App\Models\PartCategory::find($part->category_id);
+        $comp = \App\Models\PartComponent::find($part->component_id);
+        
+        $deletedBuildPartIds = [];
+        if ($cat && $comp) {
+            $builds = \App\Models\VehicleModel::where('vehicle_id', $part->vehicle_id)->pluck('id');
+            if ($builds->count() > 0) {
+                $deletedBuildPartIds = \App\Models\VehicleBuildPart::whereIn('vehicle_model_id', $builds)
+                    ->where('category', $cat->category_name)
+                    ->where('component', $comp->component_name)
+                    ->where('description', $part->description)
+                    ->pluck('id');
+                    
+                \App\Models\VehicleBuildPart::whereIn('id', $deletedBuildPartIds)->delete();
+            }
+        }
+        
         $part->delete();
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'deleted_build_part_ids' => $deletedBuildPartIds
+        ]);
     }
 
     public function updateModelPart(Request $request, $id)
@@ -316,13 +337,40 @@ class VehicleController extends Controller
             'part_number' => 'nullable|string'
         ]);
         $part = \App\Models\Part::findOrFail($id);
+        
+        $cat = \App\Models\PartCategory::find($part->category_id);
+        $comp = \App\Models\PartComponent::find($part->component_id);
+        
+        $updatedBuildPartIds = [];
+        if ($cat && $comp) {
+            $builds = \App\Models\VehicleModel::where('vehicle_id', $part->vehicle_id)->pluck('id');
+            if ($builds->count() > 0) {
+                $priceNum = $request->price ? (float)str_replace(['$', ','], '', $request->price) : 0;
+                
+                $buildParts = \App\Models\VehicleBuildPart::whereIn('vehicle_model_id', $builds)
+                    ->where('category', $cat->category_name)
+                    ->where('component', $comp->component_name)
+                    ->where('description', $part->description)
+                    ->get();
+                
+                $updatedBuildPartIds = $buildParts->pluck('id');
+                
+                \App\Models\VehicleBuildPart::whereIn('id', $updatedBuildPartIds)->update([
+                    'price' => $priceNum,
+                    'part_number' => $request->part_number ?: 'N/A'
+                ]);
+            }
+        }
+
         $part->price = $request->price;
         $part->part_number = $request->part_number ?: 'N/A';
         $part->save();
+        
         return response()->json([
             'success' => true,
             'price' => $part->price,
-            'part_number' => $part->part_number
+            'part_number' => $part->part_number,
+            'updated_build_part_ids' => $updatedBuildPartIds
         ]);
     }
 
