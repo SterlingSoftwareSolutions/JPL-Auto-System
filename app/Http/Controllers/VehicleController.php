@@ -113,6 +113,7 @@ class VehicleController extends Controller
                     $stepClone = clone $step;
                     $log = $masterStepLogs->get($step->id);
                     $stepClone->is_completed  = $log ? (bool) $log->is_completed : false;
+                    $stepClone->data_entry_value = $log ? $log->data_entry_value : null;
                     $stepClone->job_image_path = ($log && $log->image_path) ? asset('storage/' . $log->image_path) : null;
                     return $stepClone;
                 }));
@@ -154,6 +155,7 @@ class VehicleController extends Controller
                         $stepClone = clone $step;
                         $log = $stepLogs->get($step->id);
                         $stepClone->is_completed  = $log ? (bool) $log->is_completed : false;
+                        $stepClone->data_entry_value = $log ? $log->data_entry_value : null;
                         $stepClone->job_image_path = ($log && $log->image_path)
                             ? asset('storage/' . $log->image_path)
                             : null;
@@ -582,38 +584,6 @@ class VehicleController extends Controller
         $task = \App\Models\VehicleBuildTimelineTask::findOrFail($id);
         $task->delete();
 
-        return response()->json(['success' => true]);
-    }
-
-    public function toggleStep(Request $request, $id, $stepId)
-    {
-        $status = \App\Models\BuildStepLog::updateOrCreate(
-            ['vehicle_model_id' => $id, 'vehicle_build_step_id' => $stepId],
-            ['is_completed' => $request->is_completed]
-        );
-        return response()->json(['success' => true]);
-    }
-
-    public function uploadStepImage(Request $request, $id, $stepId)
-    {
-        $request->validate(['image' => 'required|image']);
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('steps', 'public');
-            $status = \App\Models\BuildStepLog::updateOrCreate(
-                ['vehicle_model_id' => $id, 'vehicle_build_step_id' => $stepId],
-                ['image_path' => $path]
-            );
-            return response()->json(['success' => true, 'image_path' => $path]);
-        }
-        return response()->json(['success' => false], 400);
-    }
-
-    public function saveDataEntry(Request $request, $id, $stepId)
-    {
-        $status = \App\Models\BuildStepLog::updateOrCreate(
-            ['vehicle_model_id' => $id, 'vehicle_build_step_id' => $stepId],
-            ['data_entry_value' => $request->data_entry_value]
-        );
         return response()->json(['success' => true]);
     }
 

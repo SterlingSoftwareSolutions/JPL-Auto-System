@@ -227,6 +227,33 @@ class BuildProcessController extends Controller
         ]);
     }
 
+    public function saveDataEntry(Request $request, $buildId, $stepId)
+    {
+        if ($buildId === 'master') {
+            $step = \App\Models\VehicleBuildStep::with('operation')->findOrFail($stepId);
+            $station = \App\Models\VehicleBuildStation::findOrFail($step->operation->vehicle_build_station_id);
+            $vehicleId = $station->vehicle_id;
+            $vehicleModelId = null;
+        } else {
+            $build = VehicleModel::findOrFail($buildId);
+            $vehicleId = $build->vehicle_id;
+            $vehicleModelId = $build->id;
+        }
+
+        $log = BuildStepLog::updateOrCreate(
+            [
+                'vehicle_model_id'      => $vehicleModelId,
+                'vehicle_build_step_id' => $stepId,
+            ],
+            [
+                'vehicle_id'       => $vehicleId,
+                'data_entry_value' => $request->data_entry_value,
+            ]
+        );
+
+        return response()->json(['success' => true]);
+    }
+
     /**
      * POST /api/builds/{buildId}/qc/{qcId}
      *
