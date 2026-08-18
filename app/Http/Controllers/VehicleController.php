@@ -469,6 +469,15 @@ class VehicleController extends Controller
         return response()->json(['success' => false], 400);
     }
 
+    public function saveDataEntry(Request $request, $id, $stepId)
+    {
+        $status = \App\Models\BuildStepLog::updateOrCreate(
+            ['vehicle_model_id' => $id, 'vehicle_build_step_id' => $stepId],
+            ['data_entry_value' => $request->data_entry_value]
+        );
+        return response()->json(['success' => true]);
+    }
+
     public function storeModelReportApproval(Request $request, $id)
     {
         $vehicle = Vehicle::findOrFail($id);

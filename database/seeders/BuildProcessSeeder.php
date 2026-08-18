@@ -153,6 +153,7 @@ class BuildProcessSeeder extends Seeder
                             'vehicle_build_operation_id' => $operation->id,
                             'specification'               => $qc[0] ?? '',
                             'expected_value'              => $qc[1] ?? '',
+                            'after_step'                  => (isset($qc[2]) && $qc[2] !== null) ? $qc[2] : null,
                             'order'                       => $qcOrder++,
                         ]);
                     }
@@ -162,12 +163,20 @@ class BuildProcessSeeder extends Seeder
                 if (!empty($opData['steps'])) {
                     $stepOrder = 0;
                     foreach ($opData['steps'] as $step) {
+                        $extras = (count($step) > 4 && is_array($step[4])) ? $step[4] : [];
+                        $de = $extras['dataEntry'] ?? null;
+                        
                         VehicleBuildStep::create([
                             'vehicle_build_operation_id' => $operation->id,
                             'label'                       => $step[0] ?? '',
                             'keypoint_text'               => ($step[1] !== null && $step[1] !== '') ? $step[1] : null,
                             'image_path'                  => $step[2] ?? null,
                             'image_caption'               => $step[3] ?? null,
+                            'photo_required'              => $extras['photoRequired'] ?? false,
+                            'photo_label'                 => $extras['photoLabel'] ?? null,
+                            'data_entry_label'            => $de['label'] ?? null,
+                            'data_entry_spec'             => $de['spec'] ?? null,
+                            'data_entry_unit'             => $de['unit'] ?? null,
                             'type'                        => null,
                             'order'                       => $stepOrder++,
                         ]);
