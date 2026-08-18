@@ -27,8 +27,12 @@ function initBuildProcess(wrapId, data, interactive, buildCards, activeBuildId) 
                 hazards: op.hazards ? op.hazards.map(h => [h.hazard, h.control]) : [],
                 tools: op.tools ? op.tools.map(t => t.name) : [],
                 materials: op.materials ? op.materials.map(m => m.name) : [],
-                steps: op.steps.map(s => [s.label, s.keypoint_text, s.image_path || null, s.image_caption || null]),
-                qc: op.qc_checks ? op.qc_checks.map(q => [q.specification, q.expected_value || '', q.status, q.id]) : [],
+                steps: op.steps.map(s => [s.label, s.keypoint_text, s.image_path || null, s.image_caption || null, { 
+                    photoRequired: s.photo_required, 
+                    photoLabel: s.photo_label,
+                    dataEntry: s.data_entry_label ? { label: s.data_entry_label, spec: s.data_entry_spec, unit: s.data_entry_unit } : null
+                }]),
+                qc: op.qc_checks ? op.qc_checks.map(q => [q.specification, q.expected_value || '', q.status, q.id, q.after_step ?? null]) : [],
                 dbSteps: op.steps,
                 signoffs: op.signoffs || [],
                 diagramSvg: op.diagram_svg ? op.diagram_svg : (op.diagram_image_path ? (window.AppUrl + '/storage/' + op.diagram_image_path) : null),
@@ -187,6 +191,23 @@ function initBuildProcess(wrapId, data, interactive, buildCards, activeBuildId) 
         const op = OPS[currentOpIdx];
         const sec = SECTIONS.find(s=>s.id===op.section);
 
+        // Helper: render one QC checkpoint as an inline card
+        function qcInlineCardHtml(q, qIdx) {
+            const status = q[2]; // 'pass', 'fail', or null/string step index
+            return `
+              <div class="qc-inline">
+                <div class="qc-inline-icon">QC</div>
+                <div class="qc-inline-body">
+                  <div class="qc-inline-check">${q[0]}</div>
+                  <div class="qc-inline-spec">${q[1]}</div>
+                </div>
+                <div class="qc-toggle-group">
+                  <button class="qc-btn pass${status==='pass'?' active':''}" onclick="if(${interactive}) procToggleQc('${wrapId}', ${q[3]}, 'pass', ${currentOpIdx}, ${qIdx}, '${activeBuildId}')">PASS</button>
+                  <button class="qc-btn fail${status==='fail'?' active':''}" onclick="if(${interactive}) procToggleQc('${wrapId}', ${q[3]}, 'fail', ${currentOpIdx}, ${qIdx}, '${activeBuildId}')">FAIL</button>
+                </div>
+              </div>`;
+        }
+
         const stepsHtml = op.steps.map((s, i)=>{
             const [instr, keypoint, img, cap] = s;
             const dbStep = op.dbSteps[i];
@@ -201,74 +222,87 @@ function initBuildProcess(wrapId, data, interactive, buildCards, activeBuildId) 
             const masterImgSrc = (typeof IMAGES !== 'undefined' && IMAGES[img]) ? IMAGES[img] : null;
             const jobImgSrc = interactive && (dbStep.job_image_url || dbStep.job_image_path) ? (dbStep.job_image_url || dbStep.job_image_path) : null;
             const safeCapAttr = (cap || '').replace(/"/g, '&quot;');
-
             let imgColHtml = '<div style="display:flex;flex-direction:column;gap:6px;min-width:160px;max-width:200px;">';
-
-            if (interactive) {
-                if (jobImgSrc) {
-                    imgColHtml += `<div class="step-img" style="position:relative;" title="Job photo">
-                        <img src="${jobImgSrc}" alt="Job photo" onclick="bpOpenLightboxFromEl(this.parentElement)" data-img-cap="Job photo">
-                        <div onclick="event.stopPropagation(); procRemoveImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}')" style="position:absolute;top:4px;right:4px;width:20px;height:20px;background:var(--red);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:sans-serif;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.2);z-index:10;">&#10005;</div>
-                        <div class="cap" style="display:flex; justify-content:space-between; align-items:center; padding:4px 6px;">
-                          <span style="color:var(--green);font-weight:600;font-size:10px;">✓ Job Photo</span>
-                          ${masterImgSrc ? `<button onclick="event.stopPropagation(); bpOpenLightbox('${masterImgSrc}', 'Reference Photo')" style="background:transparent; border:1px solid var(--green); color:var(--green); padding:2px 4px; font-size:9px; border-radius:3px; cursor:pointer;">See Ref</button>` : ''}
-                        </div>
-                      </div>`;
-                } else if (masterImgSrc) {
-                    imgColHtml += `<div class="step-img" style="position:relative;" title="Reference photo">
-                        <img src="${masterImgSrc}" alt="${cap||'Reference photo'}" onclick="bpOpenLightboxFromEl(this.parentElement)" data-img-cap="${safeCapAttr}" style="cursor:pointer;">
-                        <div class="cap" style="display:flex; justify-content:space-between; align-items:center; padding:4px 6px;">
-                          <span style="font-size:9px;color:var(--muted);">${cap||'Reference'}</span>
-                          <button onclick="event.stopPropagation(); procUploadImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}')" style="background:var(--amber); border:none; color:white; cursor:pointer; font-size:9px; font-family:var(--mono); padding:2px 6px; border-radius:4px; text-transform:uppercase; font-weight:bold;">Upload</button>
-                        </div>
-                      </div>`;
-                } else {
-                    imgColHtml += `<div class="step-img empty" onclick="procUploadImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}')" style="cursor:pointer;font-size:11px;color:var(--amber);border-color:var(--amber-dim);">📷 Upload job photo</div>`;
-                }
+            if (masterImgSrc) {
+                imgColHtml += `<div class="step-img" style="position:relative;" onclick="bpOpenLightboxFromEl(this)" data-img-cap="${safeCapAttr}" title="Reference photo">
+                    <img src="${masterImgSrc}" alt="${cap||'Reference photo'}">
+                    <div class="cap" style="font-size:9px;color:var(--muted);padding:3px 6px;">${cap||'Reference'}</div>
+                    ${activeBuildId === 'master' ? `<div onclick="event.stopPropagation(); procRemoveMasterImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}')" style="position:absolute;top:4px;right:4px;width:20px;height:20px;background:rgba(255,255,255,0.8);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--danger);font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,0.2);z-index:10;" title="Remove Reference Image">&#10005;</div>` : ''}
+                  </div>`;
             } else {
-                if (masterImgSrc) {
-                    imgColHtml += `<div class="step-img" style="position:relative;" onclick="bpOpenLightboxFromEl(this)" data-img-cap="${safeCapAttr}" title="Reference photo">
-                        <img src="${masterImgSrc}" alt="${cap||'Reference photo'}">
-                        <div class="cap" style="font-size:9px;color:var(--muted);padding:3px 6px;">Reference</div>
-                        <div onclick="event.stopPropagation(); procRemoveMasterImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}')" style="position:absolute;top:4px;right:4px;width:20px;height:20px;background:rgba(255,255,255,0.8);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--danger);font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,0.2);z-index:10;" title="Remove Reference Image">&#10005;</div>
-                      </div>`;
-                } else if (activeBuildId === 'master') {
+                if (activeBuildId === 'master') {
                     imgColHtml += `<div class="step-img empty" onclick="procUploadMasterStepImage(${dbStep.id}, '${wrapId}', ${currentOpIdx}, ${i})" style="cursor:pointer;font-size:11px;color:var(--amber);border-color:var(--amber-dim);">📷 Upload reference photo</div>`;
+                } else {
+                    imgColHtml += `<div class="step-img empty">no image</div>`;
                 }
             }
-
             imgColHtml += '</div>';
 
-            return `
-              <div class="step${isDone?' done':''}">
+            const stepCard = `
+              <div class="step ${isDone?'done':''}">
                 <div class="step-check">
-                  <div class="checkbox${isDone?' checked':''}" onclick="${interactive ? `procToggleStep('${wrapId}', ${op.dbStId}, ${currentOpIdx}, ${i}, ${dbStep.id}, '${activeBuildId}')` : 'void(0)'}">
+                  <div class="checkbox ${isDone?'checked':''}" onclick="if(${interactive}) procToggleStep('${wrapId}', ${op.dbStId}, ${currentOpIdx}, ${i}, ${dbStep.id}, '${activeBuildId}')" role="checkbox" aria-checked="${isDone}" tabindex="0">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#12151A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
                   <div class="step-num">${i+1}</div>
                 </div>
                 <div class="step-body">
                   <div class="instr">${instr}</div>
-                  ${keypoint ? `<div class="keypoint${keypointClass}">${keypoint}</div>` : ''}
+                  ${keypoint ? `<div class="keypoint ${keypointClass}">${keypoint}</div>` : ''}
                 </div>
                 ${imgColHtml}
               </div>`;
+
+            const gatedQc = op.qc.map((q,qIdx)=>({q,qIdx})).filter(({q})=> q[4]===i);
+            const qcAfterStep = gatedQc.map(({q,qIdx})=> qcInlineCardHtml(q,qIdx,dbStep.id)).join('');
+
+            const extras = s[4] || {};
+            let photoHtml = '';
+            if (extras.photoRequired) {
+                if (jobImgSrc) {
+                    photoHtml = `
+                      <div class="doc-box photo-box" style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;margin-left:76px;text-align:left;">
+                        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;">📷 Build photo</div>
+                        <div style="position:relative; display:inline-block;">
+                          <div onclick="bpOpenLightboxFromEl(this)" data-img-cap="Job photo" style="cursor:zoom-in;">
+                            <img src="${jobImgSrc}" style="display:block;max-width:220px;max-height:160px;border-radius:8px;border:1px solid var(--line);margin-bottom:4px;">
+                          </div>
+                          ${interactive ? `<button onclick="procRemoveImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}')" style="position:absolute;top:6px;right:6px;background:var(--panel);border:1px solid var(--red);color:var(--red);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.1);font-weight:bold;font-size:14px;padding:0;line-height:1;font-family:sans-serif;" title="Remove Photo">&times;</button>` : ''}
+                        </div>
+                      </div>`;
+                } else {
+                    photoHtml = `
+                      <div class="doc-box photo-box empty" style="background:var(--panel2);border:1px dashed var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;margin-left:76px;text-align:left;">
+                        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;">📷 Photo documentation required</div>
+                        <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:10px;">${extras.photoLabel || 'Photograph the completed work at this step for the build record.'}</div>
+                        ${interactive ? `<button onclick="procUploadImage(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}')" style="display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:7px 13px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer;">Add photo</button>` : ''}
+                      </div>`;
+                }
+            }
+
+            let dataEntryHtml = '';
+            if (extras.dataEntry) {
+                const de = extras.dataEntry;
+                const val = dbStep.data_entry_value || '';
+                dataEntryHtml = `
+                  <div class="doc-box data-entry-box" style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;margin-left:76px;text-align:left;">
+                    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;">📋 ${de.label}</div>
+                    <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:10px;">Required: ${de.spec}${de.unit ? ' ('+de.unit+')' : ''}</div>
+                    <input type="text" placeholder="Value used${de.unit ? ' — '+de.unit : ''}" value="${val}" ${interactive ? `onchange="procSaveDataEntry(${dbStep.id}, ${currentOpIdx}, ${i}, '${wrapId}', '${activeBuildId}', this.value)"` : 'disabled'} style="width:100%;max-width:320px;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:8px 11px;font-size:13px;">
+                  </div>`;
+            }
+
+            return stepCard + photoHtml + dataEntryHtml + qcAfterStep;
         }).join('');
 
         const hazardsHtml = op.hazards.map(h=>`<tr><td style="color:var(--text);font-weight:500;width:32%;padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top;">${h[0]}</td><td style="color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top;">${h[1]}</td></tr>`).join('');
-        
-        const qcHtml = op.qc.map((q,i)=>{
-            return `<tr>
-              <td style="padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;">${q[0]}</td>
-              <td style="color:var(--muted);width:30%;padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;">${q[1]}</td>
-              <td style="padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;">
-                <div style="display:flex;gap:6px;">
-                  <button onclick="if(${interactive}) procToggleQc('${wrapId}', ${q[3]}, 'pass', ${currentOpIdx}, ${i}, '${activeBuildId}')" style="font-family:var(--mono);font-size:11px;padding:6px 12px;border-radius:6px;border:1px solid ${q[2]==='pass'?'var(--green)':'var(--line)'};background:${q[2]==='pass'?'var(--green-dim)':'transparent'};color:${q[2]==='pass'?'var(--green)':'var(--muted)'};cursor:pointer;">PASS</button>
-                  <button onclick="if(${interactive}) procToggleQc('${wrapId}', ${q[3]}, 'fail', ${currentOpIdx}, ${i}, '${activeBuildId}')" style="font-family:var(--mono);font-size:11px;padding:6px 12px;border-radius:6px;border:1px solid ${q[2]==='fail'?'var(--red)':'var(--line)'};background:${q[2]==='fail'?'var(--red-dim)':'transparent'};color:${q[2]==='fail'?'var(--red)':'var(--muted)'};cursor:pointer;">FAIL</button>
-                </div>
-              </td>
-            </tr>`;
-        }).join('');
+
+        const ungatedQc = op.qc
+            .map((q, qIdx) => ({q, qIdx}))
+            .filter(({q}) => q[4] === null || q[4] === undefined);
+        const finalQcHtml = ungatedQc.length
+            ? `<div class="stage-heading">Final verification</div>${ungatedQc.map(({q, qIdx}) => qcInlineCardHtml(q, qIdx)).join('')}`
+            : '';
 
         const pct = Math.round(opCompletion(op)*100);
         const opIndexInSection = sectionOps(op.section).indexOf(op) + 1;
@@ -337,11 +371,7 @@ function initBuildProcess(wrapId, data, interactive, buildCards, activeBuildId) 
           </div>
           ${stepsHtml}
 
-          <div style="font-family:var(--disp);font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--text);display:flex;align-items:center;gap:10px;margin:30px 0 14px;">Quality checkpoints — end of operation<div style="flex:1;height:1px;background:var(--line);"></div></div>
-          <table style="width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:10px;overflow:hidden;">
-            <thead style="background:var(--panel2);text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);"><tr><th style="padding:10px 14px;border-bottom:1px solid var(--line);">Checkpoint</th><th style="padding:10px 14px;border-bottom:1px solid var(--line);">Spec / tolerance</th><th style="padding:10px 14px;border-bottom:1px solid var(--line);">Result</th></tr></thead>
-            <tbody>${qcHtml || '<tr><td colspan="3" style="padding:12px 14px;color:var(--muted);text-align:center;font-size:13px;">No QC checks listed</td></tr>'}</tbody>
-          </table>
+          ${finalQcHtml}
 
           <div style="font-family:var(--disp);font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--text);display:flex;align-items:center;gap:10px;margin:30px 0 14px;">Next operation<div style="flex:1;height:1px;background:var(--line);"></div></div>
           <div style="background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--muted);margin-bottom:8px;">${op.next_operation ? op.next_operation : (OPS[currentOpIdx+1] ? OPS[currentOpIdx+1].opNo + ' — ' + OPS[currentOpIdx+1].title + '.' : 'None')}</div>
@@ -608,6 +638,35 @@ function procUploadImage(dbStepId, opIdx, stepIdx, wrapId, buildId) {
     };
 
     input.click();
+}
+
+function procSaveDataEntry(dbStepId, opIdx, stepIdx, wrapId, buildId, value) {
+    if (!buildId) return;
+
+    const wrap = document.getElementById(wrapId);
+    const bp   = wrap._bp;
+
+    const step = bp._ops[opIdx].dbSteps[stepIdx];
+    step.data_entry_value = value;
+
+    fetch(`${window.AppUrl}/api/builds/${buildId}/steps/${dbStepId}/data-entry`, {
+        method : 'POST',
+        headers: {
+            'Content-Type' : 'application/json',
+            'X-CSRF-TOKEN' : _bpCsrf(),
+            'Accept'       : 'application/json',
+        },
+        body: JSON.stringify({ data_entry_value: value }),
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) {
+            alert('Failed to save data entry.');
+        }
+    })
+    .catch(() => {
+        alert('Network error saving data entry.');
+    });
 }
 
 /**

@@ -430,10 +430,69 @@
   </div>
 
   <div class="page" id="page-parts">
-    <div style="margin-bottom: 32px;">
-      <span style="background: #0f172a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.02em; display: inline-block; margin-bottom: 12px;">478 - PARTS LIST</span>
-      <h1 style="font-size: 22px; font-weight: 800; color: #111827; margin: 0 0 8px 0; letter-spacing: -0.02em;">Bill of materials</h1>
-      <p style="color: #6b7280; font-size: 14px; margin: 0; max-width: 800px; line-height: 1.5;">The default bill of materials for this model, tied to the compliance record. Every build inherits this list as its starting point.</p>
+    <div style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <span style="background: #0f172a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.02em; display: inline-block; margin-bottom: 12px;">478 - PARTS LIST</span>
+        <h1 style="font-size: 22px; font-weight: 800; color: #111827; margin: 0 0 8px 0; letter-spacing: -0.02em;">Bill of materials</h1>
+        <p style="color: #6b7280; font-size: 14px; margin: 0; max-width: 800px; line-height: 1.5;">The default bill of materials for this model, tied to the compliance record. Every build inherits this list as its starting point.</p>
+      </div>
+      <button id="add-model-part-btn" onclick="document.getElementById('add-model-part-form').style.display='block'; this.style.display='none';" style="background:#0f172a; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:600; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition:background 0.2s, transform 0.2s; white-space:nowrap;" onmouseover="this.style.background='#1e293b'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='#0f172a'; this.style.transform='translateY(0)';">
+        <i class="fas fa-plus"></i> Add Part
+      </button>
+    </div>
+
+    <div id="add-model-part-form" style="display:none; background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px;">
+      <form onsubmit="addModelPart(event, '{{ $vehicle->id }}')" style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+        <div style="flex:1; min-width:140px; position:relative;">
+          <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:500; letter-spacing:0.02em;">Category</label>
+          <select id="m-cat-sel" required onchange="if(this.value==='__NEW__'){this.style.display='none';document.getElementById('m-cat-new').style.display='block';document.getElementById('m-cat-new').focus();document.getElementById('m-cat-new').setAttribute('required', 'required');this.removeAttribute('required');}" style="width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+            <option value="" disabled selected>Select...</option>
+            @foreach(\App\Models\PartCategory::all() as $c)
+              <option value="{{ $c->category_name }}">{{ $c->category_name }}</option>
+            @endforeach
+            <option value="__NEW__" style="font-weight:bold;">+ New category</option>
+          </select>
+          <input id="m-cat-new" type="text" placeholder="New category..." style="display:none; width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+        </div>
+        <div style="flex:1.5; min-width:180px; position:relative;">
+          <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:500; letter-spacing:0.02em;">Component</label>
+          <select id="m-comp-sel" required onchange="if(this.value==='__NEW__'){this.style.display='none';document.getElementById('m-comp-new').style.display='block';document.getElementById('m-comp-new').focus();document.getElementById('m-comp-new').setAttribute('required', 'required');this.removeAttribute('required');}" style="width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+            <option value="" disabled selected>Select...</option>
+            @foreach(\App\Models\PartComponent::all() as $comp)
+              <option value="{{ $comp->component_name }}">{{ $comp->component_name }}</option>
+            @endforeach
+            <option value="__NEW__" style="font-weight:bold;">+ New component</option>
+          </select>
+          <input id="m-comp-new" type="text" placeholder="New component..." style="display:none; width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+        </div>
+        <div style="flex:2; min-width:200px;">
+          <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:500; letter-spacing:0.02em;">Description</label>
+          <input id="m-desc" required style="width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+        </div>
+        <div style="flex:1; min-width:120px;">
+          <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:500; letter-spacing:0.02em;">Part number</label>
+          <input id="m-pn" style="width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+        </div>
+        <div style="flex:0.8; min-width:80px;">
+          <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:500; letter-spacing:0.02em;">Price</label>
+          <input id="m-price" type="number" step="0.01" style="width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+        </div>
+        <div style="flex:1; min-width:140px; position:relative;">
+          <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:500; letter-spacing:0.02em;">Supplier</label>
+          <select id="m-supplier-sel" onchange="if(this.value==='__NEW__'){this.style.display='none';document.getElementById('m-supplier-new').style.display='block';document.getElementById('m-supplier-new').focus();}" style="width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+            <option value="" disabled selected>Select...</option>
+            @foreach(\App\Models\Supplier::all() as $s)
+              <option value="{{ $s->business_name }}">{{ $s->business_name }}</option>
+            @endforeach
+            <option value="__NEW__" style="font-weight:bold;">+ New supplier</option>
+          </select>
+          <input id="m-supplier-new" type="text" placeholder="New supplier..." style="display:none; width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text); background:var(--panel);">
+        </div>
+        <div>
+          <button type="submit" style="background:#c1720e; color:#fff; border:none; border-radius:6px; padding:8.5px 20px; font-weight:600; font-size:13px; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); transition:background 0.2s;">Add</button>
+          <button type="button" onclick="resetModelPartForm(this.closest('form'));" style="background:transparent; color:var(--muted); border:none; padding:8.5px 12px; font-weight:500; font-size:13px; cursor:pointer;">Cancel</button>
+        </div>
+      </form>
     </div>
 
     <div class="parts-table-wrap">
@@ -445,18 +504,29 @@
             <th style="width:30%">Description</th>
             <th style="width:12%">Part number</th>
             <th style="width:11%">Price</th>
-            <th style="width:12%">Supplier</th>
+            <th style="width:10%">Supplier</th>
+            <th style="width:2%"></th>
           </tr>
         </thead>
         <tbody id="bom-body">
           @forelse($partCategories as $category)
               @foreach($category->parts as $part)
-                  <tr>
+                  <tr data-part-id="{{ $part->id }}">
                       <td style="font-weight: 500; color: #374151;">{{ $category->category_name }}</td>
                       <td style="font-weight: 600; color: #111827;">{{ $part->component ? $part->component->component_name : 'N/A' }}</td>
                       <td style="color: #4b5563;">{{ $part->description }}</td>
-                      <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #6b7280;">{{ $part->part_number ?? 'N/A' }}</td>
-                      <td style="font-weight: 600; color: #111827;">{{ str_starts_with($part->price, '$') ? $part->price : '$' . number_format((float)$part->price, 2) }}</td>
+                      <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #6b7280;">
+                        <span id="pn-val-{{ $part->id }}">{{ $part->part_number ?? 'N/A' }}</span>
+                        <div id="pn-edit-{{ $part->id }}" style="display:none;">
+                          <input type="text" id="pn-input-{{ $part->id }}" value="{{ $part->part_number === 'N/A' ? '' : $part->part_number }}" style="width:100px; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">
+                        </div>
+                      </td>
+                      <td style="font-weight: 600; color: #111827;">
+                        <span id="price-val-{{ $part->id }}">{{ str_starts_with($part->price, '$') ? $part->price : '$' . number_format((float)$part->price, 2) }}</span>
+                        <div id="price-edit-{{ $part->id }}" style="display:none;">
+                          <input type="number" step="0.01" id="price-input-{{ $part->id }}" value="{{ str_replace(['$', ','], '', $part->price) }}" style="width:80px; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+                        </div>
+                      </td>
                       <td>
                         @if($part->supplier)
                           <span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 500;">
@@ -466,10 +536,24 @@
                           <span style="color: #9ca3af; font-style: italic;">N/A</span>
                         @endif
                       </td>
+                      <td style="text-align:right; white-space:nowrap;">
+                        <div id="actions-display-{{ $part->id }}">
+                          <button onclick="editModelPart({{ $part->id }})" style="background:transparent; border:none; color:#9ca3af; cursor:pointer; padding:4px; font-size:14px; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'" title="Edit part">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button onclick="deleteModelPart({{ $part->id }}, this)" style="background:transparent; border:none; color:#ef4444; cursor:pointer; padding:4px; font-size:14px; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'" title="Remove part">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                        <div id="actions-edit-{{ $part->id }}" style="display:none; gap:4px; justify-content:flex-end;">
+                          <button onclick="saveModelPart({{ $part->id }})" style="background:#10b981; color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer; font-size:11px;"><i class="fas fa-check"></i></button>
+                          <button onclick="cancelEditModelPart({{ $part->id }})" style="background:transparent; border:none; color:#6b7280; cursor:pointer; font-size:12px; padding:4px;"><i class="fas fa-times"></i></button>
+                        </div>
+                      </td>
                   </tr>
               @endforeach
           @empty
-              <tr><td colspan="6" style="text-align:center; padding: 32px 24px; color: #6b7280; font-size: 14px;">No parts found.</td></tr>
+              <tr><td colspan="7" style="text-align:center; padding: 32px 24px; color: #6b7280; font-size: 14px;">No parts found.</td></tr>
           @endforelse
         </tbody>
       </table>
@@ -1502,6 +1586,170 @@ function addTimelineTask() {
     document.getElementById('tl-dur').value = 1;
     renderTimeline();
   });
+}
+
+function addModelPart(e, vid) {
+  e.preventDefault();
+  const g = id => document.getElementById(`m-${id}`);
+  
+  const getVal = (id) => {
+    const sel = document.getElementById(`m-${id}-sel`);
+    if(sel) {
+      if(sel.value === '__NEW__') return document.getElementById(`m-${id}-new`).value.trim();
+      return sel.value.trim();
+    }
+    return g(id) ? g(id).value.trim() : '';
+  };
+
+  const payload = {
+    category: getVal('cat'),
+    component: getVal('comp'),
+    description: g('desc').value.trim(),
+    part_number: g('pn').value.trim() || 'N/A',
+    price: Number(g('price').value) || 0,
+    supplier: getVal('supplier') || 'N/A',
+    _token: '{{ csrf_token() }}'
+  };
+
+  fetch(window.AppUrl + `/vehicles/${vid}/parts`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(p => {
+    const tbody = document.getElementById('bom-body');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight: 500; color: #374151;">${p.category}</td>
+      <td style="font-weight: 600; color: #111827;">${p.component}</td>
+      <td style="color: #4b5563;">${p.description}</td>
+      <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #6b7280;">
+        <span id="pn-val-${p.id}">${p.part_number}</span>
+        <div id="pn-edit-${p.id}" style="display:none;">
+          <input type="text" id="pn-input-${p.id}" value="${p.part_number === 'N/A' ? '' : p.part_number}" style="width:100px; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">
+        </div>
+      </td>
+      <td style="font-weight: 600; color: #111827;">
+        <span id="price-val-${p.id}">$${Number(p.price).toFixed(2)}</span>
+        <div id="price-edit-${p.id}" style="display:none;">
+          <input type="number" step="0.01" id="price-input-${p.id}" value="${p.price}" style="width:80px; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+        </div>
+      </td>
+      <td>
+        ${p.supplier ? `<span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 500;">${p.supplier}</span>` : `<span style="color: #9ca3af; font-style: italic;">N/A</span>`}
+      </td>
+      <td style="text-align:right; white-space:nowrap;">
+        <div id="actions-display-${p.id}">
+          <button onclick="editModelPart(${p.id})" style="background:transparent; border:none; color:#9ca3af; cursor:pointer; padding:4px; font-size:14px; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'" title="Edit part">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button onclick="deleteModelPart(${p.id}, this)" style="background:transparent; border:none; color:#ef4444; cursor:pointer; padding:4px; font-size:14px; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'" title="Remove part">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+        <div id="actions-edit-${p.id}" style="display:none; gap:4px; justify-content:flex-end;">
+          <button onclick="saveModelPart(${p.id})" style="background:#10b981; color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer; font-size:11px;"><i class="fas fa-check"></i></button>
+          <button onclick="cancelEditModelPart(${p.id})" style="background:transparent; border:none; color:#6b7280; cursor:pointer; font-size:12px; padding:4px;"><i class="fas fa-times"></i></button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+    
+    // Hide empty message if exists
+    const emptyRow = tbody.querySelector('td[colspan="7"]');
+    if (emptyRow) emptyRow.parentElement.remove();
+
+    resetModelPartForm(e.target);
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Error adding model part.');
+  });
+}
+
+function deleteModelPart(partId, btn) {
+  if(!confirm('Are you sure you want to remove this part from the model?')) return;
+  fetch(window.AppUrl + `/vehicles/parts/${partId}`, {
+    method: 'DELETE',
+    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+  }).then(() => {
+    btn.closest('tr').remove();
+    const tbody = document.getElementById('bom-body');
+    if (tbody.children.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 32px 24px; color: #6b7280; font-size: 14px;">No parts found.</td></tr>`;
+    }
+  }).catch(err => {
+    console.error(err);
+    alert('Failed to remove part.');
+  });
+}
+
+function editModelPart(id) {
+  document.getElementById(`pn-val-${id}`).style.display = 'none';
+  document.getElementById(`price-val-${id}`).style.display = 'none';
+  document.getElementById(`actions-display-${id}`).style.display = 'none';
+  
+  document.getElementById(`pn-edit-${id}`).style.display = 'block';
+  document.getElementById(`price-edit-${id}`).style.display = 'block';
+  document.getElementById(`actions-edit-${id}`).style.display = 'flex';
+  document.getElementById(`price-input-${id}`).focus();
+}
+
+function cancelEditModelPart(id) {
+  document.getElementById(`pn-val-${id}`).style.display = 'inline';
+  document.getElementById(`price-val-${id}`).style.display = 'inline';
+  document.getElementById(`actions-display-${id}`).style.display = 'block';
+  
+  document.getElementById(`pn-edit-${id}`).style.display = 'none';
+  document.getElementById(`price-edit-${id}`).style.display = 'none';
+  document.getElementById(`actions-edit-${id}`).style.display = 'none';
+}
+
+function saveModelPart(id) {
+  const price = document.getElementById(`price-input-${id}`).value;
+  const pn = document.getElementById(`pn-input-${id}`).value;
+  
+  fetch(window.AppUrl + `/vehicles/parts/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+    body: JSON.stringify({ price: price, part_number: pn })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if(res.success) {
+      document.getElementById(`price-val-${id}`).innerText = '$' + Number(res.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById(`pn-val-${id}`).innerText = res.part_number;
+      cancelEditModelPart(id);
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Failed to update part.');
+  });
+}
+
+function resetModelPartForm(form) {
+  form.reset();
+  ['cat', 'comp', 'supplier'].forEach(id => {
+    const sel = document.getElementById(`m-${id}-sel`);
+    const newInp = document.getElementById(`m-${id}-new`);
+    if(sel) {
+      sel.style.display = 'block';
+      sel.setAttribute('required', 'required');
+    }
+    if(newInp) {
+      newInp.style.display = 'none';
+      newInp.removeAttribute('required');
+    }
+  });
+  
+  // Make supplier select not required
+  const sSel = document.getElementById('m-supplier-sel');
+  if(sSel) sSel.removeAttribute('required');
+
+  document.getElementById('add-model-part-form').style.display = 'none';
+  document.getElementById('add-model-part-btn').style.display = 'inline-block';
 }
 
 render();
