@@ -335,43 +335,69 @@ class VehicleController extends Controller
     public function updateModelPart(Request $request, $id)
     {
         $request->validate([
+            'category' => 'required|string',
+            'component' => 'required|string',
+            'description' => 'required|string',
             'price' => 'required|numeric',
-            'part_number' => 'nullable|string'
+            'part_number' => 'nullable|string',
+            'supplier' => 'nullable|string'
         ]);
         $part = \App\Models\Part::findOrFail($id);
         
-        $cat = \App\Models\PartCategory::find($part->category_id);
-        $comp = \App\Models\PartComponent::find($part->component_id);
+        $oldCat = \App\Models\PartCategory::find($part->category_id);
+        $oldComp = \App\Models\PartComponent::find($part->component_id);
+        $oldCatName = $oldCat ? $oldCat->category_name : null;
+        $oldCompName = $oldComp ? $oldComp->component_name : null;
+        
+        $cat = \App\Models\PartCategory::firstOrCreate(['category_name' => $request->category]);
+        $comp = \App\Models\PartComponent::firstOrCreate(['component_name' => $request->component, 'category_id' => $cat->id]);
+        
+        $supplier = null;
+        if ($request->supplier && $request->supplier !== 'N/A') {
+            $supplier = \App\Models\Supplier::firstOrCreate(['business_name' => $request->supplier]);
+        }
         
         $updatedBuildPartIds = [];
-        if ($cat && $comp) {
+        if ($oldCatName && $oldCompName) {
             $builds = \App\Models\VehicleModel::where('vehicle_id', $part->vehicle_id)->pluck('id');
             if ($builds->count() > 0) {
                 $priceNum = $request->price ? (float)str_replace(['$', ','], '', $request->price) : 0;
                 
                 $buildParts = \App\Models\VehicleBuildPart::whereIn('vehicle_model_id', $builds)
-                    ->where('category', $cat->category_name)
-                    ->where('component', $comp->component_name)
+                    ->where('category', $oldCatName)
+                    ->where('component', $oldCompName)
                     ->where('description', $part->description)
                     ->get();
                 
                 $updatedBuildPartIds = $buildParts->pluck('id');
                 
                 \App\Models\VehicleBuildPart::whereIn('id', $updatedBuildPartIds)->update([
+                    'category' => $cat->category_name,
+                    'component' => $comp->component_name,
+                    'description' => $request->description,
                     'price' => $priceNum,
-                    'part_number' => $request->part_number ?: 'N/A'
+                    'part_number' => $request->part_number ?: 'N/A',
+                    'supplier' => $supplier ? $supplier->business_name : 'N/A'
                 ]);
             }
         }
 
+        $part->category_id = $cat->id;
+        $part->component_id = $comp->id;
+        $part->description = $request->description;
         $part->price = $request->price;
         $part->part_number = $request->part_number ?: 'N/A';
+        $part->supplier_id = $supplier ? $supplier->id : null;
         $part->save();
         
         return response()->json([
             'success' => true,
+            'category' => $cat->category_name,
+            'component' => $comp->component_name,
+            'description' => $part->description,
             'price' => $part->price,
             'part_number' => $part->part_number,
+            'supplier' => $supplier ? $supplier->business_name : null,
             'updated_build_part_ids' => $updatedBuildPartIds
         ]);
     }

@@ -4,7 +4,7 @@
             <!-- Left side: Welcome Message -->
             <div class="flex items-center">
                 <div class="text-xl font-bold text-gray-800 tracking-tight">
-                    Welcome back, <span class="text-black">Admin</span> <span class="text-2xl ml-1">👋</span>
+                    Welcome back, <span class="text-black">Admin</span>
                 </div>
             </div>
 
