@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.sidebar')
 
 @section('content')
     @include('components.landingpagenavbar')
@@ -566,3 +566,4 @@
 
 
 @endsection
+

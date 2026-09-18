@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.sidebar')
 
 @section('content')
 <style>
@@ -373,3 +373,4 @@
     </div>
 </div>
 @endsection
+

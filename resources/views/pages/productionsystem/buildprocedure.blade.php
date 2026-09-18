@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.sidebar')
 
 @section('content')
 
@@ -343,5 +343,6 @@ document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeLightbox()});
 render();
 </script>
 @endsection
+
 
 
