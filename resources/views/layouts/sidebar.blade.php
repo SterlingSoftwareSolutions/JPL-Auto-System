@@ -38,7 +38,7 @@
             <a href="{{ route('dashboard') }}" class="flex items-center px-6 py-4 hover:bg-gray-100 hover:text-black transition-colors {{ Route::currentRouteName() === 'dashboard' ? 'bg-black text-white font-semibold rounded-r-2xl mr-4' : 'text-gray-900' }}">
                 <i class="fas fa-th-large w-6 text-center mr-3"></i> Dashboard
             </a>
-            <a href="{{ route('vehicles.index') }}" class="flex items-center px-6 py-4 hover:bg-gray-100 hover:text-black transition-colors {{ Route::currentRouteName() === 'vehicles.index' ? 'bg-black text-white font-semibold rounded-r-2xl mr-4' : 'text-gray-900' }}">
+            <a href="{{ route('vehicles.index') }}" class="flex items-center px-6 py-4 hover:bg-gray-100 hover:text-black transition-colors {{ request()->routeIs('vehicles.*') ? 'bg-black text-white font-semibold rounded-r-2xl mr-4' : 'text-gray-900' }}">
                 <i class="fas fa-car w-6 text-center mr-3"></i> Vehicles
             </a>
             <a href="#" class="flex items-center px-6 py-4 hover:bg-gray-100 hover:text-black transition-colors text-gray-900">
@@ -68,9 +68,11 @@
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         <!-- Top Header -->
+        @if(!View::hasSection('hide_header'))
         <div class="shrink-0 z-10">
             @include('layouts.header')
         </div>
+        @endif
         
         <!-- Content -->
         <div class="flex-1 overflow-y-auto no-scrollbar bg-gray-50">

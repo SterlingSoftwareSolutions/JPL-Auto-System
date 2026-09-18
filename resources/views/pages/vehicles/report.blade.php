@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.sidebar')
 
 @section('hide_header', true)
 
@@ -512,9 +512,24 @@
           @forelse($partCategories as $category)
               @foreach($category->parts as $part)
                   <tr data-part-id="{{ $part->id }}">
-                      <td style="font-weight: 500; color: #374151;">{{ $category->category_name }}</td>
-                      <td style="font-weight: 600; color: #111827;">{{ $part->component ? $part->component->component_name : 'N/A' }}</td>
-                      <td style="color: #4b5563;">{{ $part->description }}</td>
+                      <td style="font-weight: 500; color: #374151;">
+                        <span id="cat-val-{{ $part->id }}">{{ $category->category_name }}</span>
+                        <div id="cat-edit-{{ $part->id }}" style="display:none;">
+                          <input type="text" id="cat-input-{{ $part->id }}" value="{{ $category->category_name }}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+                        </div>
+                      </td>
+                      <td style="font-weight: 600; color: #111827;">
+                        <span id="comp-val-{{ $part->id }}">{{ $part->component ? $part->component->component_name : 'N/A' }}</span>
+                        <div id="comp-edit-{{ $part->id }}" style="display:none;">
+                          <input type="text" id="comp-input-{{ $part->id }}" value="{{ $part->component ? $part->component->component_name : '' }}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+                        </div>
+                      </td>
+                      <td style="color: #4b5563;">
+                        <span id="desc-val-{{ $part->id }}">{{ $part->description }}</span>
+                        <div id="desc-edit-{{ $part->id }}" style="display:none;">
+                          <input type="text" id="desc-input-{{ $part->id }}" value="{{ $part->description }}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+                        </div>
+                      </td>
                       <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #6b7280;">
                         <span id="pn-val-{{ $part->id }}">{{ $part->part_number ?? 'N/A' }}</span>
                         <div id="pn-edit-{{ $part->id }}" style="display:none;">
@@ -528,6 +543,7 @@
                         </div>
                       </td>
                       <td>
+                        <span id="supplier-val-{{ $part->id }}">
                         @if($part->supplier)
                           <span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 500;">
                             {{ $part->supplier->business_name }}
@@ -535,6 +551,10 @@
                         @else
                           <span style="color: #9ca3af; font-style: italic;">N/A</span>
                         @endif
+                        </span>
+                        <div id="supplier-edit-{{ $part->id }}" style="display:none;">
+                          <input type="text" id="supplier-input-{{ $part->id }}" value="{{ $part->supplier ? $part->supplier->business_name : '' }}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+                        </div>
                       </td>
                       <td style="text-align:right; white-space:nowrap;">
                         <div id="actions-display-{{ $part->id }}">
@@ -1621,9 +1641,24 @@ function addModelPart(e, vid) {
     const tbody = document.getElementById('bom-body');
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td style="font-weight: 500; color: #374151;">${p.category}</td>
-      <td style="font-weight: 600; color: #111827;">${p.component}</td>
-      <td style="color: #4b5563;">${p.description}</td>
+      <td style="font-weight: 500; color: #374151;">
+        <span id="cat-val-${p.id}">${p.category}</span>
+        <div id="cat-edit-${p.id}" style="display:none;">
+          <input type="text" id="cat-input-${p.id}" value="${p.category}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+        </div>
+      </td>
+      <td style="font-weight: 600; color: #111827;">
+        <span id="comp-val-${p.id}">${p.component}</span>
+        <div id="comp-edit-${p.id}" style="display:none;">
+          <input type="text" id="comp-input-${p.id}" value="${p.component}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+        </div>
+      </td>
+      <td style="color: #4b5563;">
+        <span id="desc-val-${p.id}">${p.description}</span>
+        <div id="desc-edit-${p.id}" style="display:none;">
+          <input type="text" id="desc-input-${p.id}" value="${p.description}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+        </div>
+      </td>
       <td style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #6b7280;">
         <span id="pn-val-${p.id}">${p.part_number}</span>
         <div id="pn-edit-${p.id}" style="display:none;">
@@ -1637,7 +1672,12 @@ function addModelPart(e, vid) {
         </div>
       </td>
       <td>
-        ${p.supplier ? `<span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 500;">${p.supplier}</span>` : `<span style="color: #9ca3af; font-style: italic;">N/A</span>`}
+        <span id="supplier-val-${p.id}">
+          ${p.supplier ? `<span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 500;">${p.supplier}</span>` : `<span style="color: #9ca3af; font-style: italic;">N/A</span>`}
+        </span>
+        <div id="supplier-edit-${p.id}" style="display:none;">
+          <input type="text" id="supplier-input-${p.id}" value="${p.supplier || ''}" style="width:100%; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px;">
+        </div>
       </td>
       <td style="text-align:right; white-space:nowrap;">
         <div id="actions-display-${p.id}">
@@ -1708,40 +1748,59 @@ function deleteModelPart(partId, btn) {
 }
 
 function editModelPart(id) {
-  document.getElementById(`pn-val-${id}`).style.display = 'none';
-  document.getElementById(`price-val-${id}`).style.display = 'none';
+  ['cat', 'comp', 'desc', 'pn', 'price', 'supplier'].forEach(f => {
+    const valEl = document.getElementById(`${f}-val-${id}`);
+    const editEl = document.getElementById(`${f}-edit-${id}`);
+    if (valEl) valEl.style.display = 'none';
+    if (editEl) editEl.style.display = 'block';
+  });
   document.getElementById(`actions-display-${id}`).style.display = 'none';
-  
-  document.getElementById(`pn-edit-${id}`).style.display = 'block';
-  document.getElementById(`price-edit-${id}`).style.display = 'block';
   document.getElementById(`actions-edit-${id}`).style.display = 'flex';
-  document.getElementById(`price-input-${id}`).focus();
+  document.getElementById(`desc-input-${id}`).focus();
 }
 
 function cancelEditModelPart(id) {
-  document.getElementById(`pn-val-${id}`).style.display = 'inline';
-  document.getElementById(`price-val-${id}`).style.display = 'inline';
+  ['cat', 'comp', 'desc', 'pn', 'price', 'supplier'].forEach(f => {
+    const valEl = document.getElementById(`${f}-val-${id}`);
+    const editEl = document.getElementById(`${f}-edit-${id}`);
+    if (valEl) valEl.style.display = '';
+    if (editEl) editEl.style.display = 'none';
+  });
   document.getElementById(`actions-display-${id}`).style.display = 'block';
-  
-  document.getElementById(`pn-edit-${id}`).style.display = 'none';
-  document.getElementById(`price-edit-${id}`).style.display = 'none';
   document.getElementById(`actions-edit-${id}`).style.display = 'none';
 }
 
 function saveModelPart(id) {
-  const price = document.getElementById(`price-input-${id}`).value;
-  const pn = document.getElementById(`pn-input-${id}`).value;
+  const payload = {
+    category: document.getElementById(`cat-input-${id}`).value,
+    component: document.getElementById(`comp-input-${id}`).value,
+    description: document.getElementById(`desc-input-${id}`).value,
+    part_number: document.getElementById(`pn-input-${id}`).value,
+    price: document.getElementById(`price-input-${id}`).value,
+    supplier: document.getElementById(`supplier-input-${id}`).value
+  };
   
   fetch(window.AppUrl + `/vehicles/parts/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-    body: JSON.stringify({ price: price, part_number: pn })
+    body: JSON.stringify(payload)
   })
   .then(r => r.json())
   .then(res => {
     if(res.success) {
+      document.getElementById(`cat-val-${id}`).innerText = res.category;
+      document.getElementById(`comp-val-${id}`).innerText = res.component;
+      document.getElementById(`desc-val-${id}`).innerText = res.description;
       document.getElementById(`price-val-${id}`).innerText = '$' + Number(res.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       document.getElementById(`pn-val-${id}`).innerText = res.part_number || 'N/A';
+      
+      const supVal = document.getElementById(`supplier-val-${id}`);
+      if (res.supplier) {
+          supVal.innerHTML = `<span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 500;">${res.supplier}</span>`;
+      } else {
+          supVal.innerHTML = `<span style="color: #9ca3af; font-style: italic;">N/A</span>`;
+      }
+      
       cancelEditModelPart(id);
       
       if (res.updated_build_part_ids && Array.isArray(res.updated_build_part_ids)) {
@@ -1749,8 +1808,12 @@ function saveModelPart(id) {
           if (b.parts) {
             b.parts.forEach(p => {
               if (res.updated_build_part_ids.includes(p.id)) {
+                p.category = res.category;
+                p.component = res.component;
+                p.description = res.description;
                 p.price = res.price;
                 p.part_number = res.part_number || 'N/A';
+                p.supplier = res.supplier;
               }
             });
           }
@@ -1796,3 +1859,4 @@ renderProcessTemplate();
 </div>
 </div>
 @endsection
+
