@@ -991,6 +991,13 @@ function onColDrop(e) {
   const oldStatus = part.status;
   const newStatus = STATUSES[colIdx].key;
   part.status = newStatus;
+  if (activeBuildId) {
+      const b = buildCards.find(x => x.id === activeBuildId);
+      if (b && b.parts) {
+          const bp = b.parts.find(p => p.id === part.id);
+          if (bp) bp.status = newStatus;
+      }
+  }
 
   fetch(window.AppUrl + `/builds/parts/${part.id}/status`, {
     method: 'PUT',
@@ -1003,6 +1010,13 @@ function onColDrop(e) {
     console.error(err);
     alert('Error saving status: ' + err.message + '. Try refreshing the page.');
     part.status = oldStatus;
+    if (activeBuildId) {
+        const b = buildCards.find(x => x.id === activeBuildId);
+        if (b && b.parts) {
+            const bp = b.parts.find(p => p.id === part.id);
+            if (bp) bp.status = oldStatus;
+        }
+    }
     render();
   });
   dragState = null;
@@ -1332,16 +1346,10 @@ function addBuildCard() {
   document.getElementById('build-modal').style.display = 'flex';
 }
 
-function openBuildDetail(id) {
-  activeBuildId = id;
-  const b = buildCards.find(x => x.id === id);
-  document.getElementById('builds-list-view').style.display = 'none';
-  document.getElementById('builds-detail-view').style.display = 'block';
-  document.getElementById('build-detail-title').textContent = b.name;
-  document.getElementById('ov-parts-pct').textContent = computePartsInstalledPct() + '%';
-  document.getElementById('ov-vin-display').textContent = b.vin || 'Assigned on completion';
-  document.getElementById('ov-vin-display').style.color = b.vin ? 'var(--text)' : 'var(--text-faint)';
-
+function refreshActiveBuildCategories() {
+  if (!activeBuildId) return;
+  const b = buildCards.find(x => x.id === activeBuildId);
+  if (!b) return;
   const catsMap = {};
   masterCategories.forEach(cName => {
     catsMap[cName] = { name: cName, parts: [] };
@@ -1364,6 +1372,20 @@ function openBuildDetail(id) {
     });
   }
   categories = Object.values(catsMap);
+}
+
+function openBuildDetail(id) {
+  activeBuildId = id;
+  const b = buildCards.find(x => x.id === id);
+  document.getElementById('builds-list-view').style.display = 'none';
+  document.getElementById('builds-detail-view').style.display = 'block';
+  document.getElementById('build-detail-title').textContent = b.name;
+  
+  refreshActiveBuildCategories();
+  
+  document.getElementById('ov-parts-pct').textContent = computePartsInstalledPct() + '%';
+  document.getElementById('ov-vin-display').textContent = b.vin || 'Assigned on completion';
+  document.getElementById('ov-vin-display').style.color = b.vin ? 'var(--text)' : 'var(--text-faint)';
 
   updateOverviewDiaryStat();
   showSubTab('overview');
@@ -1709,7 +1731,10 @@ function addModelPart(e, vid) {
         }
       });
       // Re-render build parts if we are currently viewing one
-      if (activeBuildId) render();
+      if (activeBuildId) {
+          refreshActiveBuildCategories();
+          render();
+      }
     }
 
     resetModelPartForm(e.target);
@@ -1818,7 +1843,10 @@ function saveModelPart(id) {
             });
           }
         });
-        if (activeBuildId) render();
+        if (activeBuildId) {
+            refreshActiveBuildCategories();
+            render();
+        }
       }
     }
   })
