@@ -1764,7 +1764,10 @@ function deleteModelPart(partId, btn) {
           b.parts = b.parts.filter(p => !res.deleted_build_part_ids.includes(p.id));
         }
       });
-      if (activeBuildId) render();
+      if (activeBuildId) {
+        refreshActiveBuildCategories(); // rebuild `categories` from updated buildCards.parts
+        render();                       // now re-draws the kanban with the deleted part gone
+      }
     }
   }).catch(err => {
     console.error(err);
