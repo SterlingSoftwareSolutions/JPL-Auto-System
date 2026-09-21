@@ -307,28 +307,38 @@ class VehicleController extends Controller
     public function destroyModelPart($id)
     {
         $part = \App\Models\Part::findOrFail($id);
-        
-        $cat = \App\Models\PartCategory::find($part->category_id);
+
+        $cat  = \App\Models\PartCategory::find($part->category_id);
         $comp = \App\Models\PartComponent::find($part->component_id);
-        
+
         $deletedBuildPartIds = [];
+
         if ($cat && $comp) {
             $builds = \App\Models\VehicleModel::where('vehicle_id', $part->vehicle_id)->pluck('id');
-            if ($builds->count() > 0) {
-                $deletedBuildPartIds = \App\Models\VehicleBuildPart::whereIn('vehicle_model_id', $builds)
-                    ->where('category', $cat->category_name)
-                    ->where('component', $comp->component_name)
+
+            // For each build, delete only ONE matching build-part row (the lowest id).
+            // This prevents duplicate parts (same category+component+description) from
+            // both being removed when only one master part is deleted.
+            foreach ($builds as $buildId) {
+                $match = \App\Models\VehicleBuildPart::where('vehicle_model_id', $buildId)
+                    ->where('category',    $cat->category_name)
+                    ->where('component',   $comp->component_name)
                     ->where('description', $part->description)
-                    ->pluck('id');
-                    
-                \App\Models\VehicleBuildPart::whereIn('id', $deletedBuildPartIds)->delete();
+                    ->orderBy('id')   // lowest id = the "first" copy
+                    ->first();
+
+                if ($match) {
+                    $deletedBuildPartIds[] = $match->id;
+                    $match->delete();
+                }
             }
         }
-        
+
         $part->delete();
+
         return response()->json([
-            'success' => true,
-            'deleted_build_part_ids' => $deletedBuildPartIds
+            'success'               => true,
+            'deleted_build_part_ids' => $deletedBuildPartIds,
         ]);
     }
 
